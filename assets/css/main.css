@@ -331,6 +331,16 @@ strong {
   object-fit: cover;
 }
 
+/* ============================================
+   IMAGE SECTION
+   ============================================ */
+
+.image-section {
+  padding: var(--spacing-xxl) 0;
+  background-color: var(--bg-darker);
+  border-bottom: 1px solid var(--border-dark);
+}
+
 .trust-badges {
   display: flex;
   flex-direction: column;
