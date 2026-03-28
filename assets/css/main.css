@@ -6,14 +6,20 @@
    ============================================ */
 
 :root {
-  /* Colors - Reggae-Pop Palette */
+  /* Colors - Reggae-Pop Palette (Refined) */
   --primary-green: #2d5016;       /* Forest green (reggae root) */
+  --primary-green-light: #3d6b1f;
   --accent-gold: #d4af37;         /* Caribbean gold */
+  --accent-gold-light: #e6c857;
   --accent-brown: #8b6f47;        /* Earthy brown */
-  --text-dark: #222;
-  --text-light: #555;
-  --bg-light: #f9f9f9;
-  --border-color: #ddd;
+  --text-dark: #1a1a1a;
+  --text-light: #666;
+  --bg-light: #fafbfc;
+  --bg-lighter: #f0f2f5;
+  --border-color: #e0e0e0;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.15);
 
   /* Spacing System */
   --spacing-xs: 4px;
@@ -170,7 +176,9 @@ strong {
 
 .hero {
   padding: var(--spacing-xxl) 0;
-  background: linear-gradient(135deg, #f5f5f5 0%, #fff 100%);
+  background: linear-gradient(135deg, #f0f2f5 0%, #fafbfc 50%, #fff 100%);
+  position: relative;
+  overflow: hidden;
 }
 
 .hero-content {
@@ -198,7 +206,14 @@ strong {
   padding: var(--spacing-lg);
   background-color: #fff;
   border-left: 4px solid var(--accent-gold);
-  border-radius: var(--border-radius);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-md);
+  transition: var(--transition);
+}
+
+.artist-bio:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
 }
 
 .artist-bio p {
