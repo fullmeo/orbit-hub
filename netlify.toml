@@ -1,0 +1,31 @@
+[build]
+  publish = "."
+  command = ""
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[context.production]
+  environment = { GA_ID = "G-XXXXXXXXXX" }
+
+[context.deploy-preview]
+  environment = { GA_ID = "G-XXXXXXXXXX-PREVIEW" }
+
+[context.branch-deploy]
+  environment = { GA_ID = "G-XXXXXXXXXX-DEV" }
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

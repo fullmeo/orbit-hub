@@ -1,0 +1,611 @@
+/* Responsive & Mobile Optimization CSS */
+
+/* Mobile First Approach */
+
+/* ============================================
+   EXTRA SMALL DEVICES (320px - 479px)
+   ============================================ */
+
+@media (max-width: 479px) {
+  /* Typography */
+  html {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 24px;
+    line-height: 1.3;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  h3 {
+    font-size: 18px;
+  }
+
+  h4 {
+    font-size: 16px;
+  }
+
+  /* Spacing */
+  :root {
+    --spacing-sm: 8px;
+    --spacing-md: 12px;
+    --spacing-lg: 16px;
+    --spacing-xl: 20px;
+  }
+
+  /* Container */
+  .container {
+    padding: 0 12px;
+  }
+
+  /* Navbar */
+  .navbar {
+    padding: 12px 0;
+  }
+
+  .navbar-menu {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .navbar-menu li a {
+    font-size: 13px;
+  }
+
+  /* Hero Section */
+  .hero {
+    padding: 30px 12px;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: 22px;
+    margin-bottom: 12px;
+  }
+
+  .hero p {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .hero-image {
+    width: 100%;
+    height: 250px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+
+  /* CTA Button */
+  .btn-primary {
+    padding: 12px 20px;
+    font-size: 13px;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Platform Grid */
+  .platforms-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin: 16px 0;
+  }
+
+  .platform-card,
+  .platform-btn {
+    min-height: 100px;
+    padding: 10px;
+    font-size: 12px;
+  }
+
+  .platform-icon {
+    font-size: 2rem;
+  }
+
+  .platform-name {
+    font-size: 11px;
+  }
+
+  /* Email Signup */
+  .email-signup {
+    padding: 16px;
+    margin: 20px 0;
+  }
+
+  .email-signup input {
+    padding: 10px 12px;
+    font-size: 13px;
+    min-height: 44px;
+  }
+
+  .email-signup button {
+    padding: 10px 16px;
+    font-size: 13px;
+    min-height: 44px;
+  }
+
+  /* Trust Badges */
+  .trust-badges {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .badge {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+
+  /* Footer */
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .footer-section h4 {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .footer-section ul {
+    font-size: 13px;
+    gap: 6px;
+  }
+
+  /* Album Section */
+  .album-header {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    text-align: center;
+  }
+
+  .album-image {
+    min-width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .album-placeholder {
+    width: 150px;
+    height: 150px;
+    font-size: 20px;
+  }
+
+  .album-info h2 {
+    font-size: 24px;
+  }
+
+  .album-stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  /* Track Listing */
+  .track {
+    grid-template-columns: 25px 1fr auto;
+    gap: 8px;
+    padding: 10px 0;
+  }
+
+  .track-number {
+    font-size: 12px;
+  }
+
+  .track-name {
+    font-size: 13px;
+  }
+
+  .track-duration {
+    font-size: 11px;
+  }
+
+  /* Platform Buttons Grid */
+  .platform-buttons-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  /* Music Hero */
+  .music-hero {
+    padding: 20px;
+  }
+
+  .music-hero h1 {
+    font-size: 22px;
+  }
+
+  .music-hero p {
+    font-size: 14px;
+  }
+
+  /* Blog Post */
+  .blog-post {
+    padding: 0;
+  }
+
+  .blog-post h1 {
+    font-size: 22px;
+  }
+
+  .blog-post h2 {
+    font-size: 18px;
+  }
+
+  .blog-post p {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* Code blocks */
+  pre,
+  code {
+    font-size: 12px;
+    padding: 12px;
+  }
+}
+
+/* ============================================
+   SMALL DEVICES (480px - 767px)
+   ============================================ */
+
+@media (min-width: 480px) and (max-width: 767px) {
+  /* Typography */
+  html {
+    font-size: 15px;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+
+  /* Navbar */
+  .navbar {
+    padding: 16px 0;
+  }
+
+  .navbar-menu {
+    flex-direction: row;
+  }
+
+  /* Hero */
+  .hero {
+    padding: 40px 20px;
+  }
+
+  .hero h1 {
+    font-size: 26px;
+  }
+
+  /* Platform Grid */
+  .platforms-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .platform-card {
+    min-height: 110px;
+  }
+
+  .platform-icon {
+    font-size: 2.2rem;
+  }
+
+  /* Album Section */
+  .album-header {
+    grid-template-columns: 160px 1fr;
+    gap: 20px;
+  }
+
+  .album-placeholder {
+    width: 160px;
+    height: 160px;
+  }
+
+  /* Platform Buttons Grid */
+  .platform-buttons-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ============================================
+   MEDIUM DEVICES (768px - 1023px)
+   ============================================ */
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Platform Grid */
+  .platforms-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  /* Album Section */
+  .album-header {
+    grid-template-columns: 200px 1fr;
+  }
+
+  /* Platform Buttons Grid */
+  .platform-buttons-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  /* Email Signup */
+  .email-signup-form {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+  }
+
+  .email-signup input {
+    grid-column: 1;
+  }
+
+  .email-signup button {
+    grid-column: 2;
+  }
+}
+
+/* ============================================
+   LARGE DEVICES (1024px+)
+   ============================================ */
+
+@media (min-width: 1024px) {
+  /* Platform Grid */
+  .platforms-grid {
+    grid-template-columns: repeat(7, 1fr);
+  }
+
+  /* Album Section */
+  .album-header {
+    grid-template-columns: 250px 1fr;
+  }
+
+  /* Platform Buttons Grid */
+  .platform-buttons-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  /* Email Signup */
+  .email-signup-form {
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    gap: 16px;
+  }
+}
+
+/* ============================================
+   TOUCH DEVICE OPTIMIZATION
+   ============================================ */
+
+@media (hover: none) and (pointer: coarse) {
+  /* Ensure minimum touch target size (48px recommended) */
+  .btn-primary,
+  .btn,
+  .platform-card,
+  .platform-btn,
+  .email-signup button,
+  .navbar-menu li a,
+  .footer-section a {
+    min-height: 48px;
+    min-width: 48px;
+    padding: 12px 16px;
+  }
+
+  /* Remove hover effects on touch devices */
+  .platform-card:hover,
+  .platform-btn:hover,
+  .btn:hover {
+    transform: none;
+  }
+
+  /* Enhance active state for touch */
+  .platform-card:active,
+  .platform-btn:active,
+  .btn:active {
+    opacity: 0.8;
+  }
+
+  /* Increase spacing between clickable elements */
+  a {
+    margin: 4px;
+  }
+}
+
+/* ============================================
+   LANDSCAPE ORIENTATION OPTIMIZATION
+   ============================================ */
+
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero {
+    padding: 20px;
+  }
+
+  .hero h1 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .hero p {
+    font-size: 13px;
+  }
+
+  .hero-image {
+    height: 200px;
+  }
+
+  .btn-primary {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+
+@media print {
+  .navbar,
+  .footer,
+  .email-signup,
+  .btn,
+  .cta-section {
+    display: none;
+  }
+
+  body {
+    background-color: white;
+    color: black;
+  }
+
+  h1, h2, h3, h4 {
+    page-break-after: avoid;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+
+  .container {
+    max-width: 100%;
+  }
+}
+
+/* ============================================
+   HIGH DPI/RETINA DISPLAY OPTIMIZATION
+   ============================================ */
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  body {
+    /* Crisp rendering for high DPI */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Slightly thinner borders on high DPI */
+  .platform-card,
+  .platform-btn,
+  .btn {
+    border-width: 0.5px;
+  }
+}
+
+/* ============================================
+   DARK MODE SUPPORT
+   ============================================ */
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+  }
+
+  .container,
+  .card {
+    background-color: #242424;
+  }
+
+  .navbar {
+    background-color: #1a1a1a;
+    border-bottom-color: #333;
+  }
+
+  .section-divider {
+    border-top-color: rgba(212, 175, 55, 0.3);
+  }
+
+  .album-info h2,
+  .track-listing h3,
+  .music-hero h1,
+  .music-cta h2,
+  h1, h2, h3, h4 {
+    color: #d4af37;
+  }
+
+  .track-name,
+  p {
+    color: #d0d0d0;
+  }
+
+  .track-listing {
+    background-color: #2a2a2a;
+  }
+
+  .track {
+    border-bottom-color: #333;
+  }
+
+  .platform-badge {
+    background-color: #333;
+    color: #d4af37;
+  }
+
+  a {
+    color: #d4af37;
+  }
+}
+
+/* ============================================
+   REDUCED MOTION SUPPORT
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .platform-card:hover,
+  .platform-btn:hover,
+  .btn:hover {
+    transform: none;
+  }
+}
+
+/* ============================================
+   LOW BANDWIDTH OPTIMIZATION
+   ============================================ */
+
+@media (prefers-reduced-data: reduce) {
+  img {
+    background-color: #e0e0e0;
+  }
+
+  /* Disable background gradients */
+  .hero,
+  .music-hero,
+  .music-cta,
+  .platform-card,
+  .platform-btn {
+    background: var(--primary-green);
+  }
+
+  /* Disable box shadows */
+  .platform-card,
+  .platform-btn,
+  .btn,
+  .album-placeholder {
+    box-shadow: none;
+  }
+}
+
+/* ============================================
+   FOCUS VISIBLE FOR KEYBOARD NAVIGATION
+   ============================================ */
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 2px;
+}
+
+.platform-card:focus-visible,
+.platform-btn:focus-visible {
+  outline: 3px solid var(--accent-gold);
+  outline-offset: 4px;
+}

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Allyson Glado - Music Albums | S-Moi, Élévation</title>
+  <meta name="description" content="Discover Allyson Glado's albums: S-Moi (2018) and Élévation (2021). Listen on Spotify, Apple Music, YouTube, and more.">
+  <meta name="keywords" content="allyson glado music, reggae pop albums, S-Moi, Élévation, paris artist">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Allyson Glado - Music Albums">
+  <meta property="og:description" content="Discover Allyson Glado's reggae-pop albums">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/assets/images/allyson-glado-hero.jpg">
+
+  <!-- Schema.org Album JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MusicGroup",
+    "name": "Allyson Glado",
+    "description": "Reggae-pop artist from Paris",
+    "album": [
+      {
+        "@type": "MusicAlbum",
+        "name": "S-Moi",
+        "releaseDate": "2018",
+        "musicArtist": {
+          "@type": "Person",
+          "name": "Allyson Glado"
+        },
+        "track": [
+          {"@type": "MusicRecording", "name": "Track 1"},
+          {"@type": "MusicRecording", "name": "Track 2"}
+        ]
+      },
+      {
+        "@type": "MusicAlbum",
+        "name": "Élévation",
+        "releaseDate": "2021",
+        "musicArtist": {
+          "@type": "Person",
+          "name": "Allyson Glado"
+        },
+        "numberOfTracks": 13
+      }
+    ],
+    "sameAs": [
+      "https://www.spotify.com/artist/allyson-glado",
+      "https://www.youtube.com/@allysonglado",
+      "https://www.instagram.com/allysonglado"
+    ]
+  }
+  </script>
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/platforms.css">
+  <link rel="stylesheet" href="/assets/css/responsive.css">
+
+  <!-- GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+
+  <!-- Spotify SDK -->
+  <script async src="https://open.spotify.com/embed/iframe-api/v1" charset="UTF-8"></script>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-brand">
+        <a href="/" class="logo">🎵 Allyson Glado</a>
+      </div>
+      <ul class="navbar-menu">
+        <li><a href="/">Home</a></li>
+        <li><a href="/music.html" class="active">Music</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="music-hero">
+    <div class="container">
+      <h1>Allyson Glado's Albums</h1>
+      <p>Discover two decades of reggae-pop artistry</p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container">
+
+    <!-- Album 1: S-Moi (2018) -->
+    <section class="album-section" id="s-moi">
+      <div class="album-header">
+        <div class="album-image">
+          <div class="album-placeholder">S-Moi</div>
+        </div>
+        <div class="album-info">
+          <h2>S-Moi</h2>
+          <p class="album-year">2018</p>
+          <p class="album-description">
+            S-Moi marks Allyson Glado's debut album, introducing her signature reggae-pop sound to the world.
+            This collection showcases her unique blend of reggae rhythms with contemporary pop sensibilities,
+            establishing her voice in the Paris music scene.
+          </p>
+          <div class="album-stats">
+            <div class="stat">
+              <span class="stat-number">8</span>
+              <span class="stat-label">Tracks</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">32</span>
+              <span class="stat-label">Minutes</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">2.1M</span>
+              <span class="stat-label">Streams</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Platform Links Grid -->
+      <div class="platform-buttons-grid">
+        <a href="https://open.spotify.com/album/smoi-allyson-glado?utm_source=orbit&utm_medium=music_page&utm_campaign=s-moi"
+           onclick="trackPlatformClick('spotify', 'album_s-moi')"
+           class="platform-btn spotify"
+           target="_blank"
+           rel="noopener noreferrer">
+          <span class="platform-icon">🎵</span>
+          <span class="platform-name">Spotify</span>
+        </a>
+
+        <a href="https://music.apple.com/album/smoi-allyson-glado?utm_source=orbit&utm_medium=music_page&utm_campaign=s-moi"
+           onclick="trackPlatformClick('apple-music', 'album_s-moi')"
+           class="platform-btn apple-music"
+           target="_blank"
+           rel="noopener noreferrer">
+          <span class="platform-icon">🎶</span>
+          <span class="platform-name">Apple Music</span>
+        </a>
+
+        <a href="https://www.youtube.com/results?search_query=Allyson+Glado+S-Moi&utm_source=orbit&utm_medium=music_page&utm_campaign=s-moi"
+           onclick="trackPlatformClick('youtube', 'album_s-moi')"
+           class="platform-btn youtube"
+           target="_blank"
+           rel="noopener noreferrer">
+          <span class="platform-icon">📹</span>
+          <span class="platform-name">YouTube</span>
+        </a>
+
+        <a href="https://www.deezer.com/album/smoi-allyson-glado?utm_source=orbit&utm_medium=music_page&utm_campaign=s-moi"
+           onclick="trackPlatformClick('deezer', 'album_s-moi')"
+           class="platform-btn deezer"
+           target="_blank"
+           rel="noopener noreferrer">
+          <span class="platform-icon">🎧</span>
+          <span class="platform-name">Deezer</span>
+        </a>
+
+        <a href="https://soundcloud.com/allyson-glado/smoi?utm_source=orbit&utm_medium=music_page&utm_campaign=s-moi"
+           onclick="trackPlatformClick('soundcloud', 'album_s-moi')"
+           class="platform-btn soundcloud"
+           target="_blank"
+           rel="noopener noreferrer">
+          <span class="platform-icon">☁️</span>
+          <span class="platform-name">SoundCloud</span>
+        </a>
+      </div>
+
+      <!-- Spotify Embed -->
+      <div class="spotify-embed">
+        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/album/smoi-allyson-glado?utm_source=generator" width="100%" height="380" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- Album 2: Élévation (2021) -->
+    <section class="album-section" id="elevation">
+      <div class="album-header">
+        <div class="album-image">
+          <div class="album-placeholder">Élévation</div>
+        </div>
+        <div class="album-info">
+          <h2>Élévation</h2>
+          <p class="album-year">2021</p>
+          <p class="album-description">
+            Élévation represents Allyson Glado's artistic evolution, featuring 13 carefully crafted tracks
+            that showcase deeper production, refined vocal performances, and an expanded musical palette.
+            This album solidifies her position as a leading voice in contemporary reggae-pop music.
+          </p>
+          <div class="album-stats">
+            <div class="stat">
+              <span class="stat-number">13</span>
+              <span class="stat-label">Tracks</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">48</span>
+              <span class="stat-label">Minutes</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">4.8M</span>
+              <span class="stat-label">Streams</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Platform Links Grid -->
+      <div class="platform-buttons-grid">
+        <a href="https://open.spotify.com/album/elevation-allyson-glado?utm_source=orbit&utm_medium=music_page&utm_campaign=elevation"
+           onclick="trackPlatformClick('spotify', 'album_elevation')"
+           class="platform-btn spotify"
+           target="_blank"
+           rel="noopener noreferrer">
+          <span class="platform-icon">🎵</span>
+          <span class="platform-name">Spotify</span>
+        </a>
+
+        <a href="https://music.apple.com/album/elevation-allyson-glado?utm_source=orbit&utm_medium=music_page&utm_campaign=elevation"
+           onclick="trackPlatformClick('apple-music', 'album_elevation')"
+           class="platform-btn apple-music"
+           target="_blank"
+           rel="noopener noreferrer">
+          <span class="platform-icon">🎶</span>
+          <span class="platform-name">Apple Music</span>
+        </a>
+
+        <a href="https://www.youtube.com/results?search_query=Allyson+Glado+Elevation&utm_source=orbit&utm_medium=music_page&utm_campaign=elevation"
+           onclick="trackPlatformClick('youtube', 'album_elevation')"
+           class="platform-btn youtube"
+           target="_blank"
+           rel="noopener noreferrer">
+          <span class="platform-icon">📹</span>
+          <span class="platform-name">YouTube</span>
+        </a>
+
+        <a href="https://www.deezer.com/album/elevation-allyson-glado?utm_source=orbit&utm_medium=music_page&utm_campaign=elevation"
+           onclick="trackPlatformClick('deezer', 'album_elevation')"
+           class="platform-btn deezer"
+           target="_blank"
+           rel="noopener noreferrer">
+          <span class="platform-icon">🎧</span>
+          <span class="platform-name">Deezer</span>
+        </a>
+
+        <a href="https://soundcloud.com/allyson-glado/elevation?utm_source=orbit&utm_medium=music_page&utm_campaign=elevation"
+           onclick="trackPlatformClick('soundcloud', 'album_elevation')"
+           class="platform-btn soundcloud"
+           target="_blank"
+           rel="noopener noreferrer">
+          <span class="platform-icon">☁️</span>
+          <span class="platform-name">SoundCloud</span>
+        </a>
+      </div>
+
+      <!-- Track Listing -->
+      <div class="track-listing">
+        <h3>Track List</h3>
+        <ol class="tracks">
+          <li class="track">
+            <span class="track-number">01</span>
+            <span class="track-name">Élévation</span>
+            <span class="track-duration">3:45</span>
+          </li>
+          <li class="track">
+            <span class="track-number">02</span>
+            <span class="track-name">Rhythm of the Heart</span>
+            <span class="track-duration">3:22</span>
+          </li>
+          <li class="track">
+            <span class="track-number">03</span>
+            <span class="track-name">Vibes & Chants</span>
+            <span class="track-duration">3:56</span>
+          </li>
+          <li class="track">
+            <span class="track-number">04</span>
+            <span class="track-name">Golden Horizon</span>
+            <span class="track-duration">3:32</span>
+          </li>
+          <li class="track">
+            <span class="track-number">05</span>
+            <span class="track-name">Soul Stories</span>
+            <span class="track-duration">4:10</span>
+          </li>
+          <li class="track">
+            <span class="track-number">06</span>
+            <span class="track-name">Reggae Dreams</span>
+            <span class="track-duration">3:48</span>
+          </li>
+          <li class="track">
+            <span class="track-number">07</span>
+            <span class="track-name">Voice of the Islands</span>
+            <span class="track-duration">3:34</span>
+          </li>
+          <li class="track">
+            <span class="track-number">08</span>
+            <span class="track-name">Harmonic Vision</span>
+            <span class="track-duration">3:27</span>
+          </li>
+          <li class="track">
+            <span class="track-number">09</span>
+            <span class="track-name">Celestial Beats</span>
+            <span class="track-duration">3:51</span>
+          </li>
+          <li class="track">
+            <span class="track-number">10</span>
+            <span class="track-name">Journey Within</span>
+            <span class="track-duration">4:05</span>
+          </li>
+          <li class="track">
+            <span class="track-number">11</span>
+            <span class="track-name">Light & Shadow</span>
+            <span class="track-duration">3:39</span>
+          </li>
+          <li class="track">
+            <span class="track-number">12</span>
+            <span class="track-name">Universal Connection</span>
+            <span class="track-duration">3:53</span>
+          </li>
+          <li class="track">
+            <span class="track-number">13</span>
+            <span class="track-name">Rise & Shine</span>
+            <span class="track-duration">3:42</span>
+          </li>
+        </ol>
+      </div>
+
+      <!-- Spotify Embed -->
+      <div class="spotify-embed">
+        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/album/elevation-allyson-glado?utm_source=generator" width="100%" height="380" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="music-cta">
+      <h2>Support Allyson Glado</h2>
+      <p>Follow, stream, and share her music on your favorite platform</p>
+      <a href="/" class="btn btn-primary">Discover More</a>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>Allyson Glado</h4>
+          <p>Reggae-pop artist from Paris, France</p>
+        </div>
+        <div class="footer-section">
+          <h4>Links</h4>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/music.html">Music</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Follow</h4>
+          <ul>
+            <li><a href="https://www.instagram.com/allysonglado" target="_blank">Instagram</a></li>
+            <li><a href="https://www.facebook.com/allysonglado" target="_blank">Facebook</a></li>
+            <li><a href="https://www.youtube.com/@allysonglado" target="_blank">YouTube</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Allyson Glado. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="/assets/js/platform-tracking.js" defer></script>
+  <script src="/assets/js/main.js" defer></script>
+</body>
+</html>

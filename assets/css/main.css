@@ -1,0 +1,638 @@
+/* ORBIT - Allyson Glado Main Stylesheet */
+/* Reggae-Pop Authentic Design System */
+
+/* ============================================
+   CSS VARIABLES & THEMING
+   ============================================ */
+
+:root {
+  /* Colors - Reggae-Pop Palette */
+  --primary-green: #2d5016;       /* Forest green (reggae root) */
+  --accent-gold: #d4af37;         /* Caribbean gold */
+  --accent-brown: #8b6f47;        /* Earthy brown */
+  --text-dark: #222;
+  --text-light: #555;
+  --bg-light: #f9f9f9;
+  --border-color: #ddd;
+
+  /* Spacing System */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-xxl: 48px;
+
+  /* Typography */
+  --font-serif: 'Crimson Text', Georgia, serif;
+  --font-sans: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --font-mono: 'Courier New', monospace;
+
+  /* Border Radius */
+  --border-radius: 8px;
+  --border-radius-lg: 12px;
+
+  /* Transitions */
+  --transition: all 0.3s ease;
+  --transition-fast: all 0.15s ease;
+}
+
+/* ============================================
+   RESET & BASE STYLES
+   ============================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--text-dark);
+  background-color: #fff;
+  line-height: 1.6;
+}
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--primary-green);
+  margin-bottom: var(--spacing-md);
+}
+
+h1 {
+  font-size: 48px;
+  margin-bottom: var(--spacing-lg);
+}
+
+h2 {
+  font-size: 36px;
+  margin-bottom: var(--spacing-md);
+}
+
+h3 {
+  font-size: 24px;
+  margin-bottom: var(--spacing-sm);
+}
+
+p {
+  margin-bottom: var(--spacing-md);
+  line-height: 1.8;
+}
+
+a {
+  color: var(--primary-green);
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+
+a:hover {
+  color: var(--accent-gold);
+}
+
+strong {
+  font-weight: 600;
+  color: var(--primary-green);
+}
+
+/* ============================================
+   CONTAINER & LAYOUT
+   ============================================ */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+
+.navbar {
+  background-color: #fff;
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--spacing-md) 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.navbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-brand .logo {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--primary-green);
+}
+
+.navbar-menu {
+  display: flex;
+  list-style: none;
+  gap: var(--spacing-lg);
+}
+
+.navbar-menu li a {
+  font-size: 14px;
+  font-weight: 500;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius);
+  transition: var(--transition-fast);
+  color: var(--text-dark);
+}
+
+.navbar-menu li a:hover,
+.navbar-menu li a.active {
+  background-color: var(--bg-light);
+  color: var(--primary-green);
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+
+.hero {
+  padding: var(--spacing-xxl) 0;
+  background: linear-gradient(135deg, #f5f5f5 0%, #fff 100%);
+}
+
+.hero-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-xxl);
+  align-items: start;
+}
+
+.hero h1 {
+  font-size: 52px;
+  color: var(--primary-green);
+  margin-bottom: var(--spacing-sm);
+}
+
+.tagline {
+  font-size: 20px;
+  color: var(--accent-brown);
+  font-style: italic;
+  margin-bottom: var(--spacing-lg);
+}
+
+.artist-bio {
+  margin: var(--spacing-lg) 0;
+  padding: var(--spacing-lg);
+  background-color: #fff;
+  border-left: 4px solid var(--accent-gold);
+  border-radius: var(--border-radius);
+}
+
+.artist-bio p {
+  font-size: 15px;
+  line-height: 1.8;
+  margin-bottom: var(--spacing-md);
+}
+
+.artist-bio h3 {
+  font-size: 18px;
+  margin-top: var(--spacing-lg);
+  margin-bottom: var(--spacing-sm);
+}
+
+.philosophy-list {
+  list-style: none;
+  padding: 0;
+  margin: var(--spacing-md) 0;
+}
+
+.philosophy-list li {
+  padding: var(--spacing-sm) 0;
+  padding-left: var(--spacing-md);
+  position: relative;
+}
+
+.philosophy-list li:before {
+  content: "♪";
+  position: absolute;
+  left: 0;
+  color: var(--accent-gold);
+  font-weight: bold;
+}
+
+.influences {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--spacing-md);
+  margin: var(--spacing-md) 0;
+}
+
+.influence {
+  padding: var(--spacing-md);
+  background-color: var(--bg-light);
+  border-radius: var(--border-radius);
+  text-align: center;
+  border-top: 3px solid var(--accent-gold);
+}
+
+.influence strong {
+  display: block;
+  margin-bottom: var(--spacing-xs);
+  color: var(--primary-green);
+}
+
+.hero-image {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.image-placeholder {
+  width: 100%;
+  height: 400px;
+  background: linear-gradient(135deg, var(--primary-green), var(--accent-brown));
+  border-radius: var(--border-radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.image-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.trust-badges {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.badge {
+  background-color: var(--primary-green);
+  color: white;
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  font-size: 14px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(45, 80, 22, 0.2);
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+
+.btn {
+  display: inline-block;
+  padding: var(--spacing-md) var(--spacing-lg);
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+  text-align: center;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-primary {
+  background-color: var(--primary-green);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #1f3811;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(45, 80, 22, 0.3);
+}
+
+.btn-secondary {
+  background-color: var(--accent-gold);
+  color: var(--primary-green);
+}
+
+.btn-secondary:hover {
+  background-color: #e5c158;
+  transform: translateY(-2px);
+}
+
+.btn-large {
+  padding: var(--spacing-lg) var(--spacing-xxl);
+  font-size: 16px;
+}
+
+/* ============================================
+   SECTIONS
+   ============================================ */
+
+section {
+  padding: var(--spacing-xxl) 0;
+}
+
+.platforms-section,
+.featured-albums,
+.about-collaboration,
+.cta-section {
+  background-color: #fff;
+  border-top: 1px solid var(--border-color);
+}
+
+.platforms-section h2,
+.featured-albums h2,
+.about-collaboration h2,
+.cta-section h2 {
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.section-subtitle {
+  text-align: center;
+  color: var(--text-light);
+  font-size: 16px;
+  margin-bottom: var(--spacing-xl);
+}
+
+/* ============================================
+   EMAIL SIGNUP
+   ============================================ */
+
+.email-signup {
+  background: linear-gradient(135deg, var(--primary-green), var(--accent-brown));
+  color: white;
+  padding: var(--spacing-xxl) 0;
+  text-align: center;
+}
+
+.email-signup h2 {
+  color: white;
+  margin-bottom: var(--spacing-sm);
+}
+
+.email-signup p {
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: var(--spacing-lg);
+}
+
+.email-signup-form {
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.email-signup input {
+  flex: 1;
+  min-width: 200px;
+  padding: var(--spacing-md) var(--spacing-lg);
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 14px;
+  font-family: var(--font-sans);
+}
+
+.email-signup button {
+  background-color: var(--accent-gold);
+  color: var(--primary-green);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border: none;
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  min-width: 120px;
+}
+
+.email-signup button:hover {
+  background-color: #e5c158;
+  transform: translateY(-2px);
+}
+
+/* ============================================
+   ALBUMS SECTION
+   ============================================ */
+
+.albums-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-lg);
+}
+
+.album-card {
+  background-color: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-lg);
+  transition: var(--transition);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.album-card:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+}
+
+.album-card .album-image {
+  width: 100%;
+  height: 200px;
+  margin-bottom: var(--spacing-md);
+}
+
+.album-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--primary-green), var(--accent-gold));
+  border-radius: var(--border-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+}
+
+.album-card h3 {
+  margin-bottom: var(--spacing-xs);
+}
+
+.album-year {
+  color: var(--accent-brown);
+  font-size: 14px;
+  margin-bottom: var(--spacing-md);
+  font-style: italic;
+}
+
+.album-description {
+  font-size: 14px;
+  color: var(--text-light);
+  margin-bottom: var(--spacing-md);
+}
+
+/* ============================================
+   COLLABORATION SECTION
+   ============================================ */
+
+.about-collaboration {
+  background-color: var(--bg-light);
+}
+
+.collaboration-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-lg);
+  align-items: start;
+}
+
+.collaboration-text ul {
+  list-style: none;
+  padding: 0;
+}
+
+.collaboration-text li {
+  padding: var(--spacing-md) 0;
+  padding-left: var(--spacing-lg);
+  position: relative;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.collaboration-text li:before {
+  content: "🎺";
+  position: absolute;
+  left: 0;
+}
+
+.collaboration-text li:last-child {
+  border-bottom: none;
+}
+
+/* ============================================
+   CALL TO ACTION
+   ============================================ */
+
+.cta-section {
+  background: linear-gradient(135deg, var(--primary-green), var(--accent-brown));
+  color: white;
+  text-align: center;
+  padding: var(--spacing-xxl) 0;
+}
+
+.cta-section h2 {
+  color: white;
+  font-size: 40px;
+  margin-bottom: var(--spacing-md);
+}
+
+.cta-section p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 18px;
+  margin-bottom: var(--spacing-lg);
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+.footer {
+  background-color: var(--primary-green);
+  color: white;
+  padding: var(--spacing-xxl) 0 var(--spacing-lg);
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
+}
+
+.footer-section h4 {
+  color: var(--accent-gold);
+  font-size: 16px;
+  margin-bottom: var(--spacing-md);
+}
+
+.footer-section p,
+.footer-section a {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 14px;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: var(--spacing-sm);
+}
+
+.footer-section a:hover {
+  color: var(--accent-gold);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: var(--spacing-lg);
+  text-align: center;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 13px;
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.mt-sm {
+  margin-top: var(--spacing-sm);
+}
+
+.mt-md {
+  margin-top: var(--spacing-md);
+}
+
+.mt-lg {
+  margin-top: var(--spacing-lg);
+}
+
+.mb-sm {
+  margin-bottom: var(--spacing-sm);
+}
+
+.mb-md {
+  margin-bottom: var(--spacing-md);
+}
+
+.mb-lg {
+  margin-bottom: var(--spacing-lg);
+}
