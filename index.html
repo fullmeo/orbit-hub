@@ -43,7 +43,7 @@
     }
     </script>
 
-    <!-- Schema.org - Albums -->
+    <!-- Schema.org - Music Albums with ALL platform links -->
     <script type="application/ld+json">
     [
       {
@@ -51,15 +51,28 @@
         "@type": "MusicAlbum",
         "name": "Élévation",
         "releaseDate": "2021",
+        "description": "Allyson Glado's second studio album featuring reggae-pop fusion with jazz and soul influences",
         "artist": {
           "@type": "MusicGroup",
-          "name": "Allyson Glado"
+          "name": "Allyson Glado",
+          "sameAs": [
+            "https://open.spotify.com/artist/7CgVDnTyDJjV0zZ5GFqdz1",
+            "https://music.apple.com/us/artist/allyson-glado/1209476753",
+            "https://www.youtube.com/channel/UCHbce4yJr6SJ_pAsvtbG7ag",
+            "https://www.deezer.com/en/artist/12298412",
+            "https://soundcloud.com/allysonglado",
+            "https://www.instagram.com/allysonglado",
+            "https://www.facebook.com/allysonglado"
+          ]
         },
         "potentialAction": {
           "@type": "ListenAction",
           "target": [
-            {"urlTemplate": "https://open.spotify.com/artist/7CgVDnTyDJjV0zZ5GFqdz1"},
-            {"urlTemplate": "https://music.apple.com/us/artist/allyson-glado/1209476753"}
+            {"urlTemplate": "https://open.spotify.com/artist/7CgVDnTyDJjV0zZ5GFqdz1", "name": "Spotify"},
+            {"urlTemplate": "https://music.apple.com/us/artist/allyson-glado/1209476753", "name": "Apple Music"},
+            {"urlTemplate": "https://www.youtube.com/channel/UCHbce4yJr6SJ_pAsvtbG7ag", "name": "YouTube"},
+            {"urlTemplate": "https://www.deezer.com/en/artist/12298412", "name": "Deezer"},
+            {"urlTemplate": "https://soundcloud.com/allysonglado", "name": "SoundCloud"}
           ]
         }
       },
@@ -68,15 +81,28 @@
         "@type": "MusicAlbum",
         "name": "S-Moi",
         "releaseDate": "2018",
+        "description": "Allyson Glado's debut studio album introducing her unique reggae-pop fusion sound",
         "artist": {
           "@type": "MusicGroup",
-          "name": "Allyson Glado"
+          "name": "Allyson Glado",
+          "sameAs": [
+            "https://open.spotify.com/artist/7CgVDnTyDJjV0zZ5GFqdz1",
+            "https://music.apple.com/us/artist/allyson-glado/1209476753",
+            "https://www.youtube.com/channel/UCHbce4yJr6SJ_pAsvtbG7ag",
+            "https://www.deezer.com/en/artist/12298412",
+            "https://soundcloud.com/allysonglado",
+            "https://www.instagram.com/allysonglado",
+            "https://www.facebook.com/allysonglado"
+          ]
         },
         "potentialAction": {
           "@type": "ListenAction",
           "target": [
-            {"urlTemplate": "https://open.spotify.com/artist/7CgVDnTyDJjV0zZ5GFqdz1"},
-            {"urlTemplate": "https://music.apple.com/us/artist/allyson-glado/1209476753"}
+            {"urlTemplate": "https://open.spotify.com/artist/7CgVDnTyDJjV0zZ5GFqdz1", "name": "Spotify"},
+            {"urlTemplate": "https://music.apple.com/us/artist/allyson-glado/1209476753", "name": "Apple Music"},
+            {"urlTemplate": "https://www.youtube.com/channel/UCHbce4yJr6SJ_pAsvtbG7ag", "name": "YouTube"},
+            {"urlTemplate": "https://www.deezer.com/en/artist/12298412", "name": "Deezer"},
+            {"urlTemplate": "https://soundcloud.com/allysonglado", "name": "SoundCloud"}
           ]
         }
       }
@@ -181,6 +207,20 @@
                            rel="noopener noreferrer"
                            class="platform-link"
                            aria-label="Listen on YouTube">YouTube</a>
+                        <a href="https://www.deezer.com/en/artist/12298412?utm_source=orbit_allyson&utm_medium=homepage&utm_campaign=allyson_hub&utm_content=deezer"
+                           data-platform="deezer"
+                           data-album="elevation"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="platform-link"
+                           aria-label="Listen on Deezer">Deezer</a>
+                        <a href="https://soundcloud.com/allysonglado?utm_source=orbit_allyson&utm_medium=homepage&utm_campaign=allyson_hub&utm_content=soundcloud"
+                           data-platform="soundcloud"
+                           data-album="elevation"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="platform-link"
+                           aria-label="Listen on SoundCloud">SoundCloud</a>
                     </div>
                 </article>
 
@@ -213,6 +253,20 @@
                            rel="noopener noreferrer"
                            class="platform-link"
                            aria-label="Listen on YouTube">YouTube</a>
+                        <a href="https://www.deezer.com/en/artist/12298412?utm_source=orbit_allyson&utm_medium=homepage&utm_campaign=allyson_hub&utm_content=deezer"
+                           data-platform="deezer"
+                           data-album="smoi"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="platform-link"
+                           aria-label="Listen on Deezer">Deezer</a>
+                        <a href="https://soundcloud.com/allysonglado?utm_source=orbit_allyson&utm_medium=homepage&utm_campaign=allyson_hub&utm_content=soundcloud"
+                           data-platform="soundcloud"
+                           data-album="smoi"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="platform-link"
+                           aria-label="Listen on SoundCloud">SoundCloud</a>
                     </div>
                 </article>
             </div>
@@ -265,6 +319,31 @@
                        rel="noopener noreferrer"
                        aria-label="Listen on Deezer">
                         <span class="platform-icon">♫</span> Deezer
+                    </a>
+                </div>
+            </div>
+
+            <!-- Social & Connect -->
+            <div class="social-connect">
+                <h3>Follow on Social Media</h3>
+                <div class="social-buttons">
+                    <a href="https://www.instagram.com/allysonglado?utm_source=orbit_allyson&utm_medium=homepage&utm_campaign=allyson_hub&utm_content=instagram"
+                       data-platform="instagram"
+                       data-click-type="social"
+                       class="social-btn instagram"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       aria-label="Follow on Instagram">
+                        <span class="social-icon">📷</span> Instagram
+                    </a>
+                    <a href="https://www.facebook.com/allysonglado?utm_source=orbit_allyson&utm_medium=homepage&utm_campaign=allyson_hub&utm_content=facebook"
+                       data-platform="facebook"
+                       data-click-type="social"
+                       class="social-btn facebook"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       aria-label="Follow on Facebook">
+                        <span class="social-icon">f</span> Facebook
                     </a>
                 </div>
             </div>
