@@ -1,0 +1,14 @@
+{
+  "name": "orbit-hub",
+  "version": "1.0.0",
+  "description": "ORBIT - Artist Visibility Infrastructure",
+  "main": "index.html",
+  "scripts": {
+    "build": "echo 'Static site - no build required'"
+  },
+  "keywords": ["artist", "visibility", "streaming", "music"],
+  "author": "Serigne DIAGNE",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {}
+}
