@@ -497,57 +497,6 @@
    DARK MODE SUPPORT
    ============================================ */
 
-@media (prefers-color-scheme: dark) {
-  body {
-    background-color: #1a1a1a;
-    color: #e0e0e0;
-  }
-
-  .container,
-  .card {
-    background-color: #242424;
-  }
-
-  .navbar {
-    background-color: #1a1a1a;
-    border-bottom-color: #333;
-  }
-
-  .section-divider {
-    border-top-color: rgba(212, 175, 55, 0.3);
-  }
-
-  .album-info h2,
-  .track-listing h3,
-  .music-hero h1,
-  .music-cta h2,
-  h1, h2, h3, h4 {
-    color: #d4af37;
-  }
-
-  .track-name,
-  p {
-    color: #d0d0d0;
-  }
-
-  .track-listing {
-    background-color: #2a2a2a;
-  }
-
-  .track {
-    border-bottom-color: #333;
-  }
-
-  .platform-badge {
-    background-color: #333;
-    color: #d4af37;
-  }
-
-  a {
-    color: #d4af37;
-  }
-}
-
 /* ============================================
    REDUCED MOTION SUPPORT
    ============================================ */

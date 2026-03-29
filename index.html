@@ -160,7 +160,13 @@
     <section class="image-section">
         <div class="container">
             <div class="image-placeholder">
-                <img src="assets/images/allyson-performance.jpg" alt="Allyson Glado performing on stage">
+                <img
+                    src="assets/images/allyson-performance.jpg"
+                    alt="Allyson Glado performing on stage"
+                    loading="lazy"
+                    width="1225"
+                    height="800"
+                >
             </div>
         </div>
     </section>
@@ -552,20 +558,13 @@
         </div>
     </footer>
 
-    <!-- Google Analytics (to be configured) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
+    <!-- Google Analytics - Configure GA4_ID when ready -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=GA4_ID"></script> -->
+    <!-- <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        // Update with actual GA4 ID
-        // gtag('config', 'G-XXXXXXXXXX');
-    </script>
-
-    <!-- Brevo Tracking (to be configured) -->
-    <!-- <script>
-        window.brevo = window.brevo || {};
-        window.brevo.trackingId = "YOUR_BREVO_ID";
+        gtag('config', 'GA4_ID');
     </script> -->
 
     <!-- Main JS -->
