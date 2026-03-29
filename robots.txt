@@ -9,7 +9,7 @@ Disallow: /.git/
 Disallow: /node_modules/
 
 # Sitemap location
-Sitemap: https://allysonglado.com/sitemap.xml
+Sitemap: https://orbit-allysonglado.netlify.app/sitemap.xml
 
 # Crawler delay (ms) - be respectful
 Crawl-delay: 1
