@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cp deployment_files/README.md .)",
+      "Bash(cp deployment_files/REDEPLOYMENT-INSTRUCTIONS.md .)",
+      "Bash(cp deployment_files/CONVERGENCE-VALIDATION.md .)"
+    ]
+  }
+}
