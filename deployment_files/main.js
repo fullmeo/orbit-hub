@@ -275,16 +275,26 @@ if (!CSS.supports('scroll-behavior', 'smooth')) {
 }
 
 // ========================================================================
-// PERFORMANCE: Report Web Vitals (optional)
+// PERFORMANCE: Report Web Vitals
 // ========================================================================
 
+// Track page load time
+const pageLoadStart = performance.timing.navigationStart;
+window.addEventListener('load', () => {
+    const pageLoadTime = Math.max(0, performance.now());
+    if (pageLoadTime > 0) {
+        console.log(`📊 Page load time: ${pageLoadTime.toFixed(0)}ms`);
+    }
+});
+
+// Track Largest Contentful Paint
 if ('PerformanceObserver' in window) {
     try {
-        // Largest Contentful Paint
         const observer = new PerformanceObserver((list) => {
             const entries = list.getEntries();
             const lastEntry = entries[entries.length - 1];
-            console.log('📊 LCP:', lastEntry.renderTime || lastEntry.loadTime);
+            const lcp = lastEntry.renderTime || lastEntry.loadTime;
+            console.log(`📊 LCP: ${lcp.toFixed(0)}ms`);
         });
         observer.observe({ entryTypes: ['largest-contentful-paint'] });
     } catch (e) {
