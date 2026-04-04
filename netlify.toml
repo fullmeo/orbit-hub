@@ -114,10 +114,9 @@
 # Analytics configuration
 [[plugins]]
   package = "@netlify/plugin-lighthouse"
-  
+
   [plugins.inputs]
     output_path = "lighthouse"
-    uploads_dir = "reports"
 
 # Monitoring and alerts
 [monitoring]
