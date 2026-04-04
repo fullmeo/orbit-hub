@@ -14,7 +14,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-    
+
+    <!-- Performance: Preload album covers -->
+    <link rel="preload" as="image" href="/assets/images/elevation-cover.jpg" type="image/jpeg">
+    <link rel="preload" as="image" href="/assets/images/smoi-cover.jpg" type="image/jpeg">
+
     <!-- Spotify Web Playback SDK -->
     <script src="https://sdk.scdn.co/spotify-player.js"></script>
     
@@ -60,7 +64,7 @@
         <div class="container">
             <div class="album-layout">
                 <div class="album-cover">
-                    <img src="/assets/images/elevation-cover.jpg" alt="Élévation Album Cover">
+                    <img src="/assets/images/elevation-cover.jpg" alt="Élévation Album Cover" width="400" height="400" loading="eager">
                 </div>
                 <div class="album-details">
                     <div class="album-meta">
@@ -156,7 +160,7 @@
         <div class="container">
             <div class="album-layout reverse">
                 <div class="album-cover">
-                    <img src="/assets/images/smoi-cover.jpg" alt="S-Moi Album Cover">
+                    <img src="/assets/images/smoi-cover.jpg" alt="S-Moi Album Cover" width="400" height="400" loading="eager">
                 </div>
                 <div class="album-details">
                     <div class="album-meta">

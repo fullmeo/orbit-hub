@@ -79,9 +79,15 @@
     <link rel="stylesheet" href="/assets/css/responsive.css">
     
     <!-- Google Fonts - Distinctive typography -->
+    <!-- Font Optimization -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Performance: Preload hero image (LCP fix) -->
+    <link rel="preload" as="image" href="/assets/images/allyson-main.jpg" type="image/jpeg">
+    <link rel="preload" as="image" href="/assets/images/elevation-cover.jpg" type="image/jpeg">
+    <link rel="preload" as="image" href="/assets/images/smoi-cover.jpg" type="image/jpeg">
     
     <!-- Brevo Script -->
     <script type="text/javascript" src="https://cdn.brevo.com/lib/BrevoConversationsLib.js"></script>
@@ -142,7 +148,7 @@
                 </div>
             </div>
             <div class="hero-image">
-                <img src="/assets/images/allyson-main.jpg" alt="Allyson Glado performing" loading="lazy">
+                <img src="/assets/images/allyson-main.jpg" alt="Allyson Glado performing" loading="eager" width="600" height="600" fetchpriority="high">
             </div>
         </div>
     </section>
@@ -155,7 +161,7 @@
                 <!-- Album 1: Élévation -->
                 <div class="album-card">
                     <div class="album-image">
-                        <img src="/assets/images/elevation-cover.jpg" alt="Élévation Album Cover" loading="lazy">
+                        <img src="/assets/images/elevation-cover.jpg" alt="Élévation Album Cover" loading="lazy" width="300" height="300">
                         <div class="album-overlay">
                             <a href="/music.html#elevation" class="album-link" data-event="album_elevation">Explore Album</a>
                         </div>
@@ -192,7 +198,7 @@
                 <!-- Album 2: S-Moi -->
                 <div class="album-card">
                     <div class="album-image">
-                        <img src="/assets/images/smoi-cover.jpg" alt="S-Moi Album Cover" loading="lazy">
+                        <img src="/assets/images/smoi-cover.jpg" alt="S-Moi Album Cover" loading="lazy" width="300" height="300">
                         <div class="album-overlay">
                             <a href="/music.html#smoi" class="album-link" data-event="album_smoi">Explore Album</a>
                         </div>
