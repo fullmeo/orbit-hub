@@ -1,0 +1,415 @@
+/* ========================================================================
+   RESPONSIVE DESIGN - Mobile First
+   ======================================================================== */
+
+/* Tablet: 768px */
+@media (max-width: 768px) {
+    /* Navigation */
+    .nav-menu {
+        display: none;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background: var(--color-primary);
+        padding: var(--spacing-md) 0;
+        gap: 0;
+        z-index: 999;
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+
+    .nav-link {
+        padding: var(--spacing-md);
+        border-bottom: 1px solid rgba(212, 165, 116, 0.1);
+        display: block;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    /* Hero Section */
+    .hero-content {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+        padding: 0 var(--spacing-md);
+    }
+
+    .hero-title {
+        font-size: 3rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
+
+    .hero-description {
+        font-size: 1rem;
+    }
+
+    .hero-cta {
+        flex-direction: column;
+    }
+
+    .btn {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .hero-image {
+        order: -1;
+    }
+
+    .hero {
+        padding: var(--spacing-xl) 0;
+        min-height: auto;
+    }
+
+    /* Featured Music */
+    .featured-music h2 {
+        font-size: 2rem;
+    }
+
+    .albums-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+    }
+
+    /* Platforms */
+    .platforms h2 {
+        font-size: 2rem;
+    }
+
+    .platforms-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-md);
+    }
+
+    /* Footer */
+    .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-lg);
+    }
+
+    /* Form */
+    .form-group {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+
+    .form-input,
+    .form-group button {
+        width: 100%;
+    }
+
+    /* Spacing */
+    :root {
+        --spacing-xl: 2rem;
+        --spacing-2xl: 3rem;
+    }
+
+    .container {
+        padding: 0 var(--spacing-md);
+    }
+}
+
+/* Mobile: 480px and below */
+@media (max-width: 480px) {
+    /* Typography */
+    :root {
+        font-size: 14px;
+    }
+
+    /* Navigation */
+    .nav-logo {
+        gap: var(--spacing-xs);
+        font-size: 1.2rem;
+    }
+
+    .logo-icon {
+        font-size: 1.4rem;
+    }
+
+    .nav-container {
+        padding: 0 var(--spacing-sm);
+    }
+
+    /* Hero */
+    .hero-title {
+        font-size: 2.2rem;
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .hero-description {
+        font-size: 0.95rem;
+        margin-bottom: var(--spacing-md);
+    }
+
+    .hero-cta {
+        gap: var(--spacing-sm);
+    }
+
+    .btn {
+        padding: 0.75rem 1rem;
+        font-size: 0.8rem;
+    }
+
+    /* Sections */
+    .featured-music h2,
+    .platforms h2,
+    .signup-content h2 {
+        font-size: 1.5rem;
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .featured-music,
+    .platforms,
+    .email-signup {
+        padding: var(--spacing-lg) 0;
+    }
+
+    .platforms-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+
+    /* Album Cards */
+    .album-info {
+        padding: var(--spacing-md);
+    }
+
+    .album-info h3 {
+        font-size: 1.3rem;
+    }
+
+    .album-platforms {
+        flex-direction: column;
+    }
+
+    .platform-link {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Popup */
+    .popup-content {
+        padding: var(--spacing-lg);
+    }
+
+    .popup-content h3 {
+        font-size: 1.3rem;
+    }
+
+    /* Footer */
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+
+    .footer {
+        padding: var(--spacing-lg) 0;
+    }
+
+    /* Spacing */
+    :root {
+        --spacing-md: 1.5rem;
+        --spacing-lg: 2rem;
+        --spacing-xl: 2.5rem;
+        --spacing-2xl: 2.5rem;
+    }
+
+    .container {
+        padding: 0 var(--spacing-sm);
+    }
+}
+
+/* Large Desktop: 1200px+ */
+@media (min-width: 1200px) {
+    .container {
+        padding: 0 2rem;
+    }
+
+    .hero-title {
+        font-size: 5rem;
+    }
+
+    .platforms-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* ========================================================================
+   PRINT STYLES
+   ======================================================================== */
+
+@media print {
+    nav,
+    .hero-cta,
+    .email-signup,
+    .footer,
+    .exit-popup {
+        display: none;
+    }
+
+    body {
+        background: white;
+        color: black;
+    }
+
+    a {
+        text-decoration: underline;
+    }
+
+    .hero-title,
+    .hero-subtitle {
+        color: black;
+    }
+}
+
+/* ========================================================================
+   ACCESSIBILITY - Prefers Reduced Motion
+   ======================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ========================================================================
+   DARK MODE (Optional - can be activated with CSS variable toggle)
+   ======================================================================== */
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-light: #1a1a1a;
+        --color-text: #e0e0e0;
+        --color-text-light: #b0b0b0;
+        --color-border: #333;
+    }
+
+    body {
+        background-color: var(--color-dark);
+    }
+
+    .album-card {
+        background: #2a2a2a;
+    }
+
+    .popup-content {
+        background: #2a2a2a;
+    }
+
+    .popup-content h3,
+    .signup-content h2 {
+        color: var(--color-secondary);
+    }
+
+    .form-input,
+    .popup-form input {
+        background: #1a1a1a;
+        color: var(--color-light);
+        border-color: var(--color-border);
+    }
+
+    .form-input::placeholder,
+    .popup-form input::placeholder {
+        color: var(--color-text-light);
+    }
+}
+
+/* ========================================================================
+   HIGH CONTRAST MODE
+   ======================================================================== */
+
+@media (prefers-contrast: more) {
+    :root {
+        --color-primary: #000;
+        --color-secondary: #FFD700;
+    }
+
+    .btn-primary {
+        border: 2px solid currentColor;
+    }
+
+    .nav-link::after {
+        height: 3px;
+    }
+}
+
+/* ========================================================================
+   LANDSCAPE MODE (Mobile)
+   ======================================================================== */
+
+@media (max-height: 600px) and (orientation: landscape) {
+    .hero {
+        min-height: auto;
+        padding: var(--spacing-lg) 0;
+    }
+
+    .hero-content {
+        gap: var(--spacing-md);
+    }
+
+    .hero-image {
+        display: none;
+    }
+
+    nav {
+        padding: var(--spacing-xs) 0;
+    }
+}
+
+/* ========================================================================
+   FOCUS STYLES - Better Keyboard Navigation
+   ======================================================================== */
+
+a:focus,
+button:focus,
+input:focus,
+textarea:focus,
+select:focus {
+    outline: 2px solid var(--color-secondary);
+    outline-offset: 2px;
+}
+
+/* Remove focus outline for mouse users only */
+*:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* ========================================================================
+   TOUCH DEVICE OPTIMIZATION
+   ======================================================================== */
+
+@media (hover: none) and (pointer: coarse) {
+    .nav-link::after {
+        height: 3px;
+        width: 100%;
+    }
+
+    .btn {
+        min-height: 44px;
+    }
+
+    .platform-link {
+        min-height: 44px;
+    }
+
+    .album-card:hover {
+        transform: none;
+    }
+}

@@ -1,0 +1,210 @@
+# ========================================================================
+# ORBIT - Netlify Configuration
+# Phase 0 Complete | Allyson Glado Artist Hub
+# ========================================================================
+
+# Build settings
+[build]
+  command = "echo 'Site deployed successfully'"
+  publish = "/"
+  functions = "netlify/functions"
+
+# Environment variables
+[build.environment]
+  BREVO_API_KEY = "YOUR_BREVO_API_KEY_HERE"
+  GA4_PROPERTY_ID = "G-XXXXXXXXXX"
+  SPOTIFY_CLIENT_ID = "YOUR_SPOTIFY_CLIENT_ID"
+  SPOTIFY_REDIRECT_URI = "https://orbit-allysonglado.netlify.app/callback"
+
+# Headers for security and performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+
+[[headers]]
+  for = "*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Content-Type = "application/javascript; charset=UTF-8"
+
+[[headers]]
+  for = "*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Content-Type = "text/css; charset=UTF-8"
+
+[[headers]]
+  for = "*.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+    Content-Type = "image/jpeg"
+
+[[headers]]
+  for = "*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+    Content-Type = "image/png"
+
+[[headers]]
+  for = "*.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+    Content-Type = "image/svg+xml"
+
+# Redirects (SPA fallback + custom routes)
+[[redirects]]
+  from = "/blog/*"
+  to = "/blog/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  condition = "Request.path != /.well-known/*"
+
+# Redirect old URLs if rebranding
+[[redirects]]
+  from = "/orbit-hub"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/listen"
+  to = "/music.html"
+  status = 301
+
+[[redirects]]
+  from = "/about-me"
+  to = "/about.html"
+  status = 301
+
+# Forms
+[[form]]
+  name = "Email Signup"
+  honeypot = true
+  
+[[form]]
+  name = "Contact Form"
+  honeypot = true
+
+# Context-specific settings (Production)
+[context.production]
+  environment = { ENVIRONMENT = "production" }
+  
+  [[context.production.headers]]
+    for = "/*"
+    [context.production.headers.values]
+      Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+
+# Context-specific settings (Preview)
+[context.preview]
+  environment = { ENVIRONMENT = "preview" }
+  command = "echo 'Preview deployment'"
+
+# Context-specific settings (Branch Deploy)
+[context.branch-deploy]
+  environment = { ENVIRONMENT = "development" }
+
+# Analytics configuration
+[[plugins]]
+  package = "@netlify/plugin-lighthouse"
+  
+  [plugins.inputs]
+    output_path = "lighthouse"
+    uploads_dir = "reports"
+
+# Monitoring and alerts
+[monitoring]
+  enabled = true
+
+# Edge functions (optional - for advanced features)
+# [[edge_functions]]
+#   path = "/api/*"
+#   function = "api-handler"
+
+# ========================================================================
+# COMMENTS & SETUP INSTRUCTIONS
+# ========================================================================
+
+# STEP 1: Environment Variables
+# Before deploying, set these in Netlify dashboard:
+# Settings → Build & deploy → Environment
+#
+# - BREVO_API_KEY: Get from https://app.brevo.com/settings/account/api
+# - GA4_PROPERTY_ID: Set up in Google Analytics 4 dashboard
+# - SPOTIFY_CLIENT_ID: Register app at https://developer.spotify.com/dashboard
+#
+# Example:
+# BREVO_API_KEY = "xkeysib-1234567890abcdef..."
+# GA4_PROPERTY_ID = "G-XXXXXXXXXX"
+# SPOTIFY_CLIENT_ID = "abc123def456..."
+
+# STEP 2: Brevo Integration
+# 1. Create account at https://www.brevo.com
+# 2. Get API key (Settings → API)
+# 3. Create contact list for Allyson Glado
+# 4. Set up email automation for welcome series
+# 5. Configure notification emails for form submissions
+
+# STEP 3: Google Analytics 4
+# 1. Go to https://analytics.google.com
+# 2. Create new GA4 property for this domain
+# 3. Copy Measurement ID (G-XXXXXXXXXX)
+# 4. Update in this file and index.html
+# 5. Set up conversion goals:
+#    - email_signup
+#    - platform_click
+#    - exit_intent_popup
+#    - time_on_page (>30s)
+#    - scroll_depth (25%, 50%, 75%)
+
+# STEP 4: Spotify Integration (Optional)
+# For Web Playback SDK with user authentication:
+# 1. Register app at https://developer.spotify.com/dashboard
+# 2. Get Client ID
+# 3. Set Redirect URI to: https://orbit-allysonglado.netlify.app/callback
+# 4. Store Client ID in environment variables
+# 5. Implement OAuth flow in Netlify Function (advanced)
+
+# STEP 5: Custom Domain (Optional but Recommended)
+# 1. Verify domain in Netlify: Settings → Domain management
+# 2. Add DNS records or change nameservers
+# 3. Enable free SSL certificate (automatic)
+# 4. Update og:url in index.html to custom domain
+
+# STEP 6: Forms & Email Notifications
+# The site includes Netlify Forms for contact/signup
+# Configure notifications at: Settings → Forms → Form notifications
+# Set email recipient: contact@allysonglado.com
+
+# STEP 7: Deploy & Test
+# 1. Push to GitHub main branch
+# 2. Netlify auto-deploys within 60 seconds
+# 3. Test at https://orbit-allysonglado.netlify.app
+# 4. Run lighthouse audit: https://developers.google.com/web/tools/lighthouse
+# 5. Verify GA4 events firing
+# 6. Test all platform links
+
+# ========================================================================
+# PERFORMANCE TARGETS
+# ========================================================================
+# 
+# Core Web Vitals (CWV):
+# - Largest Contentful Paint (LCP): < 2.5s
+# - First Input Delay (FID): < 100ms
+# - Cumulative Layout Shift (CLS): < 0.1
+#
+# PageSpeed Insights Target: 90+ (all metrics)
+#
+# Metrics to Monitor:
+# - First Contentful Paint (FCP): < 1.8s
+# - Time to Interactive (TTI): < 3.8s
+# - Total Blocking Time (TBT): < 200ms
+#
+# ========================================================================
