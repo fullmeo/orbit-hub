@@ -1,0 +1,96 @@
+# ========================================================================
+# ORBIT - Robots.txt
+# Allyson Glado Artist Visibility Hub
+# Optimized for Google, AI crawlers, and search engines
+# ========================================================================
+
+# SECTION 1: Default Rules (All Bots)
+User-agent: *
+Allow: /
+Allow: /assets/
+Allow: /blog/
+Allow: /sitemap.xml
+Allow: /robots.txt
+
+# Disallow: (nothing blocked - full crawl allowed)
+
+# Crawl Delay: No delay (Netlify handles rate limiting)
+Crawl-delay: 0
+
+# SECTION 2: Google Bot (Priority indexing)
+User-agent: Googlebot
+Allow: /
+Allow: /assets/
+Allow: /blog/
+Crawl-delay: 0
+
+# SECTION 3: Bing Bot
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# SECTION 4: AI Crawlers (GPTBot, Claude, etc.)
+User-agent: GPTBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+# SECTION 5: Other Search Engines
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: Yandexbot
+Allow: /
+
+# SECTION 6: Block Bad Bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+# SECTION 7: Sitemap Reference
+Sitemap: https://orbit-allysonglado.netlify.app/sitemap.xml
+
+# ========================================================================
+# NOTES FOR DEPLOYMENT
+# ========================================================================
+# 
+# 1. This robots.txt ALLOWS:
+#    ✓ Google indexing (high crawl budget)
+#    ✓ AI crawlers (GPTBot, Claude, CCBot)
+#    ✓ All legitimate search engines
+#    ✓ Full blog and asset access
+#
+# 2. This robots.txt BLOCKS:
+#    ✗ Ahrefs (SEO tool bot - not needed)
+#    ✗ Semrush (Competitor analysis - optional)
+#    ✗ DotBot (Unknown crawler)
+#
+# 3. NO Rate Limiting:
+#    - Netlify CDN handles rate limiting
+#    - Google respects robots.txt crawl-delay
+#    - Crawl-delay: 0 means Google crawls as fast as possible
+#
+# 4. Sitemap Reference:
+#    - Sitemap listed at bottom for discovery
+#    - Allows Google to crawl all pages efficiently
+#    - Provides priority hints (homepage=1.0, blog posts=0.7)
+#
+# ========================================================================
