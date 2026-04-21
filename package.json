@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "ORBIT Phase 0 - Artist Visibility Infrastructure with AI Fan Chat",
   "main": "index.html",
+  "type": "module",
   "scripts": {
     "build": "echo 'Static site - no build required'",
     "start": "netlify dev",
