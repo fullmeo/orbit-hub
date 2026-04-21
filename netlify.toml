@@ -5,7 +5,7 @@
 
 # Build settings
 [build]
-  command = "npm install && echo 'Site deployed successfully'"
+  command = "npm install && cp -r public/* . && echo 'Site deployed successfully'"
   publish = "/"
   functions = "netlify/functions"
 
