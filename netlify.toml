@@ -73,15 +73,10 @@
     Cache-Control = "public, max-age=86400"
     Content-Type = "image/svg+xml"
 
-# Redirects (SPA fallback + custom routes)
+# Redirects for legacy URL compatibility
 [[redirects]]
   from = "/blog/*"
   to = "/blog/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
   status = 200
 
 # Redirect old URLs if rebranding
