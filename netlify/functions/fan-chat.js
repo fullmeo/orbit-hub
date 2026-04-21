@@ -8,7 +8,7 @@ const { PassThrough } = require("stream");
 exports.config = { provider: 'esbuild' };
 
 const MAX_MESSAGE_LENGTH = 1000;
-const REQUEST_TIMEOUT_MS = 15000;
+const REQUEST_TIMEOUT_MS = 30000; // 30 seconds for Claude response
 const RATE_LIMIT_WINDOW_MS = 60000;
 const MAX_REQUESTS_PER_WINDOW = 10;
 const rateLimitStore = new Map();
@@ -98,7 +98,7 @@ exports.handler = async (event) => {
     if (!process.env.ANTHROPIC_API_KEY) return { statusCode: 500, headers: getCorsHeaders(event), body: JSON.stringify({ error: 'ANTHROPIC_API_KEY not set' }) };
 
     const shouldStream = event.queryStringParameters?.stream === 'true';
-    console.log(`[API] ${shouldStream ? 'STREAMING' : 'JSON'} mode`);
+    console.log(`[API] Mode: ${shouldStream ? 'STREAMING' : 'JSON'}, Query:`, event.queryStringParameters);
 
     if (shouldStream) {
       // STREAMING MODE (SSE)
@@ -112,6 +112,7 @@ exports.handler = async (event) => {
 
       (async () => {
         try {
+          console.log('[Anthropic] Starting stream request...');
           const anthropicStream = await client.messages.create({
             model: 'claude-3-5-haiku-20241022',
             max_tokens: 200,
@@ -121,10 +122,18 @@ exports.handler = async (event) => {
             signal: controller.signal,
           });
 
+          console.log('[Anthropic] Stream established, reading events...');
+          let tokenCount = 0;
+
           for await (const eventItem of anthropicStream) {
             if (eventItem.type === 'content_block_delta') {
               const text = eventItem.delta?.text || '';
-              if (text && !aborted) stream.write(`data: ${text}\n\n`);
+              if (text && !aborted) {
+                tokenCount++;
+                stream.write(`data: ${text}\n\n`);
+              }
+            } else if (eventItem.type === 'message_stop') {
+              console.log(`[Anthropic] Stream complete (${tokenCount} tokens)`);
             }
           }
 
@@ -133,6 +142,7 @@ exports.handler = async (event) => {
             stream.end();
           }
         } catch (err) {
+          console.error('[Anthropic Stream Error]', err.message, err.stack);
           if (!aborted) {
             stream.write(`event: error\ndata: ${JSON.stringify({ error: err.message })}\n\n`);
             stream.end();
