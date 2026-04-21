@@ -9,11 +9,12 @@
   }
   window._fanChatInitialized = true;
 
-  const API_URL = window.FAN_CHAT_CONFIG?.apiUrl || "/.netlify/functions/fan-chat";
+   const API_URL = window.FAN_CHAT_CONFIG?.apiUrl || "/.netlify/functions/fan-chat";
   const STORAGE_KEY = "fan_chat_messages";
   const STORAGE_MAX_MESSAGES = 50; // Limit to prevent localStorage bloat
   const STORAGE_EXPIRY_DAYS = 7; // Auto-clear old messages
   const MAX_MESSAGE_LENGTH = 1000;
+  const STREAM_ENABLED = true;
 
   /**
    * Sanitize HTML to prevent XSS
@@ -194,7 +195,7 @@
   }
 
   /**
-   * Send message to API with timeout
+   * Send message to API with timeout and streaming support
    */
   async function sendMessage() {
     const input = document.getElementById("fan-chat-input");
@@ -212,7 +213,7 @@
     input.value = "";
     input.style.height = "auto";
 
-    // Loading indicator
+    // Loading indicator (will be replaced by bot message with streaming text)
     const messagesContainer = document.getElementById("fan-chat-messages");
     const loadingEl = document.createElement("div");
     loadingEl.className = "fan-chat-msg fan-chat-msg-bot";
@@ -229,7 +230,7 @@
     const timeoutId = setTimeout(() => controller.abort(), 15000); // 15s timeout
 
     try {
-      const response = await fetch(API_URL, {
+      const response = await fetch(API_URL + "?stream=true", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -246,15 +247,81 @@
         throw new Error(data.error || `API error: ${response.status}`);
       }
 
-      const data = await response.json();
+      const contentType = response.headers.get("Content-Type") || "";
 
-      // Validate API response
-      if (typeof data?.reply !== "string") {
-        throw new Error("Invalid API response format");
+      if (contentType === "text/event-stream" && STREAM_ENABLED) {
+        // Streaming response handling
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let botMsgEl = null;
+        let botBubbleEl = null;
+        let buffer = "";
+        let firstTokenReceived = false;
+
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+
+          const chunk = decoder.decode(value, { stream: true });
+          buffer += chunk;
+
+          // Process complete lines
+          const lines = buffer.split("\n");
+          buffer = lines.pop(); // Keep incomplete line in buffer
+
+          for (const line of lines) {
+            if (line.startsWith("data: ")) {
+              const data = line.slice(6).trim();
+              if (!firstTokenReceived) {
+                // First token: replace loading indicator with bot message bubble
+                firstTokenReceived = true;
+                loadingEl.remove();
+
+                botMsgEl = document.createElement("div");
+                botMsgEl.className = "fan-chat-msg fan-chat-msg-bot";
+                botBubbleEl = document.createElement("div");
+                botBubbleEl.className = "fan-chat-bubble";
+                botBubbleEl.textContent = data;
+
+                const time = document.createElement("span");
+                time.className = "fan-chat-time";
+                time.textContent = new Date().toLocaleTimeString(navigator.language || "en-US", {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                });
+
+                botMsgEl.appendChild(botBubbleEl);
+                botMsgEl.appendChild(time);
+                messagesContainer.appendChild(botMsgEl);
+              } else {
+                // Append subsequent tokens
+                botBubbleEl.textContent += data;
+              }
+              messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            } else if (line.startsWith("event: done")) {
+              // Stream complete - save message to storage
+              const fullText = botBubbleEl.textContent;
+              const allMessages = Array.from(messagesContainer.querySelectorAll(".fan-chat-msg")).map((el) => ({
+                type: el.classList.contains("fan-chat-msg-user") ? "user" : "bot",
+                text: el.querySelector(".fan-chat-bubble").textContent,
+              }));
+              saveMessages(allMessages);
+              return; // Exit streaming
+            }
+          }
+        }
+      } else {
+        // Non-streaming fallback
+        const data = await response.json();
+
+        // Validate API response
+        if (typeof data?.reply !== "string") {
+          throw new Error("Invalid API response format");
+        }
+
+        loadingEl.remove();
+        addMessage(data.reply, "bot");
       }
-
-      loadingEl.remove();
-      addMessage(data.reply, "bot");
     } catch (error) {
       clearTimeout(timeoutId);
       loadingEl.remove();
