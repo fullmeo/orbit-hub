@@ -1,14 +1,24 @@
 {
   "name": "orbit-hub",
   "version": "1.0.0",
-  "description": "ORBIT - Artist Visibility Infrastructure",
+  "description": "ORBIT Phase 0 - Artist Visibility Infrastructure with AI Fan Chat",
   "main": "index.html",
   "scripts": {
-    "build": "echo 'Static site - no build required'"
+    "build": "echo 'Static site - no build required'",
+    "start": "netlify dev",
+    "dev": "netlify dev"
   },
-  "keywords": ["artist", "visibility", "streaming", "music"],
+  "keywords": ["artist", "visibility", "streaming", "music", "fan-chat", "claude-ai"],
   "author": "Serigne DIAGNE",
   "license": "MIT",
-  "dependencies": {},
-  "devDependencies": {}
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.28.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.19.0",
+    "@netlify/functions": "^2.0.0"
+  },
+  "engines": {
+    "node": "18.0.0"
+  }
 }

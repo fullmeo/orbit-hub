@@ -112,3 +112,22 @@ mailchimp_*.json
 # Build scripts
 build.log
 deploy.log
+
+# Build artifacts
+*.html.backup
+Seo_Monitoring_dashboard.zip
+*.bundle
+
+# Local configuration
+.claude/settings.local.json
+
+# Netlify
+.netlify/
+_netlify/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/settings.json
