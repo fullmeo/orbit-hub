@@ -14,7 +14,7 @@
  * - Validation: Flexible matching for branch deploys (not just exact match)
  */
 
-import Anthropic from "@anthropic-ai/sdk";
+const Anthropic = require("@anthropic-ai/sdk");
 
 // ========================================================================
 // CONFIGURATION
@@ -205,7 +205,7 @@ Instructions:
 // MAIN HANDLER
 // ========================================================================
 
-export default async (event, context) => {
+exports.handler = async (event, context) => {
   console.log(`[${new Date().toISOString()}] ${event.httpMethod} request`);
 
   // Handle CORS preflight
