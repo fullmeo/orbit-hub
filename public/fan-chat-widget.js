@@ -99,6 +99,7 @@
    * Create the widget HTML
    */
   function createWidget() {
+    const storedEmail = localStorage.getItem('fan_chat_email');
     const html = `
 <div id="fan-chat-widget" class="fan-chat-widget">
   <!-- Floating button -->
@@ -114,6 +115,20 @@
     </div>
 
     <div id="fan-chat-messages" class="fan-chat-messages" role="log" aria-live="polite"></div>
+
+    <!-- Email input (shown if escalation detected) -->
+    <div id="fan-chat-email-prompt" class="fan-chat-email-prompt hidden" role="region" aria-label="Email collection">
+      <p class="fan-chat-email-label">Pour qu'Allyson puisse te répondre, partage ton email 💌</p>
+      <input
+        type="email"
+        id="fan-chat-email-input"
+        class="fan-chat-email-input"
+        placeholder="ton@email.com"
+        aria-label="Your email address"
+        value="${storedEmail || ''}"
+      />
+      <button id="fan-chat-email-submit" class="fan-chat-email-submit">Continuer</button>
+    </div>
 
     <div class="fan-chat-input-area">
       <textarea
@@ -225,6 +240,9 @@
     messagesContainer.appendChild(loadingEl);
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
 
+    // Get stored email
+    const userEmail = localStorage.getItem('fan_chat_email');
+
     // API call with timeout
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 30000); // 30s timeout for streaming
@@ -235,6 +253,7 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           message: text,
+          email: userEmail,
           locale: navigator.language || "en-US",
         }),
         signal: controller.signal,
@@ -314,13 +333,25 @@
         // Non-streaming fallback
         const data = await response.json();
 
-        // Validate API response
-        if (typeof data?.reply !== "string") {
-          throw new Error("Invalid API response format");
-        }
-
         loadingEl.remove();
-        addMessage(data.reply, "bot");
+
+        // Handle escalation
+        if (data.escalated) {
+          addMessage(data.reply, "bot");
+
+          // Show email prompt if not already saved
+          if (!userEmail) {
+            setTimeout(() => {
+              document.getElementById("fan-chat-email-prompt").classList.remove("hidden");
+            }, 500);
+          }
+        } else {
+          // Validate API response
+          if (typeof data?.reply !== "string") {
+            throw new Error("Invalid API response format");
+          }
+          addMessage(data.reply, "bot");
+        }
       }
     } catch (error) {
       clearTimeout(timeoutId);
@@ -385,5 +416,34 @@
 
     // Auto-expand textarea
     input.addEventListener("input", () => autoExpand(input));
+
+    // Email submission
+    const emailInput = document.getElementById("fan-chat-email-input");
+    const emailSubmit = document.getElementById("fan-chat-email-submit");
+    const emailPrompt = document.getElementById("fan-chat-email-prompt");
+
+    if (emailSubmit && emailInput) {
+      emailSubmit.addEventListener("click", () => {
+        const email = emailInput.value.trim();
+        if (!email) {
+          addMessage("Merci de saisir un email valide 📧", "bot");
+          return;
+        }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          addMessage("Email invalide, réessaye 📧", "bot");
+          return;
+        }
+        localStorage.setItem("fan_chat_email", email);
+        emailPrompt.classList.add("hidden");
+        addMessage(`Merci! Allyson te répondra à ${email} 💌`, "bot");
+      });
+
+      emailInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          emailSubmit.click();
+        }
+      });
+    }
   });
 })();

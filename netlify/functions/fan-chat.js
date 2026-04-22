@@ -13,6 +13,18 @@ const RATE_LIMIT_WINDOW_MS = 60000;
 const MAX_REQUESTS_PER_WINDOW = 10;
 const rateLimitStore = new Map();
 
+// Escalation detection
+const ESCALATION_KEYWORDS = [
+  'rencontr', 'backstage', 'collabor', 'booking', 'événement',
+  'mariage', 'merchandise', 'boutique', 'contact direct',
+  'phone', 'appel', 'whatsapp', 'instagram dm', 'direct message'
+];
+
+function shouldEscalate(message) {
+  const msg = message.toLowerCase();
+  return ESCALATION_KEYWORDS.some(keyword => msg.includes(keyword));
+}
+
 function isOriginAllowed(event) {
   const allowedOrigin = process.env.ALLOWED_ORIGIN;
   const hostname = event.headers.host || '';
@@ -50,6 +62,49 @@ function validateMessage(message) {
   if (message.trim().length === 0) return { valid: false, error: 'Message cannot be empty' };
   if (message.length > MAX_MESSAGE_LENGTH) return { valid: false, error: `Message exceeds max length of ${MAX_MESSAGE_LENGTH} characters` };
   return { valid: true };
+}
+
+async function sendEscalationEmail(fanMessage, fanEmail) {
+  try {
+    const brevoApiKey = process.env.BREVO_API_KEY;
+    if (!brevoApiKey) {
+      console.warn('[Email] BREVO_API_KEY not set, skipping email notification');
+      return;
+    }
+
+    const allysonEmail = 'bovemmusique@gmail.com';
+    const response = await fetch('https://api.brevo.com/v3/smtp/email', {
+      method: 'POST',
+      headers: {
+        'accept': 'application/json',
+        'api-key': brevoApiKey,
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        sender: { name: 'ORBIT Chat', email: 'noreply@orbit-allysonglado.netlify.app' },
+        to: [{ email: allysonEmail, name: 'Allyson' }],
+        subject: '🎤 Message spécial d\'un fan - Escalade Chat',
+        htmlContent: `
+          <h2>📩 Message d'un fan</h2>
+          <p><strong>Message:</strong></p>
+          <blockquote style="background: #f5f5f5; padding: 12px; border-left: 4px solid #667eea;">
+            "${fanMessage}"
+          </blockquote>
+          <p><strong>Email du fan:</strong> ${fanEmail || '(Non fourni)'}</p>
+          <p style="color: #666; font-size: 12px;">Timestamp: ${new Date().toLocaleString('fr-FR')}</p>
+        `
+      })
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      console.error('[Email] Brevo error:', error);
+    } else {
+      console.log('[Email] Escalation sent to Allyson');
+    }
+  } catch (error) {
+    console.error('[Email] Failed to send escalation:', error.message);
+  }
 }
 
 function getSystemPrompt() {
@@ -92,10 +147,27 @@ exports.handler = async (event) => {
     if (event.body) try { body = JSON.parse(event.body); } catch (e) { return { statusCode: 400, headers: getCorsHeaders(event), body: JSON.stringify({ error: 'Invalid JSON' }) }; }
 
     const userMessage = body.message || '';
+    const fanEmail = body.email || null;
     const validation = validateMessage(userMessage);
     if (!validation.valid) return { statusCode: 400, headers: getCorsHeaders(event), body: JSON.stringify({ error: validation.error }) };
 
     if (!process.env.ANTHROPIC_API_KEY) return { statusCode: 500, headers: getCorsHeaders(event), body: JSON.stringify({ error: 'ANTHROPIC_API_KEY not set' }) };
+
+    // Check for escalation
+    if (shouldEscalate(userMessage)) {
+      console.log('[Escalation] Message escalated:', userMessage.substring(0, 100));
+      await sendEscalationEmail(userMessage, fanEmail);
+      return {
+        statusCode: 200,
+        headers: { ...getCorsHeaders(event), 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          escalated: true,
+          reply: fanEmail
+            ? "C'est une demande spéciale! 🎉 J'envoie ça à Allyson, elle te répondra à ton email très bientôt 💫"
+            : "C'est une demande spéciale! 🎉 J'envoie ça à Allyson. Pour qu'elle puisse te répondre, partage-moi ton email 💌"
+        })
+      };
+    }
 
     const shouldStream = event.queryStringParameters?.stream === 'true';
     console.log(`[API] Mode: ${shouldStream ? 'STREAMING' : 'JSON'}, Query:`, event.queryStringParameters);
@@ -183,7 +255,7 @@ exports.handler = async (event) => {
         ]);
 
         const reply = response.content[0].type === 'text' ? response.content[0].text : '';
-        return { statusCode: 200, headers: { ...getCorsHeaders(event), 'Content-Type': 'application/json', 'X-Content-Type-Options': 'nosniff', 'X-Frame-Options': 'DENY' }, body: JSON.stringify({ success: true, response: reply, timestamp: new Date().toISOString() }) };
+        return { statusCode: 200, headers: { ...getCorsHeaders(event), 'Content-Type': 'application/json', 'X-Content-Type-Options': 'nosniff', 'X-Frame-Options': 'DENY' }, body: JSON.stringify({ success: true, reply: reply, timestamp: new Date().toISOString() }) };
       } catch (err) {
         if (err.message === 'Request timeout') return { statusCode: 504, headers: getCorsHeaders(event), body: JSON.stringify({ error: 'Response generation timed out.' }) };
         throw err;
