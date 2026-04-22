@@ -11,10 +11,12 @@
 
    const API_URL = window.FAN_CHAT_CONFIG?.apiUrl || "/.netlify/functions/fan-chat";
   const STORAGE_KEY = "fan_chat_messages";
-  const STORAGE_MAX_MESSAGES = 50; // Limit to prevent localStorage bloat
-  const STORAGE_EXPIRY_DAYS = 7; // Auto-clear old messages
+  const STORAGE_MAX_MESSAGES = 50;
   const MAX_MESSAGE_LENGTH = 1000;
   const STREAM_ENABLED = true;
+
+  // Escalation state
+  let pendingEscalationMessage = null; // Stores user message that triggered escalation
 
   /**
    * Sanitize HTML to prevent XSS
@@ -181,18 +183,103 @@
   /**
    * Render stored messages on window open
    */
-  function renderStoredMessages() {
-    const messagesContainer = document.getElementById("fan-chat-messages");
-    if (!messagesContainer) return;
+   function renderStoredMessages() {
+     const messagesContainer = document.getElementById("fan-chat-messages");
+     if (!messagesContainer) return;
+     if (messagesContainer.children.length > 0) return;
 
-    // Only load if empty (prevent re-rendering)
-    if (messagesContainer.children.length > 0) return;
+     const stored = loadMessages();
+     stored.forEach((msg) => {
+       addMessage(msg.text, msg.type);
+     });
+   }
 
-    const stored = loadMessages();
-    stored.forEach((msg) => {
-      addMessage(msg.text, msg.type);
-    });
-  }
+   /**
+    * Show email input form for escalation
+    * @param {string} triggerMessage - The user message that triggered escalation
+    */
+   function showEmailForm(triggerMessage) {
+     pendingEscalationMessage = triggerMessage;
+
+     const messagesContainer = document.getElementById("fan-chat-messages");
+
+     const formWrapper = document.createElement("div");
+     formWrapper.className = "fan-chat-email-form";
+     formWrapper.innerHTML = `
+       <div class="fan-chat-msg fan-chat-msg-bot">
+         <div class="fan-chat-bubble fan-chat-email-prompt">
+           <p style="margin: 0 0 8px 0;">📧 Pour qu'Allyson te réponde, laisse ton email :</p>
+           <form id="fan-chat-email-form" style="display: flex; gap: 8px; flex-wrap: wrap;">
+             <input
+               type="email"
+               id="fan-chat-email-input"
+               placeholder="ton@email.com"
+               required
+               style="flex: 1; min-width: 150px; padding: 8px 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; font-family: inherit;"
+             />
+             <button type="submit" class="fan-chat-send-btn" style="flex-shrink: 0;">Envoyer ✅</button>
+           </form>
+           <p style="margin: 4px 0 0 0; font-size: 11px; color: var(--text-light);">🤖 Ne t'inquiète pas, ton email est transmis directement à Allyson.</p>
+         </div>
+       </div>
+     `;
+
+     messagesContainer.appendChild(formWrapper);
+     messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+     // Auto-focus email input
+     const emailInput = document.getElementById("fan-chat-email-input");
+     if (emailInput) emailInput.focus();
+
+     // Handle form submission
+     const form = document.getElementById("fan-chat-email-form");
+     form.addEventListener("submit", async (e) => {
+       e.preventDefault();
+       const email = emailInput.value.trim();
+       if (!email) return;
+
+       // Disable form during submission
+       form.querySelector('button').disabled = true;
+       form.querySelector('button').textContent = "Envoi...";
+
+       try {
+         const response = await fetch(API_URL, {
+           method: "POST",
+           headers: { "Content-Type": "application/json" },
+           body: JSON.stringify({
+             action: 'submit_email',
+             email: email,
+             originalMessage: pendingEscalationMessage,
+           }),
+           signal: new AbortController().signal, // No timeout for this quick call
+         });
+
+         const data = await response.json();
+
+         if (response.ok && data.success) {
+           // Remove form and show confirmation
+           formWrapper.remove();
+           addMessage(data.response, "bot");
+
+           // Save to storage (user email as bot message for record)
+           const allMessages = Array.from(messagesContainer.querySelectorAll(".fan-chat-msg")).map((el) => ({
+             type: el.classList.contains("fan-chat-msg-user") ? "user" : "bot",
+             text: el.querySelector(".fan-chat-bubble").textContent,
+           }));
+           saveMessages(allMessages);
+         } else {
+           addMessage(data.error || "Erreur d'envoi. Réessaie.", "bot");
+           form.querySelector('button').disabled = false;
+           form.querySelector('button').textContent = "Envoyer ✅";
+         }
+       } catch (err) {
+         console.error("[fan-chat] Email submission error:", err);
+         addMessage("Erreur réseau. Vérifie ta connexion.", "bot");
+         form.querySelector('button').disabled = false;
+         form.querySelector('button').textContent = "Envoyer ✅";
+       }
+     });
+   }
 
   /**
    * Send message to API with timeout and streaming support
@@ -311,16 +398,24 @@
           }
         }
       } else {
-        // Non-streaming fallback
+        // Non-streaming fallback (JSON)
         const data = await response.json();
 
-        // Validate API response
-        if (typeof data?.reply !== "string") {
-          throw new Error("Invalid API response format");
-        }
-
         loadingEl.remove();
-        addMessage(data.reply, "bot");
+
+        if (data.escalation) {
+          // Escalation triggered by bot
+          if (data.requiresEmail) {
+            showEmailForm(text); // show email form with original user message
+          } else {
+            // Email already sent (unlikely, but handle)
+            addMessage(data.response, "bot");
+          }
+        } else {
+          // Normal chat response
+          if (typeof data?.reply !== "string") throw new Error("Invalid API response format");
+          addMessage(data.reply, "bot");
+        }
       }
     } catch (error) {
       clearTimeout(timeoutId);

@@ -75,6 +75,92 @@ Instructions:
 - Si on demande des infos que tu ne connais pas, dis "je ne sais pas" plutôt que d'inventer`;
 }
 
+// ========================================================================
+// ESCALATION DETECTION
+// ========================================================================
+
+const ESCALATION_KEYWORDS = [
+  'rencontrer', 'rencontre', 'backstage', 'collaborer', 'collaboration',
+  'booking', 'booker', 'contact', 'contacter', 'inviter', 'invitation',
+  'management', 'manager', 'label', 'signer', 'contrat', 'deal',
+  'interview', 'entretien', 'podcast', 'radio', 'télévision',
+  'showcase', 'concert privé', 'prestation', 'apparition'
+];
+
+function detectEscalation(message) {
+  const lower = message.toLowerCase();
+  return ESCALATION_KEYWORDS.some(keyword => lower.includes(keyword));
+}
+
+async function sendEscalationEmail(fanMessage, fanEmail) {
+  const brevoKey = process.env.BREVO_API_KEY;
+  if (!brevoKey) {
+    console.warn('[Brevo] API key not set, skipping email');
+    return false;
+  }
+
+  const payload = {
+    sender: { email: 'noreply@orbit-allysonglado.netlify.app', name: 'ORBIT Fan Chat' },
+    to: [{ email: 'bovemmusique@gmail.com', name: 'Allyson Glado' }],
+    subject: `🎤 Nouvelle demande de contact - Fan Chat ORBIT`,
+    htmlContent: `
+      <!DOCTYPE html>
+      <html>
+      <body style="font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5;">
+        <div style="max-width: 600px; margin: 0 auto; background: white; padding: 24px; border-radius: 12px;">
+          <h2 style="color: #667eea; margin-bottom: 8px;">🎤 Nouvelle demande de contact</h2>
+          <p style="color: #666; margin-bottom: 24px;">Un fan a exprimé le souhait de rentrer en contact via le chat ORBIT.</p>
+
+          <div style="background: #f8f9fa; padding: 16px; border-radius: 8px; margin-bottom: 16px;">
+            <strong>📨 Message du fan :</strong>
+            <p style="margin: 8px 0 0 0; font-style: italic;">"${fanMessage}"</p>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px;">
+            <div>
+              <strong>📧 Email du fan :</strong><br>
+              <a href="mailto:${fanEmail}" style="color: #667eea;">${fanEmail}</a>
+            </div>
+            <div>
+              <strong>🕐 Reçu le :</strong><br>
+              ${new Date().toLocaleString('fr-FR')}
+            </div>
+          </div>
+
+          <div style="text-align: center; color: #999; font-size: 12px; padding-top: 16px; border-top: 1px solid #eee;">
+            Message automatique depuis ORBIT Fan Chat • <a href="https://orbit-allysonglado.netlify.app" target="_blank">Voir le site</a>
+          </div>
+        </div>
+      </body>
+      </html>
+    `,
+    textContent: `Nouvelle demande de contact - Fan Chat ORBIT\n\nMessage: "${fanMessage}"\nEmail: ${fanEmail}\nReçu le: ${new Date().toLocaleString('fr-FR')}\n\n-- ORBIT Fan Chat`
+  };
+
+  try {
+    const response = await fetch('https://api.brevo.com/v3/smtp/email', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'api-key': brevoKey
+      },
+      body: JSON.stringify(payload)
+    });
+
+    if (response.ok) {
+      console.log('[Brevo] Email sent successfully to bovemmusique@gmail.com');
+      return true;
+    } else {
+      const error = await response.text();
+      console.error('[Brevo] Failed to send email:', response.status, error);
+      return false;
+    }
+  } catch (err) {
+    console.error('[Brevo] Error sending email:', err.message);
+    return false;
+  }
+}
+
 exports.handler = async (event) => {
   console.log(`[${new Date().toISOString()}] ${event.httpMethod} request`);
 
@@ -88,19 +174,70 @@ exports.handler = async (event) => {
     const rateLimitCheck = checkRateLimit(clientIp);
     if (!rateLimitCheck.allowed) return { statusCode: 429, headers: { ...getCorsHeaders(event), 'Retry-After': rateLimitCheck.retryAfter }, body: JSON.stringify({ error: 'Rate limit exceeded', retryAfter: rateLimitCheck.retryAfter }) };
 
-    let body = {};
-    if (event.body) try { body = JSON.parse(event.body); } catch (e) { return { statusCode: 400, headers: getCorsHeaders(event), body: JSON.stringify({ error: 'Invalid JSON' }) }; }
+     let body = {};
+     if (event.body) try { body = JSON.parse(event.body); } catch (e) { return { statusCode: 400, headers: getCorsHeaders(event), body: JSON.stringify({ error: 'Invalid JSON' }) }; }
 
-    const userMessage = body.message || '';
-    const validation = validateMessage(userMessage);
-    if (!validation.valid) return { statusCode: 400, headers: getCorsHeaders(event), body: JSON.stringify({ error: validation.error }) };
+     const userMessage = body.message || '';
+     const userEmail = body.email || null;
+     const action = body.action || 'chat';
+     const originalMessage = body.originalMessage || userMessage; // For email submission
 
-    if (!process.env.ANTHROPIC_API_KEY) return { statusCode: 500, headers: getCorsHeaders(event), body: JSON.stringify({ error: 'ANTHROPIC_API_KEY not set' }) };
+     const validation = validateMessage(userMessage);
+     if (!validation.valid && action === 'chat') return { statusCode: 400, headers: getCorsHeaders(event), body: JSON.stringify({ error: validation.error }) };
 
-    const shouldStream = event.queryStringParameters?.stream === 'true';
-    console.log(`[API] Mode: ${shouldStream ? 'STREAMING' : 'JSON'}, Query:`, event.queryStringParameters);
+     if (!process.env.ANTHROPIC_API_KEY) return { statusCode: 500, headers: getCorsHeaders(event), body: JSON.stringify({ error: 'ANTHROPIC_API_KEY not set' }) };
 
-    if (shouldStream) {
+     const shouldStream = event.queryStringParameters?.stream === 'true';
+     console.log(`[API] Mode: ${shouldStream ? 'STREAMING' : 'JSON'}, Action: ${action}`);
+
+     // ESCALATION DETECTION (only on initial chat)
+     const isEscalation = action === 'chat' && detectEscalation(userMessage);
+     let escalationInfo = null;
+
+     if (isEscalation) {
+       console.log(`[ESCALATION] Keywords detected in message: "${userMessage.substring(0, 50)}..."`);
+       if (userEmail) {
+         escalationInfo = { emailSent: await sendEscalationEmail(userMessage, userEmail), fanEmail: userEmail };
+       } else {
+         escalationInfo = { emailSent: false, fanEmail: null };
+       }
+     }
+
+     // If escalation response (requires email)
+     if (isEscalation && action === 'chat') {
+       const responseMsg = escalationInfo.emailSent
+         ? "Merci! J'ai transmis ta demande à Allyson. Elle te répondra bientôt ! 💫"
+         : "C'est spécial! J'envoie ça à Allyson 💫. Peux-tu me donner ton email pour qu'elle te contacte ?";
+
+       return {
+         statusCode: 200,
+         headers: { ...getCorsHeaders(event), 'Content-Type': 'application/json', 'X-Content-Type-Options': 'nosniff', 'X-Frame-Options': 'DENY' },
+         body: JSON.stringify({ success: true, response: responseMsg, escalation: true, requiresEmail: !escalationInfo.emailSent, timestamp: new Date().toISOString() }),
+       };
+     }
+
+     // Email submission after escalation
+     if (action === 'submit_email' && userEmail) {
+       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+       if (!emailRegex.test(userEmail)) {
+         return { statusCode: 400, headers: getCorsHeaders(event), body: JSON.stringify({ error: 'Invalid email format' }) };
+       }
+
+       const messageToSend = originalMessage || "Demande de contact (sans message)";
+       const emailSent = await sendEscalationEmail(messageToSend, userEmail);
+
+       const confirmMsg = emailSent
+         ? "✅ Merci! Allyson a reçu ta demande et te répondra rapidement !"
+         : "⚠️ Problème d'envoi. Essaie encore ou contacte-nous directement.";
+
+       return {
+         statusCode: 200,
+         headers: { ...getCorsHeaders(event), 'Content-Type': 'application/json', 'X-Content-Type-Options': 'nosniff', 'X-Frame-Options': 'DENY' },
+         body: JSON.stringify({ success: true, response: confirmMsg, escalation: false, emailSent, timestamp: new Date().toISOString() }),
+       };
+     }
+
+     if (shouldStream) {
       // STREAMING MODE (SSE)
       const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
       const systemPrompt = getSystemPrompt();
