@@ -163,27 +163,51 @@ class ORBITApp {
     }
 
     /**
-     * Submit email to Brevo
-     * TODO: Replace with actual Brevo API integration
+     * Submit email to Brevo via Netlify Function
      */
-    submitToBrevo(email, source) {
-        console.log(`📧 Submitting email to Brevo: ${email} (source: ${source})`);
-        
-        // This is where you'd actually submit to Brevo
-        // Example fetch call (replace with actual endpoint):
-        /*
-        fetch('/api/brevo/subscribe', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                email,
-                source,
-                timestamp: new Date().toISOString()
-            })
-        })
-        .then(r => r.json())
-        .catch(e => console.error('Brevo submission failed:', e));
-        */
+    async submitToBrevo(email, source) {
+        try {
+            const response = await fetch('/.netlify/functions/brevo-subscribe', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email,
+                    source,
+                    timestamp: new Date().toISOString()
+                })
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                console.error('[brevo] Subscription failed:', data.error);
+                this.trackEvent({
+                    event: 'brevo_subscription_failed',
+                    category: 'error',
+                    label: data.error
+                });
+                return;
+            }
+
+            console.log(`[brevo] ✅ Successfully subscribed: ${email}`, data);
+
+            // Track successful subscription
+            this.trackEvent({
+                event: 'brevo_subscription_success',
+                category: 'conversion',
+                value: email
+            });
+
+        } catch (error) {
+            console.error('[brevo] Network error:', error);
+            this.trackEvent({
+                event: 'brevo_subscription_error',
+                category: 'error',
+                label: 'network_error'
+            });
+        }
     }
 
     /**

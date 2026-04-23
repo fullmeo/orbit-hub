@@ -12,13 +12,15 @@
 # Environment variables
 [build.environment]
   BREVO_API_KEY = "YOUR_BREVO_API_KEY_HERE"
+  BREVO_LIST_ID = "YOUR_BREVO_LIST_ID_HERE"
+  BREVO_WELCOME_TEMPLATE_ID = "YOUR_WELCOME_TEMPLATE_ID_HERE"
   GA4_PROPERTY_ID = "G-XXXXXXXXXX"
   SPOTIFY_CLIENT_ID = "YOUR_SPOTIFY_CLIENT_ID"
   SPOTIFY_REDIRECT_URI = "https://orbit-allysonglado.netlify.app/callback"
-   # Fan Chat Configuration
-   ANTHROPIC_API_KEY = "YOUR_ANTHROPIC_API_KEY"
-   # ALLOWED_ORIGIN set in Netlify dashboard (Site Settings → Environment)
-   NODE_ENV = "production"
+  # Fan Chat Configuration
+  ANTHROPIC_API_KEY = "YOUR_ANTHROPIC_API_KEY"
+  # ALLOWED_ORIGIN set in Netlify dashboard (Site Settings → Environment)
+  NODE_ENV = "production"
   # Artist Configuration (optional - for dynamic artist setup)
   ARTIST_NAME = "Allyson Glado"
   ARTIST_TONE = "chaleureux, inspirant, accessible, poétique"
@@ -156,15 +158,25 @@
 #
 # Example:
 # BREVO_API_KEY = "xkeysib-1234567890abcdef..."
+# BREVO_LIST_ID = "2" (get from Contacts → Lists → click list → ID)
+# BREVO_WELCOME_TEMPLATE_ID = "123" (get from Templates → select template → ID)
 # GA4_PROPERTY_ID = "G-XXXXXXXXXX"
 # SPOTIFY_CLIENT_ID = "abc123def456..."
 
 # STEP 2: Brevo Integration
 # 1. Create account at https://www.brevo.com
-# 2. Get API key (Settings → API)
-# 3. Create contact list for Allyson Glado
-# 4. Set up email automation for welcome series
-# 5. Configure notification emails for form submissions
+# 2. Get API key: Settings → Account → API
+#    Format: xkeysib-XXXXXXXX... (set as BREVO_API_KEY)
+# 3. Create contact list for Allyson Glado: Contacts → Lists → Create
+#    Get list ID: click list → ID shown in URL or settings (set as BREVO_LIST_ID)
+# 4. Create welcome email template: Templates → Create → choose "Transactional"
+#    Get template ID: Templates → view template → ID in URL (set as BREVO_WELCOME_TEMPLATE_ID)
+# 5. Set up email automation:
+#    Campaigns → Automation → Create workflow
+#    Trigger: New contact in Allyson list
+#    Action: Send welcome email template
+# 6. Configure notification emails: Emails → Notifications
+#    Set recipient for form submissions
 
 # STEP 3: Google Analytics 4
 # 1. Go to https://analytics.google.com
