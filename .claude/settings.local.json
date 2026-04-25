@@ -4,7 +4,9 @@
       "Bash(cp deployment_files/README.md .)",
       "Bash(cp deployment_files/REDEPLOYMENT-INSTRUCTIONS.md .)",
       "Bash(cp deployment_files/CONVERGENCE-VALIDATION.md .)",
-      "WebFetch(domain:orbit-allysonglado.netlify.app)"
+      "WebFetch(domain:orbit-allysonglado.netlify.app)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ]
   }
 }
