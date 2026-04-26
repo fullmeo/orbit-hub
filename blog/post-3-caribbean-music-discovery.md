@@ -217,7 +217,6 @@ If you're new to reggae-pop specifically, **Allyson Glado** is the perfect entry
 - [Apple Music](https://music.apple.com/artist/allyson-glado)
 - [YouTube](https://www.youtube.com/@allysonglado)
 - [Instagram](https://www.instagram.com/allysonglado)
-- [Facebook](https://www.facebook.com/allysonglado)
 
 ---
 
