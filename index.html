@@ -24,6 +24,9 @@
 
     <!-- Fan Chat Widget Styles -->
     <link rel="stylesheet" href="/fan-chat-styles.css">
+
+    <!-- Tipping Widget Styles -->
+    <link rel="stylesheet" href="/tipping-styles.css">
     
     <!-- Schema.org JSON-LD -->
     <script type="application/ld+json">
@@ -238,6 +241,27 @@
         </div>
     </section>
 
+    <!-- Tipping Section -->
+    <section class="tipping-section">
+        <div class="container">
+            <h2>💚 Support Allyson's Music</h2>
+            <p class="tipping-subtitle">Love the music? Send a tip in USDC and get a personalized message!</p>
+            <div class="tipping-buttons">
+                <button class="tip-btn" onclick="TippingWidget.tip('5', 'small')">
+                    <span>🎁</span>
+                    <span>Tip 5 USDC</span>
+                </button>
+                <button class="tip-btn" onclick="TippingWidget.tip('10', 'large')">
+                    <span>🎁🎁</span>
+                    <span>Tip 10 USDC</span>
+                </button>
+            </div>
+            <p style="text-align: center; font-size: 13px; color: #666; margin-top: 12px;">
+                💫 Secure payments via Circle • USDC on Base • No gas fees
+            </p>
+        </div>
+    </section>
+
     <!-- Platform Links Section -->
     <section class="platforms">
         <div class="container">
@@ -403,6 +427,16 @@
     <!-- Scripts -->
     <script src="/assets/js/main.js" defer></script>
     <script src="/assets/js/platform-tracking.js" defer></script>
+
+    <!-- Tipping Widget (USDC via Circle) -->
+    <script src="/tipping-widget.js" defer></script>
+    <script>
+        // Configure tipping widget
+        window.TIPPING_CONFIG = {
+            apiUrl: '/.netlify/functions/circle-tips',
+            thankYouApi: '/.netlify/functions/get-thanks',
+        };
+    </script>
 
     <!-- Fan Chat Widget (AI-powered artist chatbot) -->
     <script src="/fan-chat-widget.js" defer></script>

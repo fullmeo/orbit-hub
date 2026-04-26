@@ -117,6 +117,19 @@
 
     <div id="fan-chat-messages" class="fan-chat-messages" role="log" aria-live="polite"></div>
 
+    <div class="fan-chat-actions">
+      <div class="fan-chat-tip-buttons">
+        <button class="fan-chat-tip-btn" onclick="TippingWidget && TippingWidget.tip('5', 'small')" title="Tip 5 USDC">
+          <span>🎁</span>
+          <span>Tip</span>
+        </button>
+        <button class="fan-chat-tip-btn" onclick="TippingWidget && TippingWidget.tip('10', 'large')" title="Tip 10 USDC">
+          <span>🎁🎁</span>
+          <span>Tip</span>
+        </button>
+      </div>
+    </div>
+
     <div class="fan-chat-input-area">
       <textarea
         id="fan-chat-input"
@@ -437,6 +450,30 @@
     el.style.height = "auto";
     el.style.height = Math.min(el.scrollHeight, 80) + "px";
   }
+
+  /**
+   * Export message injector for external use (e.g., tipping widget)
+   */
+  window.FAN_CHAT_INJECTOR = {
+    injectMessage(text, type) {
+      addMessage(text, type);
+    },
+    openChat() {
+      const chatWindow = document.getElementById("fan-chat-window");
+      if (chatWindow) {
+        chatWindow.classList.remove("hidden");
+        const input = document.getElementById("fan-chat-input");
+        if (input) input.focus();
+        renderStoredMessages();
+      }
+    },
+    closeChat() {
+      const chatWindow = document.getElementById("fan-chat-window");
+      if (chatWindow) {
+        chatWindow.classList.add("hidden");
+      }
+    }
+  };
 
   /**
    * Initialize widget

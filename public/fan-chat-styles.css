@@ -271,6 +271,53 @@
   }
 }
 
+/* Actions area (tipping buttons) */
+.fan-chat-actions {
+  padding: 8px 12px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+  background: var(--bg-alt);
+  justify-content: center;
+}
+
+.fan-chat-tip-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.fan-chat-tip-btn {
+  padding: 6px 10px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-direction: column;
+}
+
+.fan-chat-tip-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.fan-chat-tip-btn:active {
+  transform: translateY(0);
+}
+
+.fan-chat-tip-btn:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
 /* Input area */
 .fan-chat-input-area {
   padding: 12px;
