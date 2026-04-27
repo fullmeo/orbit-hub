@@ -1,0 +1,198 @@
+=== PHASE 1 WEEK 1 DAILY METRICS ===
+Project: ORBIT Phase 1 (Apr 23 - Jul 23, 2026)
+Week 1: Apr 24 - Apr 30, 2026
+GA4 Property: G-LS4G24ESNF
+Owner: Serigne DIAGNE
+
+---
+
+DAY 1 (Apr 24, 2026) - BASELINE
+=================================
+
+GA4 Real-Time Dashboard: https://analytics.google.com/analytics/web/#/report/realtime/
+Status: ACTIVE ✅
+
+**Active Users (Real-Time):**
+[Check dashboard: "Currently viewing X active users"]
+
+**Session Count:**
+[From GA4 Real-Time or Users Overview]
+
+**Page Views:**
+- Index: __________
+- About: __________
+- Music: __________
+- Connect: __________
+
+**Email Signups (Brevo):**
+[Check Brevo Dashboard: Contacts > Total in List]
+Total: __________
+
+**Platform Clicks (GA4 Events):**
+- Spotify: __________
+- Apple Music: __________
+- YouTube: __________
+- Deezer: __________
+- SoundCloud: __________
+- Facebook: __________
+- Instagram: __________
+- TikTok: __________
+
+**Daily Target Check:**
+- Users: __________ / 14+ (100 target ÷ 7 days)
+- Sessions: __________ / 21+ (150 target ÷ 7 days)
+- Email: __________ / 1+ (10 target ÷ 7 days)
+- Platform Clicks: __________ / 9+ (65 target ÷ 7 days)
+
+**Status:** ✅ Baseline established
+**Next:** Daily collection starting Apr 25
+
+---
+
+DAY 2 (Apr 25, 2026)
+====================
+
+GA4 Active Users: __________
+Sessions: __________
+Email Signups: __________
+Platform Clicks Total: __________
+Platform Breakdown:
+- Spotify: ___
+- Apple: ___
+- YouTube: ___
+- Other: ___
+
+Status: ⏳ Pending
+
+---
+
+DAY 3 (Apr 26, 2026)
+====================
+
+GA4 Active Users: __________
+Sessions: __________
+Email Signups: __________
+Platform Clicks Total: __________
+Platform Breakdown:
+- Spotify: ___
+- Apple: ___
+- YouTube: ___
+- Other: ___
+
+Status: ⏳ Pending
+
+---
+
+DAY 4 (Apr 27, 2026)
+====================
+
+GA4 Active Users: __________
+Sessions: __________
+Email Signups: __________
+Platform Clicks Total: __________
+Platform Breakdown:
+- Spotify: ___
+- Apple: ___
+- YouTube: ___
+- Other: ___
+
+Status: ⏳ Pending
+
+---
+
+DAY 5 (Apr 28, 2026)
+====================
+
+GA4 Active Users: __________
+Sessions: __________
+Email Signups: __________
+Platform Clicks Total: __________
+Platform Breakdown:
+- Spotify: ___
+- Apple: ___
+- YouTube: ___
+- Other: ___
+
+Status: ⏳ Pending
+
+---
+
+DAY 6 (Apr 29, 2026)
+====================
+
+GA4 Active Users: __________
+Sessions: __________
+Email Signups: __________
+Platform Clicks Total: __________
+Platform Breakdown:
+- Spotify: ___
+- Apple: ___
+- YouTube: ___
+- Other: ___
+
+Status: ⏳ Pending
+
+---
+
+DAY 7 (Apr 30, 2026)
+====================
+
+GA4 Active Users: __________
+Sessions: __________
+Email Signups: __________
+Platform Clicks Total: __________
+Platform Breakdown:
+- Spotify: ___
+- Apple: ___
+- YouTube: ___
+- Other: ___
+
+Status: ⏳ Pending
+
+---
+
+WEEK 1 SUMMARY (Apr 24-30)
+==========================
+
+**Cumulative Results:**
+Total Users: __________ / 100 (Target)
+Total Sessions: __________ / 150 (Target)
+Total Email Signups: __________ / 10 (Target)
+Total Platform Clicks: __________ / 65 (Target)
+
+**Performance:**
+Users: _____% of target
+Sessions: _____% of target
+Email: _____% of target
+Clicks: _____% of target
+
+**Platform Distribution (Actual vs Target):**
+Spotify: ____% (Target: 40%)
+Apple: ____% (Target: 20%)
+YouTube: ____% (Target: 13%)
+Other: ____% (Target: 27%)
+
+**Key Insights:**
+- ___________
+- ___________
+- ___________
+
+**Issues/Blockers:**
+- ___________
+- ___________
+
+**Magnus Convergence Score:** _____/100
+
+**Gate 0 Decision (Apr 30):** ✅ GO / ❌ NO-GO
+
+---
+
+Instructions:
+1. Update daily as: date + active users + sessions + email + platform clicks
+2. At end of week (Apr 30): Fill in summary and convergence score
+3. Gate review determines if Phase 2 prep proceeds as scheduled
+4. All times are UTC (convert to local as needed)
+
+Created: Apr 24, 2026
+Last Updated: Apr 24, 2026
+Status: ACTIVE - Week 1 Collection In Progress
