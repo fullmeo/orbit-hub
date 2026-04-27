@@ -262,15 +262,17 @@ exports.handler = async (event) => {
           console.log('[Anthropic] Stream established, reading events...');
           let tokenCount = 0;
 
-          for await (const eventItem of anthropicStream) {
-            if (eventItem.type === 'content_block_delta') {
-              const text = eventItem.delta?.text || '';
+          // Handle stream events properly
+          for await (const event of anthropicStream) {
+            if (event.type === 'content_block_delta' && event.delta?.type === 'text_delta') {
+              const text = event.delta.text || '';
               if (text && !aborted) {
                 tokenCount++;
                 stream.write(`data: ${text}\n\n`);
               }
-            } else if (eventItem.type === 'message_stop') {
+            } else if (event.type === 'message_stop') {
               console.log(`[Anthropic] Stream complete (${tokenCount} tokens)`);
+              break;
             }
           }
 
