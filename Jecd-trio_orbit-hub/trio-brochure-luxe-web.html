@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Trio Santos Cirillo Diagne – Brochure Luxe. Chansons à la Demande. L'émotion sur mesure.">
+    <meta name="keywords" content="trio jazz, chanson française, cabaret luxe, événement privé, Paris">
+    <meta name="theme-color" content="#1a1a1a">
+    
+    <!-- FONTS (Serif for luxury feel) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <title>Trio Santos Cirillo Diagne – Brochure Luxe</title>
+    
+    <style>
+        /* ===== RESET & VARIABLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-black: #1a1a1a;
+            --color-gold: #c4a45a;
+            --color-bordeaux: #5c2e2e;
+            --color-cream: #f5f3f0;
+            --color-text: #3a3a3a;
+            --golden-ratio: 1.618;
+        }
+
+        html, body {
+            height: 100%;
+            background: var(--color-cream);
+        }
+
+        body {
+            font-family: 'Lora', serif;
+            color: var(--color-text);
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        /* ===== TYPOGRAPHY ===== */
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.2em, 6vw, 3.5em);
+            font-weight: 900;
+            letter-spacing: 3px;
+            color: var(--color-black);
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8em, 5vw, 2.5em);
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--color-black);
+            margin-top: 2em;
+            margin-bottom: 1.2em;
+            padding-bottom: 0.8em;
+            border-bottom: 2px solid var(--color-gold);
+        }
+
+        h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4em;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: var(--color-black);
+            margin-top: 1.2em;
+            margin-bottom: 0.6em;
+        }
+
+        p {
+            margin-bottom: 1em;
+            text-align: justify;
+        }
+
+        em {
+            color: var(--color-bordeaux);
+            font-style: italic;
+        }
+
+        strong {
+            font-weight: 600;
+            color: var(--color-black);
+        }
+
+        /* ===== LAYOUT ===== */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.08);
+        }
+
+        /* ===== HEADER / COVER ===== */
+        header {
+            background: linear-gradient(135deg, var(--color-cream) 0%, white 100%);
+            padding: 4em 2em;
+            text-align: center;
+            position: relative;
+            border-bottom: 2px solid var(--color-gold);
+        }
+
+        .logo-container {
+            margin-bottom: 2em;
+        }
+
+        .logo-container img {
+            max-width: 150px;
+            height: auto;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+        }
+
+        .header-title {
+            word-spacing: 100vw;
+            line-height: 1.1;
+            margin-bottom: 0.5em;
+        }
+
+        .tagline-main {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3em;
+            color: var(--color-gold);
+            font-style: italic;
+            margin-bottom: 0.3em;
+            letter-spacing: 1px;
+        }
+
+        .tagline-sub {
+            font-size: 0.95em;
+            color: var(--color-text);
+            margin-bottom: 1.5em;
+            letter-spacing: 0.5px;
+        }
+
+        .header-instruments {
+            font-size: 1em;
+            letter-spacing: 4px;
+            color: var(--color-black);
+        }
+
+        .header-citation {
+            font-style: italic;
+            color: var(--color-bordeaux);
+            font-size: 0.95em;
+            margin-top: 1.5em;
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        main {
+            padding: 3em 2em;
+            background: white;
+        }
+
+        section {
+            margin-bottom: 3em;
+        }
+
+        .intro-text {
+            font-size: 1.05em;
+            font-weight: 500;
+            color: var(--color-bordeaux);
+            margin-bottom: 1.2em;
+            padding-left: 1em;
+            border-left: 3px solid var(--color-gold);
+        }
+
+        /* ===== SEPARATOR ===== */
+        .separator {
+            width: 100%;
+            height: 1px;
+            background: var(--color-gold);
+            margin: 2em 0;
+            opacity: 0.6;
+        }
+
+        /* ===== MUSICIAN CARDS ===== */
+        .musicians-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2em;
+            margin: 2em 0;
+        }
+
+        .musician-card {
+            background: var(--color-cream);
+            padding: 1.8em;
+            border-top: 3px solid var(--color-gold);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .musician-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .musician-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2em;
+            font-weight: 700;
+            color: var(--color-black);
+            margin-bottom: 0.3em;
+        }
+
+        .musician-role {
+            font-size: 0.9em;
+            color: var(--color-gold);
+            font-weight: 600;
+            margin-bottom: 1em;
+            letter-spacing: 0.5px;
+        }
+
+        .musician-bio {
+            font-size: 0.95em;
+            line-height: 1.7;
+            color: var(--color-text);
+        }
+
+        /* ===== REPERTOIRE GRID ===== */
+        .repertoire-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5em;
+            margin: 2em 0;
+        }
+
+        .repertoire-item {
+            background: linear-gradient(135deg, var(--color-cream) 0%, #faf8f6 100%);
+            padding: 1.5em;
+            border-left: 3px solid var(--color-gold);
+            transition: transform 0.3s ease;
+        }
+
+        .repertoire-item:hover {
+            transform: translateX(4px);
+        }
+
+        .repertoire-category {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05em;
+            font-weight: 700;
+            color: var(--color-black);
+            margin-bottom: 0.5em;
+        }
+
+        .repertoire-items {
+            font-size: 0.95em;
+            color: var(--color-text);
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        /* ===== PRICING BOX ===== */
+        .pricing-section {
+            background: linear-gradient(135deg, var(--color-cream) 0%, #faf8f6 100%);
+            padding: 2em;
+            margin: 2em 0;
+            border: 2px solid var(--color-gold);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5em;
+            margin: 1.5em 0;
+        }
+
+        .pricing-card {
+            background: white;
+            padding: 1.2em;
+            border-top: 3px solid var(--color-gold);
+            text-align: center;
+        }
+
+        .pricing-label {
+            font-size: 0.85em;
+            color: var(--color-text);
+            margin-bottom: 0.5em;
+            letter-spacing: 0.5px;
+        }
+
+        .pricing-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3em;
+            font-weight: 700;
+            color: var(--color-black);
+        }
+
+        /* ===== CONTACT SECTION ===== */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2em;
+            margin: 2em 0;
+        }
+
+        .contact-card {
+            background: var(--color-cream);
+            padding: 1.8em;
+            border-top: 3px solid var(--color-gold);
+            text-align: center;
+        }
+
+        .contact-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15em;
+            font-weight: 700;
+            color: var(--color-black);
+            margin-bottom: 0.3em;
+        }
+
+        .contact-role {
+            font-size: 0.9em;
+            color: var(--color-gold);
+            font-style: italic;
+            margin-bottom: 1em;
+        }
+
+        .contact-details {
+            font-size: 0.95em;
+            line-height: 1.8;
+        }
+
+        .contact-link {
+            color: var(--color-gold);
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 1px solid var(--color-gold);
+        }
+
+        .contact-link:hover {
+            color: var(--color-bordeaux);
+            border-bottom-color: var(--color-bordeaux);
+        }
+
+        /* ===== HIGHLIGHT ===== */
+        .highlight {
+            text-align: center;
+            font-style: italic;
+            color: var(--color-gold);
+            font-size: 1.1em;
+            margin: 2em 0;
+            letter-spacing: 1px;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--color-black);
+            color: #c4a45a;
+            padding: 2.5em;
+            text-align: center;
+            border-top: 2px solid var(--color-gold);
+        }
+
+        footer p {
+            margin-bottom: 0.8em;
+            text-align: center;
+        }
+
+        footer .footer-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2em;
+            font-weight: 700;
+            margin-bottom: 0.2em;
+        }
+
+        footer .footer-tagline {
+            font-style: italic;
+            color: #999;
+            font-size: 0.9em;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            header {
+                padding: 2em 1.2em;
+            }
+
+            main {
+                padding: 2em 1.2em;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.4em;
+            }
+
+            .musicians-grid,
+            .repertoire-grid,
+            .contact-grid,
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            p {
+                text-align: left;
+            }
+        }
+
+        /* ===== PRINT STYLES ===== */
+        @media print {
+            body {
+                background: white;
+                font-size: 11pt;
+            }
+
+            .container {
+                box-shadow: none;
+            }
+
+            header {
+                page-break-after: avoid;
+            }
+
+            section {
+                page-break-inside: avoid;
+            }
+
+            h2 {
+                page-break-after: avoid;
+            }
+        }
+
+        /* ===== DARK MODE ===== */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #0d0d0d;
+            }
+
+            .container {
+                background: #1a1a1a;
+            }
+
+            header {
+                background: linear-gradient(135deg, #1a1a1a 0%, #222 100%);
+            }
+
+            main {
+                background: #1a1a1a;
+            }
+
+            footer {
+                background: #000;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <div class="logo-container">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 150'%3E%3Ctext x='50' y='100' text-anchor='middle' font-size='80' fill='%231a1a1a'%3E🎺%3C/text%3E%3C/svg%3E" alt="Trio Logo">
+            </div>
+            
+            <h1 class="header-title">SANTOS<br/>CIRILLO<br/>DIAGNE</h1>
+            
+            <p class="tagline-main">Chansons à la Demande</p>
+            <p class="tagline-sub">L'émotion sur mesure</p>
+            
+            <p class="header-instruments">🎤 VOIX • 🥁 BATTERIE • 🎺 TROMPETTE</p>
+            
+            <p class="header-citation">« Santos le Saint, Cirillo le Swing, Diagne la Note »</p>
+        </header>
+
+        <!-- MAIN CONTENT -->
+        <main>
+            <!-- LE CONCEPT -->
+            <section>
+                <h2>Le Concept</h2>
+                
+                <p class="intro-text">
+                    <strong>Aucune setlist figée.</strong> Vous nommez les titres, le trio les interprète 
+                    instantanément avec swing, émotion et complicité.
+                </p>
+                
+                <p>
+                    Dans la grande tradition des cabarets littéraires et bistrots chantants, Santos, Cirillo & Diagne 
+                    vous proposent des soirées <strong>sur-mesure</strong> où l'improvisation rencontre le professionnalisme 
+                    et la maîtrise musicale.
+                </p>
+                
+                <p>
+                    <strong>Formule musicale :</strong> Voix + Batterie/Percussions + Trompette<br/>
+                    <strong>Sonorisation :</strong> Acoustique ou légèrement amplifiée – adaptable à tous les lieux<br/>
+                    <strong>Durée minimum :</strong> 3 heures
+                </p>
+                
+                <div class="separator"></div>
+                
+                <p>
+                    <strong>Idéal pour :</strong> Soirées privées, mariages, anniversaires, bars & bistrots, 
+                    festivals & salles intimistes, événements d'entreprise, soirées poétiques & culturelles.
+                </p>
+            </section>
+
+            <!-- LE TRIO -->
+            <section>
+                <h2>Le Trio</h2>
+                
+                <div class="musicians-grid">
+                    <div class="musician-card">
+                        <p class="musician-name">Jean-Marc Dos Santos</p>
+                        <p class="musician-role">Chanteur & Auteur-Compositeur</p>
+                        <p class="musician-bio">
+                            Voix grave et sensible, spécialiste des grands textes. Directeur de l'association 
+                            <em>Chansons pour Mémoire</em>. Passeur de mémoire français.
+                        </p>
+                    </div>
+                    
+                    <div class="musician-card">
+                        <p class="musician-name">Jeannot Cirillo</p>
+                        <p class="musician-role">Batteur & Percussionniste</p>
+                        <p class="musician-bio">
+                            Légende vivante ayant accompagné Coluche, Laurent Voulzy, Patrick Juvet, 
+                            Vince Taylor et Gene Vincent. Groove chaleureux et sens du swing inimitable.
+                        </p>
+                    </div>
+                    
+                    <div class="musician-card">
+                        <p class="musician-name">Serigne Diagne</p>
+                        <p class="musician-role">Trompettiste & Compositeur</p>
+                        <p class="musician-bio">
+                            Performer avec Youssou N'Dour (Bercy), Paco Séry, Tony Allen, Florent Pagny. 
+                            Trompette bouchée signature pour apporter couleur jazz et émotion profonde.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- RÉPERTOIRE -->
+            <section>
+                <h2>Répertoire à la Carte</h2>
+                
+                <p class="intro-text">
+                    <strong>Tout est possible.</strong> Du plus intime au plus festif.
+                </p>
+                
+                <div class="repertoire-grid">
+                    <div class="repertoire-item">
+                        <p class="repertoire-category">Classiques Intemporels</p>
+                        <p class="repertoire-items">
+                            Claude Nougaro, Alain Bashung, Allain Leprest, Léo Ferré, 
+                            Georges Brassens, Jacques Brel, Barbara
+                        </p>
+                    </div>
+                    
+                    <div class="repertoire-item">
+                        <p class="repertoire-category">Poétiques & Introspection</p>
+                        <p class="repertoire-items">
+                            Jean Ferrat, Charles Aznavour, Serge Gainsbourg, Michel Sardou
+                        </p>
+                    </div>
+                    
+                    <div class="repertoire-item">
+                        <p class="repertoire-category">Jazz & Standards</p>
+                        <p class="repertoire-items">
+                            Chansons en version française, reprises jazzy, compositions originales du trio
+                        </p>
+                    </div>
+                    
+                    <div class="repertoire-item">
+                        <p class="repertoire-category">Créations & Surprises</p>
+                        <p class="repertoire-items">
+                            Arrangements instantanés, compositions du trio, demandes spéciales sur mesure
+                        </p>
+                    </div>
+                </div>
+                
+                <p class="highlight">✨ Votre soirée, votre setlist, votre émotion. ✨</p>
+            </section>
+
+            <!-- TARIFS -->
+            <section>
+                <h2>Tarifs & Conditions</h2>
+                
+                <div class="pricing-section">
+                    <h3 style="border: none; margin-top: 0;">Sur Devis – À partir de 3 heures</h3>
+                    
+                    <div class="pricing-grid">
+                        <div class="pricing-card">
+                            <p class="pricing-label">Formule</p>
+                            <p class="pricing-value">Flexible</p>
+                        </div>
+                        <div class="pricing-card">
+                            <p class="pricing-label">Acompte</p>
+                            <p class="pricing-value">30%</p>
+                        </div>
+                        <div class="pricing-card">
+                            <p class="pricing-label">Durée Min</p>
+                            <p class="pricing-value">3 h</p>
+                        </div>
+                    </div>
+                    
+                    <p style="text-align: center; margin-bottom: 1em;">
+                        <strong>Formules :</strong> 🍷 Apéro-Concert | 🍽️ Dîner-Concert | 🌙 Soirée Privée
+                    </p>
+                </div>
+                
+                <p>
+                    <strong>Conditions :</strong>
+                </p>
+                <ul style="margin-left: 1.5em; margin-bottom: 1em;">
+                    <li>Disponibilité : Mercredi à dimanche (à confirmer)</li>
+                    <li>Délai de réservation : 2-3 semaines recommandées</li>
+                    <li>Acompte : 30% à la confirmation</li>
+                    <li>Annulation : Gratuite jusqu'à 7 jours avant</li>
+                </ul>
+            </section>
+
+            <!-- CONTACT -->
+            <section>
+                <h2>Réservations & Contact</h2>
+                
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <p class="contact-name">Jean-Marc Dos Santos</p>
+                        <p class="contact-role">Directeur Artistique & Réservations</p>
+                        <div class="contact-details">
+                            <p>📱 <a href="tel:+33625377030" class="contact-link">+33 (0)6 25 37 70 30</a></p>
+                            <p>f <a href="https://www.facebook.com/jeanmarc.dossantos.9/" target="_blank" class="contact-link">jeanmarc.dossantos.9</a></p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <p class="contact-name">Serigne Diagne</p>
+                        <p class="contact-role">Arrangements & Questions Musicales</p>
+                        <div class="contact-details">
+                            <p>✉️ <a href="mailto:serignetrumpet@gmail.com" class="contact-link">serignetrumpet@gmail.com</a></p>
+                            <p>📸 <a href="https://instagram.com/serigne.diagnepro" target="_blank" class="contact-link">@serigne.diagnepro</a></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <p style="text-align: center; margin-top: 2em; color: var(--color-gold);">
+                    👉 <strong>Facebook :</strong> www.facebook.com/jeanmarc.dossantos.9/<br/>
+                    👉 <strong>Instagram :</strong> @serigne.diagnepro
+                </p>
+            </section>
+        </main>
+
+        <!-- FOOTER -->
+        <footer>
+            <p class="footer-brand">Trio Santos, Cirillo & Diagne</p>
+            <p class="footer-tagline">Chansons à la Demande</p>
+            <p style="color: var(--color-gold); font-style: italic; margin-top: 0.8em;">L'émotion sur mesure</p>
+            
+            <div class="separator" style="background: var(--color-gold); opacity: 0.3; margin: 1.5em 0;"></div>
+            
+            <p style="font-size: 0.85em; color: #999;">
+                © 2025 Trio Santos, Cirillo & Diagne<br/>
+                Paris, France 🎺 🥁 🎤
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

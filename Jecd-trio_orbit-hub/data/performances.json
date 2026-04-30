@@ -1,0 +1,24 @@
+[
+  {
+    "id": "perf-001",
+    "artistId": "trio-santos-cirillo-diagne",
+    "date": "2025-05-15",
+    "time": "20:00",
+    "venue": "Le Caveau de la Huchette",
+    "city": "Paris",
+    "type": "Concert privé",
+    "status": "confirmed",
+    "bookingUrl": "mailto:serignetrumpet@gmail.com"
+  },
+  {
+    "id": "perf-002",
+    "artistId": "trio-santos-cirillo-diagne",
+    "date": "2025-06-20",
+    "time": "19:30",
+    "venue": "Festival Jazz Estival",
+    "city": "Fontainebleau",
+    "type": "Festival",
+    "status": "confirmed",
+    "bookingUrl": "https://www.festival-jazz.fr"
+  }
+]

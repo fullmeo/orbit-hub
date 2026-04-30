@@ -1,0 +1,90 @@
+# Netlify Configuration for ORBIT Trio Artist Hub
+# Deploy to: https://orbit-trio.netlify.app
+
+[build]
+  # Build directory (static site - no build step needed)
+  publish = "."
+  
+  # Command to run before deploy (optional)
+  # command = "npm run build"
+
+[build.environment]
+  # Environment variables
+  NODE_VERSION = "18"
+
+# Redirects for API calls to Railway backend
+[[redirects]]
+  from = "/api/*"
+  to = "https://orbit-trio-api.railway.app/api/:splat"
+  status = 200
+  force = true
+
+# Redirect trailing slashes
+[[redirects]]
+  from = "/:path/"
+  to = "/:path"
+  status = 301
+
+# Single Page App redirect
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# HTTP Security Headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Content Security Policy
+    Content-Security-Policy = "default-src 'self' https:; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' https: data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://api.stripe.com https://orbit-trio-api.railway.app"
+    
+    # X-Frame-Options
+    X-Frame-Options = "SAMEORIGIN"
+    
+    # X-Content-Type-Options
+    X-Content-Type-Options = "nosniff"
+    
+    # X-XSS-Protection
+    X-XSS-Protection = "1; mode=block"
+    
+    # Referrer-Policy
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    
+    # Permissions-Policy
+    Permissions-Policy = "geolocation=(), microphone=(), camera=(), payment=()"
+
+# Cache configuration
+[[headers]]
+  for = "*.html"
+  [headers.values]
+    Cache-Control = "max-age=0, must-revalidate"
+
+[[headers]]
+  for = "*.js"
+  [headers.values]
+    Cache-Control = "max-age=31536000"
+
+[[headers]]
+  for = "*.css"
+  [headers.values]
+    Cache-Control = "max-age=31536000"
+
+[[headers]]
+  for = "*.png"
+  [headers.values]
+    Cache-Control = "max-age=604800"
+
+[[headers]]
+  for = "*.jpg"
+  [headers.values]
+    Cache-Control = "max-age=604800"
+
+# Context-specific settings (if using Netlify branches)
+[context.production]
+  command = "echo 'Production build'"
+  
+[context.develop]
+  command = "echo 'Development build'"
+  
+[context.deploy-preview]
+  command = "echo 'Deploy preview build'"

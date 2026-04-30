@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Trio Santos Cirillo Diagne – Brochure Minimaliste Luxe. Chansons à la Demande. L'émotion sur mesure.">
+    <meta name="theme-color" content="#1a1a1a">
+    
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <title>Trio JCD – Brochure Minimaliste Luxe</title>
+    
+    <style>
+        /* ===== RESET ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #1a1a1a;
+            --gold: #c4a45a;
+            --bordeaux: #5c2e2e;
+            --cream: #f5f3f0;
+            --text: #3a3a3a;
+        }
+
+        html, body {
+            height: 100%;
+            background: var(--cream);
+        }
+
+        body {
+            font-family: 'Lora', serif;
+            color: var(--text);
+            line-height: 1.9;
+            font-size: 16px;
+        }
+
+        /* ===== CONTAINER ===== */
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.08);
+            min-height: 100vh;
+        }
+
+        /* ===== TYPOGRAPHY ===== */
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2em, 7vw, 3.5em);
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: var(--black);
+            line-height: 1.1;
+            margin: 1em 0 0.5em 0;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.6em, 5vw, 2.2em);
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--black);
+            text-align: center;
+            margin: 1.5em 0 1em 0;
+            padding-bottom: 1em;
+            border-bottom: 1px solid var(--gold);
+        }
+
+        p {
+            margin-bottom: 1.2em;
+            line-height: 1.9;
+        }
+
+        em {
+            color: var(--bordeaux);
+            font-style: italic;
+        }
+
+        strong {
+            font-weight: 600;
+            color: var(--black);
+        }
+
+        /* ===== HEADER / COVER ===== */
+        header {
+            background: linear-gradient(135deg, var(--cream) 0%, white 100%);
+            padding: 3em 2em;
+            text-align: center;
+            border-bottom: 1px solid var(--gold);
+        }
+
+        .logo-section {
+            margin-bottom: 2.5em;
+        }
+
+        .logo-section img {
+            max-width: 120px;
+            height: auto;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.08));
+        }
+
+        .tagline-main {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5em;
+            color: var(--gold);
+            font-style: italic;
+            margin: 1em 0 0.3em 0;
+            letter-spacing: 1.5px;
+        }
+
+        .tagline-sub {
+            font-size: 1em;
+            color: var(--text);
+            margin-bottom: 1.5em;
+            font-style: italic;
+        }
+
+        .instruments {
+            font-size: 0.95em;
+            letter-spacing: 3px;
+            color: var(--black);
+            margin-bottom: 1.5em;
+        }
+
+        .citation {
+            font-style: italic;
+            color: var(--bordeaux);
+            font-size: 0.95em;
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        main {
+            padding: 3em 2.5em;
+        }
+
+        section {
+            margin-bottom: 2.5em;
+        }
+
+        .intro {
+            font-size: 1.05em;
+            font-weight: 500;
+            color: var(--bordeaux);
+            margin-bottom: 1.5em;
+            line-height: 1.8;
+        }
+
+        /* ===== SEPARATOR ===== */
+        .separator {
+            width: 60%;
+            height: 1px;
+            background: var(--gold);
+            margin: 2em auto;
+            opacity: 0.7;
+        }
+
+        /* ===== CARDS ===== */
+        .trio-member {
+            text-align: center;
+            margin-bottom: 2em;
+            padding: 1.5em;
+            background: linear-gradient(135deg, var(--cream) 0%, white 100%);
+        }
+
+        .member-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2em;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 0.3em;
+        }
+
+        .member-role {
+            font-size: 0.9em;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 1em;
+        }
+
+        .member-bio {
+            font-size: 0.95em;
+            line-height: 1.8;
+        }
+
+        /* ===== REPERTOIRE ===== */
+        .rep-category {
+            margin-bottom: 1.8em;
+        }
+
+        .rep-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1em;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 0.5em;
+        }
+
+        .rep-items {
+            font-size: 0.95em;
+            color: var(--text);
+            font-style: italic;
+            line-height: 1.7;
+        }
+
+        /* ===== CONTACT ===== */
+        .contact-person {
+            text-align: center;
+            margin-bottom: 2em;
+            padding: 1.5em;
+            background: linear-gradient(135deg, var(--cream) 0%, white 100%);
+        }
+
+        .contact-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1em;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 0.3em;
+        }
+
+        .contact-role {
+            font-size: 0.9em;
+            color: var(--gold);
+            font-style: italic;
+            margin-bottom: 1em;
+        }
+
+        .contact-info {
+            font-size: 0.95em;
+            line-height: 1.8;
+        }
+
+        .contact-link {
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .contact-link:hover {
+            color: var(--bordeaux);
+            text-decoration: underline;
+        }
+
+        /* ===== HIGHLIGHT ===== */
+        .highlight {
+            text-align: center;
+            font-style: italic;
+            color: var(--gold);
+            font-size: 1.05em;
+            margin: 2em 0;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--black);
+            color: var(--gold);
+            padding: 2.5em 2em;
+            text-align: center;
+            border-top: 1px solid var(--gold);
+        }
+
+        footer p {
+            margin-bottom: 0.8em;
+        }
+
+        .footer-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2em;
+            font-weight: 700;
+            margin-bottom: 0.3em;
+        }
+
+        .footer-tagline {
+            font-style: italic;
+            color: #999;
+            font-size: 0.9em;
+        }
+
+        /* ===== LIST STYLING ===== */
+        ul {
+            margin-left: 1.5em;
+            margin-bottom: 1.2em;
+        }
+
+        li {
+            margin-bottom: 0.6em;
+            line-height: 1.7;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            header {
+                padding: 2em 1.5em;
+            }
+
+            main {
+                padding: 2em 1.5em;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            h2 {
+                font-size: 1.3em;
+                margin: 1.2em 0 0.8em 0;
+            }
+
+            p {
+                text-align: left;
+            }
+        }
+
+        /* ===== PRINT ===== */
+        @media print {
+            body {
+                background: white;
+            }
+
+            .container {
+                box-shadow: none;
+            }
+
+            header {
+                page-break-after: avoid;
+            }
+
+            section {
+                page-break-inside: avoid;
+            }
+
+            h2 {
+                page-break-after: avoid;
+            }
+        }
+
+        /* ===== DARK MODE ===== */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #0d0d0d;
+            }
+
+            .container {
+                background: #1a1a1a;
+            }
+
+            header {
+                background: linear-gradient(135deg, #1a1a1a 0%, #222 100%);
+            }
+
+            main {
+                background: #1a1a1a;
+            }
+
+            .trio-member,
+            .contact-person {
+                background: #222;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <div class="logo-section">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 150'%3E%3Ctext x='50' y='100' text-anchor='middle' font-size='80' fill='%231a1a1a'%3E🎺%3C/text%3E%3C/svg%3E" alt="Trio JCD">
+            </div>
+            
+            <h1>Chansons à la<br/>Demande</h1>
+            
+            <p class="tagline-main">L'émotion sur mesure</p>
+            
+            <p class="instruments">🎤 VOIX • 🥁 BATTERIE • 🎺 TROMPETTE</p>
+            
+            <p class="citation">« Santos le Saint, Cirillo le Swing, Diagne la Note »</p>
+        </header>
+
+        <!-- MAIN -->
+        <main>
+            <!-- LE CONCEPT -->
+            <section>
+                <h2>Le Concept</h2>
+                
+                <p class="intro">
+                    <strong>Aucune setlist figée.<br/>Vous nommez les titres.<br/>Le trio les interprète instantanément.</strong>
+                </p>
+                
+                <p>
+                    Dans la grande tradition des cabarets littéraires et bistrots chantants, 
+                    Santos, Cirillo & Diagne offrent des soirées <strong>sur-mesure</strong> où l'improvisation 
+                    rencontre le professionnalisme.
+                </p>
+                
+                <div class="separator"></div>
+                
+                <p>
+                    <strong>Formule</strong><br/>
+                    Voix + Batterie/Percussions + Trompette<br/>
+                    Acoustique ou légèrement amplifiée — adaptable à tous les lieux.
+                </p>
+                
+                <p style="margin-top: 1.5em;">
+                    <strong>Idéal pour</strong><br/>
+                    Soirées privées • Mariages • Anniversaires<br/>
+                    Bars • Bistrots • Festivals • Entreprises
+                </p>
+            </section>
+
+            <!-- LE TRIO -->
+            <section>
+                <h2>Le Trio</h2>
+                
+                <div class="trio-member">
+                    <p class="member-name">Jean-Marc Dos Santos</p>
+                    <p class="member-role">Chanteur & Auteur-Compositeur</p>
+                    <p class="member-bio">
+                        Voix grave et sensible, spécialiste des grands textes. 
+                        Directeur de l'association <em>Chansons pour Mémoire</em>.
+                    </p>
+                </div>
+                
+                <div class="trio-member">
+                    <p class="member-name">Jeannot Cirillo</p>
+                    <p class="member-role">Batteur & Percussionniste</p>
+                    <p class="member-bio">
+                        Légende vivante : Coluche, Laurent Voulzy, Patrick Juvet, 
+                        Vince Taylor, Gene Vincent. Groove chaleureux inimitable.
+                    </p>
+                </div>
+                
+                <div class="trio-member">
+                    <p class="member-name">Serigne Diagne</p>
+                    <p class="member-role">Trompettiste & Compositeur</p>
+                    <p class="member-bio">
+                        Youssou N'Dour (Bercy), Paco Séry, Tony Allen, Florent Pagny. 
+                        Trompette bouchée signature pour couleur jazz et émotion.
+                    </p>
+                </div>
+            </section>
+
+            <!-- RÉPERTOIRE -->
+            <section>
+                <h2>Répertoire à la Carte</h2>
+                
+                <p class="intro"><strong>Tout est possible. Du plus intime au plus festif.</strong></p>
+                
+                <div class="rep-category">
+                    <p class="rep-title">Classiques intemporels</p>
+                    <p class="rep-items">
+                        Nougaro • Bashung • Leprest • Ferré<br/>
+                        Brassens • Brel • Barbara
+                    </p>
+                </div>
+                
+                <div class="rep-category">
+                    <p class="rep-title">Poétiques & introspection</p>
+                    <p class="rep-items">
+                        Ferrat • Aznavour • Gainsbourg • Sardou
+                    </p>
+                </div>
+                
+                <div class="rep-category">
+                    <p class="rep-title">Jazz & Standards</p>
+                    <p class="rep-items">
+                        Reprises jazzy • Chansons françaises<br/>
+                        Compositions originales
+                    </p>
+                </div>
+                
+                <div class="rep-category">
+                    <p class="rep-title">Créations & Surprises</p>
+                    <p class="rep-items">
+                        Arrangements instantanés<br/>
+                        Demandes spéciales sur mesure
+                    </p>
+                </div>
+                
+                <p class="highlight">Votre soirée. Votre setlist. Votre émotion.</p>
+            </section>
+
+            <!-- TARIFS -->
+            <section>
+                <h2>Tarifs & Conditions</h2>
+                
+                <p class="intro"><strong>Sur devis — à partir de 3 heures</strong></p>
+                
+                <p>
+                    <strong>Formules</strong><br/>
+                    🍷 Apéro-Concert • 🍽️ Dîner-Concert • 🌙 Soirée Privée
+                </p>
+                
+                <div class="separator"></div>
+                
+                <p>
+                    <strong>Conditions</strong>
+                </p>
+                <ul>
+                    <li>Disponibilité : mercredi à dimanche (à confirmer)</li>
+                    <li>Délai de réservation : 2-3 semaines recommandées</li>
+                    <li>Acompte : 30% à la confirmation</li>
+                    <li>Annulation : gratuite jusqu'à 7 jours avant</li>
+                </ul>
+            </section>
+
+            <!-- CONTACT -->
+            <section>
+                <h2>Réservations & Contact</h2>
+                
+                <div class="contact-person">
+                    <p class="contact-name">Jean-Marc Dos Santos</p>
+                    <p class="contact-role">Directeur Artistique & Réservations</p>
+                    <p class="contact-info">
+                        📱 <a href="tel:+33625377030" class="contact-link"><strong>+33 (0)6 25 37 70 30</strong></a><br/>
+                        f <a href="https://www.facebook.com/jeanmarc.dossantos.9/" target="_blank" class="contact-link">jeanmarc.dossantos.9</a>
+                    </p>
+                </div>
+                
+                <div class="contact-person">
+                    <p class="contact-name">Serigne Diagne</p>
+                    <p class="contact-role">Arrangements & Questions Techniques</p>
+                    <p class="contact-info">
+                        ✉️ <a href="mailto:serignetrumpet@gmail.com" class="contact-link"><strong>serignetrumpet@gmail.com</strong></a><br/>
+                        📸 <a href="https://instagram.com/serigne.diagnepro" target="_blank" class="contact-link">@serigne.diagnepro</a>
+                    </p>
+                </div>
+                
+                <p style="text-align: center; margin-top: 2em; color: var(--gold);">
+                    👉 <strong>Facebook</strong> : www.facebook.com/jeanmarc.dossantos.9/
+                </p>
+            </section>
+        </main>
+
+        <!-- FOOTER -->
+        <footer>
+            <p class="footer-brand">Trio Santos, Cirillo & Diagne</p>
+            <p class="footer-tagline">Chansons à la Demande</p>
+            
+            <div class="separator" style="background: var(--gold); opacity: 0.3; margin: 1.5em auto;"></div>
+            
+            <p style="font-size: 0.85em; color: #999;">
+                © 2025 Trio Santos, Cirillo & Diagne<br/>
+                Paris, France 🎺 🥁 🎤
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
