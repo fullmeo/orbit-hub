@@ -5,7 +5,7 @@
 # ============================================================
 
 [build]
-  publish = "Jecd-trio_orbit-hub"
+  publish = "."
   command = ""
 
 [build.environment]
