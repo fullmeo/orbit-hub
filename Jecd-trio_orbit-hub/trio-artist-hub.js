@@ -16,7 +16,7 @@
  * - 432 Hz harmonic color palette integration
  */
 
-import { LitElement, html, css, unsafeCSS } from 'https://cdn.jsdelivr.net/gh/lit/lit@3/dist/lit.min.js';
+import { LitElement, html, css } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js';
 
 // ============================================================================
 // CONSTANTS & CONFIGURATION

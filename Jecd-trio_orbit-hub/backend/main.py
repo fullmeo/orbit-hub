@@ -175,9 +175,12 @@ app = FastAPI(title="ORBIT Trio Hub API", version="2.0.0",
               docs_url="/api/docs", openapi_url="/api/openapi.json")
 
 app.add_middleware(CORSMiddleware,
-    allow_origins=["http://localhost:3000","http://localhost:8000",
-                   "https://orbit-trio.netlify.app","https://orbit-hub.netlify.app",
-                   "https://orbit-allysonglado.netlify.app"],
+    allow_origins=[
+        "http://localhost:3000", "http://localhost:8000",
+        "https://orbit-trio.netlify.app", "https://orbit-hub.netlify.app",
+        "https://orbit-allysonglado.netlify.app",
+        "https://jcd-trio-orbit-hub.netlify.app"
+    ],
     allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
 
 # ── Health ───────────────────────────────────────────────────
