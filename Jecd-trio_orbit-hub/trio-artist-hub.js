@@ -666,7 +666,7 @@ export class TrioArtistHub extends LitElement {
     this.activeTab = 'about';
     this.bookingOpen = false;
     this.mobileMenuOpen = false;
-    this.backendUrl = 'http://localhost:8000'; // Local dev
+    this.backendUrl = 'https://orbit-trio-api.railway.app'; // Railway production backend
     this.bookingData = {};
   }
 
