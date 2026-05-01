@@ -30,9 +30,20 @@ describe('Agent Query Logging Service', () => {
         status: 'completed',
       };
 
-      await logAgentQuery(entry, db);
+      const result = await logAgentQuery(entry, db);
 
-      expect(db.agent_query_log.insert).toHaveBeenCalledWith(expect.objectContaining(entry));
+      expect(db.agent_query_log.insert).toHaveBeenCalledWith(
+        expect.objectContaining({
+          agent_id: 'agent_123',
+          artist_id: 'allyson_glado',
+          query_type: 'tip',
+          cost_usdc: 5.5,
+          artist_received_usdc: 4.95,
+          platform_fee_usdc: 0.55,
+          status: 'completed',
+        })
+      );
+      expect(result).toEqual({ id: 'log_123', created_at: expect.any(String) });
     });
 
     it('should handle failed tips', async () => {

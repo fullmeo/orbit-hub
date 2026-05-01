@@ -1,0 +1,1159 @@
+﻿
+> orbit-hub@1.0.0 test
+> jest
+
+node.exe : FAIL tests/agent-query-log.test.js
+Au caractère C:\Program Files\nodejs\npm.ps1:29 : 3
++   & $NODE_EXE $NPM_CLI_JS $args
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (FAIL tests/agent-query-log.test.js:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  ÔùÅ Console
+
+    console.log
+      [AgentQueryLog] {
+        agentId: 'agent_123',
+        artistId: 'allyson_glado',
+        type: 'tip',
+        costUsdc: 5.5,
+        status: 'completed'
+      }
+
+      at logAgentQuery (backend/services/agent-query-log.js:23:11)
+
+    console.log
+      [AgentQueryLog] {
+        agentId: 'agent_123',
+        artistId: 'allyson_glado',
+        type: 'tip',
+        costUsdc: 5.5,
+        status: 'failed'
+      }
+
+      at logAgentQuery (backend/services/agent-query-log.js:23:11)
+
+    console.log
+      [AgentQueryLog] {
+        agentId: 'agent_123',
+        artistId: 'allyson_glado',
+        type: 'tip',
+        costUsdc: 10,
+        status: 'completed'
+      }
+
+      at logAgentQuery (backend/services/agent-query-log.js:23:11)
+
+    console.log
+      [AgentQueryLog] {
+        agentId: 'agent_123',
+        artistId: 'allyson_glado',
+        type: 'tip',
+        costUsdc: 5.5,
+        status: 'completed'
+      }
+
+      at logAgentQuery (backend/services/agent-query-log.js:23:11)
+
+    console.log
+      [AgentQueryLog] {
+        agentId: 'agent_123',
+        artistId: 'allyson_glado',
+        type: 'message',
+        costUsdc: 0,
+        status: 'completed'
+      }
+
+      at logAgentQuery (backend/services/agent-query-log.js:23:11)
+
+    console.log
+      [AgentQueryLog] {
+        agentId: 'agent_123',
+        artistId: 'allyson_glado',
+        type: 'message',
+        costUsdc: 0,
+        status: 'completed'
+      }
+
+      at logAgentQuery (backend/services/agent-query-log.js:23:11)
+
+    console.log
+      [AgentQueryLog] {
+        agentId: 'agent_123',
+        artistId: 'allyson_glado',
+        type: 'message',
+        costUsdc: 0,
+        status: 'completed'
+      }
+
+      at logAgentQuery (backend/services/agent-query-log.js:23:11)
+
+    console.log
+      [AgentQueryLog] {
+        agentId: 'agent_123',
+        artistId: 'allyson_glado',
+        type: 'message',
+        costUsdc: 0,
+        status: 'completed'
+      }
+
+      at logAgentQuery (backend/services/agent-query-log.js:23:11)
+
+  ÔùÅ Agent Query Logging Service ÔÇ║ logAgentQuery ÔÇ║ should insert tip payment record
+
+    expect(jest.fn()).toHaveBeenCalledWith(...expected)
+
+    Expected: {"agent_id": "agent_123", "artist_id": "allyson_glado", "artist_received_usdc": 4.95, "cost_usdc": 5.5, 
+"platform_fee_usdc": 0.55, "query_timestamp": "2026-04-27T05:18:56.006Z", "query_type": "tip", "response_time_ms": 
+150, "status": "completed", "x402_transaction_hash": "0xtx123"}
+
+    Number of calls: 0
+
+    [0m [90m 26 |[39m       [36mawait[39m logAgentQuery(entry)[33m;[39m
+     [90m 27 |[39m
+    [31m[1m>[22m[39m[90m 28 |[39m       
+expect(db[33m.[39magent_query_log[33m.[39minsert)[33m.[39mtoHaveBeenCalledWith(entry)[33m;[39m
+     [90m    |[39m                                         [31m[1m^[22m[39m
+     [90m 29 |[39m     })[33m;[39m
+     [90m 30 |[39m
+     [90m 31 |[39m     it([32m'should handle failed tips'[39m[33m,[39m [36masync[39m () [33m=>[39m {[0m
+
+      at Object.<anonymous> (tests/agent-query-log.test.js:28:41)
+
+  ÔùÅ Agent Query Logging Service ÔÇ║ logAgentQuery ÔÇ║ should handle failed tips
+
+    expect(jest.fn()).toHaveBeenCalledWith(...expected)
+
+    Expected: ObjectContaining {"status": "failed"}
+
+    Number of calls: 0
+
+    [0m [90m 44 |[39m       [36mawait[39m logAgentQuery(entry)[33m;[39m
+     [90m 45 |[39m
+    [31m[1m>[22m[39m[90m 46 |[39m       expect(db[33m.[39magent_query_log[33m.[39minsert)[33m.[39mtoHaveBee
+nCalledWith(expect[33m.[39mobjectContaining({
+     [90m    |[39m                                         [31m[1m^[22m[39m
+     [90m 47 |[39m         status[33m:[39m [32m'failed'[39m[33m,[39m
+     [90m 48 |[39m       }))[33m;[39m
+     [90m 49 |[39m     })[33m;[39m[0m
+
+      at Object.<anonymous> (tests/agent-query-log.test.js:46:41)
+
+  ÔùÅ Agent Query Logging Service ÔÇ║ logAgentQuery ÔÇ║ should handle missing transaction hash gracefully
+
+    expect(jest.fn()).toHaveBeenCalledWith(...expected)
+
+    Expected: ObjectContaining {"x402_transaction_hash": null}
+
+    Number of calls: 0
+
+    [0m [90m 65 |[39m       [36mawait[39m logAgentQuery(entry)[33m;[39m
+     [90m 66 |[39m
+    [31m[1m>[22m[39m[90m 67 |[39m       
+expect(db[33m.[39magent_query_log[33m.[39minsert)[33m.[39mtoHaveBeenCalledWith(
+     [90m    |[39m                                         [31m[1m^[22m[39m
+     [90m 68 |[39m         expect[33m.[39mobjectContaining({
+     [90m 69 |[39m           x402_transaction_hash[33m:[39m [36mnull[39m[33m,[39m
+     [90m 70 |[39m         })[0m
+
+      at Object.<anonymous> (tests/agent-query-log.test.js:67:41)
+
+  ÔùÅ Agent Query Logging Service ÔÇ║ Integration Scenarios ÔÇ║ should log full payment lifecycle
+
+    expect(jest.fn()).toHaveBeenCalledTimes(expected)
+
+    Expected number of calls: 1
+    Received number of calls: 0
+
+    [0m [90m 130 |[39m
+     [90m 131 |[39m       [90m// Confirm webhook should log[39m
+    [31m[1m>[22m[39m[90m 132 |[39m       
+expect(db[33m.[39magent_query_log[33m.[39minsert)[33m.[39mtoHaveBeenCalledTimes([35m1[39m)[33m;[39m
+     [90m     |[39m                                         [31m[1m^[22m[39m
+     [90m 133 |[39m     })[33m;[39m
+     [90m 134 |[39m
+     [90m 135 |[39m     it([32m'should distinguish tip from other query types'[39m[33m,[39m [36masync[39m () 
+[33m=>[39m {[0m
+
+      at Object.<anonymous> (tests/agent-query-log.test.js:132:41)
+
+  ÔùÅ Agent Query Logging Service ÔÇ║ Integration Scenarios ÔÇ║ should distinguish tip from other query types
+
+    expect(jest.fn()).toHaveBeenCalledTimes(expected)
+
+    Expected number of calls: 4
+    Received number of calls: 0
+
+    [0m [90m 149 |[39m       }
+     [90m 150 |[39m
+    [31m[1m>[22m[39m[90m 151 |[39m       
+expect(db[33m.[39magent_query_log[33m.[39minsert)[33m.[39mtoHaveBeenCalledTimes([35m4[39m)[33m;[39m
+     [90m     |[39m                                         [31m[1m^[22m[39m
+     [90m 152 |[39m     })[33m;[39m
+     [90m 153 |[39m   })[33m;[39m
+     [90m 154 |[39m })[33m;[39m[0m
+
+      at Object.<anonymous> (tests/agent-query-log.test.js:151:41)
+
+FAIL tests/kiloclaw-stage1.test.js
+  ÔùÅ Console
+
+    console.log
+      [Intent] Validate agent + permissions before creating payment
+
+      at logIntent (backend/services/kiloClaw.js:97:11)
+
+    console.log
+      [Audit] KILOCLAW_STAGE1_APPROVED - agent_123 ÔåÆ allyson_glado (5 USDC)
+
+      at logAuditTrail (backend/services/kiloClaw.js:109:11)
+
+    console.log
+      [Intent] Validate agent + permissions before creating payment
+
+      at logIntent (backend/services/kiloClaw.js:97:11)
+
+    console.log
+      [Intent] Validate agent + permissions before creating payment
+
+      at logIntent (backend/services/kiloClaw.js:97:11)
+
+    console.log
+      [Security] INACTIVE_AGENT_ATTEMPT for agent agent_123 {
+        type: 'INACTIVE_AGENT_ATTEMPT',
+        agentId: 'agent_123',
+        status: 'BLOCKED'
+      }
+
+      at logSecurityEvent (backend/services/kiloClaw.js:101:11)
+
+    console.log
+      [Intent] Validate agent + permissions before creating payment
+
+      at logIntent (backend/services/kiloClaw.js:97:11)
+
+    console.log
+      [Manual Review] LOW_REPUTATION_TIP - Agent: agent_123, Score: 25
+
+      at logForManualReview (backend/services/kiloClaw.js:105:11)
+
+    console.log
+      [Intent] Validate agent + permissions before creating payment
+
+      at logIntent (backend/services/kiloClaw.js:97:11)
+
+    console.log
+      [Intent] Validate agent + permissions before creating payment
+
+      at logIntent (backend/services/kiloClaw.js:97:11)
+
+    console.log
+      [Intent] Validate agent + permissions before creating payment
+
+      at logIntent (backend/services/kiloClaw.js:97:11)
+
+    console.log
+      [Intent] Validate agent + permissions before creating payment
+
+      at logIntent (backend/services/kiloClaw.js:97:11)
+
+    console.log
+      [Intent] Validate agent + permissions before creating payment
+
+      at logIntent (backend/services/kiloClaw.js:97:11)
+
+    console.log
+      [Intent] Validate agent + permissions before creating payment
+
+      at logIntent (backend/services/kiloClaw.js:97:11)
+
+    console.log
+      [Intent] Validate agent + permissions before creating payment
+
+      at logIntent (backend/services/kiloClaw.js:97:11)
+
+    console.log
+      [Intent] Validate agent + permissions before creating payment
+
+      at logIntent (backend/services/kiloClaw.js:97:11)
+
+    console.log
+      [Intent] Validate agent + permissions before creating payment
+
+      at logIntent (backend/services/kiloClaw.js:97:11)
+
+    console.log
+      [Intent] Validate agent + permissions before creating payment
+
+      at logIntent (backend/services/kiloClaw.js:97:11)
+
+    console.log
+      [Intent] Validate agent + permissions before creating payment
+
+      at logIntent (backend/services/kiloClaw.js:97:11)
+
+    console.log
+      [Intent] Validate agent + permissions before creating payment
+
+      at logIntent (backend/services/kiloClaw.js:97:11)
+
+    console.log
+      [Intent] Validate agent + permissions before creating payment
+
+      at logIntent (backend/services/kiloClaw.js:97:11)
+
+    console.log
+      [Intent] Validate agent + permissions before creating payment
+
+      at logIntent (backend/services/kiloClaw.js:97:11)
+
+  ÔùÅ KiloClaw Stage 1 Validator ÔÇ║ Artist Permissions ÔÇ║ should reject if artist blocked agent
+
+    TypeError: Cannot read properties of undefined (reading 'agents')
+
+    [0m [90m  7 |[39m
+     [90m  8 |[39m   [90m// CHECK 1: Agent Active[39m
+    [31m[1m>[22m[39m[90m  9 |[39m   [36mconst[39m agent [33m=[39m [36mawait[39m 
+db[33m.[39magents[33m.[39mfindById(agentId)[33m;[39m
+     [90m    |[39m                          [31m[1m^[22m[39m
+     [90m 10 |[39m   [36mif[39m ([33m![39magent) {
+     [90m 11 |[39m     [36mreturn[39m { approved[33m:[39m [36mfalse[39m[33m,[39m reason[33m:[39m 
+[32m'AGENT_NOT_FOUND'[39m[33m,[39m code[33m:[39m [35m404[39m }[33m;[39m
+     [90m 12 |[39m   }[0m
+
+      at kiloClawStage1Validate (backend/services/kiloClaw.js:9:26)
+      at Object.<anonymous> (tests/kiloclaw-stage1.test.js:83:28)
+
+  ÔùÅ KiloClaw Stage 1 Validator ÔÇ║ Artist Permissions ÔÇ║ should allow if permission exists and can_access is true
+
+    TypeError: Cannot read properties of undefined (reading 'agents')
+
+    [0m [90m  7 |[39m
+     [90m  8 |[39m   [90m// CHECK 1: Agent Active[39m
+    [31m[1m>[22m[39m[90m  9 |[39m   [36mconst[39m agent [33m=[39m [36mawait[39m 
+db[33m.[39magents[33m.[39mfindById(agentId)[33m;[39m
+     [90m    |[39m                          [31m[1m^[22m[39m
+     [90m 10 |[39m   [36mif[39m ([33m![39magent) {
+     [90m 11 |[39m     [36mreturn[39m { approved[33m:[39m [36mfalse[39m[33m,[39m reason[33m:[39m 
+[32m'AGENT_NOT_FOUND'[39m[33m,[39m code[33m:[39m [35m404[39m }[33m;[39m
+     [90m 12 |[39m   }[0m
+
+      at kiloClawStage1Validate (backend/services/kiloClaw.js:9:26)
+      at Object.<anonymous> (tests/kiloclaw-stage1.test.js:96:28)
+
+  ÔùÅ KiloClaw Stage 1 Validator ÔÇ║ Daily Limit Enforcement ÔÇ║ should allow tips under daily limit
+
+    TypeError: Cannot read properties of undefined (reading 'agents')
+
+    [0m [90m  7 |[39m
+     [90m  8 |[39m   [90m// CHECK 1: Agent Active[39m
+    [31m[1m>[22m[39m[90m  9 |[39m   [36mconst[39m agent [33m=[39m [36mawait[39m 
+db[33m.[39magents[33m.[39mfindById(agentId)[33m;[39m
+     [90m    |[39m                          [31m[1m^[22m[39m
+     [90m 10 |[39m   [36mif[39m ([33m![39magent) {
+     [90m 11 |[39m     [36mreturn[39m { approved[33m:[39m [36mfalse[39m[33m,[39m reason[33m:[39m 
+[32m'AGENT_NOT_FOUND'[39m[33m,[39m code[33m:[39m [35m404[39m }[33m;[39m
+     [90m 12 |[39m   }[0m
+
+      at kiloClawStage1Validate (backend/services/kiloClaw.js:9:26)
+      at Object.<anonymous> (tests/kiloclaw-stage1.test.js:112:28)
+
+  ÔùÅ KiloClaw Stage 1 Validator ÔÇ║ Daily Limit Enforcement ÔÇ║ should reject if daily limit reached (default 10)
+
+    TypeError: Cannot read properties of undefined (reading 'agents')
+
+    [0m [90m  7 |[39m
+     [90m  8 |[39m   [90m// CHECK 1: Agent Active[39m
+    [31m[1m>[22m[39m[90m  9 |[39m   [36mconst[39m agent [33m=[39m [36mawait[39m 
+db[33m.[39magents[33m.[39mfindById(agentId)[33m;[39m
+     [90m    |[39m                          [31m[1m^[22m[39m
+     [90m 10 |[39m   [36mif[39m ([33m![39magent) {
+     [90m 11 |[39m     [36mreturn[39m { approved[33m:[39m [36mfalse[39m[33m,[39m reason[33m:[39m 
+[32m'AGENT_NOT_FOUND'[39m[33m,[39m code[33m:[39m [35m404[39m }[33m;[39m
+     [90m 12 |[39m   }[0m
+
+      at kiloClawStage1Validate (backend/services/kiloClaw.js:9:26)
+      at Object.<anonymous> (tests/kiloclaw-stage1.test.js:122:28)
+
+  ÔùÅ KiloClaw Stage 1 Validator ÔÇ║ Daily Limit Enforcement ÔÇ║ should use custom daily limit from permissions
+
+    TypeError: Cannot read properties of undefined (reading 'agents')
+
+    [0m [90m  7 |[39m
+     [90m  8 |[39m   [90m// CHECK 1: Agent Active[39m
+    [31m[1m>[22m[39m[90m  9 |[39m   [36mconst[39m agent [33m=[39m [36mawait[39m 
+db[33m.[39magents[33m.[39mfindById(agentId)[33m;[39m
+     [90m    |[39m                          [31m[1m^[22m[39m
+     [90m 10 |[39m   [36mif[39m ([33m![39magent) {
+     [90m 11 |[39m     [36mreturn[39m { approved[33m:[39m [36mfalse[39m[33m,[39m reason[33m:[39m 
+[32m'AGENT_NOT_FOUND'[39m[33m,[39m code[33m:[39m [35m404[39m }[33m;[39m
+     [90m 12 |[39m   }[0m
+
+      at kiloClawStage1Validate (backend/services/kiloClaw.js:9:26)
+      at Object.<anonymous> (tests/kiloclaw-stage1.test.js:139:28)
+
+  ÔùÅ KiloClaw Stage 1 Validator ÔÇ║ Global Rate Limit ÔÇ║ should allow under global limit (50/day)
+
+    TypeError: Cannot read properties of undefined (reading 'agents')
+
+    [0m [90m  7 |[39m
+     [90m  8 |[39m   [90m// CHECK 1: Agent Active[39m
+    [31m[1m>[22m[39m[90m  9 |[39m   [36mconst[39m agent [33m=[39m [36mawait[39m 
+db[33m.[39magents[33m.[39mfindById(agentId)[33m;[39m
+     [90m    |[39m                          [31m[1m^[22m[39m
+     [90m 10 |[39m   [36mif[39m ([33m![39magent) {
+     [90m 11 |[39m     [36mreturn[39m { approved[33m:[39m [36mfalse[39m[33m,[39m reason[33m:[39m 
+[32m'AGENT_NOT_FOUND'[39m[33m,[39m code[33m:[39m [35m404[39m }[33m;[39m
+     [90m 12 |[39m   }[0m
+
+      at kiloClawStage1Validate (backend/services/kiloClaw.js:9:26)
+      at Object.<anonymous> (tests/kiloclaw-stage1.test.js:153:28)
+
+  ÔùÅ KiloClaw Stage 1 Validator ÔÇ║ Global Rate Limit ÔÇ║ should reject when global limit exceeded
+
+    TypeError: Cannot read properties of undefined (reading 'agents')
+
+    [0m [90m  7 |[39m
+     [90m  8 |[39m   [90m// CHECK 1: Agent Active[39m
+    [31m[1m>[22m[39m[90m  9 |[39m   [36mconst[39m agent [33m=[39m [36mawait[39m 
+db[33m.[39magents[33m.[39mfindById(agentId)[33m;[39m
+     [90m    |[39m                          [31m[1m^[22m[39m
+     [90m 10 |[39m   [36mif[39m ([33m![39magent) {
+     [90m 11 |[39m     [36mreturn[39m { approved[33m:[39m [36mfalse[39m[33m,[39m reason[33m:[39m 
+[32m'AGENT_NOT_FOUND'[39m[33m,[39m code[33m:[39m [35m404[39m }[33m;[39m
+     [90m 12 |[39m   }[0m
+
+      at kiloClawStage1Validate (backend/services/kiloClaw.js:9:26)
+      at Object.<anonymous> (tests/kiloclaw-stage1.test.js:161:28)
+
+  ÔùÅ KiloClaw Stage 1 Validator ÔÇ║ Duplicate Detection ÔÇ║ should allow tips if different amount
+
+    TypeError: Cannot read properties of undefined (reading 'agents')
+
+    [0m [90m  7 |[39m
+     [90m  8 |[39m   [90m// CHECK 1: Agent Active[39m
+    [31m[1m>[22m[39m[90m  9 |[39m   [36mconst[39m agent [33m=[39m [36mawait[39m 
+db[33m.[39magents[33m.[39mfindById(agentId)[33m;[39m
+     [90m    |[39m                          [31m[1m^[22m[39m
+     [90m 10 |[39m   [36mif[39m ([33m![39magent) {
+     [90m 11 |[39m     [36mreturn[39m { approved[33m:[39m [36mfalse[39m[33m,[39m reason[33m:[39m 
+[32m'AGENT_NOT_FOUND'[39m[33m,[39m code[33m:[39m [35m404[39m }[33m;[39m
+     [90m 12 |[39m   }[0m
+
+      at kiloClawStage1Validate (backend/services/kiloClaw.js:9:26)
+      at Object.<anonymous> (tests/kiloclaw-stage1.test.js:181:28)
+
+  ÔùÅ KiloClaw Stage 1 Validator ÔÇ║ Duplicate Detection ÔÇ║ should allow tips if more than 60s since last
+
+    TypeError: Cannot read properties of undefined (reading 'agents')
+
+    [0m [90m  7 |[39m
+     [90m  8 |[39m   [90m// CHECK 1: Agent Active[39m
+    [31m[1m>[22m[39m[90m  9 |[39m   [36mconst[39m agent [33m=[39m [36mawait[39m 
+db[33m.[39magents[33m.[39mfindById(agentId)[33m;[39m
+     [90m    |[39m                          [31m[1m^[22m[39m
+     [90m 10 |[39m   [36mif[39m ([33m![39magent) {
+     [90m 11 |[39m     [36mreturn[39m { approved[33m:[39m [36mfalse[39m[33m,[39m reason[33m:[39m 
+[32m'AGENT_NOT_FOUND'[39m[33m,[39m code[33m:[39m [35m404[39m }[33m;[39m
+     [90m 12 |[39m   }[0m
+
+      at kiloClawStage1Validate (backend/services/kiloClaw.js:9:26)
+      at Object.<anonymous> (tests/kiloclaw-stage1.test.js:193:28)
+
+  ÔùÅ KiloClaw Stage 1 Validator ÔÇ║ Duplicate Detection ÔÇ║ should reject duplicate tip within 60s
+
+    TypeError: Cannot read properties of undefined (reading 'agents')
+
+    [0m [90m  7 |[39m
+     [90m  8 |[39m   [90m// CHECK 1: Agent Active[39m
+    [31m[1m>[22m[39m[90m  9 |[39m   [36mconst[39m agent [33m=[39m [36mawait[39m 
+db[33m.[39magents[33m.[39mfindById(agentId)[33m;[39m
+     [90m    |[39m                          [31m[1m^[22m[39m
+     [90m 10 |[39m   [36mif[39m ([33m![39magent) {
+     [90m 11 |[39m     [36mreturn[39m { approved[33m:[39m [36mfalse[39m[33m,[39m reason[33m:[39m 
+[32m'AGENT_NOT_FOUND'[39m[33m,[39m code[33m:[39m [35m404[39m }[33m;[39m
+     [90m 12 |[39m   }[0m
+
+      at kiloClawStage1Validate (backend/services/kiloClaw.js:9:26)
+      at Object.<anonymous> (tests/kiloclaw-stage1.test.js:205:28)
+
+  ÔùÅ KiloClaw Stage 1 Validator ÔÇ║ Amount Validation ÔÇ║ should reject zero amount
+
+    TypeError: Cannot read properties of undefined (reading 'agents')
+
+    [0m [90m  7 |[39m
+     [90m  8 |[39m   [90m// CHECK 1: Agent Active[39m
+    [31m[1m>[22m[39m[90m  9 |[39m   [36mconst[39m agent [33m=[39m [36mawait[39m 
+db[33m.[39magents[33m.[39mfindById(agentId)[33m;[39m
+     [90m    |[39m                          [31m[1m^[22m[39m
+     [90m 10 |[39m   [36mif[39m ([33m![39magent) {
+     [90m 11 |[39m     [36mreturn[39m { approved[33m:[39m [36mfalse[39m[33m,[39m reason[33m:[39m 
+[32m'AGENT_NOT_FOUND'[39m[33m,[39m code[33m:[39m [35m404[39m }[33m;[39m
+     [90m 12 |[39m   }[0m
+
+      at kiloClawStage1Validate (backend/services/kiloClaw.js:9:26)
+      at Object.<anonymous> (tests/kiloclaw-stage1.test.js:220:28)
+
+  ÔùÅ KiloClaw Stage 1 Validator ÔÇ║ Amount Validation ÔÇ║ should reject negative amount
+
+    TypeError: Cannot read properties of undefined (reading 'agents')
+
+    [0m [90m  7 |[39m
+     [90m  8 |[39m   [90m// CHECK 1: Agent Active[39m
+    [31m[1m>[22m[39m[90m  9 |[39m   [36mconst[39m agent [33m=[39m [36mawait[39m 
+db[33m.[39magents[33m.[39mfindById(agentId)[33m;[39m
+     [90m    |[39m                          [31m[1m^[22m[39m
+     [90m 10 |[39m   [36mif[39m ([33m![39magent) {
+     [90m 11 |[39m     [36mreturn[39m { approved[33m:[39m [36mfalse[39m[33m,[39m reason[33m:[39m 
+[32m'AGENT_NOT_FOUND'[39m[33m,[39m code[33m:[39m [35m404[39m }[33m;[39m
+     [90m 12 |[39m   }[0m
+
+      at kiloClawStage1Validate (backend/services/kiloClaw.js:9:26)
+      at Object.<anonymous> (tests/kiloclaw-stage1.test.js:226:28)
+
+  ÔùÅ KiloClaw Stage 1 Validator ÔÇ║ Amount Validation ÔÇ║ should reject amount exceeding maximum (1000)
+
+    TypeError: Cannot read properties of undefined (reading 'agents')
+
+    [0m [90m  7 |[39m
+     [90m  8 |[39m   [90m// CHECK 1: Agent Active[39m
+    [31m[1m>[22m[39m[90m  9 |[39m   [36mconst[39m agent [33m=[39m [36mawait[39m 
+db[33m.[39magents[33m.[39mfindById(agentId)[33m;[39m
+     [90m    |[39m                          [31m[1m^[22m[39m
+     [90m 10 |[39m   [36mif[39m ([33m![39magent) {
+     [90m 11 |[39m     [36mreturn[39m { approved[33m:[39m [36mfalse[39m[33m,[39m reason[33m:[39m 
+[32m'AGENT_NOT_FOUND'[39m[33m,[39m code[33m:[39m [35m404[39m }[33m;[39m
+     [90m 12 |[39m   }[0m
+
+      at kiloClawStage1Validate (backend/services/kiloClaw.js:9:26)
+      at Object.<anonymous> (tests/kiloclaw-stage1.test.js:231:28)
+
+  ÔùÅ KiloClaw Stage 1 Validator ÔÇ║ Amount Validation ÔÇ║ should accept boundary amount (1000)
+
+    TypeError: Cannot read properties of undefined (reading 'agents')
+
+    [0m [90m  7 |[39m
+     [90m  8 |[39m   [90m// CHECK 1: Agent Active[39m
+    [31m[1m>[22m[39m[90m  9 |[39m   [36mconst[39m agent [33m=[39m [36mawait[39m 
+db[33m.[39magents[33m.[39mfindById(agentId)[33m;[39m
+     [90m    |[39m                          [31m[1m^[22m[39m
+     [90m 10 |[39m   [36mif[39m ([33m![39magent) {
+     [90m 11 |[39m     [36mreturn[39m { approved[33m:[39m [36mfalse[39m[33m,[39m reason[33m:[39m 
+[32m'AGENT_NOT_FOUND'[39m[33m,[39m code[33m:[39m [35m404[39m }[33m;[39m
+     [90m 12 |[39m   }[0m
+
+      at kiloClawStage1Validate (backend/services/kiloClaw.js:9:26)
+      at Object.<anonymous> (tests/kiloclaw-stage1.test.js:237:28)
+
+FAIL tests/payments-status.test.js
+  ÔùÅ Console
+
+    console.log
+      [Audit] PAYMENT_COMPLETED
+
+      at logAuditTrail (backend/services/payments-status.js:122:11)
+
+  ÔùÅ Payment Status Service ÔÇ║ Status Retrieval ÔÇ║ should return completed status when Circle confirms
+
+    TypeError: Cannot read properties of undefined (reading 'value')
+
+    [0m [90m 57 |[39m       [90m// Mock DB update to change status[39m
+     [90m 58 |[39m       db[33m.[39mpending_payments[33m.[39mfindById[33m.[39mmockResolvedValueOnce({
+    [31m[1m>[22m[39m[90m 59 |[39m         [33m...[39mdb[33m.[39mpending_payments[33m.[39mfindById[33m.[39
+mmock[33m.[39mresults[[35m0[39m][33m.[39mvalue[33m,[39m
+     [90m    |[39m                                                         [31m[1m^[22m[39m
+     [90m 60 |[39m         status[33m:[39m [32m'completed'[39m[33m,[39m
+     [90m 61 |[39m         transaction_hash[33m:[39m [32m'0xabc123'[39m[33m,[39m
+     [90m 62 |[39m         completed_at[33m:[39m [36mnew[39m 
+[33mDate[39m()[33m.[39mtoISOString()[33m,[39m[0m
+
+      at Object.<anonymous> (tests/payments-status.test.js:59:57)
+
+  ÔùÅ Payment Status Service ÔÇ║ Authorization ÔÇ║ should reject unauthorized agent
+
+    TypeError: Cannot read properties of undefined (reading 'value')
+
+    [0m [90m 92 |[39m     it([32m'should reject unauthorized agent'[39m[33m,[39m [36masync[39m () 
+[33m=>[39m {
+     [90m 93 |[39m       db[33m.[39mpending_payments[33m.[39mfindById[33m.[39mmockResolvedValueOnce({
+    [31m[1m>[22m[39m[90m 94 |[39m         [33m...[39mdb[33m.[39mpending_payments[33m.[39mfindById[33m.[39
+mmock[33m.[39mresults[[35m0[39m][33m.[39mvalue[33m,[39m
+     [90m    |[39m                                                         [31m[1m^[22m[39m
+     [90m 95 |[39m         agent_id[33m:[39m [32m'different_agent'[39m[33m,[39m
+     [90m 96 |[39m       })[33m;[39m
+     [90m 97 |[39m[0m
+
+      at Object.<anonymous> (tests/payments-status.test.js:94:57)
+
+  ÔùÅ Payment Status Service ÔÇ║ Audit Logging ÔÇ║ should insert into agent_query_log on completion
+
+    TypeError: Cannot read properties of undefined (reading 'value')
+
+    [0m [90m 117 |[39m       [90m// After completion, status changes[39m
+     [90m 118 |[39m       db[33m.[39mpending_payments[33m.[39mfindById[33m.[39mmockResolvedValueOnce({
+    [31m[1m>[22m[39m[90m 119 |[39m         [33m...[39mdb[33m.[39mpending_payments[33m.[39mfindById[33m.[3
+9mmock[33m.[39mresults[[35m0[39m][33m.[39mvalue[33m,[39m
+     [90m     |[39m                                                         [31m[1m^[22m[39m
+     [90m 120 |[39m         status[33m:[39m [32m'completed'[39m[33m,[39m
+     [90m 121 |[39m         transaction_hash[33m:[39m [32m'0x789'[39m[33m,[39m
+     [90m 122 |[39m         completed_at[33m:[39m [36mnew[39m 
+[33mDate[39m()[33m.[39mtoISOString()[33m,[39m[0m
+
+      at Object.<anonymous> (tests/payments-status.test.js:119:57)
+
+  ÔùÅ Payment Status Service ÔÇ║ Error Handling ÔÇ║ should handle Circle API errors gracefully
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "pending"
+    Received: "completed"
+
+    [0m [90m 141 |[39m
+     [90m 142 |[39m       [90m// Should return current DB status[39m
+    [31m[1m>[22m[39m[90m 143 |[39m       
+expect(result[33m.[39mstatus)[33m.[39mtoBe([32m'pending'[39m)[33m;[39m
+     [90m     |[39m                             [31m[1m^[22m[39m
+     [90m 144 |[39m     })[33m;[39m
+     [90m 145 |[39m   })[33m;[39m
+     [90m 146 |[39m })[33m;[39m[0m
+
+      at Object.<anonymous> (tests/payments-status.test.js:143:29)
+
+FAIL tests/payments-create.test.js
+  ÔùÅ Test suite failed to run
+
+    Cannot find module '../../backend/services/payments-create.js' from 'netlify/functions/orbit/payments/create.js'
+
+    Require stack:
+      netlify/functions/orbit/payments/create.js
+      tests/payments-create.test.js
+
+    [0m[31m[1m>[22m[39m[90m 1 |[39m [36mconst[39m { createPayment } [33m=[39m 
+require([32m'../../backend/services/payments-create.js'[39m)[33m;[39m
+     [90m   |[39m                           [31m[1m^[22m[39m
+     [90m 2 |[39m
+     [90m 3 |[39m [90m// Mock DB for now - replace with real pg client[39m
+     [90m 4 |[39m [36mconst[39m db [33m=[39m {[0m
+
+      at Resolver._throwModNotFoundError (node_modules/jest-resolve/build/index.js:863:11)
+      at Object.<anonymous> (netlify/functions/orbit/payments/create.js:1:27)
+      at Object.<anonymous> (tests/payments-create.test.js:1:17)
+
+FAIL tests/payments-status-api.test.js
+  ÔùÅ Test suite failed to run
+
+    Jest encountered an unexpected token
+
+    Jest failed to parse a file. This happens e.g. when your code or its dependencies use non-standard JavaScript 
+syntax, or when Jest is not configured to support such syntax.
+
+    Out of the box Jest supports Babel, which will be used to transform your files into valid JS based on your Babel 
+configuration.
+
+    By default "node_modules" folder is ignored by transformers.
+
+    Here's what you can do:
+     ÔÇó If you are trying to use ECMAScript Modules, see https://jestjs.io/docs/ecmascript-modules for how to enable 
+it.
+     ÔÇó If you are trying to use TypeScript, see https://jestjs.io/docs/getting-started#using-typescript
+     ÔÇó To have some of your "node_modules" files transformed, you can specify a custom "transformIgnorePatterns" in 
+your config.
+     ÔÇó If you need a custom transformation, specify a "transform" option in your config.
+     ÔÇó If you simply want to mock your non-JS modules (e.g. binary assets) you can stub them out with the 
+"moduleNameMapper" config option.
+
+    You'll find more details and examples of these config options in the docs:
+    https://jestjs.io/docs/configuration
+    For information about custom transformations, see:
+    https://jestjs.io/docs/code-transformation
+
+    Details:
+
+    C:\Users\diase\Downloads\Sarah-Jane-website\orbit-hub\netlify\functions\orbit\payments\status.js:72
+      } catch (error: any) {
+                    ^
+
+    SyntaxError: Unexpected token ':'
+
+    [0m[31m[1m>[22m[39m[90m 1 |[39m [36mconst[39m handler [33m=[39m 
+require([32m'../netlify/functions/orbit/payments/status'[39m)[33m;[39m
+     [90m   |[39m                 [31m[1m^[22m[39m
+     [90m 2 |[39m
+     [90m 3 |[39m jest[33m.[39mmock([32m'../backend/services/payments-status.js'[39m[33m,[39m () [33m=>[39m 
+({
+     [90m 4 |[39m   getPaymentStatus[33m:[39m jest[33m.[39mfn()[33m.[39mmockResolvedValue({[0m
+
+      at Runtime.createScriptFromCode (node_modules/jest-runtime/build/index.js:1314:40)
+      at Object.<anonymous> (tests/payments-status-api.test.js:1:17)
+
+FAIL tests/fan-chat.test.js
+  ÔùÅ Test suite failed to run
+
+    Jest encountered an unexpected token
+
+    Jest failed to parse a file. This happens e.g. when your code or its dependencies use non-standard JavaScript 
+syntax, or when Jest is not configured to support such syntax.
+
+    Out of the box Jest supports Babel, which will be used to transform your files into valid JS based on your Babel 
+configuration.
+
+    By default "node_modules" folder is ignored by transformers.
+
+    Here's what you can do:
+     ÔÇó If you are trying to use ECMAScript Modules, see https://jestjs.io/docs/ecmascript-modules for how to enable 
+it.
+     ÔÇó If you are trying to use TypeScript, see https://jestjs.io/docs/getting-started#using-typescript
+     ÔÇó To have some of your "node_modules" files transformed, you can specify a custom "transformIgnorePatterns" in 
+your config.
+     ÔÇó If you need a custom transformation, specify a "transform" option in your config.
+     ÔÇó If you simply want to mock your non-JS modules (e.g. binary assets) you can stub them out with the 
+"moduleNameMapper" config option.
+
+    You'll find more details and examples of these config options in the docs:
+    https://jestjs.io/docs/configuration
+    For information about custom transformations, see:
+    https://jestjs.io/docs/code-transformation
+
+    Details:
+
+    C:\Users\diase\Downloads\Sarah-Jane-website\orbit-hub\tests\fan-chat.test.js:14
+    const mockAnthropicInstance = {
+          ^
+
+    SyntaxError: Identifier 'mockAnthropicInstance' has already been declared
+
+      at Runtime.createScriptFromCode (node_modules/jest-runtime/build/index.js:1314:40)
+
+FAIL tests/circle-webhook.test.js
+  ÔùÅ Console
+
+    console.log
+      [2026-04-27T05:18:56.737Z] Circle Webhook - OPTIONS
+
+      at Object.exports.handler (netlify/functions/circle-webhook.js:72:11)
+
+    console.log
+      [2026-04-27T05:18:56.789Z] Circle Webhook - GET
+
+      at Object.exports.handler (netlify/functions/circle-webhook.js:72:11)
+
+    console.log
+      [2026-04-27T05:18:56.799Z] Circle Webhook - POST
+
+      at Object.exports.handler (netlify/functions/circle-webhook.js:72:11)
+
+    console.warn
+      [Circle Webhook] No signature key configured, accepting all webhooks
+
+    [0m [90m 18 |[39m
+     [90m 19 |[39m   [36mif[39m ([33m![39mcircleSigKey) {
+    [31m[1m>[22m[39m[90m 20 |[39m     console[33m.[39mwarn([32m'[Circle Webhook] No signature key configured, 
+accepting all webhooks'[39m)[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 21 |[39m     [36mreturn[39m [36mtrue[39m[33m;[39m
+     [90m 22 |[39m   }
+     [90m 23 |[39m[0m
+
+      at verifyCircleSignature (netlify/functions/circle-webhook.js:20:13)
+      at Object.exports.handler (netlify/functions/circle-webhook.js:86:10)
+      at Object.<anonymous> (tests/circle-webhook.test.js:62:36)
+
+    console.log
+      [Circle] Payment confirmed: pi_123 - 5 USDC from TestFan
+
+      at Object.exports.handler (netlify/functions/circle-webhook.js:114:15)
+
+    console.error
+      [Claude] Error generating message: 401 {"type":"error","error":{"type":"authentication_error","message":"invalid 
+x-api-key"},"request_id":"req_011CaTiD5ohZAVD7Asv1ACkc"}
+
+    [0m [90m 64 |[39m     [36mreturn[39m thankYouText[33m;[39m
+     [90m 65 |[39m   } [36mcatch[39m (error) {
+    [31m[1m>[22m[39m[90m 66 |[39m     console[33m.[39merror([32m'[Claude] Error generating 
+message:'[39m[33m,[39m error[33m.[39mmessage)[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 67 |[39m     [36mreturn[39m [36mnull[39m[33m;[39m
+     [90m 68 |[39m   }
+     [90m 69 |[39m }[0m
+
+      at generateThankYouMessage (netlify/functions/circle-webhook.js:66:13)
+      at Object.exports.handler (netlify/functions/circle-webhook.js:117:31)
+      at Object.<anonymous> (tests/circle-webhook.test.js:62:22)
+
+    console.log
+      [2026-04-27T05:18:57.685Z] Circle Webhook - POST
+
+      at Object.exports.handler (netlify/functions/circle-webhook.js:72:11)
+
+    console.log
+      [Circle] Payment confirmed: pi_123 - 5 USDC from TestFan
+
+      at Object.exports.handler (netlify/functions/circle-webhook.js:114:15)
+
+    console.error
+      [Claude] Error generating message: 401 {"type":"error","error":{"type":"authentication_error","message":"invalid 
+x-api-key"},"request_id":"req_011CaTiD6U8oU6TWYWdQ2fdt"}
+
+    [0m [90m 64 |[39m     [36mreturn[39m thankYouText[33m;[39m
+     [90m 65 |[39m   } [36mcatch[39m (error) {
+    [31m[1m>[22m[39m[90m 66 |[39m     console[33m.[39merror([32m'[Claude] Error generating 
+message:'[39m[33m,[39m error[33m.[39mmessage)[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 67 |[39m     [36mreturn[39m [36mnull[39m[33m;[39m
+     [90m 68 |[39m   }
+     [90m 69 |[39m }[0m
+
+      at generateThankYouMessage (netlify/functions/circle-webhook.js:66:13)
+      at Object.exports.handler (netlify/functions/circle-webhook.js:117:31)
+      at Object.<anonymous> (tests/circle-webhook.test.js:70:22)
+
+    console.log
+      [2026-04-27T05:18:57.818Z] Circle Webhook - POST
+
+      at Object.exports.handler (netlify/functions/circle-webhook.js:72:11)
+
+    console.warn
+      [Circle Webhook] No signature key configured, accepting all webhooks
+
+    [0m [90m 18 |[39m
+     [90m 19 |[39m   [36mif[39m ([33m![39mcircleSigKey) {
+    [31m[1m>[22m[39m[90m 20 |[39m     console[33m.[39mwarn([32m'[Circle Webhook] No signature key configured, 
+accepting all webhooks'[39m)[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 21 |[39m     [36mreturn[39m [36mtrue[39m[33m;[39m
+     [90m 22 |[39m   }
+     [90m 23 |[39m[0m
+
+      at verifyCircleSignature (netlify/functions/circle-webhook.js:20:13)
+      at Object.exports.handler (netlify/functions/circle-webhook.js:86:10)
+      at Object.<anonymous> (tests/circle-webhook.test.js:79:36)
+
+    console.log
+      [2026-04-27T05:18:57.824Z] Circle Webhook - POST
+
+      at Object.exports.handler (netlify/functions/circle-webhook.js:72:11)
+
+    console.warn
+      [Circle Webhook] No signature key configured, accepting all webhooks
+
+    [0m [90m 18 |[39m
+     [90m 19 |[39m   [36mif[39m ([33m![39mcircleSigKey) {
+    [31m[1m>[22m[39m[90m 20 |[39m     console[33m.[39mwarn([32m'[Circle Webhook] No signature key configured, 
+accepting all webhooks'[39m)[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 21 |[39m     [36mreturn[39m [36mtrue[39m[33m;[39m
+     [90m 22 |[39m   }
+     [90m 23 |[39m[0m
+
+      at verifyCircleSignature (netlify/functions/circle-webhook.js:20:13)
+      at Object.exports.handler (netlify/functions/circle-webhook.js:86:10)
+      at Object.<anonymous> (tests/circle-webhook.test.js:87:36)
+
+    console.log
+      [Circle] Payment confirmed: pi_123 - 5 USDC from TestFan
+
+      at Object.exports.handler (netlify/functions/circle-webhook.js:114:15)
+
+    console.error
+      [Claude] Error generating message: 401 {"type":"error","error":{"type":"authentication_error","message":"invalid 
+x-api-key"},"request_id":"req_011CaTiD7B41YzpLpkZewPqi"}
+
+    [0m [90m 64 |[39m     [36mreturn[39m thankYouText[33m;[39m
+     [90m 65 |[39m   } [36mcatch[39m (error) {
+    [31m[1m>[22m[39m[90m 66 |[39m     console[33m.[39merror([32m'[Claude] Error generating 
+message:'[39m[33m,[39m error[33m.[39mmessage)[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 67 |[39m     [36mreturn[39m [36mnull[39m[33m;[39m
+     [90m 68 |[39m   }
+     [90m 69 |[39m }[0m
+
+      at generateThankYouMessage (netlify/functions/circle-webhook.js:66:13)
+      at Object.exports.handler (netlify/functions/circle-webhook.js:117:31)
+      at Object.<anonymous> (tests/circle-webhook.test.js:87:22)
+
+    console.log
+      [2026-04-27T05:18:57.991Z] Circle Webhook - POST
+
+      at Object.exports.handler (netlify/functions/circle-webhook.js:72:11)
+
+    console.warn
+      [Circle Webhook] No signature key configured, accepting all webhooks
+
+    [0m [90m 18 |[39m
+     [90m 19 |[39m   [36mif[39m ([33m![39mcircleSigKey) {
+    [31m[1m>[22m[39m[90m 20 |[39m     console[33m.[39mwarn([32m'[Circle Webhook] No signature key configured, 
+accepting all webhooks'[39m)[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 21 |[39m     [36mreturn[39m [36mtrue[39m[33m;[39m
+     [90m 22 |[39m   }
+     [90m 23 |[39m[0m
+
+      at verifyCircleSignature (netlify/functions/circle-webhook.js:20:13)
+      at Object.exports.handler (netlify/functions/circle-webhook.js:86:10)
+      at Object.<anonymous> (tests/circle-webhook.test.js:106:36)
+
+    console.log
+      [Circle] Payment confirmed: pi_123 - 5 USDC from TestFan
+
+      at Object.exports.handler (netlify/functions/circle-webhook.js:114:15)
+
+    console.error
+      [Claude] API key not set
+
+    [0m [90m 29 |[39m   [36mconst[39m apiKey [33m=[39m 
+process[33m.[39menv[33m.[39m[33mANTHROPIC_API_KEY[39m[33m;[39m
+     [90m 30 |[39m   [36mif[39m ([33m![39mapiKey) {
+    [31m[1m>[22m[39m[90m 31 |[39m     console[33m.[39merror([32m'[Claude] API key not set'[39m)[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 32 |[39m     [36mreturn[39m [36mnull[39m[33m;[39m
+     [90m 33 |[39m   }
+     [90m 34 |[39m[0m
+
+      at generateThankYouMessage (netlify/functions/circle-webhook.js:31:13)
+      at Object.exports.handler (netlify/functions/circle-webhook.js:117:37)
+      at Object.<anonymous> (tests/circle-webhook.test.js:106:36)
+
+    console.log
+      [2026-04-27T05:18:58.003Z] Circle Webhook - POST
+
+      at Object.exports.handler (netlify/functions/circle-webhook.js:72:11)
+
+    console.warn
+      [Circle Webhook] No signature key configured, accepting all webhooks
+
+    [0m [90m 18 |[39m
+     [90m 19 |[39m   [36mif[39m ([33m![39mcircleSigKey) {
+    [31m[1m>[22m[39m[90m 20 |[39m     console[33m.[39mwarn([32m'[Circle Webhook] No signature key configured, 
+accepting all webhooks'[39m)[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 21 |[39m     [36mreturn[39m [36mtrue[39m[33m;[39m
+     [90m 22 |[39m   }
+     [90m 23 |[39m[0m
+
+      at verifyCircleSignature (netlify/functions/circle-webhook.js:20:13)
+      at Object.exports.handler (netlify/functions/circle-webhook.js:86:10)
+      at Object.<anonymous> (tests/circle-webhook.test.js:120:36)
+
+    console.log
+      [Circle] Payment confirmed: pi_999 - 10 USDC from Fan
+
+      at Object.exports.handler (netlify/functions/circle-webhook.js:114:15)
+
+    console.error
+      [Claude] Error generating message: 401 {"type":"error","error":{"type":"authentication_error","message":"invalid 
+x-api-key"},"request_id":"req_011CaTiD7qF6PvRXzWb261CX"}
+
+    [0m [90m 64 |[39m     [36mreturn[39m thankYouText[33m;[39m
+     [90m 65 |[39m   } [36mcatch[39m (error) {
+    [31m[1m>[22m[39m[90m 66 |[39m     console[33m.[39merror([32m'[Claude] Error generating 
+message:'[39m[33m,[39m error[33m.[39mmessage)[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 67 |[39m     [36mreturn[39m [36mnull[39m[33m;[39m
+     [90m 68 |[39m   }
+     [90m 69 |[39m }[0m
+
+      at generateThankYouMessage (netlify/functions/circle-webhook.js:66:13)
+      at Object.exports.handler (netlify/functions/circle-webhook.js:117:31)
+      at Object.<anonymous> (tests/circle-webhook.test.js:120:22)
+
+    console.log
+      [2026-04-27T05:18:58.139Z] Circle Webhook - POST
+
+      at Object.exports.handler (netlify/functions/circle-webhook.js:72:11)
+
+    console.warn
+      [Circle Webhook] No signature key configured, accepting all webhooks
+
+    [0m [90m 18 |[39m
+     [90m 19 |[39m   [36mif[39m ([33m![39mcircleSigKey) {
+    [31m[1m>[22m[39m[90m 20 |[39m     console[33m.[39mwarn([32m'[Circle Webhook] No signature key configured, 
+accepting all webhooks'[39m)[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 21 |[39m     [36mreturn[39m [36mtrue[39m[33m;[39m
+     [90m 22 |[39m   }
+     [90m 23 |[39m[0m
+
+      at verifyCircleSignature (netlify/functions/circle-webhook.js:20:13)
+      at Object.exports.handler (netlify/functions/circle-webhook.js:86:10)
+      at Object.<anonymous> (tests/circle-webhook.test.js:130:36)
+
+    console.log
+      [Circle] Payment confirmed: pi_123 - 5 USDC from TestFan
+
+      at Object.exports.handler (netlify/functions/circle-webhook.js:114:15)
+
+    console.error
+      [Claude] Error generating message: 401 {"type":"error","error":{"type":"authentication_error","message":"invalid 
+x-api-key"},"request_id":"req_011CaTiD8Pix47mtPMUqiqVg"}
+
+    [0m [90m 64 |[39m     [36mreturn[39m thankYouText[33m;[39m
+     [90m 65 |[39m   } [36mcatch[39m (error) {
+    [31m[1m>[22m[39m[90m 66 |[39m     console[33m.[39merror([32m'[Claude] Error generating 
+message:'[39m[33m,[39m error[33m.[39mmessage)[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 67 |[39m     [36mreturn[39m [36mnull[39m[33m;[39m
+     [90m 68 |[39m   }
+     [90m 69 |[39m }[0m
+
+      at generateThankYouMessage (netlify/functions/circle-webhook.js:66:13)
+      at Object.exports.handler (netlify/functions/circle-webhook.js:117:31)
+      at Object.<anonymous> (tests/circle-webhook.test.js:130:22)
+
+    console.log
+      [2026-04-27T05:18:58.263Z] Circle Webhook - POST
+
+      at Object.exports.handler (netlify/functions/circle-webhook.js:72:11)
+
+    console.warn
+      [Circle Webhook] No signature key configured, accepting all webhooks
+
+    [0m [90m 18 |[39m
+     [90m 19 |[39m   [36mif[39m ([33m![39mcircleSigKey) {
+    [31m[1m>[22m[39m[90m 20 |[39m     console[33m.[39mwarn([32m'[Circle Webhook] No signature key configured, 
+accepting all webhooks'[39m)[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 21 |[39m     [36mreturn[39m [36mtrue[39m[33m;[39m
+     [90m 22 |[39m   }
+     [90m 23 |[39m[0m
+
+      at verifyCircleSignature (netlify/functions/circle-webhook.js:20:13)
+      at Object.exports.handler (netlify/functions/circle-webhook.js:86:10)
+      at Object.<anonymous> (tests/circle-webhook.test.js:146:36)
+
+    console.log
+      [Circle] Payment failed: pi_fail
+
+      at Object.exports.handler (netlify/functions/circle-webhook.js:149:15)
+
+    console.log
+      [2026-04-27T05:18:58.270Z] Circle Webhook - POST
+
+      at Object.exports.handler (netlify/functions/circle-webhook.js:72:11)
+
+    console.warn
+      [Circle Webhook] No signature key configured, accepting all webhooks
+
+    [0m [90m 18 |[39m
+     [90m 19 |[39m   [36mif[39m ([33m![39mcircleSigKey) {
+    [31m[1m>[22m[39m[90m 20 |[39m     console[33m.[39mwarn([32m'[Circle Webhook] No signature key configured, 
+accepting all webhooks'[39m)[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 21 |[39m     [36mreturn[39m [36mtrue[39m[33m;[39m
+     [90m 22 |[39m   }
+     [90m 23 |[39m[0m
+
+      at verifyCircleSignature (netlify/functions/circle-webhook.js:20:13)
+      at Object.exports.handler (netlify/functions/circle-webhook.js:86:10)
+      at Object.<anonymous> (tests/circle-webhook.test.js:162:36)
+
+    console.log
+      [Circle] Unknown notification type: unknown.type
+
+      at Object.exports.handler (netlify/functions/circle-webhook.js:157:13)
+
+    console.log
+      [2026-04-27T05:18:58.275Z] Circle Webhook - POST
+
+      at Object.exports.handler (netlify/functions/circle-webhook.js:72:11)
+
+    console.warn
+      [Circle Webhook] No signature key configured, accepting all webhooks
+
+    [0m [90m 18 |[39m
+     [90m 19 |[39m   [36mif[39m ([33m![39mcircleSigKey) {
+    [31m[1m>[22m[39m[90m 20 |[39m     console[33m.[39mwarn([32m'[Circle Webhook] No signature key configured, 
+accepting all webhooks'[39m)[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 21 |[39m     [36mreturn[39m [36mtrue[39m[33m;[39m
+     [90m 22 |[39m   }
+     [90m 23 |[39m[0m
+
+      at verifyCircleSignature (netlify/functions/circle-webhook.js:20:13)
+      at Object.exports.handler (netlify/functions/circle-webhook.js:86:10)
+      at Object.<anonymous> (tests/circle-webhook.test.js:188:21)
+
+    console.log
+      [Circle] Payment confirmed: pi_new - 5 USDC from NewFan
+
+      at Object.exports.handler (netlify/functions/circle-webhook.js:114:15)
+
+    console.error
+      [Claude] Error generating message: 401 {"type":"error","error":{"type":"authentication_error","message":"invalid 
+x-api-key"},"request_id":"req_011CaTiD8zhBmKzfHfEeABd2"}
+
+    [0m [90m 64 |[39m     [36mreturn[39m thankYouText[33m;[39m
+     [90m 65 |[39m   } [36mcatch[39m (error) {
+    [31m[1m>[22m[39m[90m 66 |[39m     console[33m.[39merror([32m'[Claude] Error generating 
+message:'[39m[33m,[39m error[33m.[39mmessage)[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 67 |[39m     [36mreturn[39m [36mnull[39m[33m;[39m
+     [90m 68 |[39m   }
+     [90m 69 |[39m }[0m
+
+      at generateThankYouMessage (netlify/functions/circle-webhook.js:66:13)
+      at Object.exports.handler (netlify/functions/circle-webhook.js:117:31)
+      at Object.<anonymous> (tests/circle-webhook.test.js:188:7)
+
+  ÔùÅ Circle Webhook Handler ÔÇ║ Payment confirmation ÔÇ║ should process confirmed payment and generate thank you 
+message
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+    [0m [90m 91 |[39m       expect(data[33m.[39msuccess)[33m.[39mtoBe([36mtrue[39m)[33m;[39m
+     [90m 92 |[39m       expect(data[33m.[39mpaymentId)[33m.[39mtoBe([32m'pi_123'[39m)[33m;[39m
+    [31m[1m>[22m[39m[90m 93 |[39m       
+expect(data[33m.[39mmessageGenerated)[33m.[39mtoBe([36mtrue[39m)[33m;[39m
+     [90m    |[39m                                     [31m[1m^[22m[39m
+     [90m 94 |[39m
+     [90m 95 |[39m       [90m// Verify message stored[39m
+     [90m 96 |[39m       expect(handler[33m.[39mthankYouMessages[33m.[39mhas([32m'pi_123'[39m))[33m.[39mtoBe(
+[36mtrue[39m)[33m;[39m[0m
+
+      at Object.<anonymous> (tests/circle-webhook.test.js:93:37)
+
+  ÔùÅ Circle Webhook Handler ÔÇ║ Payment confirmation ÔÇ║ should handle missing metadata gracefully
+
+    TypeError: Cannot read properties of undefined (reading 'fanName')
+
+    [0m [90m 121 |[39m       expect(result[33m.[39mstatusCode)[33m.[39mtoBe([35m200[39m)[33m;[39m
+     [90m 122 |[39m       [36mconst[39m stored [33m=[39m 
+handler[33m.[39mthankYouMessages[33m.[39m[36mget[39m([32m'pi_999'[39m)[33m;[39m
+    [31m[1m>[22m[39m[90m 123 |[39m       
+expect(stored[33m.[39mfanName)[33m.[39mtoBe([32m'Fan'[39m)[33m;[39m [90m// default[39m
+     [90m     |[39m                     [31m[1m^[22m[39m
+     [90m 124 |[39m     })[33m;[39m
+     [90m 125 |[39m
+     [90m 126 |[39m     it([32m'should handle Claude API failure gracefully'[39m[33m,[39m [36masync[39m () 
+[33m=>[39m {[0m
+
+      at Object.<anonymous> (tests/circle-webhook.test.js:123:21)
+
+  ÔùÅ Circle Webhook Handler ÔÇ║ Storage management ÔÇ║ should limit stored messages to 100
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: false
+    Received: true
+
+    [0m [90m 189 |[39m
+     [90m 190 |[39m       [90m// Should have evicted oldest entry to maintain max 100[39m
+    [31m[1m>[22m[39m[90m 191 |[39m       
+expect(handler[33m.[39mthankYouMessages[33m.[39mhas([32m'pi_0'[39m))[33m.[39mtoBe([36mfalse[39m)[33m;[39m
+     [90m     |[39m                                                    [31m[1m^[22m[39m
+     [90m 192 |[39m       
+expect(handler[33m.[39mthankYouMessages[33m.[39mhas([32m'pi_new'[39m))[33m.[39mtoBe([36mtrue[39m)[33m;[39m
+     [90m 193 |[39m       
+expect(handler[33m.[39mthankYouMessages[33m.[39msize)[33m.[39mtoBe([35m100[39m)[33m;[39m
+     [90m 194 |[39m     })[33m;[39m[0m
+
+      at Object.<anonymous> (tests/circle-webhook.test.js:191:52)
+
+
+Test Suites: 7 failed, 4 passed, 11 total
+Tests:       26 failed, 75 passed, 101 total
+Snapshots:   0 total
+Time:        8.562 s
+Ran all test suites.

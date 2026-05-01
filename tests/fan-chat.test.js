@@ -1,13 +1,14 @@
-const mockAnthropicInstance = {
-  messages: {
-    create: jest.fn().mockResolvedValue({
-      content: [{ type: 'text', text: 'Hello! I am Allyson Glado' }],
-    }),
-  },
+// Mock Anthropic SDK BEFOREANYTHING else
+const mockAnthropicMessages = {
+  create: jest.fn().mockResolvedValue({
+    content: [{ type: 'text', text: 'Hello! I am Allyson Glado' }],
+  }),
 };
 
 jest.mock('@anthropic-ai/sdk', () => {
-  return jest.fn().mockImplementation(() => mockAnthropicInstance);
+  return jest.fn().mockImplementation(() => ({
+    messages: mockAnthropicMessages,
+  }));
 });
 
 // Set environment variables before import
@@ -15,7 +16,10 @@ process.env.ANTHROPIC_API_KEY = 'test-anthropic-key';
 process.env.BREVO_API_KEY = 'test-brevo-key';
 process.env.ARTIST_NAME = 'Allyson Glado';
 
-// Now import handler (after mocking)
+// Mock global fetch
+global.fetch = jest.fn();
+
+// Now import handler AFTER mocking
 const handler = require('../netlify/functions/fan-chat');
 
 describe('Fan Chat API', () => {
@@ -48,10 +52,12 @@ describe('Fan Chat API', () => {
     if (global.rateLimitStore) {
       global.rateLimitStore.clear();
     }
-    global.fetch = jest.fn();
-    global.fetch.mockClear();
-    jest.clearAllMocks();
-    mockAnthropicInstance.messages.create.mockClear();
+    // Clear Anthropic mock
+    mockAnthropicMessages.create.mockClear();
+    // Only clear fetch mock if it's a jest mock function
+    if (global.fetch && typeof global.fetch.mockClear === 'function') {
+      global.fetch.mockClear();
+    }
   });
 
   describe('CORS handling', () => {
@@ -235,7 +241,7 @@ describe('Fan Chat API', () => {
     });
 
     it('should return 500 when Anthropic API throws', async () => {
-      mockAnthropicInstance.messages.create.mockRejectedValueOnce(new Error('API down'));
+      mockAnthropicMessages.create.mockRejectedValueOnce(new Error('API down'));
       const event = mockEvent();
       const result = await handler.handler(event);
       expect(result.statusCode).toBe(500);
@@ -290,7 +296,7 @@ describe('Fan Chat API', () => {
 
   describe('Non-text Anthropic response', () => {
     it('should handle non-text content block gracefully', async () => {
-      mockAnthropicInstance.messages.create.mockResolvedValueOnce({
+      mockAnthropicMessages.create.mockResolvedValueOnce({
         content: [{ type: 'image', source: { type: 'base64', media_type: 'image/png', data: '...' } }],
       });
       const event = mockEvent();

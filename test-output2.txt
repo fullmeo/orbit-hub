@@ -1,0 +1,735 @@
+﻿
+> orbit-hub@1.0.0 test
+> jest
+
+node.exe : FAIL tests/payments-status.test.js
+Au caractère C:\Program Files\nodejs\npm.ps1:29 : 3
++   & $NODE_EXE $NPM_CLI_JS $args
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (FAIL tests/payments-status.test.js:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  ÔùÅ Console
+
+    console.log
+      [Audit] PAYMENT_COMPLETED
+
+      at logAuditTrail (backend/services/payments-status.js:122:11)
+
+  ÔùÅ Payment Status Service ÔÇ║ Status Retrieval ÔÇ║ should return completed status when Circle confirms
+
+    TypeError: Cannot read properties of undefined (reading 'value')
+
+    [0m [90m 57 |[39m       [90m// Mock DB update to change status[39m
+     [90m 58 |[39m       db[33m.[39mpending_payments[33m.[39mfindById[33m.[39mmockResolvedValueOnce({
+    [31m[1m>[22m[39m[90m 59 |[39m         [33m...[39mdb[33m.[39mpending_payments[33m.[39mfindById[33m.[39
+mmock[33m.[39mresults[[35m0[39m][33m.[39mvalue[33m,[39m
+     [90m    |[39m                                                         [31m[1m^[22m[39m
+     [90m 60 |[39m         status[33m:[39m [32m'completed'[39m[33m,[39m
+     [90m 61 |[39m         transaction_hash[33m:[39m [32m'0xabc123'[39m[33m,[39m
+     [90m 62 |[39m         completed_at[33m:[39m [36mnew[39m 
+[33mDate[39m()[33m.[39mtoISOString()[33m,[39m[0m
+
+      at Object.<anonymous> (tests/payments-status.test.js:59:57)
+
+  ÔùÅ Payment Status Service ÔÇ║ Authorization ÔÇ║ should reject unauthorized agent
+
+    TypeError: Cannot read properties of undefined (reading 'value')
+
+    [0m [90m 92 |[39m     it([32m'should reject unauthorized agent'[39m[33m,[39m [36masync[39m () 
+[33m=>[39m {
+     [90m 93 |[39m       db[33m.[39mpending_payments[33m.[39mfindById[33m.[39mmockResolvedValueOnce({
+    [31m[1m>[22m[39m[90m 94 |[39m         [33m...[39mdb[33m.[39mpending_payments[33m.[39mfindById[33m.[39
+mmock[33m.[39mresults[[35m0[39m][33m.[39mvalue[33m,[39m
+     [90m    |[39m                                                         [31m[1m^[22m[39m
+     [90m 95 |[39m         agent_id[33m:[39m [32m'different_agent'[39m[33m,[39m
+     [90m 96 |[39m       })[33m;[39m
+     [90m 97 |[39m[0m
+
+      at Object.<anonymous> (tests/payments-status.test.js:94:57)
+
+  ÔùÅ Payment Status Service ÔÇ║ Audit Logging ÔÇ║ should insert into agent_query_log on completion
+
+    TypeError: Cannot read properties of undefined (reading 'value')
+
+    [0m [90m 117 |[39m       [90m// After completion, status changes[39m
+     [90m 118 |[39m       db[33m.[39mpending_payments[33m.[39mfindById[33m.[39mmockResolvedValueOnce({
+    [31m[1m>[22m[39m[90m 119 |[39m         [33m...[39mdb[33m.[39mpending_payments[33m.[39mfindById[33m.[3
+9mmock[33m.[39mresults[[35m0[39m][33m.[39mvalue[33m,[39m
+     [90m     |[39m                                                         [31m[1m^[22m[39m
+     [90m 120 |[39m         status[33m:[39m [32m'completed'[39m[33m,[39m
+     [90m 121 |[39m         transaction_hash[33m:[39m [32m'0x789'[39m[33m,[39m
+     [90m 122 |[39m         completed_at[33m:[39m [36mnew[39m 
+[33mDate[39m()[33m.[39mtoISOString()[33m,[39m[0m
+
+      at Object.<anonymous> (tests/payments-status.test.js:119:57)
+
+  ÔùÅ Payment Status Service ÔÇ║ Error Handling ÔÇ║ should handle Circle API errors gracefully
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "pending"
+    Received: "completed"
+
+    [0m [90m 141 |[39m
+     [90m 142 |[39m       [90m// Should return current DB status[39m
+    [31m[1m>[22m[39m[90m 143 |[39m       
+expect(result[33m.[39mstatus)[33m.[39mtoBe([32m'pending'[39m)[33m;[39m
+     [90m     |[39m                             [31m[1m^[22m[39m
+     [90m 144 |[39m     })[33m;[39m
+     [90m 145 |[39m   })[33m;[39m
+     [90m 146 |[39m })[33m;[39m[0m
+
+      at Object.<anonymous> (tests/payments-status.test.js:143:29)
+
+FAIL tests/payments-status-api.test.js
+  ÔùÅ GET /orbit/payments/:paymentId/status ÔÇ║ Status Retrieval ÔÇ║ should return payment status
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 200
+    Received: 401
+
+    [0m [90m 49 |[39m       [36mconst[39m result [33m=[39m [36mawait[39m 
+handler[33m.[39mhandler(event)[33m;[39m
+     [90m 50 |[39m
+    [31m[1m>[22m[39m[90m 51 |[39m       
+expect(result[33m.[39mstatusCode)[33m.[39mtoBe([35m200[39m)[33m;[39m
+     [90m    |[39m                                 [31m[1m^[22m[39m
+     [90m 52 |[39m       [36mconst[39m data [33m=[39m 
+[33mJSON[39m[33m.[39mparse(result[33m.[39mbody)[33m;[39m
+     [90m 53 |[39m       expect(data[33m.[39mpaymentId)[33m.[39mtoBe([32m'payment_123'[39m)[33m;[39m
+     [90m 54 |[39m       expect(data[33m.[39mstatus)[33m.[39mtoBe([32m'pending'[39m)[33m;[39m[0m
+
+      at Object.<anonymous> (tests/payments-status-api.test.js:51:33)
+
+  ÔùÅ GET /orbit/payments/:paymentId/status ÔÇ║ Status Retrieval ÔÇ║ should handle completed payment with transaction 
+hash
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 200
+    Received: 401
+
+    [0m [90m 71 |[39m       [36mconst[39m result [33m=[39m [36mawait[39m 
+handler[33m.[39mhandler(event)[33m;[39m
+     [90m 72 |[39m
+    [31m[1m>[22m[39m[90m 73 |[39m       
+expect(result[33m.[39mstatusCode)[33m.[39mtoBe([35m200[39m)[33m;[39m
+     [90m    |[39m                                 [31m[1m^[22m[39m
+     [90m 74 |[39m       [36mconst[39m data [33m=[39m 
+[33mJSON[39m[33m.[39mparse(result[33m.[39mbody)[33m;[39m
+     [90m 75 |[39m       expect(data[33m.[39mtransactionHash)[33m.[39mtoBe([32m'0xabc'[39m)[33m;[39m
+     [90m 76 |[39m     })[33m;[39m[0m
+
+      at Object.<anonymous> (tests/payments-status-api.test.js:73:33)
+
+  ÔùÅ GET /orbit/payments/:paymentId/status ÔÇ║ Authorization ÔÇ║ should reject if agentId does not match
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 403
+    Received: 401
+
+    [0m [90m 85 |[39m       [36mconst[39m result [33m=[39m [36mawait[39m 
+handler[33m.[39mhandler(event)[33m;[39m
+     [90m 86 |[39m
+    [31m[1m>[22m[39m[90m 87 |[39m       
+expect(result[33m.[39mstatusCode)[33m.[39mtoBe([35m403[39m)[33m;[39m
+     [90m    |[39m                                 [31m[1m^[22m[39m
+     [90m 88 |[39m     })[33m;[39m
+     [90m 89 |[39m
+     [90m 90 |[39m     it([32m'should return 404 for non-existent payment'[39m[33m,[39m [36masync[39m () 
+[33m=>[39m {[0m
+
+      at Object.<anonymous> (tests/payments-status-api.test.js:87:33)
+
+  ÔùÅ GET /orbit/payments/:paymentId/status ÔÇ║ Authorization ÔÇ║ should return 404 for non-existent payment
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 404
+    Received: 401
+
+    [0m [90m  95 |[39m       [36mconst[39m result [33m=[39m [36mawait[39m 
+handler[33m.[39mhandler(event)[33m;[39m
+     [90m  96 |[39m
+    [31m[1m>[22m[39m[90m  97 |[39m       
+expect(result[33m.[39mstatusCode)[33m.[39mtoBe([35m404[39m)[33m;[39m
+     [90m     |[39m                                 [31m[1m^[22m[39m
+     [90m  98 |[39m     })[33m;[39m
+     [90m  99 |[39m   })[33m;[39m
+     [90m 100 |[39m[0m
+
+      at Object.<anonymous> (tests/payments-status-api.test.js:97:33)
+
+  ÔùÅ GET /orbit/payments/:paymentId/status ÔÇ║ Cache Headers ÔÇ║ should include no-cache header
+
+    TypeError: Cannot read properties of undefined (reading 'Cache-Control')
+
+    [0m [90m 104 |[39m       [36mconst[39m result [33m=[39m [36mawait[39m 
+handler[33m.[39mhandler(event)[33m;[39m
+     [90m 105 |[39m
+    [31m[1m>[22m[39m[90m 106 |[39m       
+expect(result[33m.[39mheaders[[32m'Cache-Control'[39m])[33m.[39mtoBe([32m'no-cache'[39m)[33m;[39m
+     [90m     |[39m                            [31m[1m^[22m[39m
+     [90m 107 |[39m     })[33m;[39m
+     [90m 108 |[39m   })[33m;[39m
+     [90m 109 |[39m[0m
+
+      at Object.<anonymous> (tests/payments-status-api.test.js:106:28)
+
+FAIL tests/payments-create.test.js
+  ÔùÅ POST /orbit/payments/create ÔÇ║ Input Validation ÔÇ║ should reject missing required fields
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 400
+    Received: 401
+
+    [0m [90m 73 |[39m       [36mconst[39m event [33m=[39m mockEvent({ body[33m:[39m 
+[33mJSON[39m[33m.[39mstringify({ amount[33m:[39m [35m5[39m }) })[33m;[39m [90m// missing artistId[39m
+     [90m 74 |[39m       [36mconst[39m result [33m=[39m [36mawait[39m 
+handler[33m.[39mhandler(event)[33m;[39m
+    [31m[1m>[22m[39m[90m 75 |[39m       
+expect(result[33m.[39mstatusCode)[33m.[39mtoBe([35m400[39m)[33m;[39m
+     [90m    |[39m                                 [31m[1m^[22m[39m
+     [90m 76 |[39m     })[33m;[39m
+     [90m 77 |[39m
+     [90m 78 |[39m     it([32m'should reject invalid currency'[39m[33m,[39m [36masync[39m () [33m=>[39m {[0m
+
+      at Object.<anonymous> (tests/payments-create.test.js:75:33)
+
+  ÔùÅ POST /orbit/payments/create ÔÇ║ Input Validation ÔÇ║ should reject invalid currency
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 400
+    Received: 401
+
+    [0m [90m 81 |[39m       })[33m;[39m
+     [90m 82 |[39m       [36mconst[39m result [33m=[39m [36mawait[39m 
+handler[33m.[39mhandler(event)[33m;[39m
+    [31m[1m>[22m[39m[90m 83 |[39m       
+expect(result[33m.[39mstatusCode)[33m.[39mtoBe([35m400[39m)[33m;[39m
+     [90m    |[39m                                 [31m[1m^[22m[39m
+     [90m 84 |[39m     })[33m;[39m
+     [90m 85 |[39m
+     [90m 86 |[39m     it([32m'should reject invalid amount range'[39m[33m,[39m [36masync[39m () [33m=>[39m 
+{[0m
+
+      at Object.<anonymous> (tests/payments-create.test.js:83:33)
+
+  ÔùÅ POST /orbit/payments/create ÔÇ║ Input Validation ÔÇ║ should reject invalid amount range
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 400
+    Received: 401
+
+    [0m [90m 89 |[39m       })[33m;[39m
+     [90m 90 |[39m       [36mconst[39m result [33m=[39m [36mawait[39m 
+handler[33m.[39mhandler(event)[33m;[39m
+    [31m[1m>[22m[39m[90m 91 |[39m       
+expect(result[33m.[39mstatusCode)[33m.[39mtoBe([35m400[39m)[33m;[39m
+     [90m    |[39m                                 [31m[1m^[22m[39m
+     [90m 92 |[39m     })[33m;[39m
+     [90m 93 |[39m   })[33m;[39m
+     [90m 94 |[39m[0m
+
+      at Object.<anonymous> (tests/payments-create.test.js:91:33)
+
+  ÔùÅ POST /orbit/payments/create ÔÇ║ Payment Creation ÔÇ║ should successfully create EUR payment
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 201
+    Received: 401
+
+    [0m [90m  98 |[39m       [36mconst[39m result [33m=[39m [36mawait[39m 
+handler[33m.[39mhandler(event)[33m;[39m
+     [90m  99 |[39m
+    [31m[1m>[22m[39m[90m 100 |[39m       
+expect(result[33m.[39mstatusCode)[33m.[39mtoBe([35m201[39m)[33m;[39m
+     [90m     |[39m                                 [31m[1m^[22m[39m
+     [90m 101 |[39m       [36mconst[39m data [33m=[39m 
+[33mJSON[39m[33m.[39mparse(result[33m.[39mbody)[33m;[39m
+     [90m 102 |[39m       expect(data[33m.[39mpaymentId)[33m.[39mtoBeDefined()[33m;[39m
+     [90m 103 |[39m       expect(data[33m.[39mamountUSDC)[33m.[39mtoBe([35m5.5[39m)[33m;[39m[0m
+
+      at Object.<anonymous> (tests/payments-create.test.js:100:33)
+
+  ÔùÅ POST /orbit/payments/create ÔÇ║ Payment Creation ÔÇ║ should create USDC payment without conversion
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 201
+    Received: 401
+
+    [0m [90m 119 |[39m       [36mconst[39m result [33m=[39m [36mawait[39m 
+handler[33m.[39mhandler(event)[33m;[39m
+     [90m 120 |[39m
+    [31m[1m>[22m[39m[90m 121 |[39m       
+expect(result[33m.[39mstatusCode)[33m.[39mtoBe([35m201[39m)[33m;[39m
+     [90m     |[39m                                 [31m[1m^[22m[39m
+     [90m 122 |[39m       expect(convertEURtoUSDC)[33m.[39mnot[33m.[39mtoHaveBeenCalled()[33m;[39m
+     [90m 123 |[39m     })[33m;[39m
+     [90m 124 |[39m   })[33m;[39m[0m
+
+      at Object.<anonymous> (tests/payments-create.test.js:121:33)
+
+  ÔùÅ POST /orbit/payments/create ÔÇ║ Error Responses ÔÇ║ should return 500 for server errors
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 500
+    Received: 401
+
+    [0m [90m 132 |[39m       [36mconst[39m result [33m=[39m [36mawait[39m 
+handler[33m.[39mhandler(event)[33m;[39m
+     [90m 133 |[39m
+    [31m[1m>[22m[39m[90m 134 |[39m       
+expect(result[33m.[39mstatusCode)[33m.[39mtoBe([35m500[39m)[33m;[39m
+     [90m     |[39m                                 [31m[1m^[22m[39m
+     [90m 135 |[39m     })[33m;[39m
+     [90m 136 |[39m   })[33m;[39m
+     [90m 137 |[39m[0m
+
+      at Object.<anonymous> (tests/payments-create.test.js:134:33)
+
+FAIL tests/circle-webhook.test.js (7.662 s)
+  ÔùÅ Console
+
+    console.log
+      [2026-04-28T08:31:45.251Z] Circle Webhook - OPTIONS
+
+      at Object.exports.handler (netlify/functions/circle-webhook.js:72:11)
+
+    console.log
+      [2026-04-28T08:31:45.293Z] Circle Webhook - GET
+
+      at Object.exports.handler (netlify/functions/circle-webhook.js:72:11)
+
+    console.log
+      [2026-04-28T08:31:45.308Z] Circle Webhook - POST
+
+      at Object.exports.handler (netlify/functions/circle-webhook.js:72:11)
+
+    console.warn
+      [Circle Webhook] No signature key configured, accepting all webhooks
+
+    [0m [90m 18 |[39m
+     [90m 19 |[39m   [36mif[39m ([33m![39mcircleSigKey) {
+    [31m[1m>[22m[39m[90m 20 |[39m     console[33m.[39mwarn([32m'[Circle Webhook] No signature key configured, 
+accepting all webhooks'[39m)[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 21 |[39m     [36mreturn[39m [36mtrue[39m[33m;[39m
+     [90m 22 |[39m   }
+     [90m 23 |[39m[0m
+
+      at verifyCircleSignature (netlify/functions/circle-webhook.js:20:13)
+      at Object.exports.handler (netlify/functions/circle-webhook.js:86:10)
+      at Object.<anonymous> (tests/circle-webhook.test.js:62:36)
+
+    console.log
+      [Circle] Payment confirmed: pi_123 - 5 USDC from TestFan
+
+      at Object.exports.handler (netlify/functions/circle-webhook.js:114:15)
+
+    console.error
+      [Claude] Error generating message: 401 {"type":"error","error":{"type":"authentication_error","message":"invalid 
+x-api-key"},"request_id":"req_011CaVriobeobXCcpErjm3gn"}
+
+    [0m [90m 64 |[39m     [36mreturn[39m thankYouText[33m;[39m
+     [90m 65 |[39m   } [36mcatch[39m (error) {
+    [31m[1m>[22m[39m[90m 66 |[39m     console[33m.[39merror([32m'[Claude] Error generating 
+message:'[39m[33m,[39m error[33m.[39mmessage)[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 67 |[39m     [36mreturn[39m [36mnull[39m[33m;[39m
+     [90m 68 |[39m   }
+     [90m 69 |[39m }[0m
+
+      at generateThankYouMessage (netlify/functions/circle-webhook.js:66:13)
+      at Object.exports.handler (netlify/functions/circle-webhook.js:117:31)
+      at Object.<anonymous> (tests/circle-webhook.test.js:62:22)
+
+    console.log
+      [2026-04-28T08:31:46.726Z] Circle Webhook - POST
+
+      at Object.exports.handler (netlify/functions/circle-webhook.js:72:11)
+
+    console.log
+      [Circle] Payment confirmed: pi_123 - 5 USDC from TestFan
+
+      at Object.exports.handler (netlify/functions/circle-webhook.js:114:15)
+
+    console.error
+      [Claude] Error generating message: 401 {"type":"error","error":{"type":"authentication_error","message":"invalid 
+x-api-key"},"request_id":"req_011CaVripXiHiD6m3mb2wpWD"}
+
+    [0m [90m 64 |[39m     [36mreturn[39m thankYouText[33m;[39m
+     [90m 65 |[39m   } [36mcatch[39m (error) {
+    [31m[1m>[22m[39m[90m 66 |[39m     console[33m.[39merror([32m'[Claude] Error generating 
+message:'[39m[33m,[39m error[33m.[39mmessage)[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 67 |[39m     [36mreturn[39m [36mnull[39m[33m;[39m
+     [90m 68 |[39m   }
+     [90m 69 |[39m }[0m
+
+      at generateThankYouMessage (netlify/functions/circle-webhook.js:66:13)
+      at Object.exports.handler (netlify/functions/circle-webhook.js:117:31)
+      at Object.<anonymous> (tests/circle-webhook.test.js:70:22)
+
+    console.log
+      [2026-04-28T08:31:46.926Z] Circle Webhook - POST
+
+      at Object.exports.handler (netlify/functions/circle-webhook.js:72:11)
+
+    console.warn
+      [Circle Webhook] No signature key configured, accepting all webhooks
+
+    [0m [90m 18 |[39m
+     [90m 19 |[39m   [36mif[39m ([33m![39mcircleSigKey) {
+    [31m[1m>[22m[39m[90m 20 |[39m     console[33m.[39mwarn([32m'[Circle Webhook] No signature key configured, 
+accepting all webhooks'[39m)[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 21 |[39m     [36mreturn[39m [36mtrue[39m[33m;[39m
+     [90m 22 |[39m   }
+     [90m 23 |[39m[0m
+
+      at verifyCircleSignature (netlify/functions/circle-webhook.js:20:13)
+      at Object.exports.handler (netlify/functions/circle-webhook.js:86:10)
+      at Object.<anonymous> (tests/circle-webhook.test.js:79:36)
+
+    console.log
+      [2026-04-28T08:31:46.933Z] Circle Webhook - POST
+
+      at Object.exports.handler (netlify/functions/circle-webhook.js:72:11)
+
+    console.warn
+      [Circle Webhook] No signature key configured, accepting all webhooks
+
+    [0m [90m 18 |[39m
+     [90m 19 |[39m   [36mif[39m ([33m![39mcircleSigKey) {
+    [31m[1m>[22m[39m[90m 20 |[39m     console[33m.[39mwarn([32m'[Circle Webhook] No signature key configured, 
+accepting all webhooks'[39m)[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 21 |[39m     [36mreturn[39m [36mtrue[39m[33m;[39m
+     [90m 22 |[39m   }
+     [90m 23 |[39m[0m
+
+      at verifyCircleSignature (netlify/functions/circle-webhook.js:20:13)
+      at Object.exports.handler (netlify/functions/circle-webhook.js:86:10)
+      at Object.<anonymous> (tests/circle-webhook.test.js:87:36)
+
+    console.log
+      [Circle] Payment confirmed: pi_123 - 5 USDC from TestFan
+
+      at Object.exports.handler (netlify/functions/circle-webhook.js:114:15)
+
+    console.error
+      [Claude] Error generating message: 401 {"type":"error","error":{"type":"authentication_error","message":"invalid 
+x-api-key"},"request_id":"req_011CaVriqBebfskFJX5g2ijm"}
+
+    [0m [90m 64 |[39m     [36mreturn[39m thankYouText[33m;[39m
+     [90m 65 |[39m   } [36mcatch[39m (error) {
+    [31m[1m>[22m[39m[90m 66 |[39m     console[33m.[39merror([32m'[Claude] Error generating 
+message:'[39m[33m,[39m error[33m.[39mmessage)[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 67 |[39m     [36mreturn[39m [36mnull[39m[33m;[39m
+     [90m 68 |[39m   }
+     [90m 69 |[39m }[0m
+
+      at generateThankYouMessage (netlify/functions/circle-webhook.js:66:13)
+      at Object.exports.handler (netlify/functions/circle-webhook.js:117:31)
+      at Object.<anonymous> (tests/circle-webhook.test.js:87:22)
+
+    console.log
+      [2026-04-28T08:31:47.074Z] Circle Webhook - POST
+
+      at Object.exports.handler (netlify/functions/circle-webhook.js:72:11)
+
+    console.warn
+      [Circle Webhook] No signature key configured, accepting all webhooks
+
+    [0m [90m 18 |[39m
+     [90m 19 |[39m   [36mif[39m ([33m![39mcircleSigKey) {
+    [31m[1m>[22m[39m[90m 20 |[39m     console[33m.[39mwarn([32m'[Circle Webhook] No signature key configured, 
+accepting all webhooks'[39m)[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 21 |[39m     [36mreturn[39m [36mtrue[39m[33m;[39m
+     [90m 22 |[39m   }
+     [90m 23 |[39m[0m
+
+      at verifyCircleSignature (netlify/functions/circle-webhook.js:20:13)
+      at Object.exports.handler (netlify/functions/circle-webhook.js:86:10)
+      at Object.<anonymous> (tests/circle-webhook.test.js:106:36)
+
+    console.log
+      [Circle] Payment confirmed: pi_123 - 5 USDC from TestFan
+
+      at Object.exports.handler (netlify/functions/circle-webhook.js:114:15)
+
+    console.error
+      [Claude] API key not set
+
+    [0m [90m 29 |[39m   [36mconst[39m apiKey [33m=[39m 
+process[33m.[39menv[33m.[39m[33mANTHROPIC_API_KEY[39m[33m;[39m
+     [90m 30 |[39m   [36mif[39m ([33m![39mapiKey) {
+    [31m[1m>[22m[39m[90m 31 |[39m     console[33m.[39merror([32m'[Claude] API key not set'[39m)[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 32 |[39m     [36mreturn[39m [36mnull[39m[33m;[39m
+     [90m 33 |[39m   }
+     [90m 34 |[39m[0m
+
+      at generateThankYouMessage (netlify/functions/circle-webhook.js:31:13)
+      at Object.exports.handler (netlify/functions/circle-webhook.js:117:37)
+      at Object.<anonymous> (tests/circle-webhook.test.js:106:36)
+
+    console.log
+      [2026-04-28T08:31:47.083Z] Circle Webhook - POST
+
+      at Object.exports.handler (netlify/functions/circle-webhook.js:72:11)
+
+    console.warn
+      [Circle Webhook] No signature key configured, accepting all webhooks
+
+    [0m [90m 18 |[39m
+     [90m 19 |[39m   [36mif[39m ([33m![39mcircleSigKey) {
+    [31m[1m>[22m[39m[90m 20 |[39m     console[33m.[39mwarn([32m'[Circle Webhook] No signature key configured, 
+accepting all webhooks'[39m)[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 21 |[39m     [36mreturn[39m [36mtrue[39m[33m;[39m
+     [90m 22 |[39m   }
+     [90m 23 |[39m[0m
+
+      at verifyCircleSignature (netlify/functions/circle-webhook.js:20:13)
+      at Object.exports.handler (netlify/functions/circle-webhook.js:86:10)
+      at Object.<anonymous> (tests/circle-webhook.test.js:120:36)
+
+    console.log
+      [Circle] Payment confirmed: pi_999 - 10 USDC from Fan
+
+      at Object.exports.handler (netlify/functions/circle-webhook.js:114:15)
+
+    console.error
+      [Claude] Error generating message: 401 {"type":"error","error":{"type":"authentication_error","message":"invalid 
+x-api-key"},"request_id":"req_011CaVriqt55LoiXajRREmhH"}
+
+    [0m [90m 64 |[39m     [36mreturn[39m thankYouText[33m;[39m
+     [90m 65 |[39m   } [36mcatch[39m (error) {
+    [31m[1m>[22m[39m[90m 66 |[39m     console[33m.[39merror([32m'[Claude] Error generating 
+message:'[39m[33m,[39m error[33m.[39mmessage)[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 67 |[39m     [36mreturn[39m [36mnull[39m[33m;[39m
+     [90m 68 |[39m   }
+     [90m 69 |[39m }[0m
+
+      at generateThankYouMessage (netlify/functions/circle-webhook.js:66:13)
+      at Object.exports.handler (netlify/functions/circle-webhook.js:117:31)
+      at Object.<anonymous> (tests/circle-webhook.test.js:120:22)
+
+    console.log
+      [2026-04-28T08:31:47.225Z] Circle Webhook - POST
+
+      at Object.exports.handler (netlify/functions/circle-webhook.js:72:11)
+
+    console.warn
+      [Circle Webhook] No signature key configured, accepting all webhooks
+
+    [0m [90m 18 |[39m
+     [90m 19 |[39m   [36mif[39m ([33m![39mcircleSigKey) {
+    [31m[1m>[22m[39m[90m 20 |[39m     console[33m.[39mwarn([32m'[Circle Webhook] No signature key configured, 
+accepting all webhooks'[39m)[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 21 |[39m     [36mreturn[39m [36mtrue[39m[33m;[39m
+     [90m 22 |[39m   }
+     [90m 23 |[39m[0m
+
+      at verifyCircleSignature (netlify/functions/circle-webhook.js:20:13)
+      at Object.exports.handler (netlify/functions/circle-webhook.js:86:10)
+      at Object.<anonymous> (tests/circle-webhook.test.js:130:36)
+
+    console.log
+      [Circle] Payment confirmed: pi_123 - 5 USDC from TestFan
+
+      at Object.exports.handler (netlify/functions/circle-webhook.js:114:15)
+
+    console.error
+      [Claude] Error generating message: 401 {"type":"error","error":{"type":"authentication_error","message":"invalid 
+x-api-key"},"request_id":"req_011CaVrirRKSaTWFm8Eay7Hb"}
+
+    [0m [90m 64 |[39m     [36mreturn[39m thankYouText[33m;[39m
+     [90m 65 |[39m   } [36mcatch[39m (error) {
+    [31m[1m>[22m[39m[90m 66 |[39m     console[33m.[39merror([32m'[Claude] Error generating 
+message:'[39m[33m,[39m error[33m.[39mmessage)[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 67 |[39m     [36mreturn[39m [36mnull[39m[33m;[39m
+     [90m 68 |[39m   }
+     [90m 69 |[39m }[0m
+
+      at generateThankYouMessage (netlify/functions/circle-webhook.js:66:13)
+      at Object.exports.handler (netlify/functions/circle-webhook.js:117:31)
+      at Object.<anonymous> (tests/circle-webhook.test.js:130:22)
+
+    console.log
+      [2026-04-28T08:31:47.349Z] Circle Webhook - POST
+
+      at Object.exports.handler (netlify/functions/circle-webhook.js:72:11)
+
+    console.warn
+      [Circle Webhook] No signature key configured, accepting all webhooks
+
+    [0m [90m 18 |[39m
+     [90m 19 |[39m   [36mif[39m ([33m![39mcircleSigKey) {
+    [31m[1m>[22m[39m[90m 20 |[39m     console[33m.[39mwarn([32m'[Circle Webhook] No signature key configured, 
+accepting all webhooks'[39m)[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 21 |[39m     [36mreturn[39m [36mtrue[39m[33m;[39m
+     [90m 22 |[39m   }
+     [90m 23 |[39m[0m
+
+      at verifyCircleSignature (netlify/functions/circle-webhook.js:20:13)
+      at Object.exports.handler (netlify/functions/circle-webhook.js:86:10)
+      at Object.<anonymous> (tests/circle-webhook.test.js:146:36)
+
+    console.log
+      [Circle] Payment failed: pi_fail
+
+      at Object.exports.handler (netlify/functions/circle-webhook.js:149:15)
+
+    console.log
+      [2026-04-28T08:31:47.355Z] Circle Webhook - POST
+
+      at Object.exports.handler (netlify/functions/circle-webhook.js:72:11)
+
+    console.warn
+      [Circle Webhook] No signature key configured, accepting all webhooks
+
+    [0m [90m 18 |[39m
+     [90m 19 |[39m   [36mif[39m ([33m![39mcircleSigKey) {
+    [31m[1m>[22m[39m[90m 20 |[39m     console[33m.[39mwarn([32m'[Circle Webhook] No signature key configured, 
+accepting all webhooks'[39m)[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 21 |[39m     [36mreturn[39m [36mtrue[39m[33m;[39m
+     [90m 22 |[39m   }
+     [90m 23 |[39m[0m
+
+      at verifyCircleSignature (netlify/functions/circle-webhook.js:20:13)
+      at Object.exports.handler (netlify/functions/circle-webhook.js:86:10)
+      at Object.<anonymous> (tests/circle-webhook.test.js:162:36)
+
+    console.log
+      [Circle] Unknown notification type: unknown.type
+
+      at Object.exports.handler (netlify/functions/circle-webhook.js:157:13)
+
+    console.log
+      [2026-04-28T08:31:47.363Z] Circle Webhook - POST
+
+      at Object.exports.handler (netlify/functions/circle-webhook.js:72:11)
+
+    console.warn
+      [Circle Webhook] No signature key configured, accepting all webhooks
+
+    [0m [90m 18 |[39m
+     [90m 19 |[39m   [36mif[39m ([33m![39mcircleSigKey) {
+    [31m[1m>[22m[39m[90m 20 |[39m     console[33m.[39mwarn([32m'[Circle Webhook] No signature key configured, 
+accepting all webhooks'[39m)[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 21 |[39m     [36mreturn[39m [36mtrue[39m[33m;[39m
+     [90m 22 |[39m   }
+     [90m 23 |[39m[0m
+
+      at verifyCircleSignature (netlify/functions/circle-webhook.js:20:13)
+      at Object.exports.handler (netlify/functions/circle-webhook.js:86:10)
+      at Object.<anonymous> (tests/circle-webhook.test.js:188:21)
+
+    console.log
+      [Circle] Payment confirmed: pi_new - 5 USDC from NewFan
+
+      at Object.exports.handler (netlify/functions/circle-webhook.js:114:15)
+
+    console.error
+      [Claude] Error generating message: 401 {"type":"error","error":{"type":"authentication_error","message":"invalid 
+x-api-key"},"request_id":"req_011CaVris7F85JjJrehFkCHC"}
+
+    [0m [90m 64 |[39m     [36mreturn[39m thankYouText[33m;[39m
+     [90m 65 |[39m   } [36mcatch[39m (error) {
+    [31m[1m>[22m[39m[90m 66 |[39m     console[33m.[39merror([32m'[Claude] Error generating 
+message:'[39m[33m,[39m error[33m.[39mmessage)[33m;[39m
+     [90m    |[39m             [31m[1m^[22m[39m
+     [90m 67 |[39m     [36mreturn[39m [36mnull[39m[33m;[39m
+     [90m 68 |[39m   }
+     [90m 69 |[39m }[0m
+
+      at generateThankYouMessage (netlify/functions/circle-webhook.js:66:13)
+      at Object.exports.handler (netlify/functions/circle-webhook.js:117:31)
+      at Object.<anonymous> (tests/circle-webhook.test.js:188:7)
+
+  ÔùÅ Circle Webhook Handler ÔÇ║ Payment confirmation ÔÇ║ should process confirmed payment and generate thank you 
+message
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+    [0m [90m 91 |[39m       expect(data[33m.[39msuccess)[33m.[39mtoBe([36mtrue[39m)[33m;[39m
+     [90m 92 |[39m       expect(data[33m.[39mpaymentId)[33m.[39mtoBe([32m'pi_123'[39m)[33m;[39m
+    [31m[1m>[22m[39m[90m 93 |[39m       
+expect(data[33m.[39mmessageGenerated)[33m.[39mtoBe([36mtrue[39m)[33m;[39m
+     [90m    |[39m                                     [31m[1m^[22m[39m
+     [90m 94 |[39m
+     [90m 95 |[39m       [90m// Verify message stored[39m
+     [90m 96 |[39m       expect(handler[33m.[39mthankYouMessages[33m.[39mhas([32m'pi_123'[39m))[33m.[39mtoBe(
+[36mtrue[39m)[33m;[39m[0m
+
+      at Object.<anonymous> (tests/circle-webhook.test.js:93:37)
+
+  ÔùÅ Circle Webhook Handler ÔÇ║ Payment confirmation ÔÇ║ should handle missing metadata gracefully
+
+    TypeError: Cannot read properties of undefined (reading 'fanName')
+
+    [0m [90m 121 |[39m       expect(result[33m.[39mstatusCode)[33m.[39mtoBe([35m200[39m)[33m;[39m
+     [90m 122 |[39m       [36mconst[39m stored [33m=[39m 
+handler[33m.[39mthankYouMessages[33m.[39m[36mget[39m([32m'pi_999'[39m)[33m;[39m
+    [31m[1m>[22m[39m[90m 123 |[39m       
+expect(stored[33m.[39mfanName)[33m.[39mtoBe([32m'Fan'[39m)[33m;[39m [90m// default[39m
+     [90m     |[39m                     [31m[1m^[22m[39m
+     [90m 124 |[39m     })[33m;[39m
+     [90m 125 |[39m
+     [90m 126 |[39m     it([32m'should handle Claude API failure gracefully'[39m[33m,[39m [36masync[39m () 
+[33m=>[39m {[0m
+
+      at Object.<anonymous> (tests/circle-webhook.test.js:123:21)
+
+  ÔùÅ Circle Webhook Handler ÔÇ║ Storage management ÔÇ║ should limit stored messages to 100
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: false
+    Received: true
+
+    [0m [90m 189 |[39m
+     [90m 190 |[39m       [90m// Should have evicted oldest entry to maintain max 100[39m
+    [31m[1m>[22m[39m[90m 191 |[39m       
+expect(handler[33m.[39mthankYouMessages[33m.[39mhas([32m'pi_0'[39m))[33m.[39mtoBe([36mfalse[39m)[33m;[39m
+     [90m     |[39m                                                    [31m[1m^[22m[39m
+     [90m 192 |[39m       
+expect(handler[33m.[39mthankYouMessages[33m.[39mhas([32m'pi_new'[39m))[33m.[39mtoBe([36mtrue[39m)[33m;[39m
+     [90m 193 |[39m       
+expect(handler[33m.[39mthankYouMessages[33m.[39msize)[33m.[39mtoBe([35m100[39m)[33m;[39m
+     [90m 194 |[39m     })[33m;[39m[0m
+
+      at Object.<anonymous> (tests/circle-webhook.test.js:191:52)
+
+A worker process has failed to exit gracefully and has been force exited. This is likely caused by tests leaking due 
+to improper teardown. Try running with --detectOpenHandles to find leaks. Active timers can also cause this, ensure 
+that .unref() was called on them.
+
+Test Suites: 4 failed, 7 passed, 11 total
+Tests:       18 failed, 120 passed, 138 total
+Snapshots:   0 total
+Time:        15.733 s
+Ran all test suites.
