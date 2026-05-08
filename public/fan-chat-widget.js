@@ -380,6 +380,11 @@
   document.addEventListener("DOMContentLoaded", () => {
     createWidget();
 
+    // Initialize tipping if available
+    if (window.initTipping) {
+      window.initTipping();
+    }
+
     const toggleBtn = document.getElementById("fan-chat-toggle");
     const closeBtn = document.getElementById("fan-chat-close");
     const chatWindow = document.getElementById("fan-chat-window");

@@ -1,186 +1,87 @@
 /**
- * Circle Payment Processing Function
- * Handles USDC payments and wallet management for Allyson
+ * MVP: Circle Payment Processing
+ * Simple demo version - mocks Circle API if key not available
  */
 
 exports.config = { provider: 'esbuild' };
 
-const CIRCLE_API_BASE = 'https://api.circle.com/v1';
-const USDC_TOKEN_ID = 'usdc'; // Circle's USDC identifier
+const USE_MOCK = !process.env.CIRCLE_API_KEY;
 
-async function circleRequest(endpoint, method = 'GET', body = null) {
+async function mockPaymentIntent(amount, email, name) {
+  console.log('[MOCK] Creating payment intent', { amount, email, name });
+  return {
+    clientToken: 'mock_token_' + Date.now(),
+    intentId: 'mock_intent_' + Math.random().toString(36).substr(2, 9),
+  };
+}
+
+async function realPaymentIntent(amount, email, name) {
   const apiKey = process.env.CIRCLE_API_KEY;
-  if (!apiKey) throw new Error('CIRCLE_API_KEY not set');
-
-  const options = {
-    method,
+  const response = await fetch('https://api.circle.com/v1/payments/intents', {
+    method: 'POST',
     headers: {
       'Authorization': `Bearer ${apiKey}`,
       'Content-Type': 'application/json',
     },
-  };
+    body: JSON.stringify({
+      idempotencyKey: `tip-${email}-${Date.now()}`,
+      amount: { amount: amount.toString(), currency: 'USD' },
+      paymentMethods: [{ type: 'card' }],
+      metadata: { fanEmail: email, fanName: name, type: 'tip' },
+    }),
+  });
 
-  if (body) options.body = JSON.stringify(body);
-
-  const response = await fetch(`${CIRCLE_API_BASE}${endpoint}`, options);
   const data = await response.json();
+  if (!response.ok) throw new Error(data.message || 'Payment API error');
 
-  if (!response.ok) {
-    console.error('[Circle API Error]', data);
-    throw new Error(data.message || `Circle API error: ${response.status}`);
-  }
-
-  return data;
-}
-
-async function ensureArtistWallet() {
-  try {
-    const walletId = process.env.CIRCLE_WALLET_ID;
-    if (walletId) {
-      console.log('[Wallet] Using existing wallet:', walletId);
-      return walletId;
-    }
-
-    console.log('[Wallet] Creating new artist wallet...');
-    const response = await circleRequest('/wallets', 'POST', {
-      idempotencyKey: `allyson-wallet-${Date.now()}`,
-      description: 'Allyson Glado - Artist Tips Wallet',
-      blockchains: ['MATIC', 'SOL', 'ETH'],
-    });
-
-    const newWalletId = response.data.walletId;
-    console.log('[Wallet] Created wallet:', newWalletId);
-
-    // Note: You'll need to set CIRCLE_WALLET_ID in Netlify after this
-    return newWalletId;
-  } catch (error) {
-    console.error('[Wallet Error]', error.message);
-    throw error;
-  }
-}
-
-async function getOrCreatePaymentIntent(amountUsd, fanEmail, fanName) {
-  try {
-    const response = await circleRequest('/payments/intents', 'POST', {
-      idempotencyKey: `payment-${fanEmail}-${Date.now()}`,
-      amount: {
-        amount: amountUsd.toString(),
-        currency: 'USD',
-      },
-      paymentMethods: [
-        {
-          type: 'ach',
-        },
-        {
-          type: 'card',
-        },
-        {
-          type: 'wire',
-        },
-      ],
-      metadata: {
-        fanEmail,
-        fanName,
-        type: 'tip',
-      },
-      verification: {
-        type: 'cvv',
-      },
-    });
-
-    return {
-      clientToken: response.data.clientToken,
-      intentId: response.data.id,
-    };
-  } catch (error) {
-    console.error('[Payment Intent Error]', error.message);
-    throw error;
-  }
+  return { clientToken: data.data.clientToken, intentId: data.data.id };
 }
 
 exports.handler = async (event) => {
-  console.log(`[${new Date().toISOString()}] Circle Payment Request`);
-
   if (event.httpMethod === 'OPTIONS') {
     return {
       statusCode: 200,
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type',
-      },
+      headers: { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'POST, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type' },
       body: '',
     };
   }
 
   try {
     if (event.httpMethod !== 'POST') {
-      return {
-        statusCode: 405,
-        body: JSON.stringify({ error: 'Method not allowed' }),
-      };
+      return { statusCode: 405, body: JSON.stringify({ error: 'Method not allowed' }) };
     }
 
-    let body = {};
-    if (event.body) {
-      body = JSON.parse(event.body);
-    }
-
-    const { amount, fanEmail, fanName, type } = body;
+    const { amount, fanEmail, fanName } = JSON.parse(event.body || '{}');
 
     if (!amount || !fanEmail || !fanName) {
-      return {
-        statusCode: 400,
-        body: JSON.stringify({
-          error: 'Missing required fields: amount, fanEmail, fanName',
-        }),
-      };
+      return { statusCode: 400, body: JSON.stringify({ error: 'Missing fields' }) };
     }
 
-    if (amount <= 0 || amount > 10000) {
-      return {
-        statusCode: 400,
-        body: JSON.stringify({
-          error: 'Amount must be between 0.01 and 10000 USD',
-        }),
-      };
+    console.log(`[Payment] Tip $${amount} from ${fanName} (${fanEmail})`);
+
+    let result;
+    if (USE_MOCK) {
+      result = await mockPaymentIntent(amount, fanEmail, fanName);
+    } else {
+      result = await realPaymentIntent(amount, fanEmail, fanName);
     }
-
-    // Ensure artist wallet exists
-    const walletId = await ensureArtistWallet();
-
-    // Create payment intent
-    const { clientToken, intentId } = await getOrCreatePaymentIntent(
-      amount,
-      fanEmail,
-      fanName
-    );
-
-    console.log('[Payment] Intent created:', intentId);
 
     return {
       statusCode: 200,
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json' },
       body: JSON.stringify({
         success: true,
-        clientToken,
-        intentId,
-        walletId,
-        message: `Payment intent created for $${amount} USD`,
+        ...result,
+        isMocked: USE_MOCK,
+        message: `Payment ready for $${amount}`,
       }),
     };
   } catch (error) {
-    console.error('[Unhandled Error]', error);
+    console.error('[Payment Error]', error.message);
     return {
       statusCode: 500,
       headers: { 'Access-Control-Allow-Origin': '*' },
-      body: JSON.stringify({
-        error: 'Payment processing failed',
-        details: error.message,
-      }),
+      body: JSON.stringify({ error: error.message }),
     };
   }
 };

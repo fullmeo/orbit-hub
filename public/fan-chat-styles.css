@@ -465,6 +465,47 @@
   }
 }
 
+/* Tipping buttons */
+.fan-chat-tip-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%);
+  border-radius: 8px;
+  margin: 8px 0;
+}
+
+.fan-chat-tip-header {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+.fan-chat-tip-btn {
+  padding: 10px 12px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.fan-chat-tip-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.fan-chat-tip-btn:active {
+  transform: translateY(0);
+}
+
 /* Print styles */
 @media print {
   .fan-chat-widget {
