@@ -1,6 +1,7 @@
 # Netlify configuration - directs to orbit-allysonglado
 [build]
   base = "orbit-allysonglado"
+  publish = "."
   functions = "netlify/functions"
 
 [build.environment]
