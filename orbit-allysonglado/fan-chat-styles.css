@@ -1,0 +1,458 @@
+/* Improved Fan Chat Widget Styles */
+
+.fan-chat-widget {
+  --primary: #667eea;
+  --primary-dark: #764ba2;
+  --primary-light: #8b9ef5;
+  --bg: #f8f9fa;
+  --bg-alt: #ffffff;
+  --border: #e9ecef;
+  --text: #333;
+  --text-light: #666;
+  --error: #e74c3c;
+  --z-button: 999;
+  --z-window: 1000;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .fan-chat-widget {
+    --bg: #1a1a1a;
+    --bg-alt: #2d2d2d;
+    --border: #3d3d3d;
+    --text: #e0e0e0;
+    --text-light: #b0b0b0;
+  }
+}
+
+/* Floating button */
+.fan-chat-button {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: var(--z-button);
+  font-family: inherit;
+  padding: 0;
+  line-height: 1;
+}
+
+.fan-chat-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+.fan-chat-button:active {
+  transform: scale(0.95);
+}
+
+.fan-chat-button:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.fan-chat-icon {
+  animation: pulse 2s infinite;
+  display: inline-block;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+/* Chat window container */
+.fan-chat-window {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 100%;
+  max-width: 380px;
+  height: 500px;
+  background: var(--bg-alt);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  z-index: var(--z-window);
+  animation: slideUp 0.3s ease;
+  border: 1px solid var(--border);
+}
+
+.fan-chat-window.hidden {
+  display: none;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Header */
+.fan-chat-header {
+  padding: 16px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: white;
+  border-radius: 12px 12px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 8px;
+}
+
+.fan-chat-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  flex: 1;
+  min-width: 0; /* Prevent overflow */
+}
+
+/* Close button */
+.fan-chat-close {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.2s ease;
+  flex-shrink: 0;
+  font-family: inherit;
+}
+
+.fan-chat-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.fan-chat-close:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+
+/* Messages container */
+.fan-chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: var(--bg);
+}
+
+/* Individual message */
+.fan-chat-msg {
+  display: flex;
+  flex-direction: column;
+  animation: messageIn 0.3s ease;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+@keyframes messageIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fan-chat-msg-user {
+  align-items: flex-end;
+}
+
+.fan-chat-msg-bot {
+  align-items: flex-start;
+}
+
+/* Message bubble */
+.fan-chat-bubble {
+  max-width: 80%;
+  padding: 12px 16px;
+  border-radius: 12px;
+  word-wrap: break-word;
+  white-space: pre-wrap; /* Preserve formatting */
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.fan-chat-msg-user .fan-chat-bubble {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: white;
+  border-bottom-right-radius: 4px;
+}
+
+.fan-chat-msg-bot .fan-chat-bubble {
+  background: var(--border);
+  color: var(--text);
+  border-bottom-left-radius: 4px;
+}
+
+/* Timestamp */
+.fan-chat-time {
+  display: block;
+  font-size: 11px;
+  opacity: 0.7;
+  margin-top: 4px;
+  color: var(--text-light);
+}
+
+.fan-chat-msg-user .fan-chat-time {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Typing indicator */
+.fan-chat-typing {
+  padding: 12px 16px;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  min-height: 40px;
+}
+
+.fan-chat-typing span {
+  width: 8px;
+  height: 8px;
+  background: var(--primary);
+  border-radius: 50%;
+  animation: typing 1.4s infinite;
+}
+
+.fan-chat-typing span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.fan-chat-typing span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typing {
+  0%, 60%, 100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  30% {
+    transform: translateY(-10px);
+    opacity: 1;
+  }
+}
+
+/* Actions area (tipping buttons) */
+.fan-chat-actions {
+  padding: 8px 12px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+  background: var(--bg-alt);
+  justify-content: center;
+}
+
+.fan-chat-tip-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.fan-chat-tip-btn {
+  padding: 6px 10px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-direction: column;
+}
+
+.fan-chat-tip-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.fan-chat-tip-btn:active {
+  transform: translateY(0);
+}
+
+.fan-chat-tip-btn:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Input area */
+.fan-chat-input-area {
+  padding: 12px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+  background: var(--bg-alt);
+  border-radius: 0 0 12px 12px;
+}
+
+/* Input field */
+.fan-chat-input-text {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+  resize: none;
+  max-height: 80px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  color: var(--text);
+  background: var(--bg-alt);
+}
+
+.fan-chat-input-text:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+}
+
+.fan-chat-input-text:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: -2px;
+}
+
+.fan-chat-input-text::placeholder {
+  color: var(--text-light);
+}
+
+/* Send button */
+.fan-chat-send-btn {
+  padding: 8px 16px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  height: fit-content;
+  font-family: inherit;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.fan-chat-send-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.fan-chat-send-btn:active {
+  transform: translateY(0);
+}
+
+.fan-chat-send-btn:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.fan-chat-send-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 480px) {
+  .fan-chat-window {
+    max-width: calc(100% - 32px);
+    height: 60vh;
+    max-height: 90vh;
+  }
+
+  .fan-chat-bubble {
+    max-width: 90%;
+  }
+
+  .fan-chat-button {
+    bottom: 16px;
+    right: 16px;
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
+  }
+}
+
+/* Scrollbar styling */
+.fan-chat-messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+.fan-chat-messages::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+.fan-chat-messages::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 3px;
+}
+
+.fan-chat-messages::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-dark);
+}
+
+/* Firefox scrollbar */
+.fan-chat-messages {
+  scrollbar-color: var(--primary) var(--bg);
+  scrollbar-width: thin;
+}
+
+/* Accessibility: Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  .fan-chat-widget {
+    display: none !important;
+  }
+}
