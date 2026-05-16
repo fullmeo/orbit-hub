@@ -5,8 +5,7 @@
 
 # Build settings
 [build]
-  base = "orbit-allysonglado"
-  command = "npm install && cp -r public/* . && echo 'Site deployed successfully'"
+  command = "npm install"
   publish = "."
   functions = "netlify/functions"
 
