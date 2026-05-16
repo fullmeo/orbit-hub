@@ -1,9 +1,9 @@
 # Netlify configuration - redirects to orbit-allysonglado
 [build]
   base = "orbit-allysonglado"
-  command = "npm install && cp -r public/* . && echo 'Site deployed successfully'"
+  command = "npm install"
   publish = "."
-  functions = "orbit-allysonglado/netlify/functions"
+  functions = "netlify/functions"
 
 # Environment variables
 [build.environment]
