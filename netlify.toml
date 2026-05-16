@@ -1,8 +1,8 @@
 # Netlify configuration - directs to orbit-allysonglado
 [build]
   base = "orbit-allysonglado"
-  publish = "orbit-allysonglado"
-  functions = "orbit-allysonglado/netlify/functions"
+  publish = "."
+  functions = "netlify/functions"
 
 [build.environment]
   GA4_PROPERTY_ID = "G-LS4G24ESNF"
