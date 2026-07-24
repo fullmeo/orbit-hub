@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ouidah Blues, Jazz &amp; Gospel Festival 2026 | Propulsé par Orbit-hub</title>
+    <meta name="description" content="Site officiel du Ouidah Blues, Jazz &amp; Gospel Festival 2026 à Ouidah, Bénin. Première édition. Appel à candidatures ouvert jusqu'au 30 juin. Artistes sélectionnés reçoivent un Orbit-hub personnel. Fusion Blues, Jazz, Gospel et racines Vodun.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&amp;family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+        
+        :root {
+            --primary: #C2410C;
+            --green: #15803D;
+            --gold: #B45309;
+        }
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .heading-serif {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 700;
+            line-height: 1.1;
+        }
+
+        .section-header {
+            font-family: 'Space Grotesk', 'Inter', sans-serif;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        .festival-gradient {
+            background: linear-gradient(135deg, #1F2937 0%, #111827 100%);
+        }
+
+        .african-pattern {
+            background-image: 
+                linear-gradient(rgba(194, 65, 12, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(194, 65, 12, 0.08) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .nav-scrolled {
+            background-color: rgba(17, 24, 39, 0.95);
+            backdrop-filter: blur(12px);
+        }
+
+        .hero-bg {
+            background-image: linear-gradient(rgba(17, 24, 39, 0.65), rgba(17, 24, 39, 0.75)), url('assets/images/poster-arch.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .music-note {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .card-hover {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        .nav-link {
+            transition: all 0.2s ease;
+        }
+        
+        .nav-link:hover {
+            color: #C2410C;
+            transform: translateY(-1px);
+        }
+
+        .festival-red { color: #C2410C; }
+        .festival-green { color: #15803D; }
+        .festival-gold { color: #B45309; }
+
+        .stat-number {
+            font-variant-numeric: tabular-nums;
+        }
+
+        .modal {
+            animation: modalPop 0.3s ease-out forwards;
+        }
+
+        @keyframes modalPop {
+            from { opacity: 0; transform: scale(0.95) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .poster-shadow {
+            box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.4);
+        }
+
+        .subtle-grid {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill-rule='evenodd'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-10V8h-2v16h-4v2h4v4h2v-4h4v-2h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 6v-4H4v4H0v2h4v4h2V8h4V6H6z' fill='%23C2410C' fill-opacity='0.06'/%3E%3C/g%3E%3C/svg%3E");
+            background-size: 60px 60px;
+        }
+    </style>
+</head>
+<body class="bg-zinc-950 text-zinc-200 overflow-x-hidden">
+    <!-- NAVBAR -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-zinc-950/90 backdrop-blur-lg border-b border-white/10">
+        <div class="max-w-screen-2xl mx-auto">
+            <div class="px-8 py-5 flex items-center justify-between">
+                <!-- Logo -->
+                <div class="flex items-center gap-x-3">
+                    <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-orange-600 via-red-700 to-amber-700 flex items-center justify-center shadow-inner">
+                        <div class="w-6 h-6 rounded-xl bg-white flex items-center justify-center">
+                            <i class="fa-solid fa-infinity text-orange-700 text-3xl font-black"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="font-bold text-3xl tracking-tighter">OUIDAH</div>
+                        <div class="text-xs text-zinc-400 -mt-1">Blues, Jazz &amp; Gospel Festival <span class="text-orange-500/70">• Propulsé par Orbit-hub</span></div>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center gap-x-9 text-sm font-medium">
+                    <a href="#festival" class="nav-link text-zinc-300 hover:text-white">Le Festival</a>
+                    <a href="#candidature" class="nav-link text-zinc-300 hover:text-white">Appel à Candidature</a>
+                    <a href="#experience" class="nav-link text-zinc-300 hover:text-white">L'Expérience</a>
+                    <a href="#galerie" class="nav-link text-zinc-300 hover:text-white">Galerie</a>
+                </div>
+
+                <div class="flex items-center gap-x-3">
+                    <!-- CTA -->
+                    <a href="#candidature" 
+                       class="hidden md:inline-flex items-center gap-x-2 px-6 py-2.5 rounded-3xl bg-white text-zinc-950 text-sm font-semibold hover:bg-orange-50 active:bg-white transition-all">
+                        <i class="fa-solid fa-user-plus mr-1.5"></i>
+                        <span>Postuler</span>
+                    </a>
+                    
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-btn"
+                            class="md:hidden w-11 h-11 flex items-center justify-center text-xl text-zinc-300 hover:text-white hover:bg-white/5 rounded-2xl transition-colors">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-white/10 bg-zinc-950">
+            <div class="px-6 py-6 flex flex-col gap-y-4 text-base font-medium">
+                <a href="#festival" class="py-1 text-zinc-300 active:text-white">Le Festival</a>
+                <a href="#candidature" class="py-1 text-zinc-300 active:text-white">Appel à Candidature</a>
+                <a href="#experience" class="py-1 text-zinc-300 active:text-white">L'Expérience</a>
+                <a href="#galerie" class="py-1 text-zinc-300 active:text-white">Galerie</a>
+                <div class="pt-3 border-t border-white/10">
+                    <a href="#candidature" 
+                       class="flex items-center justify-center gap-x-2 w-full py-3.5 rounded-3xl bg-white text-zinc-950 font-semibold text-sm">
+                        <i class="fa-solid fa-user-plus"></i>
+                        <span>Postuler maintenant</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="hero-bg min-h-[100dvh] flex items-center pt-16 relative">
+        <div class="max-w-screen-2xl mx-auto px-6 md:px-12 lg:px-16 pt-12 pb-20">
+            <div class="max-w-4xl">
+                <!-- Badge -->
+                <div class="inline-flex items-center gap-x-2 px-4 py-1.5 rounded-3xl bg-white/10 backdrop-blur-md border border-white/20 mb-6">
+                    <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                    <span class="text-xs font-semibold tracking-widest text-white/90">PREMIÈRE ÉDITION • 2026</span>
+                </div>
+
+                <h1 class="text-7xl md:text-8xl lg:text-[92px] leading-[0.92] font-black tracking-tighter heading-serif mb-4">
+                    OUIDAH<br>
+                    <span class="bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-300 bg-clip-text text-transparent">BLUES, JAZZ</span><br>
+                    &amp; GOSPEL
+                </h1>
+                
+                <p class="max-w-lg text-2xl md:text-3xl text-white/90 font-light tracking-tight mb-3">
+                    Festival • Ouidah, Bénin • 29-31 Octobre 2026
+                </p>
+                
+                <p class="max-w-md text-lg text-white/70 mb-10">
+                    29 • 30 • 31 Octobre 2026<br>
+                    Ouidah, Bénin — Berceau du Vodun
+                </p>
+
+                <div class="flex flex-wrap gap-4">
+                    <a href="#candidature" 
+                       class="group inline-flex items-center justify-center gap-x-3 px-9 py-4 rounded-3xl bg-orange-600 hover:bg-orange-500 active:bg-orange-700 transition-all text-white font-semibold text-lg shadow-xl shadow-orange-950/50">
+                        <span>Postuler comme artiste</span>
+                        <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                    
+                    <a href="#festival" 
+                       class="inline-flex items-center justify-center gap-x-3 px-8 py-4 rounded-3xl border border-white/40 hover:bg-white/10 active:bg-white/5 transition-all font-medium text-lg">
+                        Découvrir le festival
+                    </a>
+                </div>
+                
+                <div class="mt-12 flex items-center gap-x-8 text-sm">
+                    <div class="flex -space-x-2">
+                        <div class="w-8 h-8 rounded-full bg-zinc-700 border border-zinc-600 overflow-hidden ring-2 ring-zinc-950"><img src="assets/images/poster-candidature.jpg" class="object-cover w-full h-full" alt=""></div>
+                        <div class="w-8 h-8 rounded-full bg-zinc-700 border border-zinc-600 overflow-hidden ring-2 ring-zinc-950"><img src="assets/images/poster-arch.jpg" class="object-cover w-full h-full" alt=""></div>
+                    </div>
+                    <div class="text-white/60 text-xs tracking-wider">REJOIGNEZ + DE 150 ARTISTES &amp; ACTEURS CULTURELS</div>
+                </div>
+                <div class="mt-4">
+                    <span class="text-xs text-white/50">Propulsé par <span class="text-orange-400">Orbit-hub</span></span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 hidden md:block">
+            <div class="flex flex-col items-center text-white/40 text-xs tracking-[3px]">
+                <div>SCROLL</div>
+                <i class="fa-solid fa-chevron-down mt-1 animate-bounce"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- TRUST / KEY FACTS -->
+    <div class="border-b border-white/10 bg-zinc-900">
+        <div class="max-w-screen-2xl mx-auto px-6 md:px-12 py-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-y-6 text-center">
+                <div>
+                    <div class="text-4xl font-semibold text-orange-500 tracking-tighter">29-31</div>
+                    <div class="text-xs uppercase tracking-[2px] text-zinc-400 mt-1">Octobre 2026</div>
+                </div>
+                <div>
+                    <div class="text-4xl font-semibold text-emerald-400 tracking-tighter">Ouidah</div>
+                    <div class="text-xs uppercase tracking-[2px] text-zinc-400 mt-1">Bénin, Afrique de l'Ouest</div>
+                </div>
+                <div>
+                    <div class="text-4xl font-semibold text-amber-400 tracking-tighter">1<sup>re</sup></div>
+                    <div class="text-xs uppercase tracking-[2px] text-zinc-400 mt-1">Édition — Nouvelle ère</div>
+                </div>
+                <div>
+                    <div class="text-4xl font-semibold text-white tracking-tighter">VODUN × JAZZ</div>
+                    <div class="text-xs uppercase tracking-[2px] text-zinc-400 mt-1">Blues • Gospel • Spiritualité</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LE FESTIVAL -->
+    <section id="festival" class="max-w-screen-2xl mx-auto px-6 md:px-12 lg:px-16 py-20 md:py-24">
+        <div class="grid md:grid-cols-12 gap-x-12 items-center">
+            <div class="md:col-span-7">
+                <div class="uppercase text-orange-500 text-xs tracking-[3px] font-semibold mb-3">LE FESTIVAL</div>
+                <h2 class="section-header text-6xl md:text-7xl leading-none tracking-tighter mb-8">
+                    Plus qu’un festival.<br>
+                    Une <span class="text-orange-400">vibration</span>.
+                </h2>
+                
+                <div class="prose prose-invert max-w-none text-lg text-zinc-300">
+                    <p class="mb-6">Le <strong>VODUN JAZZ FESTIVAL</strong> entre dans une nouvelle ère et devient <strong>OUIDAH BLUES, JAZZ &amp; GOSPEL FESTIVAL</strong>.</p>
+                    
+                    <p>Une expérience encore plus riche, plus spirituelle et plus vibrante, mêlant la tradition Blues, Jazz et Gospel dans une ambiance unique à Ouidah — la capitale spirituelle du Bénin et berceau du Vodun.</p>
+                </div>
+            </div>
+            
+            <div class="md:col-span-5 mt-10 md:mt-0">
+                <div class="bg-zinc-900 border border-white/10 rounded-3xl p-8 md:p-9">
+                    <div class="flex items-center gap-x-4 mb-6">
+                        <i class="fa-solid fa-globe text-3xl text-orange-500"></i>
+                        <div>
+                            <div class="font-semibold">Connecter les continents</div>
+                            <div class="text-sm text-zinc-400">Afrique • Diaspora • Monde</div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4 text-sm">
+                        <div class="flex gap-3">
+                            <i class="fa-solid fa-check text-emerald-400 mt-1"></i>
+                            <span>Performances live fusionnant racines africaines et musiques afro-américaines</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <i class="fa-solid fa-check text-emerald-400 mt-1"></i>
+                            <span>Moments spirituels au cœur du Vodun et de la mémoire historique (Porte du Non-Retour)</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <i class="fa-solid fa-check text-emerald-400 mt-1"></i>
+                            <span>Rencontres, ateliers, jams et célébrations nocturnes</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- APPEL À CANDIDATURE -->
+    <section id="candidature" class="bg-zinc-900 py-16 md:py-20 border-y border-white/10">
+        <div class="max-w-screen-2xl mx-auto px-6 md:px-12 lg:px-16">
+            <div class="flex flex-col lg:flex-row gap-10 lg:gap-16">
+                
+                <!-- Left content -->
+                <div class="lg:w-5/12">
+                    <div class="sticky top-24">
+                        <div class="uppercase tracking-[3px] text-xs text-red-500 font-semibold mb-2">APPEL À CANDIDATURE</div>
+                        <h2 class="section-header text-6xl leading-none tracking-tighter mb-6">Rejoignez<br>la scène</h2>
+                        
+                        <p class="text-xl text-zinc-300 mb-8">Artistes, musiciens, chanteurs et acteurs culturels — déposez votre candidature pour la première édition du festival.</p>
+                        
+                        <div class="flex items-center gap-x-3 text-sm">
+                            <div class="px-4 py-2 bg-emerald-950 text-emerald-400 rounded-2xl flex items-center gap-x-2 text-xs font-medium">
+                                <i class="fa-solid fa-clock"></i>
+                                <span>DATE LIMITE : <strong>30 JUIN 2026</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Form Card -->
+                <div class="lg:w-7/12">
+                    <div class="bg-zinc-950 border border-white/10 rounded-3xl p-8 md:p-10 poster-shadow">
+                        <div class="mb-8">
+                            <div class="flex items-center gap-x-3 mb-4">
+                                <div class="px-4 py-1.5 bg-gradient-to-r from-orange-600 to-red-600 text-white text-xs font-bold tracking-wider rounded-2xl">OUVERT</div>
+                                <div class="text-sm text-zinc-400">Sélection en cours</div>
+                            </div>
+                            
+                            <h3 class="text-3xl font-semibold tracking-tight">Postulez pour performer</h3>
+                            <p class="mt-2 text-zinc-400">Sélection sur dossier (biographie, photos, vidéos lives sur scène). Artistes retenus reçoivent <strong>gratuitement leur Orbit-hub personnel</strong> + performance live pendant les 3 jours du festival.</p>
+                        </div>
+                        
+                        <!-- Application Form -->
+                        <form id="application-form" class="space-y-5">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                <div>
+                                    <label class="block text-xs font-medium text-zinc-400 mb-1.5">NOM COMPLET</label>
+                                    <input type="text" id="full-name" required 
+                                           class="w-full bg-zinc-900 border border-white/10 focus:border-orange-600 rounded-2xl px-5 py-3.5 text-sm placeholder:text-zinc-500 outline-none transition-colors">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-zinc-400 mb-1.5">EMAIL</label>
+                                    <input type="email" id="email" required 
+                                           class="w-full bg-zinc-900 border border-white/10 focus:border-orange-600 rounded-2xl px-5 py-3.5 text-sm placeholder:text-zinc-500 outline-none transition-colors">
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-xs font-medium text-zinc-400 mb-1.5">TYPE DE CANDIDATURE</label>
+                                <select id="category" required class="w-full bg-zinc-900 border border-white/10 focus:border-orange-600 rounded-2xl px-5 py-3.5 text-sm outline-none">
+                                    <option value="">Sélectionnez...</option>
+                                    <option value="artiste-musicien">Artiste Musicien / Chanteur</option>
+                                    <option value="acteur-culturel">Acteur Culturel</option>
+                                    <option value="groupe">Groupe / Formation</option>
+                                    <option value="autre">Autre (précisez)</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-xs font-medium text-zinc-400 mb-1.5">PRÉSENTATION COURTE (bio / style musical)</label>
+                                <textarea id="bio" rows="3" required placeholder="Parlez-nous de votre parcours, votre univers musical et ce qui vous relie à Ouidah / au Vodun..."
+                                          class="w-full bg-zinc-900 border border-white/10 focus:border-orange-600 rounded-3xl px-5 py-4 text-sm placeholder:text-zinc-500 outline-none resize-y min-h-[90px]"></textarea>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                <div>
+                                    <label class="block text-xs font-medium text-zinc-400 mb-1.5">LIEN VIDÉO (YouTube, etc.)</label>
+                                    <input type="url" id="video-link" placeholder="https://youtube.com/..." 
+                                           class="w-full bg-zinc-900 border border-white/10 focus:border-orange-600 rounded-2xl px-5 py-3.5 text-sm placeholder:text-zinc-500 outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-zinc-400 mb-1.5">LIEN PORTFOLIO / PHOTOS</label>
+                                    <input type="url" id="portfolio-link" placeholder="Drive, Instagram, site..." 
+                                           class="w-full bg-zinc-900 border border-white/10 focus:border-orange-600 rounded-2xl px-5 py-3.5 text-sm placeholder:text-zinc-500 outline-none">
+                                </div>
+                            </div>
+                            
+                            <div class="pt-3">
+                                <button type="submit" 
+                                        class="w-full flex items-center justify-center gap-x-3 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500 transition-all text-white font-semibold py-4 rounded-3xl text-base tracking-wide active:scale-[0.985]">
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                    <span>ENVOYER MA CANDIDATURE</span>
+                                </button>
+                                <p class="text-center text-[10px] text-zinc-500 mt-3">Nous vous répondrons sous 15 jours après la date limite.</p>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Contact info -->
+                    <div class="mt-8 text-sm flex flex-wrap gap-x-8 gap-y-2 text-zinc-400">
+                        <div><i class="fa-solid fa-envelope mr-2 text-orange-500"></i> <a href="mailto:Adjos67@gmail.com" class="hover:text-white">Adjos67@gmail.com</a></div>
+                        <div><i class="fa-solid fa-phone mr-2 text-orange-500"></i> <a href="tel:+22997078586" class="hover:text-white">+229 97 07 85 86</a></div>
+                        <div><i class="fa-brands fa-facebook mr-2 text-orange-500"></i> <a href="https://facebook.com/TogbeAdjos" target="_blank" class="hover:text-white">@Togbe_Adjos_officiel</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- L'EXPÉRIENCE -->
+    <section id="experience" class="max-w-screen-2xl mx-auto px-6 md:px-12 lg:px-16 py-20">
+        <div class="text-center mb-14">
+            <div class="uppercase tracking-[3px] text-xs text-amber-500 font-semibold">L'EXPÉRIENCE</div>
+            <h2 class="section-header text-6xl tracking-tighter mt-3">Très très bientôt...<br>une vibration unique</h2>
+        </div>
+        
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="card-hover bg-zinc-900 border border-white/10 rounded-3xl p-8">
+                <div class="w-12 h-12 flex items-center justify-center rounded-2xl bg-orange-950 text-orange-400 mb-6">
+                    <i class="fa-solid fa-music text-3xl"></i>
+                </div>
+                <h4 class="font-semibold text-2xl tracking-tight mb-3">Blues • Jazz • Gospel</h4>
+                <p class="text-zinc-400">Des sets envoûtants où les racines du blues et du gospel rencontrent la puissance spirituelle du Vodun et les rythmes ancestraux du Bénin.</p>
+            </div>
+            
+            <div class="card-hover bg-zinc-900 border border-white/10 rounded-3xl p-8">
+                <div class="w-12 h-12 flex items-center justify-center rounded-2xl bg-emerald-950 text-emerald-400 mb-6">
+                    <i class="fa-solid fa-place-of-worship text-3xl"></i>
+                </div>
+                <h4 class="font-semibold text-2xl tracking-tight mb-3">Spiritualité &amp; Mémoire</h4>
+                <p class="text-zinc-400">Célébrations au pied de la Porte du Non-Retour, moments de recueillement, rituels et échanges culturels profonds entre artistes et communauté.</p>
+            </div>
+            
+            <div class="card-hover bg-zinc-900 border border-white/10 rounded-3xl p-8">
+                <div class="w-12 h-12 flex items-center justify-center rounded-2xl bg-amber-950 text-amber-400 mb-6">
+                    <i class="fa-solid fa-users text-3xl"></i>
+                </div>
+                <h4 class="font-semibold text-2xl tracking-tight mb-3">Communauté &amp; Diaspora</h4>
+                <p class="text-zinc-400">Un point de rencontre pour les artistes locaux, la diaspora africaine et les passionnés du monde entier. Orbit-hub sera votre orbite permanente.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALERIE -->
+    <section id="galerie" class="bg-zinc-900 py-16 border-t border-white/10">
+        <div class="max-w-screen-2xl mx-auto px-6 md:px-12 lg:px-16">
+            <div class="flex items-end justify-between mb-8">
+                <div>
+                    <div class="uppercase text-xs tracking-[3px] text-zinc-400">VISUELS OFFICIELS</div>
+                    <h3 class="section-header text-5xl tracking-tighter">Galerie</h3>
+                </div>
+                <a href="#" class="hidden md:inline text-sm flex items-center gap-x-2 text-orange-400 hover:text-orange-300">Voir plus <i class="fa-solid fa-arrow-right-long"></i></a>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Poster 1 -->
+                <div class="group relative overflow-hidden rounded-3xl aspect-[16/10] md:aspect-auto md:h-[420px] border border-white/10">
+                    <img src="assets/images/poster-candidature.jpg" alt="Affiche Appel à Candidature - Ouidah Blues Jazz & Gospel Festival 2026" 
+                         class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-black/60 to-black/80"></div>
+                    <div class="absolute bottom-0 left-0 p-8">
+                        <div class="text-xs uppercase tracking-widest text-orange-400">AFFICHE OFFICIELLE</div>
+                        <div class="text-white text-3xl font-semibold tracking-tight">Appel à Candidature</div>
+                        <div class="text-white/70 text-sm mt-1">Ouvert jusqu'au 30 Juin 2026</div>
+                    </div>
+                </div>
+                
+                <!-- Poster 2 -->
+                <div class="group relative overflow-hidden rounded-3xl aspect-[16/10] md:aspect-auto md:h-[420px] border border-white/10">
+                    <img src="assets/images/poster-arch.jpg" alt="Visuel promotionnel Ouidah Blues Jazz Gospel Festival - Arc de Ouidah" 
+                         class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-black/50 to-black/80"></div>
+                    <div class="absolute bottom-0 left-0 p-8">
+                        <div class="text-xs uppercase tracking-widest text-emerald-400">VISUEL PROMOTIONNEL</div>
+                        <div class="text-white text-3xl font-semibold tracking-tight">Une expérience unique à Ouidah</div>
+                        <div class="text-white/70 text-sm mt-1">Très très bientôt...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ORBIT-HUB EXPLAINED -->
+    <section class="max-w-screen-2xl mx-auto px-6 md:px-12 lg:px-16 py-20 border-b border-white/10">
+        <div class="max-w-3xl mx-auto text-center">
+            <div class="inline-flex items-center justify-center w-16 h-16 rounded-3xl bg-gradient-to-br from-orange-600/20 to-red-600/10 mb-6 ring-1 ring-white/10">
+                <i class="fa-solid fa-infinity text-4xl text-orange-400"></i>
+            </div>
+            <h2 class="section-header text-5xl tracking-tighter mb-5">Pourquoi <span class="text-orange-400">Orbit-hub</span> ?</h2>
+            <p class="text-xl text-zinc-300">Orbit-hub est le point d’ancrage digital central du festival. Un hub vivant où artistes, fans, partenaires et la communauté orbitent autour de la vibration culturelle et spirituelle d’Ouidah.</p>
+            
+            <div class="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4 text-left">
+                <div class="bg-zinc-900 border border-white/10 p-6 rounded-3xl">
+                    <div class="font-semibold mb-1">Candidatures centralisées</div>
+                    <div class="text-sm text-zinc-400">Un seul endroit pour postuler, suivre son dossier et recevoir les informations.</div>
+                </div>
+                <div class="bg-zinc-900 border border-white/10 p-6 rounded-3xl">
+                    <div class="font-semibold mb-1">Actualités &amp; Communauté</div>
+                    <div class="text-sm text-zinc-400">News, stories artistes, behind the scenes et connexion avec la diaspora.</div>
+                </div>
+                <div class="bg-zinc-900 border border-white/10 p-6 rounded-3xl">
+                    <div class="font-semibold mb-1">Hub évolutif</div>
+                    <div class="text-sm text-zinc-400">Billetterie, programme détaillé, galerie live et espace artistes à venir.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION NOS ARTISTES & ORBIT-HUB -->
+    <section class="max-w-screen-2xl mx-auto px-6 md:px-12 lg:px-16 py-16 border-t border-white/10">
+        <div class="text-center mb-10">
+            <div class="uppercase tracking-[3px] text-xs text-orange-400 font-semibold">ÉCOSYSTÈME ORBIT-HUB</div>
+            <h2 class="section-header text-5xl tracking-tighter mt-2">Nos Artistes &amp; leurs Orbit-hubs</h2>
+            <p class="max-w-md mx-auto mt-3 text-zinc-400">Chaque artiste sélectionné reçoit son propre hub digital professionnel. Découvrez leurs univers et suivez leurs parcours.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <!-- Placeholder cards - À remplacer par de vrais artistes une fois sélectionnés -->
+            <div class="bg-zinc-900 border border-white/10 rounded-3xl p-6 text-center">
+                <div class="w-16 h-16 mx-auto bg-zinc-800 rounded-full mb-4 flex items-center justify-center">
+                    <i class="fa-solid fa-user text-3xl text-orange-400"></i>
+                </div>
+                <h4 class="font-semibold">Artiste 1</h4>
+                <p class="text-xs text-zinc-400 mt-1">Blues • Vodun Jazz</p>
+                <a href="#" class="mt-4 inline-block text-sm text-orange-400 hover:underline">Voir son Orbit-hub →</a>
+            </div>
+            
+            <div class="bg-zinc-900 border border-white/10 rounded-3xl p-6 text-center">
+                <div class="w-16 h-16 mx-auto bg-zinc-800 rounded-full mb-4 flex items-center justify-center">
+                    <i class="fa-solid fa-user text-3xl text-orange-400"></i>
+                </div>
+                <h4 class="font-semibold">Artiste 2</h4>
+                <p class="text-xs text-zinc-400 mt-1">Gospel • Jazz</p>
+                <a href="#" class="mt-4 inline-block text-sm text-orange-400 hover:underline">Voir son Orbit-hub →</a>
+            </div>
+            
+            <div class="bg-zinc-900 border border-white/10 rounded-3xl p-6 text-center">
+                <div class="w-16 h-16 mx-auto bg-zinc-800 rounded-full mb-4 flex items-center justify-center">
+                    <i class="fa-solid fa-user text-3xl text-orange-400"></i>
+                </div>
+                <h4 class="font-semibold">Artiste 3</h4>
+                <p class="text-xs text-zinc-400 mt-1">Fusion Spirituelle</p>
+                <a href="#" class="mt-4 inline-block text-sm text-orange-400 hover:underline">Voir son Orbit-hub →</a>
+            </div>
+        </div>
+        
+        <div class="text-center mt-8 text-sm text-zinc-400">
+            Les premiers Orbit-hubs artistes seront déployés après la sélection (juillet 2026).<br>
+            <a href="#candidature" class="text-orange-400 hover:underline">Postulez pour rejoindre cette sélection →</a>
+        </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <div class="max-w-screen-2xl mx-auto px-6 md:px-12 py-16 text-center">
+        <div class="max-w-lg mx-auto">
+            <h3 class="text-4xl tracking-tighter font-semibold mb-4">Prêt à faire partie de l’histoire ?</h3>
+            <p class="text-zinc-400 mb-8">La première édition s’annonce historique. Postulez avant le 30 juin et recevez votre Orbit-hub personnel.</p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#candidature" class="px-10 py-4 bg-white hover:bg-zinc-100 active:bg-white transition-colors text-zinc-950 font-semibold rounded-3xl inline-flex items-center justify-center gap-x-2">
+                    Postuler maintenant
+                </a>
+                <a href="mailto:Adjos67@gmail.com" class="px-8 py-4 border border-white/30 hover:bg-white/5 rounded-3xl inline-flex items-center justify-center gap-x-2 text-sm font-medium">
+                    <i class="fa-solid fa-envelope"></i>
+                    <span>Contacter l’organisation</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-black border-t border-white/10 pt-12 pb-8">
+        <div class="max-w-screen-2xl mx-auto px-6 md:px-12 lg:px-16 text-sm">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-y-6">
+                <div>
+                    <div class="flex items-center gap-x-2 mb-1">
+                        <span class="font-bold tracking-tighter text-xl">OUIDAH FESTIVAL</span>
+                    </div>
+                    <div class="text-zinc-500 text-xs">© 2026 • Ouidah Blues, Jazz &amp; Gospel Festival — Première édition</div>
+                    <div class="text-zinc-500 text-xs mt-0.5">Organisé par Togbé Adjos • VODUN JAZZ</div>
+                    <div class="text-xs text-orange-400/80 mt-1">Propulsé par Orbit-hub</div>
+                </div>
+                
+                <div class="flex flex-wrap gap-x-6 gap-y-1 text-xs text-zinc-400">
+                    <a href="#" class="hover:text-white">Mentions légales</a>
+                    <a href="#" class="hover:text-white">Politique de confidentialité</a>
+                    <a href="https://facebook.com/TogbeAdjos" target="_blank" class="hover:text-white">Facebook</a>
+                    <a href="#" class="hover:text-white">Instagram</a>
+                </div>
+            </div>
+            
+            <div class="mt-10 pt-6 border-t border-white/10 text-[10px] text-center text-zinc-500 tracking-wider">
+                Ce site pose les bases du hub digital officiel. Design &amp; développement par Grok • xAI — Adaptable et extensible.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-6">
+        <div class="modal bg-zinc-900 border border-white/10 rounded-3xl max-w-md w-full p-9 text-center">
+            <div class="mx-auto w-16 h-16 bg-emerald-500/10 text-emerald-400 rounded-full flex items-center justify-center mb-6">
+                <i class="fa-solid fa-check text-4xl"></i>
+            </div>
+            <h3 class="text-3xl font-semibold tracking-tight mb-3">Candidature reçue !</h3>
+            <p class="text-zinc-300 mb-8">Merci pour votre envoi. Notre équipe l’examinera avec attention. Vous recevrez une réponse par email avant mi-juillet 2026.</p>
+            
+            <div class="flex flex-col gap-3">
+                <button onclick="closeModal()" 
+                        class="w-full py-3.5 rounded-3xl bg-white text-zinc-950 font-semibold">Parfait, merci !</button>
+                <button onclick="closeModal()" 
+                        class="text-sm text-zinc-400 hover:text-white">Fermer</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tailwind script
+        function initializeTailwind() {
+            document.documentElement.style.setProperty('--accent', '#C2410C');
+        }
+        
+        // Navbar scroll effect
+        function initNavbar() {
+            const navbar = document.getElementById('navbar');
+            let lastScroll = 0;
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('nav-scrolled', 'shadow-xl');
+                } else {
+                    navbar.classList.remove('nav-scrolled', 'shadow-xl');
+                }
+            });
+            
+            // Mobile menu
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                const icon = mobileBtn.querySelector('i');
+                if (mobileMenu.classList.contains('hidden')) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                } else {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                }
+            });
+            
+            // Close mobile menu on link click
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    const icon = mobileBtn.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                });
+            });
+        }
+        
+        // Application form handler
+        function initApplicationForm() {
+            const form = document.getElementById('application-form');
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Basic validation already handled by required attributes
+                const submitBtn = form.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> ENVOI EN COURS...`;
+                
+                // Simulate API call
+                setTimeout(() => {
+                    // Show success modal
+                    showSuccessModal();
+                    
+                    // Reset form
+                    form.reset();
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalText;
+                    
+                    // Optional: store in localStorage a "submitted" flag
+                    localStorage.setItem('orbitHubApplicationSubmitted', 'true');
+                }, 1450);
+            });
+        }
+        
+        function showSuccessModal() {
+            const modal = document.getElementById('success-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+        
+        function closeModal() {
+            const modal = document.getElementById('success-modal');
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+        }
+        
+        // Simple countdown to deadline (June 30, 2026)
+        function initCountdown() {
+            // Only show if element exists (we can add one later if wanted)
+            // For now, it's visual in the badge
+            console.log('%c[Orbit-hub] Countdown ready. Deadline: 30 June 2026', 'color:#666');
+        }
+        
+        // Smooth scroll for anchor links
+        function initSmoothScroll() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    
+                    if (targetElement) {
+                        e.preventDefault();
+                        const navHeight = 80;
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.scrollY - navHeight;
+                        
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        }
+        
+        // Keyboard accessibility for modal
+        function initKeyboardControls() {
+            document.addEventListener('keydown', function(e) {
+                if (e.key === "Escape") {
+                    const modal = document.getElementById('success-modal');
+                    if (!modal.classList.contains('hidden')) {
+                        closeModal();
+                    }
+                }
+            });
+        }
+        
+        // Main initialization
+        function initializeWebsite() {
+            initializeTailwind();
+            initNavbar();
+            initApplicationForm();
+            initCountdown();
+            initSmoothScroll();
+            initKeyboardControls();
+            
+            // Easter egg / dev note
+            console.log('%c[Orbit-hub] Foundations laid successfully. Ready to scale. Designed for Togbé Adjos & VODUN JAZZ.', 'color:#854d0e; font-size:9px');
+            
+            // Optional: prefill form if testing
+            // Uncomment for demo: document.getElementById('full-name').value = 'Artiste Test';
+        }
+        
+        // Boot
+        window.onload = initializeWebsite;
+    </script>
+</body>
+</html>

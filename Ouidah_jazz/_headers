@@ -1,0 +1,135 @@
+# ========================================================================
+# ORBIT - Netlify Custom Headers
+# Security, Performance, and Compliance
+# ========================================================================
+
+# Default headers for all files
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+  Vary: Accept-Encoding
+
+# HTML files - no cache, always fresh
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate, no-cache
+  Content-Security-Policy: default-src 'self' https: 'unsafe-inline'; script-src 'self' https://cdn.jsdelivr.net https://www.googletagmanager.com https://www.google-analytics.com https://sdk.scdn.co https://cdn.brevo.com 'unsafe-inline'; img-src 'self' https: data:; font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com
+  X-Content-Type-Options: nosniff
+
+# JavaScript - cache for 1 year (immutable hash in filename)
+/assets/js/*.js
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Type: application/javascript; charset=UTF-8
+  Access-Control-Allow-Origin: *
+
+# CSS - cache for 1 year (immutable hash in filename)
+/assets/css/*.css
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Type: text/css; charset=UTF-8
+  Access-Control-Allow-Origin: *
+
+# Images - cache for 24 hours with revalidation
+/assets/images/*
+  Cache-Control: public, max-age=86400
+  Access-Control-Allow-Origin: *
+
+# Fonts - cache for 1 year (Google Fonts)
+/assets/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# SVG files - cache for 1 year
+/*.svg
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Type: image/svg+xml
+  Access-Control-Allow-Origin: *
+
+# Favicons
+/favicon.ico
+  Cache-Control: public, max-age=604800
+  Content-Type: image/x-icon
+
+# Manifest & sitemap
+/manifest.json
+/sitemap.xml
+/robots.txt
+  Cache-Control: public, max-age=86400
+  Content-Type: application/json
+
+# CORS for fonts
+/fonts/*
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD, OPTIONS
+  Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept
+
+# API endpoints (if using Netlify Functions)
+/.netlify/functions/*
+  Cache-Control: no-cache, no-store, must-revalidate
+  X-Content-Type-Options: nosniff
+  Vary: Accept-Encoding, Authorization
+
+# Well-known paths (SSL verification, etc.)
+/.well-known/*
+  Cache-Control: public, max-age=604800
+
+# ========================================================================
+# CONTENT SECURITY POLICY (CSP) EXPLANATION
+# ========================================================================
+#
+# default-src 'self' https:
+#   - Only allow resources from same origin or HTTPS
+#
+# script-src 'self' https://... 'unsafe-inline'
+#   - Inline GA4 and tracking scripts require 'unsafe-inline'
+#   - CDNs for libraries: jsdelivr, Spotify SDK, Google Analytics
+#   - Brevo for email forms
+#
+# img-src 'self' https: data:
+#   - Allow images from any HTTPS source + data URIs
+#
+# font-src 'self' https://fonts.googleapis.com
+#   - Google Fonts + local fonts
+#
+# ========================================================================
+# CACHE STRATEGY
+# ========================================================================
+#
+# Immutable assets (JS/CSS with hash):
+#   max-age=31536000 (1 year)
+#   immutable directive prevents revalidation
+#
+# Images:
+#   max-age=86400 (24 hours)
+#   Can be revalidated if browser cache expires
+#
+# HTML:
+#   max-age=0, must-revalidate
+#   Always check server for latest version
+#   Ensures new deploys show immediately
+#
+# API responses:
+#   no-cache, no-store, must-revalidate
+#   Never cache dynamic content
+#
+# ========================================================================
+# SECURITY HEADERS EXPLANATION
+# ========================================================================
+#
+# X-Content-Type-Options: nosniff
+#   Prevents MIME type sniffing attacks
+#
+# X-Frame-Options: SAMEORIGIN
+#   Prevents clickjacking by disallowing embedding in other sites
+#
+# X-XSS-Protection: 1; mode=block
+#   Legacy XSS protection (modern CSP is better)
+#
+# Referrer-Policy: strict-origin-when-cross-origin
+#   Controls when Referer header is sent
+#   Protects user privacy while allowing analytics
+#
+# Permissions-Policy
+#   Disable geolocation, microphone, camera to prevent abuse
+#
+# ========================================================================

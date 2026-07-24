@@ -1,0 +1,25 @@
+[project]
+name = "magnus-validator"
+version = "1.1-corrected"
+description = "Magnus Validator - 3-pillar code-intent alignment scoring (Python port)"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+    {name = "Port from JS v1.1-corrected"}
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "pytest-cov"]
+
+[project.scripts]
+magnus-validator = "magnus_validator.cli:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-ra -q --strict-markers"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"

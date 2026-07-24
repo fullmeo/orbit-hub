@@ -1,0 +1,12 @@
+# Netlify configuration - Ouidah Jazz & Gospel Festival
+[build]
+  base = "."
+  publish = "."
+  functions = "netlify/functions"
+
+[build.environment]
+  GA4_PROPERTY_ID = "G-OUIDAH-JAZZ"
+  ARTIST_NAME = "Togbé Adjos"
+  ARTIST_TONE = "authentique, mystique, soulful, contemplatif"
+  ARTIST_BIO = "Fondateur et artiste principal du Ouidah Blues, Jazz & Gospel Festival"
+  NODE_ENV = "production"

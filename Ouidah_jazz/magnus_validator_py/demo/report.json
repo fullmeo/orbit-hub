@@ -1,0 +1,14 @@
+{
+  "version": "1.1-corrected",
+  "timestamp": "2026-05-24T06:37:59.876554+00:00",
+  "seed": "20260524-fixed",
+  "model": "default",
+  "scores": {
+    "recognition": 0,
+    "inevitability": 100,
+    "coherence": 74,
+    "overall": 58
+  },
+  "interpretation": "Convergence faible - Revoir l'alignement avec l'intent",
+  "hash": "5b6cc3511c42b06489876e377270bd7e376a821e2dcb25f99b3c792a14759507"
+}

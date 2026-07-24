@@ -1,0 +1,15 @@
+=== MAGNUS VALIDATOR v1.1-corrected ===
+Timestamp : 2026-05-24T06:39:18.938965+00:00
+Seed      : full-test
+Model     : default
+
+Scores :
+  Recognition   : 0/100
+  Inevitability : 100/100
+  Coherence     : 74/100
+  Overall       : 58/100
+
+Interprétation :
+  Convergence faible - Revoir l'alignement avec l'intent
+
+Hash : 74d8ba8a21a61c38f92777640d61ed84125c8cf5b85b0e7460c3d77c152f3957

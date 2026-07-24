@@ -1,0 +1,51 @@
+# ========================================================================
+# ORBIT - Netlify Redirects
+# Ouidah Blues, Jazz & Gospel Festival 2026
+# Fondateur: Togbé Adjos • VODUN JAZZ
+# ========================================================================
+
+# URL aliases (friendly shortcuts)
+/about                            /index.html#about              301
+/contact                          /index.html#contact            301
+/festival                         /index.html#festival           301
+/artists                          /index.html#artists            301
+/apply                            /index.html#apply              301
+/call-for-artists                 /index.html#apply              301
+/candidatures                     /index.html#apply              301
+
+# Social media shortcuts (UTM pre-configured)
+/facebook                         https://facebook.com/TogbeAdjos?utm_source=orbit&utm_medium=shortlink  301
+/instagram                        https://instagram.com/togbeadjos?utm_source=orbit&utm_medium=shortlink  301
+/email                            mailto:Adjos67@gmail.com       301
+/contact-email                    mailto:Adjos67@gmail.com       301
+/newsletter                       /index.html#contact            301
+
+# Legal pages
+/legal                            /index.html                    301
+/privacy                          /index.html                    301
+/terms                            /index.html                    301
+
+# Old site redirects (if migrating)
+/index.html                       /                              301
+/orbit-hub                        /                              301
+
+# Catch-all: SPA fallback for non-existent routes
+/*                                /index.html                    200
+
+# ========================================================================
+# NOTES
+# ========================================================================
+# 
+# 301 = Permanent redirect (search engines follow, updates crawl)
+# 302 = Temporary redirect (for A/B testing, campaigns)
+# 200 = Rewrite (URL stays in browser, invisible to user - good for SPA)
+#
+# UTM Parameters in shortcuts:
+# - utm_source: 'orbit' identifies the source
+# - utm_medium: 'shortlink' identifies marketing channel
+# - utm_campaign: Optional, can be added per campaign
+#
+# These allow tracking of shortened link performance in GA4
+# Example: /spotify link clicks → GA4 event with utm params
+#
+# ========================================================================
