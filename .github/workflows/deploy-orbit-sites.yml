@@ -1,0 +1,177 @@
+name: Deploy ORBIT Sites
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  workflow_dispatch:
+    inputs:
+      site:
+        description: 'Site to deploy (all|allyson-glado|ouidah-jazz|jecd-trio)'
+        required: false
+        default: 'all'
+
+env:
+  NODE_VERSION: '18'
+
+jobs:
+  detect-changes:
+    name: Detect Changed Sites
+    runs-on: ubuntu-latest
+    outputs:
+      sites: ${{ steps.detect.outputs.sites }}
+      all-deployed: ${{ steps.detect.outputs.all-deployed }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect Changed Directories
+        id: detect
+        run: |
+          if [[ "${{ github.event.inputs.site }}" != "" ]]; then
+            # Manual dispatch with specific site
+            SITES="${{ github.event.inputs.site }}"
+          else
+            # Auto-detect from git diff
+            CHANGED=$(git diff --name-only ${{ github.event.before }}...HEAD || echo "")
+
+            SITES=""
+            [[ $CHANGED == *"orbit-allysonglado"* ]] && SITES="$SITES allyson-glado"
+            [[ $CHANGED == *"Ouidah_jazz"* ]] && SITES="$SITES ouidah-jazz"
+            [[ $CHANGED == *"Jecd-trio_orbit-hub"* ]] && SITES="$SITES jecd-trio"
+
+            # If no specific changes, deploy all
+            if [[ -z "$SITES" ]]; then
+              SITES="all"
+            fi
+          fi
+
+          echo "sites=$SITES" >> $GITHUB_OUTPUT
+          echo "Detected sites to deploy: $SITES"
+
+  deploy-site:
+    name: Deploy ${{ matrix.site }}
+    runs-on: ubuntu-latest
+    needs: detect-changes
+    strategy:
+      matrix:
+        site: [allyson-glado, ouidah-jazz, jecd-trio]
+      max-parallel: 1
+    if: |
+      contains(needs.detect-changes.outputs.sites, matrix.site) ||
+      contains(needs.detect-changes.outputs.sites, 'all')
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Get Site Config
+        id: config
+        run: |
+          CONFIG=$(node -e "
+            const config = require('./orbit-sites.config.json');
+            const site = config.sites.find(s => s.id === '${{ matrix.site }}');
+            if (!site) process.exit(1);
+            console.log('dir=' + site.directory);
+            console.log('domain=' + site.domain);
+            console.log('status=' + site.status);
+          ")
+          echo "$CONFIG" >> $GITHUB_OUTPUT
+
+      - name: Install Dependencies
+        run: |
+          cd "${{ steps.config.outputs.dir }}"
+          npm ci --prefer-offline
+
+      - name: Build Site
+        run: |
+          cd "${{ steps.config.outputs.dir }}"
+          npm run build
+
+      - name: Deploy to Netlify
+        id: deploy
+        uses: nwtgck/actions-netlify@v3
+        with:
+          publish-dir: './${{ steps.config.outputs.dir }}'
+          production-deploy: ${{ github.ref == 'refs/heads/main' }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: |
+            Deploy ${{ matrix.site }} from ${{ github.sha }}
+            Commit: ${{ github.event.head_commit.message }}
+          netlify-config-path: './${{ steps.config.outputs.dir }}/netlify.toml'
+          enable-pull-request-comment: true
+          enable-commit-comment: true
+          overwrites-pull-request-comment: true
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets[format('NETLIFY_SITE_ID_{0}', matrix.site)] }}
+
+      - name: Add Deployment Status
+        uses: actions/github-script@v7
+        if: always()
+        with:
+          script: |
+            const status = '${{ job.status }}';
+            const deployUrl = '${{ steps.deploy.outputs.deploy-url }}';
+            const liveUrl = '${{ steps.deploy.outputs.url }}';
+
+            let message = `## 🎛️ ${{ matrix.site }} Deploy ${status === 'success' ? '✅' : '❌'}\n\n`;
+            if (deployUrl) message += `**Deploy Preview**: [${deployUrl}](${deployUrl})\n`;
+            if (liveUrl && '${{ github.ref }}' === 'refs/heads/main') {
+              message += `**Live Site**: [${liveUrl}](${liveUrl})\n`;
+            }
+
+            console.log(message);
+
+  slack-notification:
+    name: Notify Slack
+    runs-on: ubuntu-latest
+    needs: [detect-changes, deploy-site]
+    if: always()
+    steps:
+      - name: Send Slack Message
+        if: env.SLACK_WEBHOOK_URL
+        uses: slackapi/slack-github-action@v1
+        with:
+          payload: |
+            {
+              "text": "ORBIT Sites Deployment",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*ORBIT Hub Multi-Site Deployment*\n*Status*: ${{ needs.deploy-site.result }}\n*Workflow*: <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View>"
+                  }
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+  summary:
+    name: Deployment Summary
+    runs-on: ubuntu-latest
+    needs: [detect-changes, deploy-site]
+    if: always()
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate Summary
+        run: |
+          echo "## 🎯 ORBIT Multi-Site Deployment Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Branch**: ${{ github.ref }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Commit**: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Status**: ${{ needs.deploy-site.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Detected Sites**: ${{ needs.detect-changes.outputs.sites }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "[View Workflow]({{ github.server_url }}/{{ github.repository }}/actions/runs/{{ github.run_id }})" >> $GITHUB_STEP_SUMMARY

@@ -11,7 +11,13 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "coverage": "jest --coverage",
-    "metrics": "jest --coverage && echo '✅ All metrics calculated'"
+    "metrics": "jest --coverage && echo '✅ All metrics calculated'",
+    "deploy:list": "node deploy-multi-site.js list",
+    "deploy:all": "node deploy-multi-site.js deploy all",
+    "deploy:allyson": "node deploy-multi-site.js deploy allyson-glado",
+    "deploy:ouidah": "node deploy-multi-site.js deploy ouidah-jazz",
+    "deploy:jecd": "node deploy-multi-site.js deploy jecd-trio",
+    "init:site": "node -e \"require('child_process').execSync('powershell -NoProfile -ExecutionPolicy Bypass .\\\\init-new-artist-site.ps1', {stdio: 'inherit'})\" || bash init-new-artist-site.sh"
   },
   "keywords": [
     "artist",

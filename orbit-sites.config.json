@@ -1,0 +1,108 @@
+{
+  "platform": "netlify",
+  "organization": "orbit-hub",
+  "description": "Multi-site configuration for ORBIT Hub artist pages",
+  "version": "1.0.0",
+  "sites": [
+    {
+      "id": "allyson-glado",
+      "name": "Allyson Glado",
+      "domain": "orbit-allysonglado.netlify.app",
+      "customDomain": null,
+      "directory": "orbit-allysonglado",
+      "status": "production",
+      "artist": {
+        "name": "Allyson Glado",
+        "genre": "Reggae-Pop",
+        "bio": "Artiste reggae-pop de Paris, combinant rythmes caribéens authentiques avec soul et jazz.",
+        "tone": "chaleureux, inspirant, accessible, poétique",
+        "instagram": "https://instagram.com/allysonglado",
+        "spotify": "https://open.spotify.com/artist/allyson-glado"
+      },
+      "analytics": {
+        "ga4PropertyId": "G-LS4G24ESNF"
+      },
+      "features": [
+        "fan-chat",
+        "music-streaming",
+        "newsletter",
+        "social-integration"
+      ]
+    },
+    {
+      "id": "ouidah-jazz",
+      "name": "Ouidah Jazz & Gospel",
+      "domain": "ouidah-jazz.netlify.app",
+      "customDomain": null,
+      "directory": "Ouidah_jazz",
+      "status": "staging",
+      "artist": {
+        "name": "Togbé Adjos",
+        "genre": "Vodun Jazz • Blues",
+        "bio": "Fondateur et artiste principal du Ouidah Blues, Jazz & Gospel Festival",
+        "tone": "authentique, mystique, soulful, contemplatif",
+        "instagram": "https://instagram.com/togbeadjos",
+        "spotify": "https://..."
+      },
+      "analytics": {
+        "ga4PropertyId": "G-OUIDAH-JAZZ"
+      },
+      "features": [
+        "fan-chat",
+        "music-streaming",
+        "festival-info",
+        "social-integration"
+      ]
+    },
+    {
+      "id": "jecd-trio",
+      "name": "JECD Trio",
+      "domain": "jecd-trio.netlify.app",
+      "customDomain": null,
+      "directory": "Jecd-trio_orbit-hub",
+      "status": "staging",
+      "artist": {
+        "name": "JECD Trio",
+        "genre": "Jazz/Electronic",
+        "bio": "Trio fusion jazz électronique",
+        "tone": "experimental, innovative, modern",
+        "instagram": null,
+        "spotify": null
+      },
+      "analytics": {
+        "ga4PropertyId": "G-JECD-TRIO"
+      },
+      "features": [
+        "music-streaming",
+        "api-integration",
+        "backend-support"
+      ]
+    }
+  ],
+  "deployment": {
+    "strategy": "multi-site",
+    "rollout": "individual-per-artist",
+    "cdnPurgingEnabled": true,
+    "previewDeployments": true,
+    "productionBranch": "main",
+    "deployPreviewBranch": "develop"
+  },
+  "shared": {
+    "nodeVersion": "18.0.0",
+    "buildCommand": "npm run build",
+    "publishDirectory": ".",
+    "functions": "netlify/functions",
+    "redirectsFile": "_redirects",
+    "headersFile": "_headers"
+  },
+  "environment": {
+    "production": {
+      "NODE_ENV": "production",
+      "LOG_LEVEL": "info"
+    },
+    "staging": {
+      "NODE_ENV": "staging",
+      "LOG_LEVEL": "debug"
+    }
+  }
+}
