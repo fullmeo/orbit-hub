@@ -1,0 +1,67 @@
+# ========================================================================
+# ORBIT - Netlify Redirects
+# Allyson Glado Artist Hub
+# ========================================================================
+
+# Blog archive redirect
+/blog/*  /blog/index.html  200
+
+# URL aliases (friendly shortcuts)
+/listen                           /music.html                    301
+/music                            /music.html                    301
+/albums                           /music.html                    301
+/about-me                         /about.html                    301
+/contact                          /connect.html                  301
+/social                           /connect.html                  301
+/press                            /connect.html#press-section    301
+/bookings                         /connect.html#contact-methods  301
+/collaborate                      /connect.html#contact-methods  301
+
+# Spotify/platform shortcuts (UTM pre-configured)
+/spotify                          https://open.spotify.com/artist/7CgVDnTyDJjV0zZ5GFqdz1?utm_source=orbit&utm_medium=shortlink  301
+/apple                            https://music.apple.com/us/artist/allyson-glado/1209476753?utm_source=orbit&utm_medium=shortlink  301
+/youtube                          https://www.youtube.com/channel/UCHbce4yJr6SJ_pAsvtbG7ag?utm_source=orbit&utm_medium=shortlink  301
+/deezer                           https://www.deezer.com/en/artist/12298412?utm_source=orbit&utm_medium=shortlink  301
+/soundcloud                       https://soundcloud.com/allysonglado?utm_source=orbit&utm_medium=shortlink  301
+/instagram                        https://www.instagram.com/allysonglado?utm_source=orbit&utm_medium=shortlink  301
+/tiktok                           https://www.tiktok.com/@allysonglado?utm_source=orbit&utm_medium=shortlink  301
+/facebook                         https://www.facebook.com/allysonglado?utm_source=orbit&utm_medium=shortlink  301
+
+# Album shortcuts
+/elevation                        /music.html#elevation          301
+/smoi                             /music.html#smoi               301
+/s-moi                            /music.html#smoi               301
+
+# Old site redirects (if migrating)
+/index.html                       /                              301
+/orbit-hub                        /                              301
+
+# Legal pages
+/legal                            /terms.html                    301
+/privacy                          /privacy.html                  301
+/terms                            /terms.html                    301
+
+# Email/contact
+/email                            /connect.html#newsletter       301
+/newsletter                       /connect.html#newsletter       301
+
+# Catch-all: SPA fallback for non-existent routes
+/*                                /index.html                    200
+
+# ========================================================================
+# NOTES
+# ========================================================================
+# 
+# 301 = Permanent redirect (search engines follow, updates crawl)
+# 302 = Temporary redirect (for A/B testing, campaigns)
+# 200 = Rewrite (URL stays in browser, invisible to user - good for SPA)
+#
+# UTM Parameters in shortcuts:
+# - utm_source: 'orbit' identifies the source
+# - utm_medium: 'shortlink' identifies marketing channel
+# - utm_campaign: Optional, can be added per campaign
+#
+# These allow tracking of shortened link performance in GA4
+# Example: /spotify link clicks → GA4 event with utm params
+#
+# ========================================================================

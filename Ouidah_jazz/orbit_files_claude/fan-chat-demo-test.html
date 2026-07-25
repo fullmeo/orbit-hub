@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fan Chat Demo - Test UX/UI (No API)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0a1a12;
+            color: #f5f1e8;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .demo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .demo-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #1a472a 0%, #0a1a12 100%);
+            border-radius: 10px;
+            border: 2px solid #2d5a3d;
+        }
+
+        .demo-header h1 {
+            font-size: 2.5rem;
+            color: #d4a574;
+            margin-bottom: 10px;
+        }
+
+        .demo-header p {
+            font-size: 1.1rem;
+            color: rgba(245, 241, 232, 0.8);
+            margin-bottom: 15px;
+        }
+
+        .demo-badge {
+            display: inline-block;
+            background: #1DB954;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin: 5px;
+        }
+
+        .demo-badge.warning {
+            background: #f39c12;
+        }
+
+        .demo-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 900px) {
+            .demo-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .demo-section {
+            background: #1a1a1a;
+            border: 1px solid #2d5a3d;
+            border-radius: 10px;
+            padding: 25px;
+        }
+
+        .demo-section h2 {
+            font-size: 1.5rem;
+            color: #d4a574;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .demo-section h2::before {
+            content: '📋';
+            font-size: 1.3rem;
+        }
+
+        .demo-section.features h2::before {
+            content: '✨';
+        }
+
+        .demo-section.instructions h2::before {
+            content: '🎯';
+        }
+
+        .demo-section.test-cases h2::before {
+            content: '🧪';
+        }
+
+        .demo-section ul {
+            list-style: none;
+            margin-bottom: 15px;
+        }
+
+        .demo-section li {
+            padding: 12px;
+            margin: 8px 0;
+            background: rgba(212, 165, 116, 0.1);
+            border-left: 3px solid #d4a574;
+            border-radius: 5px;
+        }
+
+        .demo-section li strong {
+            color: #d4a574;
+        }
+
+        .demo-section code {
+            background: #0a1a12;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #1DB954;
+        }
+
+        .test-cases {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .test-case {
+            background: #0a1a12;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #2d5a3d;
+        }
+
+        .test-case strong {
+            color: #d4a574;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .test-case small {
+            color: rgba(224, 224, 224, 0.7);
+            display: block;
+        }
+
+        .demo-live {
+            background: #1a1a1a;
+            border: 2px solid #d4a574;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            grid-column: 1 / -1;
+        }
+
+        .demo-live h2 {
+            margin-bottom: 20px;
+        }
+
+        .demo-live p {
+            color: rgba(245, 241, 232, 0.8);
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .demo-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .demo-button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .demo-button.primary {
+            background: #d4a574;
+            color: #1a472a;
+        }
+
+        .demo-button.primary:hover {
+            background: #e8b960;
+            transform: translateY(-2px);
+        }
+
+        .demo-button.secondary {
+            background: transparent;
+            color: #d4a574;
+            border: 2px solid #d4a574;
+        }
+
+        .demo-button.secondary:hover {
+            background: #d4a574;
+            color: #1a472a;
+            transform: translateY(-2px);
+        }
+
+        .demo-button.danger {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .demo-button.danger:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+
+        .info-box {
+            background: rgba(29, 185, 84, 0.1);
+            border-left: 4px solid #1DB954;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+
+        .info-box strong {
+            color: #1DB954;
+        }
+
+        .warning-box {
+            background: rgba(243, 156, 18, 0.1);
+            border-left: 4px solid #f39c12;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+
+        .warning-box strong {
+            color: #f39c12;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background: #1a1a1a;
+            border-radius: 10px;
+            border: 1px solid #2d5a3d;
+            color: rgba(245, 241, 232, 0.7);
+        }
+
+        .footer a {
+            color: #d4a574;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Fan Chat Widget Styles (from main CSS) */
+        .fan-chat-widget {
+            --primary-color: #d4a574;
+            --secondary-color: #1a472a;
+            --dark-bg: #0a1a12;
+            --light-text: #f5f1e8;
+            --border-color: #2d5a3d;
+        }
+
+        .fan-chat-widget[data-theme="light"] {
+            --primary-color: #1a472a;
+            --secondary-color: #d4a574;
+            --dark-bg: #f5f1e8;
+            --light-text: #0a1a12;
+            --border-color: #e0d5c7;
+        }
+
+        .fan-chat-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--primary-color);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .fan-chat-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+        }
+
+        .fan-chat-button svg {
+            width: 30px;
+            height: 30px;
+            color: var(--secondary-color);
+            stroke: var(--secondary-color);
+        }
+
+        .fan-chat-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #e74c3c;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .fan-chat-window {
+            position: fixed;
+            bottom: 110px;
+            right: 30px;
+            width: 400px;
+            height: 600px;
+            background: var(--dark-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            z-index: 998;
+            transition: all 0.3s ease;
+        }
+
+        .fan-chat-window.hidden {
+            display: none;
+        }
+
+        @media (max-width: 500px) {
+            .fan-chat-window {
+                width: 100vw;
+                height: 100vh;
+                bottom: 0;
+                right: 0;
+                border-radius: 0;
+            }
+        }
+
+        .fan-chat-header {
+            background: linear-gradient(135deg, var(--secondary-color), #1a472a);
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .fan-chat-artist-info h2 {
+            color: var(--light-text);
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .fan-chat-artist-info p {
+            color: rgba(212, 165, 116, 0.8);
+            font-size: 0.9rem;
+        }
+
+        .fan-chat-close {
+            background: none;
+            border: none;
+            color: var(--light-text);
+            cursor: pointer;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .fan-chat-close svg {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+        }
+
+        .fan-chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .fan-chat-message {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fan-chat-message.user {
+            justify-content: flex-end;
+        }
+
+        .fan-chat-message.assistant {
+            justify-content: flex-start;
+        }
+
+        .fan-chat-message-content {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 8px;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+        }
+
+        .fan-chat-message.user .fan-chat-message-content {
+            background: var(--primary-color);
+            color: var(--secondary-color);
+        }
+
+        .fan-chat-message.assistant .fan-chat-message-content {
+            background: var(--border-color);
+            color: var(--light-text);
+        }
+
+        .typing-indicator {
+            display: flex;
+            gap: 4px;
+        }
+
+        .typing-indicator span {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--light-text);
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% {
+                opacity: 0.3;
+                transform: translateY(0);
+            }
+            30% {
+                opacity: 1;
+                transform: translateY(-8px);
+            }
+        }
+
+        .fan-chat-input-area {
+            display: flex;
+            gap: 10px;
+            padding: 15px;
+            border-top: 1px solid var(--border-color);
+            background: var(--dark-bg);
+        }
+
+        .fan-chat-input {
+            flex: 1;
+            background: rgba(212, 165, 116, 0.1);
+            border: 1px solid var(--border-color);
+            color: var(--light-text);
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .fan-chat-input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 8px rgba(212, 165, 116, 0.2);
+        }
+
+        .fan-chat-input::placeholder {
+            color: rgba(212, 165, 116, 0.5);
+        }
+
+        .fan-chat-send {
+            background: var(--primary-color);
+            border: none;
+            color: var(--secondary-color);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .fan-chat-send:hover {
+            transform: scale(1.05);
+        }
+
+        .fan-chat-send svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--secondary-color);
+        }
+
+        .fan-chat-footer {
+            padding: 10px;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            background: rgba(212, 165, 116, 0.05);
+            font-size: 0.8rem;
+            color: rgba(212, 165, 116, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <!-- Header -->
+        <div class="demo-header">
+            <h1>🎵 Fan Chat Demo</h1>
+            <p>Test UX/UI without API Keys</p>
+            <div>
+                <span class="demo-badge">✅ DEMO MODE</span>
+                <span class="demo-badge warning">🚫 NO API REQUIRED</span>
+                <span class="demo-badge">💻 FULLY INTERACTIVE</span>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="demo-content">
+            <!-- Instructions -->
+            <div class="demo-section instructions">
+                <h2>How to Test</h2>
+                <ul>
+                    <li><strong>1.</strong> Look for the 💬 chat button in the bottom-right corner</li>
+                    <li><strong>2.</strong> Click to open the chat window</li>
+                    <li><strong>3.</strong> Type a message and hit Enter or click Send</li>
+                    <li><strong>4.</strong> Wait 1.5 seconds for a mock response</li>
+                    <li><strong>5.</strong> Messages persist in localStorage (refresh page to see)</li>
+                </ul>
+
+                <div class="info-box">
+                    <strong>💡 Tip:</strong> This demo uses keyword-based responses. Try keywords like:
+                    <code>hello</code>, <code>album</code>, <code>spotify</code>, <code>paris</code>,
+                    <code>collaborations</code>, <code>concert</code>, etc.
+                </div>
+            </div>
+
+            <!-- Features -->
+            <div class="demo-section features">
+                <h2>Features Tested</h2>
+                <ul>
+                    <li>✅ <strong>Open/Close:</strong> Click button to toggle chat</li>
+                    <li>✅ <strong>Send Message:</strong> Type and press Enter or click Send</li>
+                    <li>✅ <strong>Typing Indicator:</strong> See "..." while waiting</li>
+                    <li>✅ <strong>Auto-scroll:</strong> Chat follows new messages</li>
+                    <li>✅ <strong>Persistence:</strong> Messages saved in localStorage</li>
+                    <li>✅ <strong>XSS Safety:</strong> No HTML injection possible</li>
+                    <li>✅ <strong>Mobile Responsive:</strong> Works on all screen sizes</li>
+                    <li>✅ <strong>Dark Mode:</strong> Default reggae-pop theme</li>
+                    <li>✅ <strong>Accessibility:</strong> WCAG AA compliant</li>
+                    <li>✅ <strong>Input Validation:</strong> Max 1000 chars</li>
+                </ul>
+            </div>
+
+            <!-- Test Cases -->
+            <div class="demo-section test-cases">
+                <h2>Test Cases to Try</h2>
+
+                <div class="test-case">
+                    <strong>Test 1: Greeting</strong>
+                    <small>Type: "Hello" or "Bonjour"</small>
+                    <small>Expected: Friendly greeting response</small>
+                </div>
+
+                <div class="test-case">
+                    <strong>Test 2: About Artist</strong>
+                    <small>Type: "Who are you?" or "Raconte-moi"</small>
+                    <small>Expected: Artist biography response</small>
+                </div>
+
+                <div class="test-case">
+                    <strong>Test 3: Albums</strong>
+                    <small>Type: "Tell me about your albums"</small>
+                    <small>Expected: Album information</small>
+                </div>
+
+                <div class="test-case">
+                    <strong>Test 4: Streaming</strong>
+                    <small>Type: "Where can I listen?"</small>
+                    <small>Expected: Spotify, Apple Music links info</small>
+                </div>
+
+                <div class="test-case">
+                    <strong>Test 5: Persistence</strong>
+                    <small>Action: Send message → Refresh page (F5)</small>
+                    <small>Expected: Message history still visible</small>
+                </div>
+
+                <div class="test-case">
+                    <strong>Test 6: Long Message</strong>
+                    <small>Type: 500+ characters</small>
+                    <small>Expected: Message accepted (max 1000)</small>
+                </div>
+
+                <div class="test-case">
+                    <strong>Test 7: Mobile</strong>
+                    <small>Action: Open on mobile or resize to 400px width</small>
+                    <small>Expected: Chat fills full screen, button hidden</small>
+                </div>
+
+                <div class="test-case">
+                    <strong>Test 8: Typing Indicator</strong>
+                    <small>Action: Send message</small>
+                    <small>Expected: "..." appears for 1.5 seconds before response</small>
+                </div>
+            </div>
+
+            <!-- Live Demo -->
+            <div class="demo-live">
+                <h2>👇 Live Demo Below 👇</h2>
+                <p>The chat widget will appear in the bottom-right corner of your screen.</p>
+
+                <div class="demo-buttons">
+                    <button class="demo-button primary" onclick="openChat()">
+                        Open Chat Now
+                    </button>
+                    <button class="demo-button secondary" onclick="clearChatHistory()">
+                        Clear History
+                    </button>
+                    <button class="demo-button secondary" onclick="testMessage()">
+                        Send Test Message
+                    </button>
+                </div>
+
+                <div class="warning-box">
+                    <strong>⚠️ Demo Mode:</strong> This version uses simulated responses based on keywords.
+                    When connected to the real API, responses will be AI-generated using Anthropic's Claude.
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>🚀 <strong>Ready to go live?</strong> Replace <code>fan-chat-widget-demo.js</code> with <code>fan-chat-widget.js</code> and add your <code>ANTHROPIC_API_KEY</code> to Netlify.</p>
+            <p><a href="https://github.com/fullmeo/orbit-hub" target="_blank">View Source Code on GitHub</a></p>
+        </div>
+    </div>
+
+    <!-- Load the demo widget -->
+    <script src="fan-chat-widget-demo.js"></script>
+
+    <!-- Helper Functions -->
+    <script>
+        function openChat() {
+            const button = document.getElementById('fan-chat-button');
+            if (button) button.click();
+        }
+
+        function clearChatHistory() {
+            if (confirm('Clear all messages? This cannot be undone.')) {
+                localStorage.removeItem('fan-chat-messages');
+                const container = document.getElementById('fan-chat-messages');
+                if (container) container.innerHTML = '';
+                alert('Chat history cleared!');
+            }
+        }
+
+        function testMessage() {
+            const input = document.getElementById('fan-chat-input');
+            if (input) {
+                const messages = [
+                    'Hello! Tell me about yourself',
+                    'What\'s your favorite album?',
+                    'Where can I listen to your music?',
+                    'Tell me about your collaborations',
+                    'Do you perform live concerts?'
+                ];
+                const random = messages[Math.floor(Math.random() * messages.length)];
+                input.value = random;
+                input.focus();
+            }
+        }
+
+        console.log('✅ Fan Chat Demo loaded - No API required!');
+    </script>
+</body>
+</html>

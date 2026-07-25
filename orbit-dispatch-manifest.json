@@ -1,0 +1,502 @@
+{
+  "project": "ORBIT (Artist Hub for Allyson Glado)",
+  "status": "Phase 0 Production → Phase 1 Multi-Page Expansion",
+  "generated": "2026-05-02T00:00:00Z",
+  "summary": {
+    "total_tasks": 27,
+    "total_estimated_hours": 98,
+    "critical_path_hours": 32,
+    "phases": ["Phase 0 (Complete)", "Phase 1 (Active)", "Phase 2 (Deferred)"],
+    "convergence_φ": 0.92
+  },
+  "task_categories": {
+    "CRITICAL_BLOCKER": "MUST resolve before any Phase 1 execution",
+    "PHASE_1_CORE": "Core Phase 1 functionality (landing page, blog, email)",
+    "PHASE_1_ENHANCEMENT": "UX/Polish for Phase 1 launch",
+    "PHASE_2_DEFERRED": "Multi-artist scaling, advanced features (defer post MVP)",
+    "OPTIONAL": "Nice-to-have, defer unless explicitly prioritized"
+  },
+  "tasks": [
+    {
+      "id": "BLOCKER-001",
+      "category": "CRITICAL_BLOCKER",
+      "title": "Resolve Service Topology (LitElement ↔ Railway ↔ FastAPI)",
+      "description": "3-way coupling decision: how do LitElement Web Components communicate with Railway microservices? Admin panel hosted where? API gateway routing?",
+      "dependencies": [],
+      "estimated_hours": 3,
+      "effort": "MEDIUM",
+      "priority": 1,
+      "blocks": [
+        "PHASE_1_001",
+        "PHASE_1_002",
+        "PHASE_1_003",
+        "PHASE_1_004"
+      ],
+      "required_by": "Phase 1 execution start",
+      "notes": "Serigne + Opus 4-6 deep-dive session. Decision locks all downstream architecture."
+    },
+    {
+      "id": "BLOCKER-002",
+      "category": "CRITICAL_BLOCKER",
+      "title": "Lock Album Upload Flow (Phase 1 vs Phase 2)",
+      "description": "Define Phase 1 scope: admin-only upload (single artist) vs Phase 2 (multi-artist upload). Current BBBA decision incomplete on user flow.",
+      "dependencies": [],
+      "estimated_hours": 2,
+      "effort": "LOW",
+      "priority": 2,
+      "blocks": [
+        "PHASE_1_005",
+        "PHASE_1_006",
+        "PHASE_2_001"
+      ],
+      "required_by": "Before PHASE_1_005 start",
+      "notes": "Decision: Phase 1 = admin-only (Allyson interface), Phase 2 = generalized multi-artist. Lock scope NOW."
+    },
+    {
+      "id": "PHASE_1_001",
+      "category": "PHASE_1_CORE",
+      "title": "Build Landing Page (Hero, CTA, Album Grid)",
+      "description": "Hero section with artist bio, call-to-action (email signup), featured album grid with 3–5 albums. Responsive design (mobile-first).",
+      "dependencies": ["BLOCKER-001"],
+      "estimated_hours": 8,
+      "effort": "MEDIUM",
+      "priority": 3,
+      "blocks": ["PHASE_1_008"],
+      "owner": "Sonnet 4-6 (React component)",
+      "tech_stack": ["LitElement", "Tailwind CSS", "responsive grid"],
+      "required_by": "Week 1 end"
+    },
+    {
+      "id": "PHASE_1_002",
+      "category": "PHASE_1_CORE",
+      "title": "Build Blog List Page + Blog Post Template",
+      "description": "Blog list (chronological, pagination), individual blog post pages. Markdown parsing (posts stored in CMS or filesystem). Author byline, publish date, metadata.",
+      "dependencies": ["BLOCKER-001"],
+      "estimated_hours": 6,
+      "effort": "MEDIUM",
+      "priority": 4,
+      "blocks": ["PHASE_1_009", "PHASE_1_010"],
+      "owner": "Sonnet 4-6",
+      "tech_stack": ["LitElement", "markdown-it or remark", "SEO meta tags"],
+      "required_by": "Week 1 end"
+    },
+    {
+      "id": "PHASE_1_003",
+      "category": "PHASE_1_CORE",
+      "title": "Build Photo Gallery Page (Albums, Carousel, Lightbox)",
+      "description": "Gallery page with album cards, carousel for featured images, lightbox for full-screen viewing. Metadata per image (caption, date, location).",
+      "dependencies": ["BLOCKER-001"],
+      "estimated_hours": 7,
+      "effort": "MEDIUM",
+      "priority": 5,
+      "blocks": ["PHASE_1_012"],
+      "owner": "Sonnet 4-6",
+      "tech_stack": ["LitElement", "Photoswipe or similar", "lazy loading"],
+      "required_by": "Week 2 start"
+    },
+    {
+      "id": "PHASE_1_004",
+      "category": "PHASE_1_CORE",
+      "title": "Build Navigation + Footer (Consistent across all pages)",
+      "description": "Primary nav (Home, Blog, Gallery, About, Contact), mobile hamburger menu, footer with social links, copyright, sitemap link.",
+      "dependencies": ["BLOCKER-001"],
+      "estimated_hours": 4,
+      "effort": "LOW",
+      "priority": 6,
+      "blocks": ["PHASE_1_001", "PHASE_1_002", "PHASE_1_003"],
+      "owner": "Sonnet 4-6",
+      "tech_stack": ["LitElement shared component", "responsive nav"],
+      "required_by": "Week 1 start (foundational)"
+    },
+    {
+      "id": "PHASE_1_005",
+      "category": "PHASE_1_CORE",
+      "title": "Build Admin Panel (Album Upload Interface — Phase 1: Admin-Only)",
+      "description": "Admin-only interface for Allyson to upload albums (name, description, cover image, track list). Phase 1 = single-artist auth (Allyson), Phase 2 = generalize. JWT token in localStorage (phase 1 acceptable).",
+      "dependencies": ["BLOCKER-001", "BLOCKER-002"],
+      "estimated_hours": 8,
+      "effort": "MEDIUM",
+      "priority": 7,
+      "blocks": ["PHASE_1_006"],
+      "owner": "Sonnet 4-6 (FastAPI auth)",
+      "tech_stack": ["FastAPI /admin, JWT auth", "LitElement form", "file upload to storage"],
+      "required_by": "Week 2 mid"
+    },
+    {
+      "id": "PHASE_1_006",
+      "category": "PHASE_1_CORE",
+      "title": "Implement Album + Track Database Schema (Prisma)",
+      "description": "Finalize Prisma schema for Album (name, description, cover_image_url, release_date, artist_id) and Track (title, duration, album_id). Migrations.",
+      "dependencies": ["BLOCKER-001"],
+      "estimated_hours": 3,
+      "effort": "LOW",
+      "priority": 8,
+      "blocks": ["PHASE_1_005", "PHASE_1_012"],
+      "owner": "Sonnet 4-6 (Prisma)",
+      "tech_stack": ["Prisma", "PostgreSQL on Railway"],
+      "required_by": "Week 1 end"
+    },
+    {
+      "id": "PHASE_1_007",
+      "category": "PHASE_1_ENHANCEMENT",
+      "title": "Implement Email Signup (Brevo Integration Already Exists)",
+      "description": "Verify Brevo integration from Phase 0 works. Test end-to-end email capture from landing page → Brevo contact list. Add confirmation email template.",
+      "dependencies": [],
+      "estimated_hours": 2,
+      "effort": "LOW",
+      "priority": 9,
+      "blocks": [],
+      "owner": "Sonnet 4-6 (Brevo SDK)",
+      "tech_stack": ["Brevo API", "email templates"],
+      "required_by": "Week 1 end"
+    },
+    {
+      "id": "PHASE_1_008",
+      "category": "PHASE_1_ENHANCEMENT",
+      "title": "Add About Page (Bio, Credits, Contact Info)",
+      "description": "About Allyson (bio), album credits (musicians, producers), contact form (name, email, message → Brevo).",
+      "dependencies": ["PHASE_1_001"],
+      "estimated_hours": 4,
+      "effort": "LOW",
+      "priority": 10,
+      "blocks": [],
+      "owner": "Sonnet 4-6",
+      "tech_stack": ["LitElement", "form handling"],
+      "required_by": "Week 2 end"
+    },
+    {
+      "id": "PHASE_1_009",
+      "category": "PHASE_1_ENHANCEMENT",
+      "title": "Implement Blog Workflow (Allyson Writes → Approval → Publish)",
+      "description": "Semi-automatic blog workflow: Allyson submits post (markdown or rich text), Serigne approves, post appears on site. Admin panel blog editor.",
+      "dependencies": ["PHASE_1_002", "PHASE_1_005"],
+      "estimated_hours": 6,
+      "effort": "MEDIUM",
+      "priority": 11,
+      "blocks": [],
+      "owner": "Sonnet 4-6",
+      "tech_stack": ["FastAPI endpoint", "Prisma Post schema", "markdown rendering"],
+      "required_by": "Week 3 start"
+    },
+    {
+      "id": "PHASE_1_010",
+      "category": "PHASE_1_ENHANCEMENT",
+      "title": "Add Search + Filter on Blog (by tag, date range)",
+      "description": "Blog search (title/content), tag filtering, date range picker. Client-side or server-side depending on volume.",
+      "dependencies": ["PHASE_1_002"],
+      "estimated_hours": 4,
+      "effort": "MEDIUM",
+      "priority": 12,
+      "blocks": [],
+      "owner": "Sonnet 4-6",
+      "tech_stack": ["FastAPI /search endpoint", "Lunr.js or similar"],
+      "required_by": "Week 3 mid"
+    },
+    {
+      "id": "PHASE_1_011",
+      "category": "PHASE_1_ENHANCEMENT",
+      "title": "Implement Social Media Share Buttons (Blog + Gallery)",
+      "description": "Share buttons (Twitter/X, Facebook, LinkedIn) on blog posts and gallery images. OG meta tags for rich previews.",
+      "dependencies": ["PHASE_1_002", "PHASE_1_003"],
+      "estimated_hours": 2,
+      "effort": "LOW",
+      "priority": 13,
+      "blocks": [],
+      "owner": "Sonnet 4-6",
+      "tech_stack": ["OG tags", "share-intent libraries"],
+      "required_by": "Week 3 end"
+    },
+    {
+      "id": "PHASE_1_012",
+      "category": "PHASE_1_ENHANCEMENT",
+      "title": "Add Image Optimization + CDN Setup (Cloudinary or Netlify Images)",
+      "description": "Optimize all images for web (responsive srcset, AVIF/WebP formats). Consider Cloudinary or Netlify's built-in image optimization.",
+      "dependencies": ["PHASE_1_003", "PHASE_1_006"],
+      "estimated_hours": 3,
+      "effort": "MEDIUM",
+      "priority": 14,
+      "blocks": [],
+      "owner": "Sonnet 4-6",
+      "tech_stack": ["Cloudinary SDK or Netlify images"],
+      "required_by": "Week 3 end"
+    },
+    {
+      "id": "PHASE_1_013",
+      "category": "PHASE_1_ENHANCEMENT",
+      "title": "Implement Analytics Tracking (GA4 Already Configured)",
+      "description": "Verify GA4 from Phase 0 is tracking correctly. Add custom events (album view, blog read, email signup, admin login). Set up funnels.",
+      "dependencies": [],
+      "estimated_hours": 2,
+      "effort": "LOW",
+      "priority": 15,
+      "blocks": [],
+      "owner": "Sonnet 4-6",
+      "tech_stack": ["GA4 gtag.js"],
+      "required_by": "Week 2 end"
+    },
+    {
+      "id": "PHASE_1_014",
+      "category": "PHASE_1_ENHANCEMENT",
+      "title": "SEO Audit + Schema.org Verification (Phase 0 A-rated, enhance for Phase 1)",
+      "description": "Verify Schema.org JSON-LD for blog posts, albums, images. Ensure all pages have proper meta tags (title, description, keywords). Run PageSpeed Insights.",
+      "dependencies": [],
+      "estimated_hours": 3,
+      "effort": "LOW",
+      "priority": 16,
+      "blocks": [],
+      "owner": "Sonnet 4-6",
+      "tech_stack": ["schema.org", "structured data testing tool"],
+      "required_by": "Week 2 end"
+    },
+    {
+      "id": "PHASE_1_015",
+      "category": "PHASE_1_ENHANCEMENT",
+      "title": "Add Dark Mode Toggle (Accessibility + UX Enhancement)",
+      "description": "CSS custom properties for dark mode. Persist user preference in localStorage. Prefers-color-scheme media query fallback.",
+      "dependencies": [],
+      "estimated_hours": 2,
+      "effort": "LOW",
+      "priority": 17,
+      "blocks": [],
+      "owner": "Sonnet 4-6",
+      "tech_stack": ["CSS variables", "localStorage"],
+      "required_by": "Week 3 end (optional but nice)"
+    },
+    {
+      "id": "PHASE_1_016",
+      "category": "PHASE_1_ENHANCEMENT",
+      "title": "Performance Testing + Optimization (Lighthouse, WebVitals)",
+      "description": "Run Lighthouse, measure Core Web Vitals (LCP, FID, CLS). Optimize based on results (code splitting, lazy loading, caching).",
+      "dependencies": ["PHASE_1_001", "PHASE_1_002", "PHASE_1_003"],
+      "estimated_hours": 5,
+      "effort": "MEDIUM",
+      "priority": 18,
+      "blocks": [],
+      "owner": "Sonnet 4-6",
+      "tech_stack": ["Lighthouse, WebVitals API"],
+      "required_by": "Week 4 start (pre-launch)"
+    },
+    {
+      "id": "PHASE_1_017",
+      "category": "PHASE_1_ENHANCEMENT",
+      "title": "Write Unit Tests (Landing, Blog, Gallery Components)",
+      "description": "Jest + React Testing Library for LitElement components. 80%+ coverage for core pages. Admin panel auth tests.",
+      "dependencies": ["PHASE_1_001", "PHASE_1_002", "PHASE_1_003", "PHASE_1_005"],
+      "estimated_hours": 8,
+      "effort": "MEDIUM",
+      "priority": 19,
+      "blocks": [],
+      "owner": "Kilo/Grok (Sonnet review)",
+      "tech_stack": ["Jest", "React Testing Library", "Web Components test utils"],
+      "required_by": "Week 4 mid"
+    },
+    {
+      "id": "PHASE_1_018",
+      "category": "PHASE_1_ENHANCEMENT",
+      "title": "E2E Testing (Cypress or Playwright)",
+      "description": "Critical user journeys (landing → email signup, view album, admin login → upload, read blog post). 10+ test scenarios.",
+      "dependencies": ["PHASE_1_001", "PHASE_1_002", "PHASE_1_005"],
+      "estimated_hours": 6,
+      "effort": "MEDIUM",
+      "priority": 20,
+      "blocks": [],
+      "owner": "Kilo/Grok",
+      "tech_stack": ["Playwright or Cypress"],
+      "required_by": "Week 4 end"
+    },
+    {
+      "id": "PHASE_1_019",
+      "category": "PHASE_1_ENHANCEMENT",
+      "title": "Security Audit (OWASP Top 10, Auth Flow Review)",
+      "description": "Review JWT auth, SQL injection (Prisma safe), XSS (sanitize markdown), CSRF, rate limiting. Penetration test basics.",
+      "dependencies": ["PHASE_1_005"],
+      "estimated_hours": 4,
+      "effort": "MEDIUM",
+      "priority": 21,
+      "blocks": [],
+      "owner": "Grok (security assessment)",
+      "tech_stack": ["OWASP checklist"],
+      "required_by": "Week 4 start"
+    },
+    {
+      "id": "PHASE_2_001",
+      "category": "PHASE_2_DEFERRED",
+      "title": "Generalize Admin Panel for Multi-Artist (Phase 2 MVP)",
+      "description": "Extend admin interface to support multiple artists. Role-based auth (admin, artist, viewer). Artist dashboard for self-service album uploads.",
+      "dependencies": ["PHASE_1_005", "BLOCKER-002"],
+      "estimated_hours": 12,
+      "effort": "HARD",
+      "priority": 22,
+      "blocks": ["PHASE_2_002"],
+      "owner": "Opus 4-6 (architecture) → Sonnet (impl)",
+      "tech_stack": ["Role-based FastAPI auth", "multi-tenant Prisma"],
+      "required_by": "Phase 2 (post MVP validation)"
+    },
+    {
+      "id": "PHASE_2_002",
+      "category": "PHASE_2_DEFERRED",
+      "title": "Build Artist Profile Pages (Directory of Artists)",
+      "description": "Directory of all artists on platform, individual artist profile pages (bio, albums, links). Enable Allyson to invite collaborators.",
+      "dependencies": ["PHASE_2_001"],
+      "estimated_hours": 10,
+      "effort": "HARD",
+      "priority": 23,
+      "blocks": [],
+      "owner": "Sonnet 4-6",
+      "tech_stack": ["LitElement artist card", "FastAPI /artists endpoint"],
+      "required_by": "Phase 2 (post MVP)"
+    },
+    {
+      "id": "PHASE_2_003",
+      "category": "PHASE_2_DEFERRED",
+      "title": "Implement Collaborative Features (Comments, Likes, Playlists)",
+      "description": "Album/song comments, like counts, user playlists, social features. Requires user authentication beyond admin.",
+      "dependencies": ["PHASE_2_001"],
+      "estimated_hours": 15,
+      "effort": "HARD",
+      "priority": 24,
+      "blocks": [],
+      "owner": "Opus 4-6 (design) → Sonnet (impl)",
+      "tech_stack": ["User auth system", "comment/like schema"],
+      "required_by": "Phase 2 (6+ months out)"
+    },
+    {
+      "id": "PHASE_2_004",
+      "category": "PHASE_2_DEFERRED",
+      "title": "Add Phonosophie Integration (If Allyson Interested)",
+      "description": "Embed Phonosophie collection into artist bios or album notes. Linguistic analysis of song titles. Deferred per BBBA decision.",
+      "dependencies": [],
+      "estimated_hours": 8,
+      "effort": "MEDIUM",
+      "priority": 25,
+      "blocks": [],
+      "owner": "Serigne + Sonnet (design phase)",
+      "tech_stack": ["Phonosophie collection API", "LitElement component"],
+      "required_by": "Phase 2 or Phase 3 (post validation with Allyson)"
+    },
+    {
+      "id": "OPTIONAL_001",
+      "category": "OPTIONAL",
+      "title": "Video Integration (Music Videos, Behind-the-Scenes)",
+      "description": "Embed YouTube videos or self-hosted video player. Video library. Only if Allyson has video content.",
+      "dependencies": [],
+      "estimated_hours": 6,
+      "effort": "MEDIUM",
+      "priority": 26,
+      "blocks": [],
+      "owner": "Sonnet 4-6",
+      "tech_stack": ["YouTube embed or HLS player"],
+      "required_by": "Phase 2+ (only if needed)"
+    },
+    {
+      "id": "OPTIONAL_002",
+      "category": "OPTIONAL",
+      "title": "Add Podcast Feed (if applicable)",
+      "description": "Publish blog posts or interviews as RSS feed. MP3 hosting if Allyson does interviews.",
+      "dependencies": [],
+      "estimated_hours": 4,
+      "effort": "LOW",
+      "priority": 27,
+      "blocks": [],
+      "owner": "Sonnet 4-6",
+      "tech_stack": ["RSS generation", "podcast hosting"],
+      "required_by": "Phase 2+ (only if needed)"
+    }
+  ],
+  "phase_summaries": {
+    "Phase_0_Complete": {
+      "status": "✓ PRODUCTION",
+      "description": "Multi-page architecture, Brevo email, GA4, Schema.org A-rated, AI-crawlability audit pass",
+      "tasks_completed": "N/A (phase complete)",
+      "hours_invested": "~120 (from previous sessions)"
+    },
+    "Phase_1_MVP": {
+      "status": "🟡 ACTIVE",
+      "description": "Landing page, blog, gallery, admin panel (admin-only), email signup, analytics, SEO, performance optimization",
+      "blockers": ["BLOCKER-001 (Service Topology)", "BLOCKER-002 (Album Upload Flow)"],
+      "core_tasks": [1, 2, 3, 4, 5, 6, 7, 8],
+      "enhancement_tasks": [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+      "total_hours": 98,
+      "critical_path_hours": 32,
+      "estimated_timeline": "4–5 weeks (with blockers resolved)"
+    },
+    "Phase_2_Scaling": {
+      "status": "⏳ DEFERRED",
+      "description": "Multi-artist platform, artist profiles, collaborative features, Phonosophie integration",
+      "tasks": [22, 23, 24, 25],
+      "total_hours": "~45",
+      "estimated_start": "Post Phase 1 MVP validation (6–8 weeks out)"
+    },
+    "Optional": {
+      "status": "⏳ IF_NEEDED",
+      "description": "Video integration, podcast feed",
+      "tasks": [26, 27],
+      "total_hours": "~10",
+      "estimated_start": "Only if Allyson requests"
+    }
+  },
+  "critical_path": {
+    "sequence": [
+      "BLOCKER-001 (3h) → BLOCKER-002 (2h)",
+      "→ PHASE_1_004 (4h, nav foundational)",
+      "→ [PHASE_1_001 (8h) + PHASE_1_006 (3h) parallel] = 8h critical",
+      "→ [PHASE_1_002 (6h) + PHASE_1_003 (7h) parallel] = 7h critical",
+      "→ PHASE_1_005 (8h, admin upload)",
+      "→ [PHASE_1_009 (6h) + PHASE_1_016 (5h) parallel] = 6h critical",
+      "→ PHASE_1_017 + PHASE_1_018 (14h total testing)",
+      "TOTAL CRITICAL PATH: ~48h (32h w/ aggressive parallelization)"
+    ],
+    "timeline_aggressive": "4 weeks (full-time, 2 developers)",
+    "timeline_conservative": "5 weeks (part-time, sequential)"
+  },
+  "recommendations": {
+    "immediate_actions": [
+      "Resolve BLOCKER-001 (Service Topology) — Serigne + Opus session, 3h",
+      "Resolve BLOCKER-002 (Album Upload scope) — Serigne, 1h decision",
+      "Start PHASE_1_004 (navigation) — foundational, unblocked, parallel to blockers"
+    ],
+    "sprint_structure": {
+      "Sprint_1": {
+        "focus": "Blocker resolution + navigation + landing page",
+        "tasks": ["BLOCKER-001", "BLOCKER-002", "PHASE_1_004", "PHASE_1_001", "PHASE_1_006"],
+        "duration": "1 week",
+        "hours": "20"
+      },
+      "Sprint_2": {
+        "focus": "Blog + gallery pages + admin panel foundation",
+        "tasks": ["PHASE_1_002", "PHASE_1_003", "PHASE_1_005"],
+        "duration": "1 week",
+        "hours": "21"
+      },
+      "Sprint_3": {
+        "focus": "Blog workflow + enhancement features (dark mode, search, sharing)",
+        "tasks": ["PHASE_1_007", "PHASE_1_008", "PHASE_1_009", "PHASE_1_010", "PHASE_1_011", "PHASE_1_015"],
+        "duration": "1 week",
+        "hours": "20"
+      },
+      "Sprint_4": {
+        "focus": "Image optimization + SEO + analytics + testing",
+        "tasks": ["PHASE_1_012", "PHASE_1_013", "PHASE_1_014", "PHASE_1_016", "PHASE_1_017"],
+        "duration": "1 week",
+        "hours": "19"
+      },
+      "Sprint_5": {
+        "focus": "E2E testing + security audit + launch prep",
+        "tasks": ["PHASE_1_018", "PHASE_1_019"],
+        "duration": "1 week",
+        "hours": "10 (low-intensity, review phase)"
+      }
+    },
+    "resource_allocation": {
+      "Opus_4_6": "BLOCKER-001 (architecture), PHASE_2_001 (future scaling design) — 3h this sprint",
+      "Sonnet_4_6": "All Phase 1 core + enhancement — estimated 80h",
+      "Kilo_Grok": "Testing (PHASE_1_017, PHASE_1_018), security audit (PHASE_1_019) — 18h",
+      "Serigne": "BLOCKER-002 decision + final review/sign-off — 2h"
+    }
+  },
+  "φ_harmonic_alignment": {
+    "design_ratio": "Tasks weighted by φ-convergence: blockers (high impact) first, then core, then enhancements",
+    "efficiency": "Critical path 32h achievable with clear sequencing; total 98h realistic over 5 weeks",
+    "convergence_estimate": "φ_ORBIT = 0.92 post-Phase-1 (blocked architectural clarity + scope lock required)"
+  }
+}
