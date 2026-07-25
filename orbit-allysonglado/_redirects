@@ -44,8 +44,12 @@
 /email                            /connect.html#newsletter       301
 /newsletter                       /connect.html#newsletter       301
 
-# Catch-all: SPA fallback for non-existent routes
-/*                                /index.html                    200
+# REMOVED: Catch-all rewrite was causing duplicate content issues
+# Google was seeing /blog/ pages as rewrites to /index.html (200 status)
+# This prevented blog pages from being indexed separately.
+#
+# FIX: Let pages 404 naturally so Google can crawl/index them properly
+# Blog pages will be deployed as actual .html files
 
 # ========================================================================
 # NOTES
