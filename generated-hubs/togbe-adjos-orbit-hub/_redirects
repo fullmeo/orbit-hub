@@ -1,0 +1,69 @@
+# ========================================================================
+# ORBIT - Netlify Redirects
+# Togbé Adjos - Ouidah Blues, Jazz & Gospel Festival
+# ========================================================================
+
+# Blog archive redirect
+/blog/*  /blog/index.html  200
+
+# URL aliases (friendly shortcuts)
+/listen                           /music.html                    301
+/music                            /music.html                    301
+/albums                           /music.html                    301
+/about-me                         /about.html                    301
+/contact                          /connect.html                  301
+/social                           /connect.html                  301
+/press                            /connect.html#press-section    301
+/bookings                         /connect.html#contact-methods  301
+/collaborate                      /connect.html#contact-methods  301
+
+# Social/platform shortcuts (UTM pre-configured) - Togbé Adjos
+/facebook                         https://facebook.com/TogbeAdjos?utm_source=orbit&utm_medium=shortlink  301
+/instagram                        https://instagram.com/togbeadjos?utm_source=orbit&utm_medium=shortlink  301
+
+# Note: Spotify, Apple Music, etc. links would go to Ouidah Festival artist profiles
+# (Togbé Adjos performs at the festival but may not have individual artist profiles)
+# Update these URLs if individual artist profiles are available
+# /spotify    → TBD
+# /apple      → TBD
+
+# Album shortcuts
+/elevation                        /music.html#elevation          301
+/smoi                             /music.html#smoi               301
+/s-moi                            /music.html#smoi               301
+
+# Old site redirects (if migrating)
+/index.html                       /                              301
+/orbit-hub                        /                              301
+
+# Legal pages
+/legal                            /terms.html                    301
+/privacy                          /privacy.html                  301
+/terms                            /terms.html                    301
+
+# Email/contact
+/email                            /connect.html#newsletter       301
+/newsletter                       /connect.html#newsletter       301
+
+# REMOVED: Catch-all rewrite was causing duplicate content issues
+# This is a multi-page site (index.html, music.html, about.html, connect.html)
+# Each page should be indexable separately - not masked as rewrites to homepage
+# Pages will now 404 naturally instead of being hidden behind rewrite
+
+# ========================================================================
+# NOTES
+# ========================================================================
+# 
+# 301 = Permanent redirect (search engines follow, updates crawl)
+# 302 = Temporary redirect (for A/B testing, campaigns)
+# 200 = Rewrite (URL stays in browser, invisible to user - good for SPA)
+#
+# UTM Parameters in shortcuts:
+# - utm_source: 'orbit' identifies the source
+# - utm_medium: 'shortlink' identifies marketing channel
+# - utm_campaign: Optional, can be added per campaign
+#
+# These allow tracking of shortened link performance in GA4
+# Example: /spotify link clicks → GA4 event with utm params
+#
+# ========================================================================
