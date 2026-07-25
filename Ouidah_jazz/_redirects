@@ -29,8 +29,13 @@
 /index.html                       /                              301
 /orbit-hub                        /                              301
 
-# Catch-all: SPA fallback for non-existent routes
-/*                                /index.html                    200
+# REMOVED: Catch-all rewrite was causing duplicate content issues
+# Google was seeing all non-existent paths as rewrites to /index.html (200 status)
+# This prevented proper SEO indexing and caused duplicate content warnings
+#
+# FIX: Let pages 404 naturally so Google can properly crawl the site
+# Ouidah Jazz is a single-page app - routing is handled client-side via anchors (#about, #contact, etc)
+# Not a traditional SPA with JavaScript routing, so catch-all is not needed
 
 # ========================================================================
 # NOTES
