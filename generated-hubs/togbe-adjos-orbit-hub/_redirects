@@ -28,9 +28,8 @@
 # /apple      → TBD
 
 # Album shortcuts
-/elevation                        /music.html#elevation          301
-/smoi                             /music.html#smoi               301
-/s-moi                            /music.html#smoi               301
+/maman-tchamba                    /music.html#maman-tchamba     301
+/bandcamp                         https://togbeadjos.bandcamp.com  301
 
 # Old site redirects (if migrating)
 /index.html                       /                              301

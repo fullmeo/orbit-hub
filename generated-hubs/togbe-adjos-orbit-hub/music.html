@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Allyson Glado - Albums & Music | Élévation, S-Moi</title>
-    <meta name="description" content="Explore Allyson Glado's albums: Élévation (2021) and S-Moi (2018). Listen on Spotify, Apple Music, YouTube, and more.">
-    <meta name="keywords" content="albums, music, Vodun Jazz • Blues, Élévation, S-Moi, Allyson Glado, streaming">
-    <meta name="og:title" content="Allyson Glado Albums - Élévation & S-Moi">
-    <meta name="og:description" content="Discover Allyson Glado's award-winning albums on all major streaming platforms">
-    <link rel="canonical" href="https://orbit-allysonglado.netlify.app/music.html">
+    <title>Togbé Adjos - Albums & Maman Tchamba | Vodun Jazz</title>
+    <meta name="description" content="Explore Togbé Adjos's albums: Maman Tchamba (2020). Listen on Bandcamp, Apple Music, Shazam, and more. Vodun Jazz fusion with spiritual depth.">
+    <meta name="keywords" content="albums, music, Vodun Jazz, Maman Tchamba, Togbé Adjos, streaming, Bandcamp">
+    <meta name="og:title" content="Togbé Adjos Albums - Maman Tchamba">
+    <meta name="og:description" content="Discover Togbé Adjos's album Maman Tchamba on all major streaming platforms">
+    <link rel="canonical" href="https://togbe-adjos-orbit-hub.netlify.app/music.html">
     <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="stylesheet" href="/assets/css/responsive.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,24 +17,17 @@
 
     <!-- Performance: Preload album covers -->
     <link rel="preload" as="image" href="/assets/images/elevation-cover.jpg" type="image/jpeg">
-    <link rel="preload" as="image" href="/assets/images/smoi-cover.jpg" type="image/jpeg">
 
-    <!-- Spotify Web Playback SDK -->
-    <script src="https://sdk.scdn.co/spotify-player.js"></script>
-    
-    <script>
-        window.onSpotifyWebPlaybackSDKReady = () => {
-            console.log('🎵 Spotify Web Playback SDK ready');
-        };
-    </script>
+    <!-- Bandcamp Embed Support -->
+    <script src="https://bandcamp.com/api.js"></script>
 
     <!-- Google Analytics 4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS4G24ESNF"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TOGBE-ADJOS"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', 'G-LS4G24ESNF', {
+        gtag('config', 'G-TOGBE-ADJOS', {
             'page_path': window.location.pathname,
             'allow_google_signals': false,
             'allow_ad_personalization_signals': false
@@ -68,32 +61,32 @@
     <section class="page-hero">
         <div class="hero-content">
             <h1>My Music</h1>
-            <p>Explore albums, playlists, and featured tracks across all platforms</p>
+            <p>Maman Tchamba - Explore Vodun Jazz spirituality across all platforms</p>
         </div>
     </section>
 
-    <!-- Album: Élévation -->
-    <section class="album-section" id="elevation">
+    <!-- Album: Maman Tchamba -->
+    <section class="album-section" id="maman-tchamba">
         <div class="container">
             <div class="album-layout">
                 <div class="album-cover">
-                    <img src="/assets/images/elevation-cover.jpg" alt="Élévation Album Cover" width="400" height="400" loading="eager">
+                    <img src="/assets/images/elevation-cover.jpg" alt="Maman Tchamba Album Cover" width="400" height="400" loading="eager">
                 </div>
                 <div class="album-details">
                     <div class="album-meta">
-                        <span class="album-year">2021</span>
-                        <h2>Élévation</h2>
+                        <span class="album-year">2020</span>
+                        <h2>Maman Tchamba</h2>
                         <p class="album-description-long">
-                            Élévation is a transformative journey through Vodun Jazz • Blues, soul, and jazz fusion. Released in 2021, this album marks Allyson's artistic evolution, showcasing deeper production, refined vocals, and bold musical choices.
+                            Maman Tchamba is a transformative spiritual journey through Vodun Jazz, exploring ancient Vodun traditions, reggae dub, jazz sophistication, and Beninese musical heritage. Released in 2020, this album represents Togbé Adjos's artistic evolution and deepest exploration of ancestral African spirituality merged with contemporary musical innovation.
                         </p>
                         <p class="album-highlights">
-                            <strong>Notable Collaborations:</strong> Serigne Diagne (Trumpet), featuring Caribbean and soul influences blended with modern production.
+                            <strong>Musical Vision:</strong> A fusion of sacred Vodun percussion rhythms, dub reggae aesthetics, jazz harmonies, and the wisdom of Beninese traditions. Maman Tchamba honors the spiritual guidance of feminine ancestors and the earth mother (Maman in Fon language).
                         </p>
                     </div>
 
-                    <!-- Spotify Embed (Fallback) -->
+                    <!-- Bandcamp Embed -->
                     <div class="spotify-embed">
-                        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/7CgVDnTyDJjV0zZ5GFqdz1?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                        <iframe style="border: solid 1px #ccc; border-radius: 12px" src="https://bandcamp.com/EmbeddedPlayer/album=1234567890/size=large/bgcol=ffffff/linkcol=0687f5/artwork=small" seamless><a href="https://togbeadjos.bandcamp.com">Maman Tchamba by Togbé Adjos</a></iframe>
                     </div>
 
                     <!-- Tracklist -->
@@ -102,65 +95,60 @@
                         <ol class="tracks">
                             <li>
                                 <span class="track-number">1.</span>
-                                <span class="track-name">Elevation Intro</span>
-                                <span class="track-duration">2:34</span>
+                                <span class="track-name">Sakpata</span>
+                                <span class="track-duration">5:12</span>
                             </li>
                             <li>
                                 <span class="track-number">2.</span>
-                                <span class="track-name">Caribbean Nights</span>
-                                <span class="track-duration">4:12</span>
+                                <span class="track-name">Gambada</span>
+                                <span class="track-duration">4:48</span>
                             </li>
                             <li>
                                 <span class="track-number">3.</span>
-                                <span class="track-name">Soul Rising (feat. Serigne Diagne)</span>
-                                <span class="track-duration">5:43</span>
+                                <span class="track-name">Lêgba</span>
+                                <span class="track-duration">6:15</span>
                             </li>
                             <li>
                                 <span class="track-number">4.</span>
-                                <span class="track-name">Rhythms of Home</span>
-                                <span class="track-duration">3:58</span>
-                            </li>
-                            <li>
-                                <span class="track-number">5.</span>
-                                <span class="track-name">Elevation (Reprise)</span>
-                                <span class="track-duration">6:21</span>
+                                <span class="track-name">Maman Tchamba (Reprise)</span>
+                                <span class="track-duration">7:42</span>
                             </li>
                         </ol>
                     </div>
 
                     <!-- Platform Links -->
                     <div class="platform-links">
-                        <a href="https://open.spotify.com/album/elevation?utm_source=orbit&utm_medium=music_page&utm_campaign=elevation" 
-                           class="platform-link spotify" 
-                           data-event="platform_click" 
-                           data-platform="spotify" 
-                           data-source="elevation_album" 
+                        <a href="https://togbeadjos.bandcamp.com"
+                           class="platform-link bandcamp"
+                           data-event="platform_click"
+                           data-platform="bandcamp"
+                           data-source="maman_tchamba_album"
                            target="_blank" rel="noopener">
-                            ♫ Listen on Spotify
+                            🎼 Listen on Bandcamp
                         </a>
-                        <a href="https://music.apple.com/us/album/elevation/1209476753" 
-                           class="platform-link apple" 
-                           data-event="platform_click" 
-                           data-platform="apple" 
-                           data-source="elevation_album" 
+                        <a href="https://music.apple.com/us/artist/togbe-adjos"
+                           class="platform-link apple"
+                           data-event="platform_click"
+                           data-platform="apple"
+                           data-source="maman_tchamba_album"
                            target="_blank" rel="noopener">
                             🍎 Apple Music
                         </a>
-                        <a href="https://www.youtube.com/playlist?list=PLxxx" 
-                           class="platform-link youtube" 
-                           data-event="platform_click" 
-                           data-platform="youtube" 
-                           data-source="elevation_album" 
+                        <a href="https://www.shazam.com/search?q=togbe+adjos"
+                           class="platform-link shazam"
+                           data-event="platform_click"
+                           data-platform="shazam"
+                           data-source="maman_tchamba_album"
                            target="_blank" rel="noopener">
-                            ▶ YouTube
+                            ▶ Shazam
                         </a>
-                        <a href="https://www.deezer.com/album/elevation" 
-                           class="platform-link deezer" 
-                           data-event="platform_click" 
-                           data-platform="deezer" 
-                           data-source="elevation_album" 
+                        <a href="https://beyondmusic.com"
+                           class="platform-link beyond"
+                           data-event="platform_click"
+                           data-platform="beyond"
+                           data-source="maman_tchamba_album"
                            target="_blank" rel="noopener">
-                            ♫ Deezer
+                            ♫ Beyond Music
                         </a>
                     </div>
                 </div>
@@ -168,96 +156,47 @@
         </div>
     </section>
 
-    <!-- Album: S-Moi -->
-    <section class="album-section alternate" id="smoi">
+    <!-- Featured Tracks -->
+    <section class="album-section alternate">
         <div class="container">
-            <div class="album-layout reverse">
-                <div class="album-cover">
-                    <img src="/assets/images/smoi-cover.jpg" alt="S-Moi Album Cover" width="400" height="400" loading="eager">
+            <div class="album-layout">
+                <div class="album-cover" style="display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #C2410C 0%, #B45309 100%); border-radius: 10px; min-height: 400px;">
+                    <div style="text-align: center; color: white;">
+                        <i class="fa-solid fa-compact-disc" style="font-size: 5rem; opacity: 0.3; margin-bottom: 20px; display: block;"></i>
+                        <h3 style="font-size: 2rem; margin: 0;">Maman Tchamba</h3>
+                        <p style="margin: 10px 0 0 0; font-size: 1.1rem; opacity: 0.9;">2020</p>
+                    </div>
                 </div>
                 <div class="album-details">
                     <div class="album-meta">
-                        <span class="album-year">2018</span>
-                        <h2>S-Moi</h2>
+                        <span class="album-year">Featured Tracks</span>
+                        <h2>Spiritual Journeys</h2>
                         <p class="album-description-long">
-                            S-Moi is Allyson's debut album, introducing her distinctive Vodun Jazz • Blues sound. Released in 2018, this album establishes the foundation for her artistic voice, blending Caribbean rhythms with contemporary soul and jazz elements.
+                            Maman Tchamba features three iconic tracks that represent the spiritual core of Togbé Adjos's artistic vision. Each composition honors a different aspect of Vodun spirituality and the diaspora's African heritage.
                         </p>
-                        <p class="album-highlights">
-                            <strong>Musical Style:</strong> Reggae-pop foundation with soul, jazz, and Caribbean influences. Rich orchestration and authentic storytelling throughout.
-                        </p>
-                    </div>
 
-                    <!-- Spotify Embed (Fallback) -->
-                    <div class="spotify-embed">
-                        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/7CgVDnTyDJjV0zZ5GFqdz1?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                    </div>
+                        <div style="margin-top: 30px; space-y: 20px;">
+                            <div style="margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid var(--color-border);">
+                                <h4 style="color: var(--color-primary); margin-bottom: 10px;">Sakpata</h4>
+                                <p style="color: var(--color-text-light); line-height: 1.6; margin: 0;">
+                                    Ancient Vodun rhythms merged with sophisticated jazz progression. This composition invokes Sakpata, the orisha protector and healer, honoring the connection between ancestral wisdom and contemporary musical expression.
+                                </p>
+                            </div>
 
-                    <!-- Tracklist -->
-                    <div class="tracklist">
-                        <h3>Tracklist</h3>
-                        <ol class="tracks">
-                            <li>
-                                <span class="track-number">1.</span>
-                                <span class="track-name">S-Moi Opening</span>
-                                <span class="track-duration">1:47</span>
-                            </li>
-                            <li>
-                                <span class="track-number">2.</span>
-                                <span class="track-name">Myself</span>
-                                <span class="track-duration">4:05</span>
-                            </li>
-                            <li>
-                                <span class="track-number">3.</span>
-                                <span class="track-name">Island Vibes</span>
-                                <span class="track-duration">3:32</span>
-                            </li>
-                            <li>
-                                <span class="track-number">4.</span>
-                                <span class="track-name">Soul Connection (feat. Serigne Diagne)</span>
-                                <span class="track-duration">5:18</span>
-                            </li>
-                            <li>
-                                <span class="track-number">5.</span>
-                                <span class="track-name">Return Home</span>
-                                <span class="track-duration">4:44</span>
-                            </li>
-                        </ol>
-                    </div>
+                            <div style="margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid var(--color-border);">
+                                <h4 style="color: var(--color-primary); margin-bottom: 10px;">Gambada</h4>
+                                <p style="color: var(--color-text-light); line-height: 1.6; margin: 0;">
+                                    Infectious Beninese percussion rhythms layered with reggae dub aesthetics. Gambada is a celebration of movement, joy, and the ancestral connections that bind the African diaspora. Infectious grooves meet spiritual depth.
+                                </p>
+                            </div>
 
-                    <!-- Platform Links -->
-                    <div class="platform-links">
-                        <a href="https://open.spotify.com/album/smoi?utm_source=orbit&utm_medium=music_page&utm_campaign=smoi" 
-                           class="platform-link spotify" 
-                           data-event="platform_click" 
-                           data-platform="spotify" 
-                           data-source="smoi_album" 
-                           target="_blank" rel="noopener">
-                            ♫ Listen on Spotify
-                        </a>
-                        <a href="https://music.apple.com/us/album/s-moi/1209476753" 
-                           class="platform-link apple" 
-                           data-event="platform_click" 
-                           data-platform="apple" 
-                           data-source="smoi_album" 
-                           target="_blank" rel="noopener">
-                            🍎 Apple Music
-                        </a>
-                        <a href="https://soundcloud.com/allysonglado/sets/s-moi" 
-                           class="platform-link soundcloud" 
-                           data-event="platform_click" 
-                           data-platform="soundcloud" 
-                           data-source="smoi_album" 
-                           target="_blank" rel="noopener">
-                            ☁ SoundCloud
-                        </a>
-                        <a href="https://www.deezer.com/album/s-moi" 
-                           class="platform-link deezer" 
-                           data-event="platform_click" 
-                           data-platform="deezer" 
-                           data-source="smoi_album" 
-                           target="_blank" rel="noopener">
-                            ♫ Deezer
-                        </a>
+                            <div style="margin-bottom: 0; padding-bottom: 0; border-bottom: none;">
+                                <h4 style="color: var(--color-primary); margin-bottom: 10px;">Lêgba</h4>
+                                <p style="color: var(--color-text-light); line-height: 1.6; margin: 0;">
+                                    A subtle, intricate tribute to Lêgba, the crossroads keeper and messenger between worlds. Jazz-inflected melodies create space for contemplation, honoring the complexity of cultural bridges and spiritual transitions.
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -269,59 +208,59 @@
         <div class="container">
             <h2>Listen on All Platforms</h2>
             <div class="platforms-grid">
-                <a href="https://..." 
-                   class="platform-btn spotify" 
-                   data-event="platform_click" 
-                   data-platform="spotify" 
-                   data-source="all_platforms_section" 
+                <a href="https://togbeadjos.bandcamp.com"
+                   class="platform-btn bandcamp"
+                   data-event="platform_click"
+                   data-platform="bandcamp"
+                   data-source="all_platforms_section"
                    target="_blank" rel="noopener">
-                    <span class="platform-icon">♫</span>
-                    <span>Spotify</span>
+                    <span class="platform-icon">🎼</span>
+                    <span>Bandcamp</span>
                 </a>
-                <a href="https://music.apple.com/us/artist/allyson-glado/1209476753" 
-                   class="platform-btn apple" 
-                   data-event="platform_click" 
-                   data-platform="apple" 
-                   data-source="all_platforms_section" 
+                <a href="https://music.apple.com/us/artist/togbe-adjos"
+                   class="platform-btn apple"
+                   data-event="platform_click"
+                   data-platform="apple"
+                   data-source="all_platforms_section"
                    target="_blank" rel="noopener">
                     <span class="platform-icon">🍎</span>
                     <span>Apple Music</span>
                 </a>
-                <a href="https://www.youtube.com/channel/UCHbce4yJr6SJ_pAsvtbG7ag" 
-                   class="platform-btn youtube" 
-                   data-event="platform_click" 
-                   data-platform="youtube" 
-                   data-source="all_platforms_section" 
+                <a href="https://www.shazam.com/search?q=togbe+adjos"
+                   class="platform-btn shazam"
+                   data-event="platform_click"
+                   data-platform="shazam"
+                   data-source="all_platforms_section"
                    target="_blank" rel="noopener">
                     <span class="platform-icon">▶</span>
-                    <span>YouTube</span>
+                    <span>Shazam</span>
                 </a>
-                <a href="https://www.deezer.com/en/artist/12298412" 
-                   class="platform-btn deezer" 
-                   data-event="platform_click" 
-                   data-platform="deezer" 
-                   data-source="all_platforms_section" 
+                <a href="https://beyondmusic.com"
+                   class="platform-btn beyond"
+                   data-event="platform_click"
+                   data-platform="beyond"
+                   data-source="all_platforms_section"
                    target="_blank" rel="noopener">
                     <span class="platform-icon">♫</span>
-                    <span>Deezer</span>
+                    <span>Beyond Music</span>
                 </a>
-                <a href="https://soundcloud.com/allysonglado" 
-                   class="platform-btn soundcloud" 
-                   data-event="platform_click" 
-                   data-platform="soundcloud" 
-                   data-source="all_platforms_section" 
+                <a href="https://www.instagram.com/togbeadjos"
+                   class="platform-btn instagram"
+                   data-event="platform_click"
+                   data-platform="instagram"
+                   data-source="all_platforms_section"
                    target="_blank" rel="noopener">
-                    <span class="platform-icon">☁</span>
-                    <span>SoundCloud</span>
+                    <span class="platform-icon">📷</span>
+                    <span>Instagram</span>
                 </a>
-                <a href="https://www.bandcamp.com/allysonglado" 
-                   class="platform-btn bandcamp" 
-                   data-event="platform_click" 
-                   data-platform="bandcamp" 
-                   data-source="all_platforms_section" 
+                <a href="https://www.facebook.com/TogbeAdjos"
+                   class="platform-btn facebook"
+                   data-event="platform_click"
+                   data-platform="facebook"
+                   data-source="all_platforms_section"
                    target="_blank" rel="noopener">
-                    <span class="platform-icon">🎼</span>
-                    <span>Bandcamp</span>
+                    <span class="platform-icon">f</span>
+                    <span>Facebook</span>
                 </a>
             </div>
         </div>
@@ -343,17 +282,17 @@
                 <div class="footer-section">
                     <h4>Platforms</h4>
                     <ul>
-                        <li><a href="https://..." target="_blank" rel="noopener">Spotify</a></li>
-                        <li><a href="https://music.apple.com/us/artist/allyson-glado/1209476753" target="_blank" rel="noopener">Apple Music</a></li>
-                        <li><a href="https://www.youtube.com/channel/UCHbce4yJr6SJ_pAsvtbG7ag" target="_blank" rel="noopener">YouTube</a></li>
-                        <li><a href="https://soundcloud.com/allysonglado" target="_blank" rel="noopener">SoundCloud</a></li>
+                        <li><a href="https://togbeadjos.bandcamp.com" target="_blank" rel="noopener">Bandcamp</a></li>
+                        <li><a href="https://music.apple.com/us/artist/togbe-adjos" target="_blank" rel="noopener">Apple Music</a></li>
+                        <li><a href="https://www.shazam.com/search?q=togbe+adjos" target="_blank" rel="noopener">Shazam</a></li>
+                        <li><a href="https://beyondmusic.com" target="_blank" rel="noopener">Beyond Music</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h4>Social</h4>
                     <ul>
-                        <li><a href="https://www.instagram.com/allysonglado" target="_blank" rel="noopener">Instagram</a></li>
-                        <li><a href="https://www.tiktok.com/@allysonglado" target="_blank" rel="noopener">TikTok</a></li>
+                        <li><a href="https://www.instagram.com/togbeadjos" target="_blank" rel="noopener">Instagram</a></li>
+                        <li><a href="https://www.facebook.com/TogbeAdjos" target="_blank" rel="noopener">Facebook</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -361,12 +300,12 @@
                     <ul>
                         <li><a href="/privacy.html">Privacy Policy</a></li>
                         <li><a href="/terms.html">Terms of Use</a></li>
-                        <li><a href="mailto:contact@allysonglado.com">Contact</a></li>
+                        <li><a href="mailto:Adjos67@gmail.com">Contact</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 Allyson Glado. All rights reserved.</p>
+                <p>&copy; 2026 Togbé Adjos. All rights reserved.</p>
                 <p>Powered by <a href="https://github.com/fullmeo/orbit-hub" target="_blank" rel="noopener">ORBIT</a></p>
             </div>
         </div>
@@ -505,6 +444,55 @@
             margin-top: var(--spacing-lg);
         }
 
+        .platform-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .platform-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .platform-link.bandcamp {
+            background: var(--color-secondary);
+            color: var(--color-primary);
+        }
+
+        .platform-link.bandcamp:hover {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .platform-link.apple {
+            background: #555;
+            color: white;
+        }
+
+        .platform-link.apple:hover {
+            background: #333;
+        }
+
+        .platform-link.shazam,
+        .platform-link.beyond {
+            background: #f5f5f5;
+            color: var(--color-primary);
+            border-color: var(--color-primary);
+        }
+
+        .platform-link.shazam:hover,
+        .platform-link.beyond:hover {
+            background: var(--color-primary);
+            color: white;
+        }
+
         .all-platforms {
             padding: var(--spacing-2xl) 0;
             background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-dark) 100%);
@@ -524,6 +512,32 @@
             gap: var(--spacing-md);
             max-width: 900px;
             margin: 0 auto;
+        }
+
+        .platform-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: var(--spacing-lg);
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .platform-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-5px);
+        }
+
+        .platform-icon {
+            font-size: 2rem;
+            margin-bottom: var(--spacing-sm);
         }
 
         @media (max-width: 768px) {
