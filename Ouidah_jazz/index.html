@@ -489,69 +489,80 @@
         </div>
     </section>
 
-    <!-- CONSEIL ARTISTIQUE -->
+    <!-- CONSEIL ARTISTIQUE - 3D CAROUSEL -->
     <section id="conseil" class="max-w-screen-2xl mx-auto px-6 md:px-12 lg:px-16 py-20 border-t border-white/10">
-        <div class="mb-12">
-            <div class="uppercase text-xs tracking-[3px] text-zinc-400 mb-3">CONSEIL ARTISTIQUE</div>
-            <h3 class="section-header text-5xl tracking-tighter">Voix qui guident le festival</h3>
+        <div class="mb-12 flex items-end justify-between">
+            <div>
+                <div class="uppercase text-xs tracking-[3px] text-zinc-400 mb-3">CONSEIL ARTISTIQUE</div>
+                <h3 class="section-header text-5xl tracking-tighter">Voix qui guident le festival</h3>
+            </div>
+            <div class="hidden md:flex gap-3">
+                <button id="carousel-prev" class="w-12 h-12 rounded-full border border-white/20 hover:bg-white/10 flex items-center justify-center text-orange-400 transition-all">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <button id="carousel-next" class="w-12 h-12 rounded-full border border-white/20 hover:bg-white/10 flex items-center justify-center text-orange-400 transition-all">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
         </div>
 
-        <div class="grid md:grid-cols-2 gap-8">
-            <!-- Françoise Ramel -->
-            <div class="bg-zinc-900 border border-white/10 rounded-3xl overflow-hidden">
-                <div class="flex flex-col h-full">
-                    <!-- Portrait -->
-                    <div class="aspect-[3/4] overflow-hidden">
-                        <img src="assets/images/francoise-ramel-advisor.jpeg"
-                             alt="Françoise Ramel - Conseil Artistique"
-                             class="w-full h-full object-cover">
+        <!-- 3D Carousel Container -->
+        <div class="perspective overflow-hidden" style="perspective: 1200px;">
+            <div id="carousel" class="flex justify-center items-center gap-4 py-6 overflow-x-auto md:overflow-hidden" style="min-height: 480px;">
+
+                <!-- Françoise Ramel -->
+                <div class="carousel-item flex-shrink-0" style="transform: rotateY(0deg) translateZ(300px); transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);">
+                    <div class="bg-zinc-900 border border-white/10 rounded-2xl overflow-hidden" style="width: 260px;">
+                        <div class="flex flex-col h-full">
+                            <div class="aspect-[3/4] overflow-hidden">
+                                <img src="assets/images/francoise-ramel-advisor.jpeg" loading="lazy"
+                                     alt="Françoise Ramel"
+                                     class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+                            </div>
+                            <div class="p-5 flex flex-col justify-between flex-grow">
+                                <div>
+                                    <h4 class="text-base font-semibold mb-1">Françoise Ramel</h4>
+                                    <p class="text-orange-400 text-[10px] font-medium mb-2 uppercase tracking-wide">Artistic Director</p>
+                                    <p class="text-zinc-300 text-[11px] leading-relaxed">
+                                        Journaliste, fondatrice Voix du Sahara. 20 ans accompagnant artistes africains.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                </div>
 
-                    <!-- Info -->
-                    <div class="p-8 flex flex-col justify-between flex-grow">
-                        <div>
-                            <h4 class="text-xl font-semibold mb-1">Françoise Ramel</h4>
-                            <p class="text-orange-400 text-xs font-medium mb-4">ARTISTIC DIRECTOR &amp; CULTURAL ADVISOR</p>
-
-                            <p class="text-zinc-300 text-sm leading-relaxed mb-4">
-                                Journaliste culturelle, fondatrice de <em>Voix du Sahara</em> et du festival nomade <em>Paysages</em>. 20 ans accompagnant les artistes et festivals africains.
-                            </p>
-
-                            <p class="text-zinc-400 text-xs">
-                                Conviction : la musique et le spectacle vivant transforment les sociétés. Mission : amplifier les voix émergentes africaines et créer des coopérations durables.
-                            </p>
+                <!-- Alex Boicel - Active/Center -->
+                <div class="carousel-item flex-shrink-0 active" style="transform: rotateY(0deg) translateZ(380px); z-index: 10; transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);">
+                    <div class="bg-gradient-to-b from-orange-950/30 to-zinc-900 border border-orange-500/30 rounded-2xl overflow-hidden shadow-2xl" style="width: 290px;">
+                        <div class="flex flex-col h-full">
+                            <div class="aspect-[3/4] overflow-hidden ring-2 ring-orange-500/20">
+                                <img src="assets/images/alex-boicel-manager.jpeg" loading="lazy"
+                                     alt="Alex Boicel"
+                                     class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+                            </div>
+                            <div class="p-6 flex flex-col justify-between flex-grow">
+                                <div>
+                                    <h4 class="text-lg font-semibold mb-1">Alex Boicel</h4>
+                                    <p class="text-orange-400 text-[10px] font-medium mb-2 uppercase tracking-wide">Manager &amp; Promoter</p>
+                                    <p class="text-zinc-300 text-[11px] leading-relaxed mb-2">
+                                        30+ ans festivals africains. Fondateur Festival Nuits d'Afrique.
+                                    </p>
+                                    <p class="text-zinc-400 text-[10px]">
+                                        Gère 100+ événements internationaux.
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Alex Boicel -->
-            <div class="bg-zinc-900 border border-white/10 rounded-3xl overflow-hidden">
-                <div class="flex flex-col h-full">
-                    <!-- Portrait -->
-                    <div class="aspect-[3/4] overflow-hidden">
-                        <img src="assets/images/alex-boicel-manager.jpeg"
-                             alt="Alex Boicel - Manager"
-                             class="w-full h-full object-cover">
-                    </div>
-
-                    <!-- Info -->
-                    <div class="p-8 flex flex-col justify-between flex-grow">
-                        <div>
-                            <h4 class="text-xl font-semibold mb-1">Alex Boicel</h4>
-                            <p class="text-orange-400 text-xs font-medium mb-4">PROMOTER &amp; MANAGER</p>
-
-                            <p class="text-zinc-300 text-sm leading-relaxed mb-4">
-                                Agent et producteur indépendant. 30+ ans dans les festivals musicaux africains et de la diaspora. Créateur du Festival Nuits d'Afrique (Montréal, 1987) — le plus grand festival de musique africaine en Amérique du Nord.
-                            </p>
-
-                            <p class="text-zinc-400 text-xs">
-                                Gère une centaine d'événements internationaux (festivals, showcases, galas). Travaille avec artistes et diaspora pour connecter Africa + Caraïbes + Afro-Américains sur scènes mondiales.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <!-- Navigation Dots -->
+        <div class="flex justify-center gap-2 mt-8">
+            <button class="carousel-dot active" data-index="0" style="width: 12px; height: 12px; border-radius: 50%; background: #C2410C; border: none; cursor: pointer; transition: all 0.3s;"></button>
+            <button class="carousel-dot" data-index="1" style="width: 12px; height: 12px; border-radius: 50%; background: rgba(194, 65, 12, 0.4); border: none; cursor: pointer; transition: all 0.3s;"></button>
         </div>
     </section>
 
@@ -693,11 +704,86 @@
     </div>
 
     <script>
+        // 3D Carousel functionality
+        function initCarousel() {
+            const carousel = document.getElementById('carousel');
+            const items = document.querySelectorAll('.carousel-item');
+            const dots = document.querySelectorAll('.carousel-dot');
+            const prevBtn = document.getElementById('carousel-prev');
+            const nextBtn = document.getElementById('carousel-next');
+
+            let currentIndex = 0;
+
+            function updateCarousel(index) {
+                currentIndex = (index + items.length) % items.length;
+
+                // Update items with 3D effect
+                items.forEach((item, i) => {
+                    const offset = i - currentIndex;
+                    const rotation = offset * 65;
+                    const translateZ = offset === 0 ? 400 : (Math.abs(offset) === 1 ? 300 : 0);
+                    const scale = offset === 0 ? 1 : 0.85;
+                    const opacity = Math.abs(offset) <= 1 ? 1 : 0;
+
+                    item.style.transform = `rotateY(${rotation}deg) translateZ(${translateZ}px) scale(${scale})`;
+                    item.style.opacity = opacity;
+                    item.style.pointerEvents = offset === 0 ? 'auto' : 'none';
+
+                    if (offset === 0) {
+                        item.classList.add('active');
+                    } else {
+                        item.classList.remove('active');
+                    }
+                });
+
+                // Update dots
+                dots.forEach((dot, i) => {
+                    if (i === currentIndex) {
+                        dot.style.background = '#C2410C';
+                        dot.style.width = '32px';
+                        dot.style.borderRadius = '6px';
+                    } else {
+                        dot.style.background = 'rgba(194, 65, 12, 0.4)';
+                        dot.style.width = '12px';
+                        dot.style.borderRadius = '50%';
+                    }
+                });
+            }
+
+            // Navigation handlers
+            prevBtn?.addEventListener('click', () => updateCarousel(currentIndex - 1));
+            nextBtn?.addEventListener('click', () => updateCarousel(currentIndex + 1));
+
+            // Dot navigation
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => updateCarousel(index));
+            });
+
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') updateCarousel(currentIndex - 1);
+                if (e.key === 'ArrowRight') updateCarousel(currentIndex + 1);
+            });
+
+            // Touch swipe support
+            let touchStart = 0;
+            carousel.addEventListener('touchstart', (e) => {
+                touchStart = e.touches[0].clientX;
+            });
+            carousel.addEventListener('touchend', (e) => {
+                const touchEnd = e.changedTouches[0].clientX;
+                if (touchStart - touchEnd > 50) updateCarousel(currentIndex + 1);
+                if (touchEnd - touchStart > 50) updateCarousel(currentIndex - 1);
+            });
+
+            updateCarousel(0);
+        }
+
         // Tailwind script
         function initializeTailwind() {
             document.documentElement.style.setProperty('--accent', '#C2410C');
         }
-        
+
         // Navbar scroll effect
         function initNavbar() {
             const navbar = document.getElementById('navbar');
@@ -829,6 +915,7 @@
             initCountdown();
             initSmoothScroll();
             initKeyboardControls();
+            initCarousel();
             
             // Easter egg / dev note
             console.log('%c[Orbit-hub] Foundations laid successfully. Ready to scale. Designed for Togbé Adjos & VODUN JAZZ.', 'color:#854d0e; font-size:9px');
