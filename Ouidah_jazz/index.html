@@ -762,6 +762,8 @@
             const nextBtn = document.getElementById('carousel-next');
 
             let currentIndex = 0;
+            let autoScrollInterval = null;
+            const AUTO_SCROLL_DELAY = 5000; // 5 seconds
 
             function updateCarousel(index) {
                 currentIndex = (index + items.length) % items.length;
@@ -799,19 +801,46 @@
                 });
             }
 
+            // Auto-scroll functionality
+            function startAutoScroll() {
+                if (autoScrollInterval) clearInterval(autoScrollInterval);
+                autoScrollInterval = setInterval(() => {
+                    updateCarousel(currentIndex + 1);
+                }, AUTO_SCROLL_DELAY);
+            }
+
+            function resetAutoScroll() {
+                startAutoScroll();
+            }
+
             // Navigation handlers
-            prevBtn?.addEventListener('click', () => updateCarousel(currentIndex - 1));
-            nextBtn?.addEventListener('click', () => updateCarousel(currentIndex + 1));
+            prevBtn?.addEventListener('click', () => {
+                updateCarousel(currentIndex - 1);
+                resetAutoScroll();
+            });
+            nextBtn?.addEventListener('click', () => {
+                updateCarousel(currentIndex + 1);
+                resetAutoScroll();
+            });
 
             // Dot navigation
             dots.forEach((dot, index) => {
-                dot.addEventListener('click', () => updateCarousel(index));
+                dot.addEventListener('click', () => {
+                    updateCarousel(index);
+                    resetAutoScroll();
+                });
             });
 
             // Keyboard navigation
             document.addEventListener('keydown', (e) => {
-                if (e.key === 'ArrowLeft') updateCarousel(currentIndex - 1);
-                if (e.key === 'ArrowRight') updateCarousel(currentIndex + 1);
+                if (e.key === 'ArrowLeft') {
+                    updateCarousel(currentIndex - 1);
+                    resetAutoScroll();
+                }
+                if (e.key === 'ArrowRight') {
+                    updateCarousel(currentIndex + 1);
+                    resetAutoScroll();
+                }
             });
 
             // Touch swipe support
@@ -821,11 +850,26 @@
             });
             carousel.addEventListener('touchend', (e) => {
                 const touchEnd = e.changedTouches[0].clientX;
-                if (touchStart - touchEnd > 50) updateCarousel(currentIndex + 1);
-                if (touchEnd - touchStart > 50) updateCarousel(currentIndex - 1);
+                if (touchStart - touchEnd > 50) {
+                    updateCarousel(currentIndex + 1);
+                    resetAutoScroll();
+                }
+                if (touchEnd - touchStart > 50) {
+                    updateCarousel(currentIndex - 1);
+                    resetAutoScroll();
+                }
+            });
+
+            // Pause on hover, resume on leave
+            carousel.addEventListener('mouseenter', () => {
+                if (autoScrollInterval) clearInterval(autoScrollInterval);
+            });
+            carousel.addEventListener('mouseleave', () => {
+                startAutoScroll();
             });
 
             updateCarousel(0);
+            startAutoScroll();
         }
 
         // Tailwind script
