@@ -51,7 +51,7 @@ orbit-hub-website/
 **Pour un vrai déploiement :**
 - Uploadez sur Netlify, Vercel, GitHub Pages ou tout hébergeur statique
 - Remplacez les liens Facebook par les vrais
-- ⚠️ Le formulaire de candidature est branché sur Formspree mais l'`action` dans `index.html` contient encore le placeholder `YOUR_FORM_ID` — créez un formulaire sur [formspree.io](https://formspree.io) (destination : Adjos67@gmail.com) et remplacez l'ID avant toute mise en production, sinon les candidatures ne partiront pas
+- Le formulaire de candidature est branché sur Formspree (`https://formspree.io/f/xrpzbrlg`), compte géré par l'équipe technique — vérifiez dans Settings > Recipients que la destination est bien Adjos67@gmail.com
 - Ajoutez les pages suivantes quand prêt : Programme, Artistes sélectionnés, Billetterie, Espace Artiste
 
 ## 🔄 Prochaines étapes recommandées (évolutions)
