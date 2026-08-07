@@ -28,14 +28,14 @@ orbit-hub-website/
 ### Sections principales
 1. **Hero** — Impactant avec fond du visuel de l'Arc + CTA forts
 2. **Le Festival** — Présentation de la nouvelle ère (évolution du VODUN JAZZ FESTIVAL)
-3. **Appel à Candidature** — Section mise en avant avec **formulaire fonctionnel** (simulation d'envoi + modal de succès)
+3. **Appel à Candidature** — Section mise en avant avec **formulaire fonctionnel** (envoi réel via Formspree + modal de succès)
 4. **L'Expérience** — 3 piliers (musique, spiritualité, communauté)
 5. **Galerie** — Mise en valeur des deux visuels fournis
 6. **Pourquoi Orbit-hub ?** — Explication du concept de hub digital
 7. **Footer** complet avec contacts
 
 ### Fonctionnalités interactives
-- Formulaire de candidature prêt à l'emploi (validation HTML5 + envoi simulé)
+- Formulaire de candidature prêt à l'emploi (validation HTML5 + envoi réel via Formspree vers Adjos67@gmail.com)
 - Modal de confirmation après soumission
 - Navigation fluide (smooth scroll)
 - Menu mobile hamburger
@@ -51,13 +51,13 @@ orbit-hub-website/
 **Pour un vrai déploiement :**
 - Uploadez sur Netlify, Vercel, GitHub Pages ou tout hébergeur statique
 - Remplacez les liens Facebook par les vrais
-- Connectez le formulaire à Formspree, EmailJS, ou une vraie API backend plus tard
+- ⚠️ Le formulaire de candidature est branché sur Formspree mais l'`action` dans `index.html` contient encore le placeholder `YOUR_FORM_ID` — créez un formulaire sur [formspree.io](https://formspree.io) (destination : Adjos67@gmail.com) et remplacez l'ID avant toute mise en production, sinon les candidatures ne partiront pas
 - Ajoutez les pages suivantes quand prêt : Programme, Artistes sélectionnés, Billetterie, Espace Artiste
 
 ## 🔄 Prochaines étapes recommandées (évolutions)
 
 - Page dédiée `/programme` avec line-up teaser
-- Système de candidature réel (backend + base de données)
+- Tracking du nombre de candidatures reçues (Formspree ne fournit qu'un email par soumission — pour un compteur/dashboard il faudrait une vraie base de données, ex. Supabase)
 - Galerie photo/vidéo agrandie
 - Intégration newsletter
 - Compte à rebours dynamique visible
