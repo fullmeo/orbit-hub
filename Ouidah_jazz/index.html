@@ -339,19 +339,19 @@
                         <form id="application-form" action="https://formspree.io/f/xrpzbrlg" method="POST" class="space-y-5">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                                 <div>
-                                    <label class="block text-xs font-medium text-zinc-400 mb-1.5">NOM COMPLET</label>
+                                    <label for="full-name" class="block text-xs font-medium text-zinc-400 mb-1.5">NOM COMPLET</label>
                                     <input type="text" id="full-name" name="full_name" required
                                            class="w-full bg-zinc-900 border border-white/10 focus:border-orange-600 rounded-2xl px-5 py-3.5 text-sm placeholder:text-zinc-500 outline-none transition-colors">
                                 </div>
                                 <div>
-                                    <label class="block text-xs font-medium text-zinc-400 mb-1.5">EMAIL</label>
+                                    <label for="email" class="block text-xs font-medium text-zinc-400 mb-1.5">EMAIL</label>
                                     <input type="email" id="email" name="email" required
                                            class="w-full bg-zinc-900 border border-white/10 focus:border-orange-600 rounded-2xl px-5 py-3.5 text-sm placeholder:text-zinc-500 outline-none transition-colors">
                                 </div>
                             </div>
 
                             <div>
-                                <label class="block text-xs font-medium text-zinc-400 mb-1.5">TYPE DE CANDIDATURE</label>
+                                <label for="category" class="block text-xs font-medium text-zinc-400 mb-1.5">TYPE DE CANDIDATURE</label>
                                 <select id="category" name="category" required class="w-full bg-zinc-900 border border-white/10 focus:border-orange-600 rounded-2xl px-5 py-3.5 text-sm outline-none">
                                     <option value="">Sélectionnez...</option>
                                     <option value="artiste-musicien">Artiste Musicien / Chanteur</option>
@@ -362,25 +362,26 @@
                             </div>
 
                             <div>
-                                <label class="block text-xs font-medium text-zinc-400 mb-1.5">PRÉSENTATION COURTE (bio / style musical)</label>
+                                <label for="bio" class="block text-xs font-medium text-zinc-400 mb-1.5">PRÉSENTATION COURTE (bio / style musical)</label>
                                 <textarea id="bio" name="bio" rows="3" required placeholder="Parlez-nous de votre parcours, votre univers musical et ce qui vous relie à Ouidah / au Vodun..."
                                           class="w-full bg-zinc-900 border border-white/10 focus:border-orange-600 rounded-3xl px-5 py-4 text-sm placeholder:text-zinc-500 outline-none resize-y min-h-[90px]"></textarea>
                             </div>
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                                 <div>
-                                    <label class="block text-xs font-medium text-zinc-400 mb-1.5">LIEN VIDÉO (YouTube, etc.)</label>
+                                    <label for="video-link" class="block text-xs font-medium text-zinc-400 mb-1.5">LIEN VIDÉO (YouTube, etc.)</label>
                                     <input type="url" id="video-link" name="video_link" placeholder="https://youtube.com/..."
                                            class="w-full bg-zinc-900 border border-white/10 focus:border-orange-600 rounded-2xl px-5 py-3.5 text-sm placeholder:text-zinc-500 outline-none">
                                 </div>
                                 <div>
-                                    <label class="block text-xs font-medium text-zinc-400 mb-1.5">LIEN PORTFOLIO / PHOTOS</label>
+                                    <label for="portfolio-link" class="block text-xs font-medium text-zinc-400 mb-1.5">LIEN PORTFOLIO / PHOTOS</label>
                                     <input type="url" id="portfolio-link" name="portfolio_link" placeholder="Drive, Instagram, site..."
                                            class="w-full bg-zinc-900 border border-white/10 focus:border-orange-600 rounded-2xl px-5 py-3.5 text-sm placeholder:text-zinc-500 outline-none">
                                 </div>
                             </div>
 
                             <input type="hidden" name="_subject" value="Nouvelle candidature - Ouidah Blues Jazz &amp; Gospel Festival">
+                            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
 
                             <div class="pt-3">
                                 <button type="submit"

@@ -15,7 +15,7 @@
 # HTML files - no cache, always fresh
 /*.html
   Cache-Control: public, max-age=0, must-revalidate, no-cache
-  Content-Security-Policy: default-src 'self' https: 'unsafe-inline'; script-src 'self' https://cdn.jsdelivr.net https://www.googletagmanager.com https://www.google-analytics.com https://sdk.scdn.co https://cdn.brevo.com 'unsafe-inline'; img-src 'self' https: data:; font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com
+  Content-Security-Policy: default-src 'self' https: 'unsafe-inline'; script-src 'self' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://www.googletagmanager.com https://www.google-analytics.com https://sdk.scdn.co https://cdn.brevo.com 'unsafe-inline' 'unsafe-eval'; connect-src 'self' https://formspree.io https://www.google-analytics.com; img-src 'self' https: data:; font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com
   X-Content-Type-Options: nosniff
 
 # JavaScript - cache for 1 year (immutable hash in filename)
@@ -80,10 +80,15 @@
 # default-src 'self' https:
 #   - Only allow resources from same origin or HTTPS
 #
-# script-src 'self' https://... 'unsafe-inline'
+# script-src 'self' https://... 'unsafe-inline' 'unsafe-eval'
 #   - Inline GA4 and tracking scripts require 'unsafe-inline'
+#   - Tailwind Play CDN (cdn.tailwindcss.com) compiles CSS at runtime
+#     and requires 'unsafe-eval' to execute
 #   - CDNs for libraries: jsdelivr, Spotify SDK, Google Analytics
 #   - Brevo for email forms
+#
+# connect-src 'self' https://formspree.io https://www.google-analytics.com
+#   - Allows the candidature form to POST to Formspree via fetch()
 #
 # img-src 'self' https: data:
 #   - Allow images from any HTTPS source + data URIs
