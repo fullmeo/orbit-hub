@@ -19,6 +19,14 @@
         body {
             font-family: 'Inter', system_ui, sans-serif;
         }
+
+        /* Carousel items outside the active slot get pointer-events:none so
+           background cards don't intercept clicks meant for the centered
+           one — but that also swallows clicks on links inside them. Force
+           links back to clickable regardless of which card is active. */
+        .carousel-item a {
+            pointer-events: auto;
+        }
         
         .heading-serif {
             font-family: 'Playfair Display', Georgia, serif;
