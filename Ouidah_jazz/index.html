@@ -930,6 +930,11 @@
                 .join('&');
         }
 
+        // Backup submission channel — sends the same application to Formspree
+        // in parallel with Netlify Forms, so a candidacy still gets through
+        // if either service has an outage or the Netlify form detection fails.
+        const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xrpzbrlg';
+
         function initApplicationForm() {
             const form = document.getElementById('application-form');
             const errorMessage = document.getElementById('application-error');
@@ -949,13 +954,37 @@
                 const payload = {};
                 formData.forEach((value, key) => { payload[key] = value; });
 
-                fetch('/', {
+                const netlifySubmit = fetch('/', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                     body: encodeFormData(payload)
-                })
-                    .then((response) => {
-                        if (!response.ok) throw new Error('Submission failed with status ' + response.status);
+                });
+
+                const formspreeData = new FormData(form);
+                formspreeData.delete('form-name');
+                formspreeData.delete('bot-field');
+                const formspreeSubmit = fetch(FORMSPREE_ENDPOINT, {
+                    method: 'POST',
+                    headers: { 'Accept': 'application/json' },
+                    body: formspreeData
+                });
+
+                Promise.allSettled([netlifySubmit, formspreeSubmit])
+                    .then(([netlifyResult, formspreeResult]) => {
+                        const netlifyOk = netlifyResult.status === 'fulfilled' && netlifyResult.value.ok;
+                        const formspreeOk = formspreeResult.status === 'fulfilled' && formspreeResult.value.ok;
+
+                        if (!netlifyOk) {
+                            console.error('[Orbit-hub] Netlify Forms submission failed:', netlifyResult.reason || netlifyResult.value.status);
+                        }
+                        if (!formspreeOk) {
+                            console.error('[Orbit-hub] Formspree submission failed:', formspreeResult.reason || formspreeResult.value.status);
+                        }
+
+                        if (!netlifyOk && !formspreeOk) {
+                            throw new Error('Both submission channels failed');
+                        }
+
                         showSuccessModal();
                         form.reset();
                         localStorage.setItem('orbitHubApplicationSubmitted', 'true');
