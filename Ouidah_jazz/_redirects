@@ -16,8 +16,8 @@
 # Social media shortcuts (UTM pre-configured)
 /facebook                         https://facebook.com/TogbeAdjos?utm_source=orbit&utm_medium=shortlink  301
 /instagram                        https://instagram.com/togbeadjos?utm_source=orbit&utm_medium=shortlink  301
-/email                            mailto:Adjos67@gmail.com       301
-/contact-email                    mailto:Adjos67@gmail.com       301
+/email                            /redirect-email.html            200
+/contact-email                    /redirect-email.html            200
 /newsletter                       /index.html#contact            301
 
 # Legal pages
