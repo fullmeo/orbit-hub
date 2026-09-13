@@ -760,7 +760,12 @@
 
                 // Update items with 3D effect
                 items.forEach((item, i) => {
-                    const offset = i - currentIndex;
+                    // Wrap the offset around the circle of items so the active
+                    // card always has one neighbor on each side, even when
+                    // it's the first or last item (e.g. 2 vs -1 becomes -1).
+                    let offset = i - currentIndex;
+                    if (offset > items.length / 2) offset -= items.length;
+                    if (offset < -items.length / 2) offset += items.length;
                     const rotation = offset * 65;
                     const translateZ = offset === 0 ? 400 : (Math.abs(offset) === 1 ? 300 : 0);
                     const scale = offset === 0 ? 1 : 0.85;
