@@ -7,5 +7,13 @@
   "afrisson": "https://www.afrisson.com/serigne-diagne/",
   "email": "serignetrumpet@gmail.com",
   "telephone": "+33661919035",
-  "ville": "Paris"
+  "ville": "Paris",
+  "platform": {
+    "name": "Orbit Hub",
+    "id": "serigne-diagne",
+    "repo": "https://github.com/fullmeo/orbit-hub",
+    "directory": "serigne-diagne_orbit-hub",
+    "affiliation": "member",
+    "publicLabel": "Un hub Orbit"
+  }
 }
