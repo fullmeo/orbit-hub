@@ -25,7 +25,6 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
       - name: Detect Changed Directories
         id: detect
         run: |
@@ -43,7 +42,6 @@ jobs:
             fi
           fi
           echo "sites=$SITES" >> $GITHUB_OUTPUT
-          echo "Detected sites to deploy: $SITES"
 
   deploy-site:
     name: Deploy ${{ matrix.site }}
@@ -58,14 +56,9 @@ jobs:
       contains(needs.detect-changes.outputs.sites, 'all')
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-
       - name: Get Site Config
         id: config
         run: |
@@ -74,13 +67,16 @@ jobs:
             const site = config.sites.find(s => s.id === '${{ matrix.site }}');
             if (!site) process.exit(1);
             console.log('dir=' + site.directory);
-            console.log('domain=' + site.domain);
-            console.log('status=' + site.status);
           ")
           echo "$CONFIG" >> $GITHUB_OUTPUT
-
+      - name: Optional npm build
+        run: |
+          cd "${{ steps.config.outputs.dir }}"
+          if [ -f package.json ]; then
+            npm ci --prefer-offline || npm install
+            npm run build --if-present
+          fi
       - name: Deploy to Netlify
-        id: deploy
         uses: nwtgck/actions-netlify@v3
         with:
           publish-dir: './${{ steps.config.outputs.dir }}'
