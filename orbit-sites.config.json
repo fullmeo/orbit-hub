@@ -22,12 +22,7 @@
       "analytics": {
         "ga4PropertyId": "G-LS4G24ESNF"
       },
-      "features": [
-        "fan-chat",
-        "music-streaming",
-        "newsletter",
-        "social-integration"
-      ]
+      "features": ["fan-chat", "music-streaming", "newsletter", "social-integration"]
     },
     {
       "id": "ouidah-jazz",
@@ -47,12 +42,7 @@
       "analytics": {
         "ga4PropertyId": "G-OUIDAH-JAZZ"
       },
-      "features": [
-        "fan-chat",
-        "music-streaming",
-        "festival-info",
-        "social-integration"
-      ]
+      "features": ["fan-chat", "music-streaming", "festival-info", "social-integration"]
     },
     {
       "id": "jecd-trio",
@@ -72,11 +62,27 @@
       "analytics": {
         "ga4PropertyId": "G-JECD-TRIO"
       },
-      "features": [
-        "music-streaming",
-        "api-integration",
-        "backend-support"
-      ]
+      "features": ["music-streaming", "api-integration", "backend-support"]
+    },
+    {
+      "id": "serigne-diagne",
+      "name": "Serigne Diagne",
+      "domain": "serigne-diagne.netlify.app",
+      "customDomain": null,
+      "directory": "serigne-diagne_orbit-hub",
+      "status": "staging",
+      "artist": {
+        "name": "Serigne Diagne",
+        "genre": "Jazz • Trompette",
+        "bio": "Trompettiste et compositeur basé à Paris.",
+        "tone": "nocturne, vintage, spirituel, précis",
+        "instagram": "https://www.instagram.com/serigne.diagnepro",
+        "afrisson": "https://www.afrisson.com/serigne-diagne/"
+      },
+      "analytics": {
+        "ga4PropertyId": "G-SERIGNE-DIAGNE"
+      },
+      "features": ["digital-business-card", "vcard", "social-integration"]
     }
   ],
   "deployment": {
