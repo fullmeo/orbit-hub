@@ -1,0 +1,10 @@
+# Netlify configuration - Serigne Diagne
+[build]
+  base = "serigne-diagne_orbit-hub"
+  publish = "."
+
+[build.environment]
+  ARTIST_NAME = "Serigne Diagne"
+  ARTIST_TONE = "nocturne, vintage, spirituel, precis"
+  ARTIST_BIO = "Trompettiste et compositeur base a Paris"
+  NODE_ENV = "production"
