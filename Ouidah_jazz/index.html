@@ -102,6 +102,30 @@
             background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill-rule='evenodd'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-10V8h-2v16h-4v2h4v4h2v-4h4v-2h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 6v-4H4v4H0v2h4v4h2V8h4V6H6z' fill='%23C2410C' fill-opacity='0.06'/%3E%3C/g%3E%3C/svg%3E");
             background-size: 60px 60px;
         }
+
+        /* Mobile: 3D carousel becomes a flat, native swipeable scroll-snap row.
+           translateZ/rotateY position cards off-flow, which breaks native
+           overflow-x scrolling used on small screens - so it's disabled here
+           and the JS skips 3D transforms below this breakpoint. */
+        @media (max-width: 767px) {
+            #carousel {
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                justify-content: flex-start !important;
+            }
+            .carousel-item {
+                transform: none !important;
+                opacity: 1 !important;
+                scroll-snap-align: center;
+            }
+
+            /* background-attachment: fixed is unreliable/janky on mobile
+               Safari and Chrome (scroll jumps, incorrect paint) - fall back
+               to normal scrolling on small screens. */
+            .hero-bg {
+                background-attachment: scroll;
+            }
+        }
     </style>
 </head>
 <body class="bg-zinc-950 text-zinc-200 overflow-x-hidden">
@@ -520,9 +544,12 @@
                     <div class="bg-gradient-to-b from-red-950/30 to-zinc-900 border border-red-500/30 rounded-2xl overflow-hidden shadow-2xl" style="width: 290px;">
                         <div class="flex flex-col h-full">
                             <div class="aspect-[3/4] overflow-hidden ring-2 ring-red-500/20">
-                                <img src="assets/images/logo-togbe.PNG" loading="lazy"
-                                     alt="Togbé Adjos - Fondateur du Festival"
-                                     class="w-full h-full object-contain hover:scale-105 transition-transform duration-700" style="background: rgba(194, 65, 12, 0.1);">
+                                <picture>
+                                    <source srcset="assets/images/togbe-adjos-card.webp" type="image/webp">
+                                    <img src="assets/images/togbe-adjos-card.png" loading="lazy" width="640" height="801"
+                                         alt="Togbé Adjos - Fondateur du Festival"
+                                         class="w-full h-full object-contain hover:scale-105 transition-transform duration-700" style="background: rgba(194, 65, 12, 0.1);">
+                                </picture>
                             </div>
                             <div class="p-6 flex flex-col justify-between flex-grow">
                                 <div>
@@ -567,9 +594,12 @@
                     <div class="bg-zinc-900 border border-white/10 rounded-2xl overflow-hidden" style="width: 290px;">
                         <div class="flex flex-col h-full">
                             <div class="aspect-[3/4] overflow-hidden">
-                                <img src="assets/images/serigne-diagne.jpeg" loading="lazy"
-                                     alt="Serigne Diagne"
-                                     class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+                                <picture>
+                                    <source srcset="assets/images/serigne-diagne-card.webp" type="image/webp">
+                                    <img src="assets/images/serigne-diagne-card.jpg" loading="lazy" width="900" height="1350"
+                                         alt="Serigne Diagne"
+                                         class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+                                </picture>
                             </div>
                             <div class="p-6 flex flex-col justify-between flex-grow">
                                 <div>
@@ -746,9 +776,35 @@
             let currentIndex = 0;
             let autoScrollInterval = null;
             const AUTO_SCROLL_DELAY = 5000; // 5 seconds
+            const isMobile = () => window.matchMedia('(max-width: 767px)').matches;
+
+            function updateDots() {
+                dots.forEach((dot, i) => {
+                    if (i === currentIndex) {
+                        dot.style.background = '#C2410C';
+                        dot.style.width = '32px';
+                        dot.style.borderRadius = '6px';
+                    } else {
+                        dot.style.background = 'rgba(194, 65, 12, 0.4)';
+                        dot.style.width = '12px';
+                        dot.style.borderRadius = '50%';
+                    }
+                });
+            }
 
             function updateCarousel(index) {
                 currentIndex = (index + items.length) % items.length;
+
+                // On mobile the cards are laid out flat in a native scroll-snap
+                // row (see CSS), so 3D transforms are skipped - translateZ and
+                // rotateY position elements outside the normal box flow, which
+                // breaks how the browser computes native horizontal scrolling.
+                if (isMobile()) {
+                    items.forEach((item, i) => item.classList.toggle('active', i === currentIndex));
+                    items[currentIndex]?.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                    updateDots();
+                    return;
+                }
 
                 // Update items with 3D effect
                 items.forEach((item, i) => {
@@ -774,18 +830,7 @@
                     }
                 });
 
-                // Update dots
-                dots.forEach((dot, i) => {
-                    if (i === currentIndex) {
-                        dot.style.background = '#C2410C';
-                        dot.style.width = '32px';
-                        dot.style.borderRadius = '6px';
-                    } else {
-                        dot.style.background = 'rgba(194, 65, 12, 0.4)';
-                        dot.style.width = '12px';
-                        dot.style.borderRadius = '50%';
-                    }
-                });
+                updateDots();
             }
 
             // Auto-scroll functionality
@@ -830,12 +875,16 @@
                 }
             });
 
-            // Touch swipe support
+            // Touch swipe support (desktop/tablet 3D mode only - on mobile,
+            // native CSS scroll-snap already handles swiping the flat row,
+            // and driving both at once made swipes jump/fight each other).
             let touchStart = 0;
             carousel.addEventListener('touchstart', (e) => {
+                if (isMobile()) return;
                 touchStart = e.touches[0].clientX;
             });
             carousel.addEventListener('touchend', (e) => {
+                if (isMobile()) return;
                 const touchEnd = e.changedTouches[0].clientX;
                 if (touchStart - touchEnd > 50) {
                     updateCarousel(currentIndex + 1);
@@ -846,6 +895,31 @@
                     resetAutoScroll();
                 }
             });
+
+            // Keep dots in sync when the user swipes the native mobile row directly.
+            let scrollSyncTimeout = null;
+            carousel.addEventListener('scroll', () => {
+                if (!isMobile()) return;
+                clearTimeout(scrollSyncTimeout);
+                scrollSyncTimeout = setTimeout(() => {
+                    const carouselCenter = carousel.scrollLeft + carousel.clientWidth / 2;
+                    let closestIndex = 0;
+                    let closestDistance = Infinity;
+                    items.forEach((item, i) => {
+                        const itemCenter = item.offsetLeft + item.offsetWidth / 2;
+                        const distance = Math.abs(itemCenter - carouselCenter);
+                        if (distance < closestDistance) {
+                            closestDistance = distance;
+                            closestIndex = i;
+                        }
+                    });
+                    if (closestIndex !== currentIndex) {
+                        currentIndex = closestIndex;
+                        items.forEach((item, i) => item.classList.toggle('active', i === currentIndex));
+                        updateDots();
+                    }
+                }, 100);
+            }, { passive: true });
 
             // Pause on hover, resume on leave
             carousel.addEventListener('mouseenter', () => {
