@@ -4,7 +4,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jazz à Ouidah 2027 | Propulsé par Orbit-hub</title>
-    <meta name="description" content="Site officiel de Jazz à Ouidah 2027 (VODUN JAZZ FESTIVAL) à Ouidah, Bénin. Première édition, reportée de 2026 à 2027 — 15-17 janvier 2027. Appel à candidatures ouvert jusqu'au 15 décembre 2026. Artistes sélectionnés reçoivent un Orbit-hub personnel. Fusion Blues, Jazz, Gospel et racines Vodun.">
+    <meta name="description" content="Site officiel de Jazz à Ouidah — 1re édition du VODUN JAZZ FESTIVAL, 15-17 janvier 2027 à Ouidah, Bénin. Candidatures ouvertes jusqu'au 15 décembre 2026.">
+    <link rel="canonical" href="https://orbit-ouidah-jazz.netlify.app/">
+
+    <!-- Open Graph / Facebook, WhatsApp, LinkedIn -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://orbit-ouidah-jazz.netlify.app/">
+    <meta property="og:title" content="Jazz à Ouidah 2027 — VODUN JAZZ FESTIVAL">
+    <meta property="og:description" content="1re édition du VODUN JAZZ FESTIVAL, 15-17 janvier 2027 à Ouidah, Bénin. Candidatures ouvertes jusqu'au 15 décembre 2026.">
+    <meta property="og:image" content="https://orbit-ouidah-jazz.netlify.app/assets/images/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="Jazz à Ouidah">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Jazz à Ouidah 2027 — VODUN JAZZ FESTIVAL">
+    <meta name="twitter:description" content="1re édition du VODUN JAZZ FESTIVAL, 15-17 janvier 2027 à Ouidah, Bénin.">
+    <meta name="twitter:image" content="https://orbit-ouidah-jazz.netlify.app/assets/images/og-image.jpg">
+
+    <!-- Icons / PWA -->
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+    <meta name="theme-color" content="#C2410C">
+
+    <!-- Resource hints for the render-blocking third-party assets below -->
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Structured data: festival dates/location for rich results -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "MusicEvent",
+        "name": "Jazz à Ouidah 2027 — VODUN JAZZ FESTIVAL",
+        "description": "1re édition du VODUN JAZZ FESTIVAL, fusion Blues, Jazz, Gospel et racines Vodun.",
+        "startDate": "2027-01-15",
+        "endDate": "2027-01-17",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+            "@type": "Place",
+            "name": "Ouidah",
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Ouidah",
+                "addressCountry": "BJ"
+            }
+        },
+        "image": ["https://orbit-ouidah-jazz.netlify.app/assets/images/og-image.jpg"],
+        "organizer": {
+            "@type": "Organization",
+            "name": "VODUN JAZZ FESTIVAL",
+            "email": "Adjos67@gmail.com"
+        },
+        "url": "https://orbit-ouidah-jazz.netlify.app/"
+    }
+    </script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
@@ -579,9 +642,12 @@
                     <div class="bg-zinc-900 border border-white/10 rounded-2xl overflow-hidden" style="width: 290px;">
                         <div class="flex flex-col h-full">
                             <div class="aspect-[3/4] overflow-hidden">
-                                <img src="assets/images/alex-boicel-manager.jpeg" loading="lazy"
-                                     alt="Alex Boicel"
-                                     class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+                                <picture>
+                                    <source srcset="assets/images/alex-boicel-card.webp" type="image/webp">
+                                    <img src="assets/images/alex-boicel-card.jpg" loading="lazy" width="700" height="1159"
+                                         alt="Alex Boicel"
+                                         class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+                                </picture>
                             </div>
                             <div class="p-6 flex flex-col justify-between flex-grow">
                                 <div>
