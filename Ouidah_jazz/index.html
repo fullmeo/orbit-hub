@@ -874,7 +874,18 @@
                 // breaks how the browser computes native horizontal scrolling.
                 if (isMobile()) {
                     items.forEach((item, i) => item.classList.toggle('active', i === currentIndex));
-                    items[currentIndex]?.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                    // Scroll only the carousel's own horizontal track (never
+                    // scrollIntoView, which moves the whole page's vertical
+                    // scroll too - that made the 5s autoplay yank the page
+                    // back to this section even while someone had scrolled
+                    // well past it to read something else).
+                    const item = items[currentIndex];
+                    if (item) {
+                        carousel.scrollTo({
+                            left: item.offsetLeft - (carousel.clientWidth - item.offsetWidth) / 2,
+                            behavior: 'smooth'
+                        });
+                    }
                     updateDots();
                     return;
                 }
@@ -1001,6 +1012,18 @@
             carousel.addEventListener('mouseleave', () => {
                 startAutoScroll();
             });
+
+            // Pause autoplay while the carousel is scrolled out of view,
+            // instead of advancing it pointlessly in the background.
+            if ('IntersectionObserver' in window) {
+                new IntersectionObserver((entries) => {
+                    if (entries[0].isIntersecting) {
+                        startAutoScroll();
+                    } else if (autoScrollInterval) {
+                        clearInterval(autoScrollInterval);
+                    }
+                }, { threshold: 0.2 }).observe(carousel);
+            }
 
             updateCarousel(0);
             startAutoScroll();
