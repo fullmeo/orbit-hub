@@ -6,52 +6,33 @@
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait-primary",
-  
   "theme_color": "#1a1f3a",
   "background_color": "#ffffff",
   "prefer_related_applications": false,
-  
   "icons": [
     {
-      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%231a1f3a' width='192' height='192'/><text x='50%' y='50%' font-size='120' dominant-baseline='middle' text-anchor='middle'>🎺</text></svg>",
+      "src": "/images/icon-192.png",
       "sizes": "192x192",
-      "type": "image/svg+xml",
+      "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect fill='%231a1f3a' width='512' height='512'/><text x='50%' y='50%' font-size='320' dominant-baseline='middle' text-anchor='middle'>🎺</text></svg>",
+      "src": "/images/icon-512.png",
       "sizes": "512x512",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
-    }
-  ],
-  
-  "screenshots": [
-    {
-      "src": "/images/screenshot-1.png",
       "type": "image/png",
-      "sizes": "540x720",
-      "form_factor": "narrow"
+      "purpose": "any"
     },
     {
-      "src": "/images/screenshot-1-wide.png",
+      "src": "/images/icon-512.png",
+      "sizes": "512x512",
       "type": "image/png",
-      "sizes": "1280x720",
-      "form_factor": "wide"
+      "purpose": "maskable"
     }
   ],
-  
-  "categories": ["music", "entertainment"],
-  
-  "screenshots": [
-    {
-      "src": "images/screenshot-1.png",
-      "sizes": "540x720",
-      "type": "image/png",
-      "form_factor": "narrow"
-    }
+  "categories": [
+    "music",
+    "entertainment"
   ],
-  
   "share_target": {
     "action": "/share-event",
     "method": "POST",
@@ -62,7 +43,6 @@
       "url": "url"
     }
   },
-  
   "shortcuts": [
     {
       "name": "Réserver un concert",
@@ -71,9 +51,9 @@
       "url": "/?tab=booking",
       "icons": [
         {
-          "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%23d4af37' width='192' height='192'/><text x='50%' y='50%' font-size='120' dominant-baseline='middle' text-anchor='middle'>📅</text></svg>",
+          "src": "/images/icon-192.png",
           "sizes": "192x192",
-          "type": "image/svg+xml"
+          "type": "image/png"
         }
       ]
     },
@@ -84,9 +64,9 @@
       "url": "/?tab=performances",
       "icons": [
         {
-          "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%23d4af37' width='192' height='192'/><text x='50%' y='50%' font-size='120' dominant-baseline='middle' text-anchor='middle'>🎭</text></svg>",
+          "src": "/images/icon-192.png",
           "sizes": "192x192",
-          "type": "image/svg+xml"
+          "type": "image/png"
         }
       ]
     },
@@ -97,9 +77,9 @@
       "url": "/?tab=streaming",
       "icons": [
         {
-          "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%231DB954' width='192' height='192'/><text x='50%' y='50%' font-size='120' dominant-baseline='middle' text-anchor='middle'>🎵</text></svg>",
+          "src": "/images/icon-192.png",
           "sizes": "192x192",
-          "type": "image/svg+xml"
+          "type": "image/png"
         }
       ]
     }

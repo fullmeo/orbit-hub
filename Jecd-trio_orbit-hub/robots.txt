@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://jcd-trio-orbit-hub.netlify.app/sitemap.xml
