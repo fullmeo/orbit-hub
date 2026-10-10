@@ -31,7 +31,6 @@
     "description": "Trio voix, batterie et trompette — chansons à la demande pour mariages, soirées privées et événements. Paris.",
     "genre": ["Jazz", "Chanson"],
     "areaServed": "Paris, France",
-    "email": "serignetrumpet@gmail.com",
     "sameAs": ["https://www.facebook.com/jeanmarc.dossantos.9/", "https://instagram.com/serigne.diagnepro"]
   }
   </script>
@@ -134,6 +133,30 @@
       background: linear-gradient(to bottom, transparent, #d4af77, transparent);
       margin: 0 auto;
     }
+
+    /* ── FORMULAIRE DE RÉSERVATION ───────────────────────── */
+    .rf { max-width: 640px; margin: 0 auto; text-align: left; background: rgba(255,255,255,.05);
+          border: 1px solid rgba(255,255,255,.1); border-radius: 24px; padding: 2rem; }
+    .rf-title { font-family: 'Playfair Display', serif; color: #fff; font-size: 1.75rem; margin: 0 0 .25rem; }
+    .rf-intro { color: rgba(255,255,255,.6); font-size: .9rem; margin: 0 0 1.5rem; }
+    .rf-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .rf-full { grid-column: 1 / -1; }
+    .rf-field { display: flex; flex-direction: column; gap: .4rem; color: rgba(255,255,255,.8); font-size: .85rem; }
+    .rf-field input, .rf-field select, .rf-field textarea {
+      background: rgba(0,0,0,.35); border: 1px solid rgba(255,255,255,.2); border-radius: 12px;
+      color: #fff; padding: .75rem 1rem; font: inherit; font-size: 1rem; }
+    .rf-field select option { color: #000; }
+    .rf-field input:focus, .rf-field select:focus, .rf-field textarea:focus {
+      outline: 2px solid #d4af77; outline-offset: 1px; border-color: #d4af77; }
+    .rf-submit { margin-top: 1.5rem; width: 100%; padding: 1rem 2rem; background: #d4af77; color: #000;
+      border: 0; border-radius: 999px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+      font-size: .8rem; cursor: pointer; transition: background .3s; }
+    .rf-submit:hover { background: #fff; }
+    .rf-submit:disabled { opacity: .6; cursor: wait; }
+    .rf-status { margin: 1rem 0 0; min-height: 1.4em; font-size: .95rem; text-align: center; }
+    .rf-status.ok { color: #8fd18f; }
+    .rf-status.err { color: #ff9b8a; }
+    @media (max-width: 560px) { .rf { padding: 1.25rem; } .rf-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body class="bg-[#faf7f0] text-[#1a1a1a] overflow-x-hidden">
@@ -448,10 +471,45 @@
         </div>
       </div>
 
-      <a href="mailto:serignetrumpet@gmail.com?subject=Demande de réservation — Trio Santos Cirillo Diagne"
-         class="inline-block px-12 py-5 bg-[#d4af77] text-black text-sm tracking-[3px] uppercase font-bold rounded-full hover:bg-white transition-all duration-400 hover:scale-105 fade-up">
-        Demander un devis
-      </a>
+      <form id="booking-form" class="rf" action="https://formspree.io/f/mvkzrryv" method="POST" novalidate>
+        <h3 class="rf-title">Demander un devis</h3>
+        <p class="rf-intro">Décrivez votre événement, nous vous répondons rapidement.</p>
+
+        <div class="rf-grid">
+          <label class="rf-field">Nom *
+            <input type="text" name="nom" required autocomplete="name" maxlength="120">
+          </label>
+          <label class="rf-field">E-mail *
+            <input type="email" name="email" required autocomplete="email" maxlength="160">
+          </label>
+          <label class="rf-field">Téléphone
+            <input type="tel" name="telephone" autocomplete="tel" maxlength="40">
+          </label>
+          <label class="rf-field">Date de l'événement
+            <input type="date" name="date_evenement">
+          </label>
+          <label class="rf-field rf-full">Type d'événement
+            <select name="type_evenement">
+              <option value="">Choisir…</option>
+              <option>Mariage</option>
+              <option>Anniversaire</option>
+              <option>Soirée privée</option>
+              <option>Événement d'entreprise</option>
+              <option>Autre</option>
+            </select>
+          </label>
+          <label class="rf-field rf-full">Votre message *
+            <textarea name="message" rows="5" required maxlength="3000"></textarea>
+          </label>
+        </div>
+
+        <!-- Champ piège anti-spam : doit rester vide -->
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none">
+        <input type="hidden" name="_subject" value="Demande de réservation — Trio Santos Cirillo Diagne">
+
+        <button type="submit" class="rf-submit">Envoyer ma demande</button>
+        <p id="booking-status" class="rf-status" role="status" aria-live="polite"></p>
+      </form>
 
     </div>
   </section>
@@ -524,6 +582,39 @@
     testImg.onload = () => heroBg.classList.remove('hero-bg-fallback');
     testImg.onerror = () => heroBg.classList.add('hero-bg-fallback');
     testImg.src = 'images/hero-bg.jpg';
+
+    // ── Formulaire de réservation (Formspree) ─────────────
+    const bookingForm = document.getElementById('booking-form');
+    if (bookingForm) {
+      const status = document.getElementById('booking-status');
+      const submitBtn = bookingForm.querySelector('.rf-submit');
+      bookingForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        status.className = 'rf-status';
+        if (!bookingForm.checkValidity()) {
+          bookingForm.reportValidity();
+          return;
+        }
+        submitBtn.disabled = true;
+        status.textContent = 'Envoi en cours…';
+        try {
+          const res = await fetch(bookingForm.action, {
+            method: 'POST',
+            body: new FormData(bookingForm),
+            headers: { Accept: 'application/json' }
+          });
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+          bookingForm.reset();
+          status.className = 'rf-status ok';
+          status.textContent = 'Merci ! Votre demande est bien envoyée, nous vous répondons rapidement.';
+        } catch (err) {
+          status.className = 'rf-status err';
+          status.textContent = "L'envoi a échoué. Réessayez ou contactez-nous par téléphone ou par e-mail.";
+        } finally {
+          submitBtn.disabled = false;
+        }
+      });
+    }
 
     // ── PWA : service worker ──────────────────────────────
     if ('serviceWorker' in navigator) {
