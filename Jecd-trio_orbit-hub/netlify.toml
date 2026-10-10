@@ -31,12 +31,6 @@
   status = 200
   force  = true
 
-# Trailing slash
-[[redirects]]
-  from   = "/:path/"
-  to     = "/:path"
-  status = 301
-
 # SPA fallback — toujours en dernier
 [[redirects]]
   from   = "/*"
