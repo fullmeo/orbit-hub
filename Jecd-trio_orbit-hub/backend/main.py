@@ -41,10 +41,13 @@ SMTP_PASS    = os.getenv("SMTP_PASSWORD", "")
 stripe_lib.api_key     = os.getenv("STRIPE_SECRET_KEY",     "")
 STRIPE_PUB_KEY         = os.getenv("STRIPE_PUBLISHABLE_KEY","")
 STRIPE_WEBHOOK_SECRET  = os.getenv("STRIPE_WEBHOOK_SECRET", "")
-JWT_SECRET    = os.getenv("JWT_SECRET",    "CHANGE_ME_IN_PROD")
+JWT_SECRET    = os.getenv("JWT_SECRET",    "")
 JWT_ALGORITHM = "HS256"
 ADMIN_USER    = os.getenv("ADMIN_USERNAME","admin")
-ADMIN_PASS    = os.getenv("ADMIN_PASSWORD","CHANGE_ME")
+ADMIN_PASS    = os.getenv("ADMIN_PASSWORD","")
+if not JWT_SECRET or not ADMIN_PASS:
+    # Pas de secret par défaut : l'espace admin reste désactivé tant que non configuré
+    logger.warning("JWT_SECRET / ADMIN_PASSWORD non définis — espace admin désactivé")
 
 DATA_DIR  = Path("data"); DATA_DIR.mkdir(exist_ok=True)
 F_BOOK    = DATA_DIR / "bookings.json"
@@ -69,6 +72,8 @@ def make_token(data):
     return jwt.encode(p, JWT_SECRET, algorithm=JWT_ALGORITHM)
 
 def require_admin(creds: HTTPAuthorizationCredentials = Depends(security)):
+    if not JWT_SECRET:
+        raise HTTPException(503, "Admin non configuré")
     if not creds:
         raise HTTPException(401, "Auth requise")
     try:
@@ -193,6 +198,8 @@ async def health():
 # ── Auth ─────────────────────────────────────────────────────
 @app.post("/auth/login", tags=["Auth"])
 async def login(creds: AdminLogin):
+    if not JWT_SECRET or not ADMIN_PASS:
+        raise HTTPException(503, "Admin non configuré")
     if creds.username != ADMIN_USER or creds.password != ADMIN_PASS:
         raise HTTPException(401, "Identifiants incorrects")
     token = make_token({"sub": creds.username, "role": "admin"})

@@ -148,7 +148,7 @@ SMTP_USERNAME=your-email@gmail.com
 SMTP_PASSWORD=your-app-password
 
 # Stripe (Optional)
-STRIPE_API_KEY=sk_test_xxxxx
+STRIPE_SECRET_KEY=sk_test_xxxxx
 
 # Admin
 ADMIN_EMAIL=admin@orbit-hub.netlify.app
@@ -204,7 +204,7 @@ HOST=0.0.0.0
      - `SMTP_SERVER`
      - `SMTP_USERNAME`
      - `SMTP_PASSWORD`
-     - `STRIPE_API_KEY` (optional)
+     - `STRIPE_SECRET_KEY` (optional)
      - `DEBUG=False`
 
 4. **Deploy**

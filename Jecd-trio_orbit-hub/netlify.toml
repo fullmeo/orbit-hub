@@ -31,12 +31,6 @@
   status = 200
   force  = true
 
-# Trailing slash
-[[redirects]]
-  from   = "/:path/"
-  to     = "/:path"
-  status = 301
-
 # SPA fallback — toujours en dernier
 [[redirects]]
   from   = "/*"
@@ -47,7 +41,7 @@
 [[headers]]
   for = "/*"
   [headers.values]
-    Content-Security-Policy   = "default-src 'self'; script-src 'self' 'unsafe-inline' https://js.stripe.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' https: data: blob:; connect-src 'self' https://orbit-trio-api.railway.app https://api.stripe.com https://ko-fi.com; frame-src https://js.stripe.com https://hooks.stripe.com; worker-src blob:;"
+    Content-Security-Policy   = "default-src 'self'; script-src 'self' 'unsafe-inline' https://js.stripe.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' https: data: blob:; connect-src 'self' https://orbit-trio-api.railway.app https://api.stripe.com https://ko-fi.com; frame-src https://js.stripe.com https://hooks.stripe.com; worker-src 'self' blob:;"
     X-Frame-Options           = "SAMEORIGIN"
     X-Content-Type-Options    = "nosniff"
     Referrer-Policy           = "strict-origin-when-cross-origin"
