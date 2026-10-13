@@ -1,6 +1,5 @@
 # Netlify configuration - Serigne Diagne
 [build]
-  base = "serigne-diagne_orbit-hub"
   publish = "."
 
 [build.environment]

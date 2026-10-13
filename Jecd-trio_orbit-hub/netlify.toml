@@ -5,7 +5,6 @@
 # ============================================================
 
 [build]
-  base = "Jecd-trio_orbit-hub"
   publish = "."
   command = ""
 

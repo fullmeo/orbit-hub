@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
     inputs:
       site:
-        description: 'Site to deploy (all|allyson-glado|ouidah-jazz|jecd-trio|serigne-diagne)'
+        description: 'Site to deploy (all|allyson-glado|ouidah-jazz|jecd-trio|serigne-diagne|orbit-hub)'
         required: false
         default: 'all'
 
@@ -37,6 +37,7 @@ jobs:
             [[ $CHANGED == *"Ouidah_jazz"* ]] && SITES="$SITES ouidah-jazz"
             [[ $CHANGED == *"Jecd-trio_orbit-hub"* ]] && SITES="$SITES jecd-trio"
             [[ $CHANGED == *"serigne-diagne_orbit-hub"* ]] && SITES="$SITES serigne-diagne"
+            [[ $CHANGED == *"orbit-hub-site"* ]] && SITES="$SITES orbit-hub"
             if [[ -z "$SITES" ]]; then
               SITES="all"
             fi
@@ -49,11 +50,11 @@ jobs:
     needs: detect-changes
     strategy:
       matrix:
-        site: [allyson-glado, ouidah-jazz, jecd-trio, serigne-diagne]
+        site: [allyson-glado, ouidah-jazz, jecd-trio, serigne-diagne, orbit-hub]
       max-parallel: 1
     if: |
-      contains(needs.detect-changes.outputs.sites, matrix.site) ||
-      contains(needs.detect-changes.outputs.sites, 'all')
+      contains(format(' {0} ', needs.detect-changes.outputs.sites), format(' {0} ', matrix.site)) ||
+      contains(format(' {0} ', needs.detect-changes.outputs.sites), ' all ')
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -69,6 +70,8 @@ jobs:
             console.log('dir=' + site.directory);
           ")
           echo "$CONFIG" >> $GITHUB_OUTPUT
+          # GitHub secret names cannot contain hyphens
+          echo "secret_key=$(echo '${{ matrix.site }}' | tr '-' '_')" >> $GITHUB_OUTPUT
       - name: Optional npm build
         run: |
           cd "${{ steps.config.outputs.dir }}"
@@ -86,4 +89,4 @@ jobs:
           netlify-config-path: './${{ steps.config.outputs.dir }}/netlify.toml'
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets[format('NETLIFY_SITE_ID_{0}', matrix.site)] }}
+          NETLIFY_SITE_ID: ${{ secrets[format('NETLIFY_SITE_ID_{0}', steps.config.outputs.secret_key)] }}

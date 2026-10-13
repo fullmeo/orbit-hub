@@ -1,6 +1,5 @@
 # Netlify configuration - Ouidah Jazz & Gospel Festival
 [build]
-  base = "Ouidah_jazz"
   publish = "."
   functions = "netlify/functions"
 
