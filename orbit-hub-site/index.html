@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Orbit Hub | Infrastructure de visibilité pour artistes indépendants</title>
+  <meta name="description" content="Orbit Hub est une infrastructure web qui centralise la présence en ligne des artistes indépendants : un hub unique relié à Spotify, YouTube, Instagram et plus. Fondé par Serigne Diagne." />
+  <meta name="author" content="Serigne Diagne" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#0c0a08" />
+  <link rel="canonical" href="https://orbit-hub.netlify.app/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Orbit Hub | Infrastructure de visibilité pour artistes" />
+  <meta property="og:description" content="Un hub central pour chaque artiste indépendant. Fondé par Serigne Diagne." />
+  <meta property="og:url" content="https://orbit-hub.netlify.app/" />
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@graph":[
+    {"@type":"Organization","@id":"https://orbit-hub.netlify.app/#org","name":"Orbit Hub","url":"https://orbit-hub.netlify.app/","description":"Infrastructure web de visibilité pour artistes indépendants.","founder":{"@id":"https://orbit-hub.netlify.app/#founder"},"sameAs":["https://github.com/fullmeo/orbit-hub"]},
+    {"@type":"Person","@id":"https://orbit-hub.netlify.app/#founder","name":"Serigne Diagne","jobTitle":"Fondateur d'Orbit Hub, trompettiste et compositeur","url":"https://www.afrisson.com/serigne-diagne/","sameAs":["https://www.instagram.com/serigne.diagnepro","https://www.afrisson.com/serigne-diagne/","https://github.com/fullmeo"]}
+  ]}
+  </script>
+  <style>
+    :root { --bg:#0c0a08; --card:#16110d; --gold:#d2aa5a; --cream:#ebd8be; --muted:#b9a88a; --line:#786032; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { background:radial-gradient(1200px 600px at 20% 0%, #2a1c10 0%, transparent 55%), var(--bg); color:var(--cream); font-family:Georgia, serif; line-height:1.55; }
+    main { width:min(880px,100%); margin:0 auto; padding:48px 16px 32px; }
+    h1 { font-size:clamp(34px,7vw,56px); color:var(--gold); line-height:1.05; }
+    h2 { font-size:22px; color:var(--gold); margin-bottom:14px; }
+    .tag { font-family:Arial,sans-serif; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); margin-top:10px; }
+    .lead { margin-top:22px; font-size:19px; max-width:60ch; }
+    section { margin-top:48px; }
+    .grid { display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); }
+    .card { background:var(--card); border:1px solid var(--line); padding:18px; }
+    .card h3 { font-size:17px; color:var(--cream); }
+    .card p { color:var(--muted); font-size:15px; margin-top:6px; }
+    .card a { color:var(--gold); }
+    .founder { display:grid; gap:8px; }
+    .btn { display:inline-block; margin:18px 12px 0 0; padding:11px 18px; border:1px solid var(--gold); color:var(--gold); text-decoration:none; font-family:Arial,sans-serif; font-size:14px; }
+    .btn:hover, .btn:focus-visible { background:var(--gold); color:var(--bg); }
+    footer { border-top:1px solid var(--line); margin-top:56px; padding:20px 0 0; color:var(--muted); font-family:Arial,sans-serif; font-size:13px; }
+    a { color:var(--gold); }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Orbit Hub</h1>
+    <p class="tag">Infrastructure de visibilité pour artistes indépendants</p>
+    <p class="lead">Une présence en ligne éparpillée sur dix plateformes ne se retrouve pas. Orbit Hub place un hub unique au centre : les plateformes gravitent autour, le public passe par une seule porte.</p>
+    <a class="btn" href="https://github.com/fullmeo/orbit-hub">Voir le projet sur GitHub</a>
+  </header>
+
+  <section aria-labelledby="how">
+    <h2 id="how">Le principe</h2>
+    <div class="grid">
+      <div class="card"><h3>Un hub central</h3><p>Une page par artiste, rapide, optimisée pour Google et pour le mobile.</p></div>
+      <div class="card"><h3>Les plateformes en orbite</h3><p>Streaming, réseaux sociaux, newsletter : tout est relié depuis le hub.</p></div>
+      <div class="card"><h3>Mesure et soutien</h3><p>Suivi GA4, pourboires et chat des fans pour prolonger la relation.</p></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="hubs">
+    <h2 id="hubs">Les hubs</h2>
+    <div class="grid">
+      <div class="card"><h3>Allyson Glado</h3><p>Reggae-pop, Paris.</p><p><a href="https://orbit-allysonglado.netlify.app">orbit-allysonglado.netlify.app</a></p></div>
+      <div class="card"><h3>Ouidah Jazz &amp; Gospel</h3><p>Festival de jazz, blues et gospel.</p></div>
+      <div class="card"><h3>JECD Trio</h3><p>Jazz et électronique.</p></div>
+      <div class="card"><h3>Serigne Diagne</h3><p>Trompettiste et compositeur.</p><p><a href="https://www.afrisson.com/serigne-diagne/">Fiche Afrisson</a></p></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="founder" class="founder">
+    <h2 id="founder">Fondateur</h2>
+    <p><strong>Serigne Diagne</strong>, trompettiste et compositeur à Paris, a fondé Orbit Hub et en pilote le développement.</p>
+    <p><a href="https://www.instagram.com/serigne.diagnepro">Instagram</a> · <a href="https://www.afrisson.com/serigne-diagne/">Afrisson</a> · <a href="https://github.com/fullmeo">GitHub</a></p>
+  </section>
+
+  <footer>© Orbit Hub · Fondé par Serigne Diagne</footer>
+</main>
+</body>
+</html>
