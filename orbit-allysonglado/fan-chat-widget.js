@@ -346,7 +346,9 @@
       if (!response.ok) {
         const data = await response.json().catch(() => ({}));
         console.error("[fan-chat] API error", response.status, data);
-        throw new Error(data.error || `API error: ${response.status}`);
+        const err = new Error(data.details || data.error || `API error: ${response.status}`);
+        err.status = response.status;
+        throw err;
       }
 
       const contentType = response.headers.get("Content-Type") || "";
@@ -441,7 +443,10 @@
         addMessage("Sorry, that took too long. Try again! 🙏", "bot");
       } else {
         console.error("[fan-chat] Error:", error);
-        addMessage("Sorry, technical issue. Try again later! 🙏", "bot");
+        // Temporary diagnostics (readable on mobile, no console needed).
+        const detail = String(error && error.message ? error.message : error).slice(0, 160);
+        const status = error && error.status ? ` ${error.status}` : "";
+        addMessage(`Désolée, petit souci technique 🙏 [chat v2${status}: ${detail}]`, "bot");
       }
     }
   }

@@ -340,6 +340,6 @@ exports.handler = async (event) => {
 
   } catch (error) {
     console.error('[Unhandled Error]', error);
-    return { statusCode: 500, headers: getCorsHeaders(event), body: JSON.stringify({ error: 'Internal server error', details: error.message }) };
+    return { statusCode: 500, headers: getCorsHeaders(event), body: JSON.stringify({ error: 'Internal server error', details: `${error.status || ''} ${error.message}`.trim() }) };
   }
 };
