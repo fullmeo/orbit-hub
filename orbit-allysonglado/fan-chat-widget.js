@@ -327,10 +327,11 @@
 
     // API call with timeout
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 30000); // 30s timeout for streaming
+    const timeoutId = setTimeout(() => controller.abort(), 30000); // 30s timeout
 
     try {
-      const response = await fetch(API_URL + "?stream=true", {
+      // JSON mode: the serverless function does not reliably deliver SSE streams.
+      const response = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -343,7 +344,8 @@
       clearTimeout(timeoutId);
 
       if (!response.ok) {
-        const data = await response.json();
+        const data = await response.json().catch(() => ({}));
+        console.error("[fan-chat] API error", response.status, data);
         throw new Error(data.error || `API error: ${response.status}`);
       }
 
@@ -426,8 +428,9 @@
           }
         } else {
           // Normal chat response
-          if (typeof data?.reply !== "string") throw new Error("Invalid API response format");
-          addMessage(data.reply, "bot");
+          const reply = typeof data?.response === "string" ? data.response : data?.reply;
+          if (typeof reply !== "string" || !reply) throw new Error("Invalid API response format");
+          addMessage(reply, "bot");
         }
       }
     } catch (error) {
