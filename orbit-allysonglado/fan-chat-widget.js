@@ -327,10 +327,11 @@
 
     // API call with timeout
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 30000); // 30s timeout for streaming
+    const timeoutId = setTimeout(() => controller.abort(), 30000); // 30s timeout
 
     try {
-      const response = await fetch(API_URL + "?stream=true", {
+      // JSON mode: the serverless function does not reliably deliver SSE streams.
+      const response = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -343,8 +344,11 @@
       clearTimeout(timeoutId);
 
       if (!response.ok) {
-        const data = await response.json();
-        throw new Error(data.error || `API error: ${response.status}`);
+        const data = await response.json().catch(() => ({}));
+        console.error("[fan-chat] API error", response.status, data);
+        const err = new Error(data.details || data.error || `API error: ${response.status}`);
+        err.status = response.status;
+        throw err;
       }
 
       const contentType = response.headers.get("Content-Type") || "";
@@ -426,8 +430,9 @@
           }
         } else {
           // Normal chat response
-          if (typeof data?.reply !== "string") throw new Error("Invalid API response format");
-          addMessage(data.reply, "bot");
+          const reply = typeof data?.response === "string" ? data.response : data?.reply;
+          if (typeof reply !== "string" || !reply) throw new Error("Invalid API response format");
+          addMessage(reply, "bot");
         }
       }
     } catch (error) {
@@ -438,7 +443,10 @@
         addMessage("Sorry, that took too long. Try again! 🙏", "bot");
       } else {
         console.error("[fan-chat] Error:", error);
-        addMessage("Sorry, technical issue. Try again later! 🙏", "bot");
+        // Temporary diagnostics (readable on mobile, no console needed).
+        const detail = String(error && error.message ? error.message : error).slice(0, 160);
+        const status = error && error.status ? ` ${error.status}` : "";
+        addMessage(`Désolée, petit souci technique 🙏 [chat v2${status}: ${detail}]`, "bot");
       }
     }
   }

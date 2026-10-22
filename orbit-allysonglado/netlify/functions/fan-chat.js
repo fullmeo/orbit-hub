@@ -13,6 +13,22 @@ const RATE_LIMIT_WINDOW_MS = 60000;
 const MAX_REQUESTS_PER_WINDOW = 10;
 const rateLimitStore = new Map();
 
+// Override with FAN_CHAT_MODEL in the Netlify environment if needed.
+const FAN_CHAT_MODEL = process.env.FAN_CHAT_MODEL || 'claude-haiku-5-5';
+
+// Thinking is always on by default for this model and its tokens count toward
+// max_tokens, so a short chat reply needs thinking off (allowed at low effort).
+function buildChatRequest(systemPrompt, userMessage) {
+  return {
+    model: FAN_CHAT_MODEL,
+    max_tokens: 400,
+    thinking: { type: 'disabled' },
+    output_config: { effort: 'low' },
+    system: systemPrompt,
+    messages: [{ role: 'user', content: userMessage }],
+  };
+}
+
 function isOriginAllowed(event) {
   const allowedOrigin = process.env.ALLOWED_ORIGIN;
   const hostname = event.headers.host || '';
@@ -251,10 +267,7 @@ exports.handler = async (event) => {
         try {
           console.log('[Anthropic] Starting stream request...');
           const anthropicStream = await client.messages.create({
-            model: 'claude-3-5-haiku-20241022',
-            max_tokens: 200,
-            system: systemPrompt,
-            messages: [{ role: 'user', content: userMessage }],
+            ...buildChatRequest(systemPrompt, userMessage),
             stream: true,
             signal: controller.signal,
           });
@@ -312,16 +325,12 @@ exports.handler = async (event) => {
 
       try {
         const response = await Promise.race([
-          client.messages.create({
-            model: 'claude-3-5-haiku-20241022',
-            max_tokens: 200,
-            system: systemPrompt,
-            messages: [{ role: 'user', content: userMessage }],
-          }),
+          client.messages.create(buildChatRequest(systemPrompt, userMessage)),
           timeoutPromise,
         ]);
 
-        const reply = response.content[0].type === 'text' ? response.content[0].text : '';
+        const textBlock = response.content.find((block) => block.type === 'text');
+        const reply = textBlock ? textBlock.text : '';
         return { statusCode: 200, headers: { ...getCorsHeaders(event), 'Content-Type': 'application/json', 'X-Content-Type-Options': 'nosniff', 'X-Frame-Options': 'DENY' }, body: JSON.stringify({ success: true, response: reply, timestamp: new Date().toISOString() }) };
       } catch (err) {
         if (err.message === 'Request timeout') return { statusCode: 504, headers: getCorsHeaders(event), body: JSON.stringify({ error: 'Response generation timed out.' }) };
@@ -331,6 +340,6 @@ exports.handler = async (event) => {
 
   } catch (error) {
     console.error('[Unhandled Error]', error);
-    return { statusCode: 500, headers: getCorsHeaders(event), body: JSON.stringify({ error: 'Internal server error', details: error.message }) };
+    return { statusCode: 500, headers: getCorsHeaders(event), body: JSON.stringify({ error: 'Internal server error', details: `${error.status || ''} ${error.message}`.trim() }) };
   }
 };

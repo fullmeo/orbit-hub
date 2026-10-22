@@ -22,7 +22,12 @@
       "analytics": {
         "ga4PropertyId": "G-LS4G24ESNF"
       },
-      "features": ["fan-chat", "music-streaming", "newsletter", "social-integration"]
+      "features": [
+        "fan-chat",
+        "music-streaming",
+        "newsletter",
+        "social-integration"
+      ]
     },
     {
       "id": "ouidah-jazz",
@@ -42,7 +47,12 @@
       "analytics": {
         "ga4PropertyId": "G-OUIDAH-JAZZ"
       },
-      "features": ["fan-chat", "music-streaming", "festival-info", "social-integration"]
+      "features": [
+        "fan-chat",
+        "music-streaming",
+        "festival-info",
+        "social-integration"
+      ]
     },
     {
       "id": "jecd-trio",
@@ -62,7 +72,11 @@
       "analytics": {
         "ga4PropertyId": "G-JECD-TRIO"
       },
-      "features": ["music-streaming", "api-integration", "backend-support"]
+      "features": [
+        "music-streaming",
+        "api-integration",
+        "backend-support"
+      ]
     },
     {
       "id": "serigne-diagne",
@@ -82,7 +96,34 @@
       "analytics": {
         "ga4PropertyId": "G-SERIGNE-DIAGNE"
       },
-      "features": ["digital-business-card", "vcard", "social-integration"]
+      "features": [
+        "digital-business-card",
+        "vcard",
+        "social-integration"
+      ]
+    },
+    {
+      "id": "orbit-hub",
+      "name": "Orbit Hub",
+      "domain": "orbit-hub.netlify.app",
+      "customDomain": null,
+      "directory": "orbit-hub-site",
+      "status": "staging",
+      "artist": {
+        "name": "Orbit Hub",
+        "genre": "Plateforme",
+        "bio": "Infrastructure de visibilité pour artistes indépendants. Fondateur : Serigne Diagne.",
+        "tone": "sobre, précis, chaleureux",
+        "instagram": "https://www.instagram.com/serigne.diagnepro",
+        "spotify": null
+      },
+      "analytics": {
+        "ga4PropertyId": "G-ORBIT-HUB"
+      },
+      "features": [
+        "platform-landing",
+        "founder-profile"
+      ]
     }
   ],
   "deployment": {
